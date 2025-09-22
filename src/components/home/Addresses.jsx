@@ -23,6 +23,6 @@ export const Addresses = () => {
             Add Address now
            </button>
          </div>
-       </div>
+       </div> 
   )
 }
