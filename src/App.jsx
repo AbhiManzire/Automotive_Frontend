@@ -1,67 +1,83 @@
-import React, { lazy } from "react";
-import { ToastContainer } from "react-toastify";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
-import AccessibleNavigationAnnouncer from "@/components/AccessibleNavigationAnnouncer";
-import PrivateRoute from "@/components/login/PrivateRoute";
-import Contact from "./components/home/Contact";
-import { Brands } from "./components/home/Brands";
-import Cart from "./components/home/Cart";
-import { Garage } from "./components/home/Garage";
-import { MyProfile } from "./components/home/MyProfile";
-import { Navbar } from "./components/home/Navbar";
-import { MyOrder } from "./components/home/MyOrder";
-import { MyWishlist } from "./components/home/MyWishlist";
-import { Company_GST } from "./components/home/Company_GST";
-import { Addresses } from "./components/home/Addresses";
-import Dashboard from "./pages/Dashboard";
-import Home from "./components/home/Home";
-import { Document } from "./components/home/Document";
-import Footer from "./components/home/Footer";
-const Layout = lazy(() => import("@/layout/Layout"));
-const Login = lazy(() => import("@/pages/Login"));
-const SignUp = lazy(() => import("@/pages/SignUp"));
-const ForgetPassword = lazy(() => import("@/pages/ForgotPassword"));
-const ResetPassword = lazy(() => import("@/pages/ResetPassword"));
-const App = () => {
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import './App.css';
+
+import Header from './component/Header';
+import Footer from "./component/Footer";
+
+import { Navbar } from './component/Navbar';
+import Cart from './component/Cart';
+import { BoodmoUi } from './component/BoodmoUi';
+import CurrentOffers from './component/CurrentOffers';
+import SearchSection from "./component/SearchSection";
+import BrandTrustAndCarMakers from './component/BrandTrustAndCarMakers';
+import { Garage } from './component/Garage';
+import { MyProfile } from './component/MyProfile';
+import { MyOrder } from './component/MyOrder';
+import { MyWishlist } from './component/MyWishlist';
+import { Document } from './component/Document';
+import { Company_GST } from './component/Company_GST';
+import { Addresses } from "./component/Addresses";
+import { Brands } from "./component/Brands";
+import Contact from "./component/Contact";
+import Article_review from "./component/Article_Review";
+import Login from "./component/Login";
+import ForgotPassword from "./component/Forgot_Password";
+import Signup from "./component/Signup";
+
+// Component to conditionally render Header/Footer
+const Layout = ({ children }) => {
+  const location = useLocation();
+  const hideHeaderFooter = ["/login", "/signup", "/forgot-password"].includes(location.pathname);
   return (
     <>
-      <ToastContainer />
-      <Router>
-        <AccessibleNavigationAnnouncer />
-        <Switch>
-   
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/forgot-password" component={ForgetPassword} />
-          <Route path="/reset-password/:token" component={ResetPassword} />
-
-          {/* Public Home Page and its sub-routes */}
-          
-          <Route exact path="/" component={Home} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/brands" component={Brands} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/garage" component={Garage} />
-          <Route path="/document" component={Document} />
-          <Route path="/myprofile" component={MyProfile} />
-          <Route path="/myorder" component={MyOrder} />
-          <Route path="/mywishlist" component={MyWishlist} />
-          <Route path="/company_gst" component={Company_GST} />
-          <Route path="/addresses" component={Addresses} />
-
-          <PrivateRoute>
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/admin" component={Layout} />
-          </PrivateRoute>
-        </Switch>
-        <Footer />
-      </Router>
+      {!hideHeaderFooter && <Header />}
+      {children}
+      {!hideHeaderFooter && <Footer />}
     </>
   );
 };
+
+function App() {
+  return (
+    <Router>
+      <Layout>
+        <Routes>
+          {/* Home Page */}
+          <Route
+            path="/"
+            element={
+              <>
+                <BoodmoUi />
+                <CurrentOffers />
+                <SearchSection />
+                <BrandTrustAndCarMakers />
+                <Article_review
+                  items={[{ label: "Articles and Reviews", href: "/pages/article/" }]}
+                />
+              </>
+            }
+          />
+
+          {/* Authentication Pages */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/signup" element={<Signup />} />
+
+          {/* Other Pages */}
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/brands" element={<Brands />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/garage" element={<Garage />} />
+          <Route path="/document" element={<Document />} />
+          <Route path="/myprofile" element={<MyProfile />} />
+          <Route path="/myorder" element={<MyOrder />} />
+          <Route path="/mywishlist" element={<MyWishlist />} />
+          <Route path="/company_gst" element={<Company_GST />} />
+          <Route path="/addresses" element={<Addresses />} />
+        </Routes>
+      </Layout>
+    </Router>
+  );
+}
+
 export default App;
