@@ -83,9 +83,9 @@ const ArticleReview = () => {
 
     return (
         <section>
-            <div>
-                <h2 className="text-4xl font-bold text-gray-800 mb-6">
-                    Article & <span className="text-sky-500">Review</span>
+            <div class ="px-6">
+                <h2 className="text-4xl font-semibold text-gray-800 mb-6">
+                    Article & <span className="text-black">Review</span>
                 </h2>
             </div>
 
