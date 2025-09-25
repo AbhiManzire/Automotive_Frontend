@@ -9,7 +9,7 @@ const CurrentOffers = () => {
   return (
     <section className="px-6 py-12">
       <h2 className="text-4xl font-bold text-gray-800 mb-6">
-        Current <span className="text-sky-500">Offers</span>
+        Current <span className="text-red-500">Offers</span>
       </h2>
 
       <Swiper

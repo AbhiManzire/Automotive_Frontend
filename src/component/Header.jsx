@@ -48,7 +48,7 @@ export const Header = () => {
               placeholder='Search: "Maruti Alto Oil Filter"'
               className="flex-1 px-4 py-3 md:py-3 text-gray-700 text-base md:text-lg outline-none"
             />
-            <button className="bg-sky-500 text-white px-5 flex items-center justify-center">
+            <button className="bg-red-500 text-white px-5 border-gray-500 flex items-center justify-center">
               <FaSearch className="text-lg md:text-xl" />
             </button>
           </div>
@@ -99,7 +99,7 @@ export const Header = () => {
           {isHomePage && (
             <button
               onClick={goToLoginPage}
-              className="border-solid bg-blue-400 text-white px-5 py-2 rounded hover:bg-green-500"
+              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-green-500"
             >
               Login
             </button>
@@ -108,7 +108,7 @@ export const Header = () => {
           {isHomePage && (
             <button
               onClick={goToCreateAcc}
-              className="border-solid bg-blue-400 text-white px-5 py-2 rounded hover:bg-green-500 "
+              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-green-500 "
             >
               Register
             </button>

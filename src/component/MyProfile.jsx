@@ -47,7 +47,7 @@ export const MyProfile = () => {
       {/* Page Header */}
      <div className="flex flex-col md:flex-row md:items-center md:justify-between border-t-2 mb-8 px-5 py-5 pb-3">
           <h1 className="text-3xl font-bold text-gray-800 mb-4 md:mb-0">
-          My <span className="text-sky-500">Profile</span>
+          My <span className="text-red-500">Profile</span>
         </h1>
         <Navbar/>
       </div>
@@ -77,7 +77,7 @@ export const MyProfile = () => {
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="px-3 py-3 text-sm border rounded-lg text-sky-600 hover:bg-sky-50"
+                  className="px-3 py-3 text-sm border rounded-lg text-red-400 hover:bg-red-500 hover:text-white"
                 >
                   Copy
                 </button>
@@ -89,12 +89,12 @@ export const MyProfile = () => {
               <input
                 type="text"
                 placeholder="First name"
-                className="w-1/2 px-3 py-3 border rounded-lg focus:ring-2 focus:ring-sky-500"
+                className="w-1/2 px-3 py-3 border rounded-lg focus:ring-2 focus:ring-red-500"
               />
               <input
                 type="text"
                 placeholder="Last name"
-                className="w-1/2 px-3 py-3 border rounded-lg focus:ring-2 focus:ring-sky-500"
+                className="w-1/2 px-3 py-3 border rounded-lg focus:ring-2 focus:ring-red-500"
               />
             </div>
 
@@ -114,7 +114,7 @@ export const MyProfile = () => {
                 <button
                   type="button"
                   onClick={handleSavePhone}
-                  className="px-6 py-3 rounded-lg bg-sky-500 text-white font-medium hover:bg-sky-600"
+                  className="px-6 py-3 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600"
                 >
                   Save
                 </button>
@@ -131,14 +131,14 @@ export const MyProfile = () => {
               <button
                 type="button"
                 onClick={handleChangePassword}
-                className="px-4 py-3 border rounded-lg hover:bg-sky-400"
+                className="px-4 py-3 border rounded-lg hover:bg-red-400"
               >
                 Change Password
               </button>
               <button
                 type="button"
                 onClick={handleSaveProfile}
-                className="px-6 py-3 rounded-lg bg-sky-500 text-white font-medium hover:bg-sky-600"
+                className="px-6 py-3 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600"
               >
                 Save
               </button>
@@ -150,7 +150,7 @@ export const MyProfile = () => {
         <div className="space-y-6">
           {/* Points */}
           <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-red-700 mb-4 flex items-center gap-2">
               Profile Connections <CiCircleQuestion />
             </h2>
             <div className="flex items-center justify-between">
@@ -166,7 +166,7 @@ export const MyProfile = () => {
               <button
                 type="button"
                 onClick={handlePurchase}
-                className="px-4 py-3 rounded-lg bg-sky-500 text-white hover:bg-sky-600"
+                className="px-4 py-3 rounded-lg bg-red-500 text-white hover:bg-red-600"
               >
                 Purchase
               </button>
@@ -188,8 +188,8 @@ export const MyProfile = () => {
             <div className="flex gap-10 text-3xl text-gray-600">
               <FcGoogle className="hover:scale-110 border transition cursor-pointer" />
               <FaFacebook className="hover:text-blue-600 hover:scale-110 border transition cursor-pointer" />
-              <FaApple className="hover:text-black hover:scale-110 border transition cursor-pointer" />
-              <BiFingerprint className="hover:text-sky-600 hover:scale-110 border transition cursor-pointer" />
+              <FaApple className="hover:text-red-600 hover:scale-110 border transition cursor-pointer" />
+              <BiFingerprint className="hover:text-red-600 hover:scale-110 border transition cursor-pointer" />
             </div>
           </div>
         </div>

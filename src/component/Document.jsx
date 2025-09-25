@@ -20,7 +20,7 @@ export const Document = () => {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 px-10 py-10 pb-3">
         <h1 className="text-3xl font-bold text-gray-800 mb-4 md:mb-0">
-          <span className="text-sky-500">Documents</span>
+          <span className="text-red-500">Documents</span>
         </h1>
         <Navbar />
       </div>
@@ -78,7 +78,7 @@ export const Document = () => {
 
           {/* Apply Button */}
           <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-10 rounded shadow focus:outline-none focus:shadow-outline"
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-10 rounded shadow focus:outline-none focus:shadow-outline"
             onClick={handleApply}
           >
             Apply

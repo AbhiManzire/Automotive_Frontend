@@ -91,7 +91,7 @@ const SearchSection = () => {
   return (
     <div className="text-left">
       <h2 className="text-2xl font-bold text-gray-800 mb-2">
-        Add new <span className="text-sky-500">Car</span>
+        Add new <span className="text-red-500">Car</span>
       </h2>
       <h2 className="text-lg mb-4">Find your car by Number Plate:</h2>
 
@@ -99,6 +99,7 @@ const SearchSection = () => {
         <span className="bg-gray-200 px-3 py-2 rounded-l">IND</span>
         <input
           type="text"
+
           placeholder="DL1AA2345"
           className="flex-1 px-3 py-2 outline-none text-gray-700"
         />
@@ -192,7 +193,7 @@ export const BoodmoUi = () => {
   }, []);
 
   return (
-    <section className="bg-gray-300 px-20 flex flex-col md:flex-row items-center justify-between gap-4">
+    <section className="bg-red-300 px-20 flex flex-col md:flex-row items-center justify-between gap-4">
       {/* 🔹 Left side = Images */}
       <div className="w-full flex justify-center items-center">
         <img
@@ -210,7 +211,7 @@ export const BoodmoUi = () => {
             placeholder='Search: "Maruti Alto Oil Filter"'
             className="flex-1 px-4 py-3 outline-none text-gray-700"
           />
-          <button className="bg-sky-500 text-white px-6 flex items-center justify-center">
+          <button className="bg-red-500 text-white px-6 flex items-center justify-center">
             <FaSearch className="text-lg" />
           </button>
         </div>

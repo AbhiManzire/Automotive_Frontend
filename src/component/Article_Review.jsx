@@ -85,7 +85,7 @@ const ArticleReview = () => {
         <section>
             <div class ="px-6">
                 <h2 className="text-4xl font-semibold text-gray-800 mb-6">
-                    Article & <span className="text-black">Review</span>
+                    Article & <span className="text-red-500">Review</span>
                 </h2>
             </div>
 
@@ -131,7 +131,7 @@ const ArticleReview = () => {
                                         {article.tags.map((tag, index) => (
                                             <span
                                                 key={index}
-                                                className="bg-blue-100 text-blue-700 px-2 py-1 text-xs rounded"
+                                                className="bg-blue-100 text-red-700 px-2 py-1 text-xs rounded"
                                             >
                                                 {tag}
                                             </span>

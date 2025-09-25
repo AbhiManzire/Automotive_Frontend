@@ -45,9 +45,9 @@ export default function BrandTrustAndCarMakers() {
       <section className="mb-12">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-4xl font-semibold text-gray-800">
-            Brands we <span className="text-sky-400">Trust</span>
+            Brands we <span className="text-red-500">Trust</span>
           </h2>
-          <a href="#" className="text-sm text-blue-600 hover:underline">
+          <a href="#" className="text-sm text-red-600 hover:underline">
             VIEW ALL
           </a>
         </div>
@@ -90,7 +90,7 @@ export default function BrandTrustAndCarMakers() {
       <section>
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-4xl font-semibold text-gray-800">
-            Popular <span className="text-sky-400">Car Makers</span>
+            Popular <span className="text-red-500">Car Makers</span>
           </h2>
           <a href="#" className="text-sm text-blue-600 hover:underline">
             VIEW ALL

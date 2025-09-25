@@ -7,9 +7,9 @@ const Contact = () => {
       {/* Page Heading */}
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">
-          Help & <span className="text-sky-500">Support</span>
+          Help & <span className="text-red-500">Support</span>
         </h1>
-        <div className="flex gap-6 text-sky-600 font-medium">
+        <div className="flex gap-6 text-red-600 font-medium">
           <a href="#" className="hover:underline">
             FAQ
           </a>
@@ -24,7 +24,7 @@ const Contact = () => {
         <div className="md:w-1/2 flex flex-col gap-8">
           {/* Location */}
           <div className="flex gap-4 items-start">
-            <FaMapMarkerAlt className="text-sky-500 text-2xl mt-1" />
+            <FaMapMarkerAlt className="text-red-500 text-2xl mt-1" />
             <div>
               <h2 className="text-lg font-semibold">Location</h2>
               <p className="text-gray-600 leading-relaxed">
@@ -89,7 +89,7 @@ const Contact = () => {
               </label>
               <button
                 type="submit"
-                className="bg-sky-400 text-white px-4 py-2 rounded w-1/2 hover:bg-sky-600"
+                className="bg-red-500 text-white px-4 py-2 rounded w-1/2 hover:bg-red-600"
               >
                 Submit Ticket
               </button>
@@ -110,7 +110,7 @@ const Contact = () => {
         <ul className="list-disc ml-6">
           <li>
             <strong>Phone (IVR):</strong>{" "}
-            <a href="tel:+911141189222" className="text-sky-600">
+            <a href="tel:+911141189222" className="text-red-600">
               +91 114 1189222
             </a>
           </li>

@@ -165,7 +165,7 @@ const SearchSection = () => {
             {/* Title */}
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-4xl font-bold text-gray-800">
-                    Search by <span className="text-sky-500">Vehicle</span>
+                    Search by <span className="text-red-500">Vehicle</span>
                 </h2>
 
                 <div className="flex items-center space-x-2">
@@ -181,7 +181,7 @@ const SearchSection = () => {
             </div>
 
             {/* Dropdowns */}
-            <div className="flex flex-col md:flex-row items-center gap-4 bg-gray-400 p-6 rounded-lg shadow-md">
+            <div className="flex flex-col md:flex-row items-center gap-4 bg-red-400 p-6 rounded-lg shadow-md">
                 {/* Car Maker */}
                 <select
                     className="border border-gray-300 px-4 py-3 rounded focus:ring-2 focus:ring-sky-500"
@@ -191,14 +191,14 @@ const SearchSection = () => {
                     <option value="">Select Car Maker</option>
                     {Object.keys(carData).map((maker) => (
                         <option key={maker} value={maker}>
-                            {maker}
+                            {maker} 
                         </option>
                     ))}
                 </select>
 
                 {/* Model */}
                 <select
-                    className={`border border-gray-300 px-4 py-3 rounded focus:ring-2 focus:ring-sky-500 ${!selectedMaker ? "text-gray-300 cursor-not-allowed" : ""
+                    className={`border border-gray-300 px-4 py-3 rounded focus:ring-2 focus:ring-sky-500 ${!selectedMaker ? "text-gray-700 cursor-not-allowed" : ""
                         }`}
                     value={selectedModel}
                     onChange={handleModelChange}
@@ -214,7 +214,7 @@ const SearchSection = () => {
 
                 {/* Year */}
                 <select
-                    className={`border border-gray-300 px-4 py-3 rounded focus:ring-2 focus:ring-sky-500 ${!selectedModel ? "text-gray-300 cursor-not-allowed" : ""
+                    className={`border border-gray-300 px-4 py-3 rounded focus:ring-2 focus:ring-sky-500 ${!selectedModel ? "text-gray-700 cursor-not-allowed" : ""
                         }`}
                     value={selectedYear}
                     onChange={handleYearChange}
@@ -230,20 +230,20 @@ const SearchSection = () => {
 
                 {/* Modification */}
                 <select
-                    className={`border border-gray-300 px-4 py-3 rounded focus:ring-2 focus:ring-sky-500 ${!selectedYear ? "text-gray-300 cursor-not-allowed" : ""
+                    className={`border border-gray-300 px-4 py-3 rounded focus:ring-2 focus:ring-sky-500 ${!selectedYear ? "text-gray-700 cursor-not-allowed" : ""
                         }`}
                     disabled={!selectedYear}
                 >
                     <option value="">Select Modification</option>
                     {modifications.map((mod) => (
                         <option key={mod} value={mod}>
-                            {mod}
+                            {mod} 
                         </option>
                     ))}
                 </select>
 
                 {/* Search Button */}
-                <button className="bg-sky-500 font-bold hover:bg-sky-700 text-white px-6 py-3 shadow rounded">
+                <button className="bg-black font-bold hover:bg-sky-700 text-white px-6 py-3 shadow rounded">
                     Search Parts
                 </button>
             </div>

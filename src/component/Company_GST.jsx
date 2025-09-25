@@ -8,14 +8,14 @@ export const Company_GST = () => {
     <div className="px-10">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 px-10 py-10 pb-3">
-        <h1 className="text-3xl font-semibold text-blue-950 mb-4 md:mb-0">
-          Company <span className="text-sky-500">/GST</span>
+        <h1 className="text-3xl font-semibold text-gray-700 mb-4 md:mb-0">
+          Company <span className="text-red-500">/GST</span>
         </h1>
         <Navbar />
       </div>
 
       {/* Title */}
-      <h2 className="text-2xl font-semibold text-blue-900 mb-6">
+      <h2 className="text-2xl font-semibold text-red-500 mb-6">
         Billing information
       </h2>
 

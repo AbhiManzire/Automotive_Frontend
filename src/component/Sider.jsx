@@ -84,7 +84,7 @@ const SearchVehicleSection = () => {
   return (
     <div className="text-left flex flex-col gap-4">
       <h2 className="text-3xl font-bold text-gray-700 mb-2">
-        Search by <span className="text-sky-500">Vehicle</span>
+        Search by <span className="text-red-500">Vehicle</span>
       </h2>
 
       {/* Dropdowns */}
@@ -125,7 +125,7 @@ const SearchVehicleSection = () => {
 const SearchNumberPlateSection = () => (
   <div className="text-left flex flex-col gap-4">
     <h3 className="text-2xl font-bold text-gray-700">
-      Search by <span className="text-sky-500">Number Plate</span>
+      Search by <span className="text-red-500">Number Plate</span>
     </h3>
     <div className="flex items-center border rounded-lg px-3 py-3 shadow-md mb-4">
       <span className="bg-gray-200 px-3 py-2 rounded-l">IND</span>

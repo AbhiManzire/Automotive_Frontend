@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import logo2 from "./logo2.png";
 
 const Footer = () => {
     return (
@@ -7,13 +8,13 @@ const Footer = () => {
             <div className="max-w-full mx-auto  px-6">
 
                 {/* 🔹 Blue App Download Section */}
-                <div className="bg-gray-400 text-white md:py-10">
+                <div className="bg-red-300 text-white md:py-10">
                     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
 
                         {/* Left text */}
                         <div>
                             <h2 className="text-2xl font-bold">Download</h2>
-                            <h3 className="text-2xl font-bold text-blue-800">Our Mobile App</h3>
+                            <h3 className="text-2xl font-bold text-red-800">Our Mobile App</h3>
                             <p className="mt-2 text-white ">
                                 And get the full boodmo experience on the go
                             </p>
@@ -52,10 +53,12 @@ const Footer = () => {
 
                     {/* Logo and description */}
                     <div>
-                        <h2 className="text-4xl font-bold text-gray-800">
-                            <span className="text-gray-900">bood</span>
-                            <span className="text-sky-400">mo</span>
-                        </h2>
+                        <img
+                           
+                            src={logo2}
+                            alt="Boodmo Logo"
+                            className="h-18 w-[150px] cursor-pointer"
+                        />
                         <p className="mt-2 text-gray-600 text-base">
                             India’s biggest online marketplace for car spare parts
                         </p>
@@ -63,7 +66,7 @@ const Footer = () => {
 
                     {/* About links */}
                     <div>
-                        <h3 className="text-base font-semibold text-blue-800 mb-3">About</h3>
+                        <h3 className="text-base font-semibold text-red-800 mb-3">About</h3>
                         <ul className="space-y-3">
                             {[
                                 "About us", "Contact us", "FAQ", "Careers",
@@ -79,7 +82,7 @@ const Footer = () => {
 
                     {/* Policy links */}
                     <div>
-                        <h3 className="text-base font-semibold text-blue-800 mb-3">Policy</h3>
+                        <h3 className="text-base font-semibold text-red-800 mb-3">Policy</h3>
                         <ul className="space-y-3">
                             {[
                                 "Return Policy", "Privacy Policy", "Disclaimer",
@@ -94,7 +97,7 @@ const Footer = () => {
 
                     {/* Useful links */}
                     <div>
-                        <h3 className="text-base font-semibold text-blue-800 mb-3">Useful links</h3>
+                        <h3 className="text-base font-semibold text-red-800 mb-3">Useful links</h3>
                         <ul className="space-y-3">
                             {[
                                 "Articles", "Brands", "Catalogues", "Car Makers",
@@ -109,9 +112,9 @@ const Footer = () => {
                 </div>
 
                 {/* 🔹 Social Media */}
-                <div className="flex justify-center md:justify-start space-x-6 text-sky-500 text-xl py-6">
+                <div className="flex justify-center md:justify-start space-x-4 text-sky-500 text-xl py-6">
                     <a href="#"><FaFacebookF /></a>
-                    <a href="#"><FaInstagram /></a>
+                  <div className="text-pink-800">  <a href="#"><FaInstagram  /></a> </div>
                     <a href="#"><FaLinkedinIn /></a>
                 </div>
 

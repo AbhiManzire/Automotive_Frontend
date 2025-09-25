@@ -460,7 +460,7 @@ export const Brands = () => {
       {/* Heading + Search */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h1 className="text-3xl font-bold">
-          Shop by <span className="text-sky-500">Brand</span>
+          Shop by <span className="text-red-500">Brand</span>
         </h1>
         <div>
           <input

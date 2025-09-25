@@ -7,7 +7,7 @@ export const Addresses = () => {
    
          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
            <h1 className="text-3xl font-bold text-gray-800">
-             My <span className="text-sky-500">Wishlist</span>
+             My <span className="text-red-500">Wishlist</span>
            </h1>
            <Navbar />
          </div>

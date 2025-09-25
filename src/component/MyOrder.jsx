@@ -9,7 +9,7 @@ export const MyOrder = () => {
   return (<div>
     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 px-5 py-5 pb-3">
       <h1 className="text-3xl font-bold text-gray-800 mb-4 md:mb-0">
-        My <span className="text-sky-500">Orders</span>
+        My <span className="text-red-500">Orders</span>
       </h1>
       <Navbar />
     </div>
@@ -35,7 +35,7 @@ export const MyOrder = () => {
       <p className="text-gray-600 text-lg mb-4">
         No {activeTab} orders
       </p>
-      <button className="bg-sky-400 hover:bg-sky-500 text-white px-6 py-4 rounded-md transition">
+      <button className="bg-red-400 hover:bg-red-500 text-white px-6 py-4 rounded-md transition">
         Continue shopping
       </button>
     </div>

@@ -64,7 +64,7 @@ const Vehicle = () => {
       {/* Heading and Search */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <h1 className="text-3xl font-bold">
-          Search Parts by <span className="text-sky-500">VEHICLE MAKERS</span>
+          Search Parts by <span className="text-red-500">VEHICLE MAKERS</span>
         </h1>
         <input
           type="search"
