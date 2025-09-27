@@ -23,6 +23,7 @@ import Article_review from "./component/Article_Review";
 import Login from "./component/Login";
 import ForgotPassword from "./component/Forgot_Password";
 import Signup from "./component/Signup";
+import VendorPage from "./component/VendorPage";
 
 // Component to conditionally render Header/Footer
 const Layout = ({ children }) => {
@@ -65,6 +66,7 @@ function App() {
 
           {/* Other Pages */}
           <Route path="/contact" element={<Contact />} />
+          <Route path="/vendor" element={<VendorPage/>} />
           <Route path="/brands" element={<Brands />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/garage" element={<Garage />} />

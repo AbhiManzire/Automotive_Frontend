@@ -25,6 +25,7 @@ export const Header = () => {
   const goToHomePage = () => navigate("/");
   const goToLoginPage = () => navigate("/login");
   const goToCreateAcc = () => navigate("/signup");
+  const goToVendor = () => navigate("/vendor");
   const isLoggedIn = !!localStorage.getItem("token"); // or your auth flag
 
 
@@ -96,10 +97,19 @@ export const Header = () => {
           >
             <IoReorderThreeOutline className="text-blue-900" />
           </button>
+          
+          {isHomePage && (
+            <button
+              onClick={goToVendor}
+              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-red-500 "
+            >
+              Become A Vendor
+            </button>
+          )}
           {isHomePage && (
             <button
               onClick={goToLoginPage}
-              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-green-500"
+              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-red-500"
             >
               Login
             </button>
@@ -108,7 +118,7 @@ export const Header = () => {
           {isHomePage && (
             <button
               onClick={goToCreateAcc}
-              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-green-500 "
+              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-red-500 "
             >
               Register
             </button>
