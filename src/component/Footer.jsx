@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="max-w-full mx-auto  px-6">
 
                 {/* 🔹 Blue App Download Section */}
-                <div className="bg-red-300 text-white md:py-10">
+                <div className="bg-red-400 text-white md:py-10">
                     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
 
                         {/* Left text */}
@@ -16,7 +16,7 @@ const Footer = () => {
                             <h2 className="text-2xl font-bold">Download</h2>
                             <h3 className="text-2xl font-bold text-red-800">Our Mobile App</h3>
                             <p className="mt-2 text-white ">
-                                And get the full boodmo experience on the go
+                            Experience the complete Sparelo journey anytime, anywhere.
                             </p>
                         </div>
 
@@ -54,20 +54,27 @@ const Footer = () => {
                     {/* Logo and description */}
                     <div>
                         <img
-                           
+
                             src={logo2}
-                            alt="Boodmo Logo"
-                            className="h-18 w-[150px] cursor-pointer"
+                            alt="Sparelo Logo "
+                            className="h-15 w-[140px] cursor-pointer"
                         />
                         <p className="mt-2 text-gray-600 text-base">
-                            India’s biggest online marketplace for car spare parts
+                            Discover India's premier destination for automotive spare parts online.
                         </p>
+
+                        {/* 🔹 Social Media */}
+                        <div className="flex justify-center md:justify-start space-x-4 text-sky-500 text-xl mt-6 py-10">
+                            <a href="#"><FaFacebookF /></a>
+                            <div className="text-pink-800">  <a href="#"><FaInstagram /></a> </div>
+                            <a href="#"><FaLinkedinIn /></a>
+                        </div>
                     </div>
 
                     {/* About links */}
-                    <div>
+                    <div >
                         <h3 className="text-base font-semibold text-red-800 mb-3">About</h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-5">
                             {[
                                 "About us", "Contact us", "FAQ", "Careers",
                                 "Investor Relations", "Suppliers Relations",
@@ -83,7 +90,7 @@ const Footer = () => {
                     {/* Policy links */}
                     <div>
                         <h3 className="text-base font-semibold text-red-800 mb-3">Policy</h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-5">
                             {[
                                 "Return Policy", "Privacy Policy", "Disclaimer",
                                 "Terms of Use", "Buyers Policy", "Sellers Policy"
@@ -111,12 +118,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* 🔹 Social Media */}
-                <div className="flex justify-center md:justify-start space-x-4 text-sky-500 text-xl py-6">
-                    <a href="#"><FaFacebookF /></a>
-                  <div className="text-pink-800">  <a href="#"><FaInstagram  /></a> </div>
-                    <a href="#"><FaLinkedinIn /></a>
-                </div>
+
 
                 {/* 🔹 Bottom bar */}
                 <div className="border-t pt-4 pb-6 text-center text-xs text-gray-500">

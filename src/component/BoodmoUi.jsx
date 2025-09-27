@@ -217,7 +217,7 @@ export const BoodmoUi = () => {
         </div>
 
         <button
-          className="bg-green-500 text-sm font-semibold text-white flex items-center justify-center gap-3 px-4 py-3 rounded-lg shadow-md hover:bg-blue-600 transition w-fit"
+          className="bg-gray-500 text-sm font-semibold text-white flex items-center justify-center gap-3 px-6 py-3 rounded-lg shadow-md hover:bg-gray-600 transition w-fit"
           onClick={() => setIsModalOpen(true)}
         >
           <FaCar className="text-2xl" />

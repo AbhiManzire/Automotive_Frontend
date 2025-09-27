@@ -24,6 +24,8 @@ import Login from "./component/Login";
 import ForgotPassword from "./component/Forgot_Password";
 import Signup from "./component/Signup";
 import VendorPage from "./component/VendorPage";
+import SearchByCategory from "./component/SearchByCategory";
+import WhyChooseAftermarket from "./component/WhyChooseAftermarket";
 
 // Component to conditionally render Header/Footer
 const Layout = ({ children }) => {
@@ -51,6 +53,8 @@ function App() {
                 <BoodmoUi />
                 <CurrentOffers />
                 <SearchSection />
+                <SearchByCategory />
+                <WhyChooseAftermarket/>
                 <BrandTrustAndCarMakers />
                 <Article_review
                   items={[{ label: "Articles and Reviews", href: "/pages/article/" }]}

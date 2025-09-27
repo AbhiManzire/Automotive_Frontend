@@ -40,11 +40,11 @@ const carMakers = [
 
 export default function BrandTrustAndCarMakers() {
   return (
-    <div className="px-6 py-12 bg-white">
+    <div className="px-6 py-4 bg-white">
       {/* Brands Section */}
       <section className="mb-12">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-4xl font-semibold text-gray-800">
+          <h2 className="text-4xl font-bold text-gray-800">
             Brands we <span className="text-red-500">Trust</span>
           </h2>
           <a href="#" className="text-sm text-red-600 hover:underline">
@@ -89,7 +89,7 @@ export default function BrandTrustAndCarMakers() {
       {/* Car Makers Section */}
       <section>
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-4xl font-semibold text-gray-800">
+          <h2 className="text-4xl font-bold text-gray-800">
             Popular <span className="text-red-500">Car Makers</span>
           </h2>
           <a href="#" className="text-sm text-blue-600 hover:underline">
@@ -101,7 +101,7 @@ export default function BrandTrustAndCarMakers() {
           {carMakers.map((maker) => (
             <button
               key={maker}
-              className="bg-white border border-gray-200 shadow-sm py-4 px-4 rounded-md text-sm font-medium text-gray-700 
+              className="bg-white border border-gray-200 shadow-sm py-5 px-4 rounded-md text-sm font-medium text-gray-700 
               hover:bg-sky-50 hover:shadow-md hover:border-sky-300 transition"
             >
               {maker}

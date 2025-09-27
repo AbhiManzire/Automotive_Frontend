@@ -47,7 +47,7 @@ export const Header = () => {
             <input
               type="text"
               placeholder='Search: "Maruti Alto Oil Filter"'
-              className="flex-1 px-4 py-3 md:py-3 text-gray-700 text-base md:text-lg outline-none"
+              className="flex-1 px-4 py-3 md:py-3 text-gray-700 border border-gray-200 text-base md:text-lg outline-none"
             />
             <button className="bg-red-500 text-white px-5 border-gray-500 flex items-center justify-center">
               <FaSearch className="text-lg md:text-xl" />
@@ -101,7 +101,7 @@ export const Header = () => {
           {isHomePage && (
             <button
               onClick={goToVendor}
-              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-red-500 "
+              className="border-solid bg-red-500 text-white px-5 py-2 rounded hover:bg-red-600 "
             >
               Become A Vendor
             </button>
@@ -109,7 +109,7 @@ export const Header = () => {
           {isHomePage && (
             <button
               onClick={goToLoginPage}
-              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-red-500"
+              className="border-solid bg-red-500 text-white px-5 py-2 rounded hover:bg-red-600"
             >
               Login
             </button>
@@ -118,7 +118,7 @@ export const Header = () => {
           {isHomePage && (
             <button
               onClick={goToCreateAcc}
-              className="border-solid bg-red-400 text-white px-5 py-2 rounded hover:bg-red-500 "
+              className="border-solid bg-red-500 text-white px-5 py-2 rounded hover:bg-red-600 "
             >
               Register
             </button>
