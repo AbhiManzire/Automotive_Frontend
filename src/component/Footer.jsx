@@ -4,11 +4,11 @@ import logo2 from "./logo2.png";
 
 const Footer = () => {
     return (
-        <footer className="bg-white border-t text-sm text-gray-600">
+        <footer className="bg-white border-t text-sm text-gray-700">
             <div className="max-w-full mx-auto  px-6">
 
                 {/* 🔹 Blue App Download Section */}
-                <div className="bg-red-400 text-white md:py-10">
+                <div className="bg-gradient-to-r from-red-500 to-red-400 text-white md:py-10">
                     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
 
                         {/* Left text */}
@@ -54,13 +54,12 @@ const Footer = () => {
                     {/* Logo and description */}
                     <div>
                         <img
-
                             src={logo2}
                             alt="Sparelo Logo "
                             className="h-15 w-[140px] cursor-pointer"
                         />
                         <p className="mt-2 text-gray-600 text-base">
-                            Discover India's premier destination for automotive spare parts online.
+                          India's leading online hub for automotive spare parts, where quality meets convenience in the world of vehicle maintenance.
                         </p>
 
                         {/* 🔹 Social Media */}
@@ -73,8 +72,8 @@ const Footer = () => {
 
                     {/* About links */}
                     <div >
-                        <h3 className="text-base font-semibold text-red-800 mb-3">About</h3>
-                        <ul className="space-y-5">
+                        <h3 className="text-base font-bold  text-red-800 mb-3">About</h3>
+                        <ul className="space-y-5 font-bold text-base">
                             {[
                                 "About us", "Contact us", "FAQ", "Careers",
                                 "Investor Relations", "Suppliers Relations",
@@ -89,8 +88,8 @@ const Footer = () => {
 
                     {/* Policy links */}
                     <div>
-                        <h3 className="text-base font-semibold text-red-800 mb-3">Policy</h3>
-                        <ul className="space-y-5">
+                        <h3 className=" font-bold text-base text-red-800 mb-3">Policy</h3>
+                        <ul className="space-y-5 font-bold text-base">
                             {[
                                 "Return Policy", "Privacy Policy", "Disclaimer",
                                 "Terms of Use", "Buyers Policy", "Sellers Policy"
@@ -104,8 +103,8 @@ const Footer = () => {
 
                     {/* Useful links */}
                     <div>
-                        <h3 className="text-base font-semibold text-red-800 mb-3">Useful links</h3>
-                        <ul className="space-y-3">
+                        <h3 className="text-base font-bold  text-red-800 mb-3">Useful links</h3>
+                        <ul className="space-y-3 font-bold text-base">
                             {[
                                 "Articles", "Brands", "Catalogues", "Car Makers",
                                 "Damaged Parts", "Best Offers", "Sitemap", "Sitemap2"
@@ -121,7 +120,7 @@ const Footer = () => {
 
 
                 {/* 🔹 Bottom bar */}
-                <div className="border-t pt-4 pb-6 text-center text-xs text-gray-500">
+                <div className="border-t pt-4 pb-6  text-center text-sm text-gray-500">
                     © 2015-2025 Smart Parts Online Pvt. Ltd. (v7.3.7 build 250715.1409)
                 </div>
             </div>

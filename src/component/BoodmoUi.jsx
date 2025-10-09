@@ -195,16 +195,16 @@ export const BoodmoUi = () => {
   return (
     <section className="bg-red-300 px-20 flex flex-col md:flex-row items-center justify-between gap-4">
       {/* 🔹 Left side = Images */}
-      <div className="w-full flex justify-center items-center">
+      {/* <div className="w-full flex justify-center items-center">
         <img
           src={images[currentImage]}
           alt="Engine"
           className="h-50 md:h-56 py-2 w-full object-contain transition-all duration-700"
         />
-      </div>
+      </div> */}
 
       {/* 🔹 Right side = Search + Add Car */}
-      <div className="flex flex-col gap-6 px-4 w-full md:w-1/2">
+      <div className="flex flex-col gap-6 px-4 py-20 w-full md:w-1/2">
         <div className="flex bg-white rounded-lg overflow-hidden shadow-md text-lg w-full">
           <input
             type="text"

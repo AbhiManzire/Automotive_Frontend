@@ -2,256 +2,551 @@ import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
 const SearchSection = () => {
-    const [selectedMaker, setSelectedMaker] = useState("");
-    const [selectedModel, setSelectedModel] = useState("");
-    const [selectedYear, setSelectedYear] = useState("");
-    const [models, setModels] = useState([]);
-    const [years, setYears] = useState([]);
-    const [modifications, setModifications] = useState([]);
+  const [selectedMaker, setSelectedMaker] = useState("");
+  const [selectedModel, setSelectedModel] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const [models, setModels] = useState([]);
+  const [years, setYears] = useState([]);
+  const [modifications, setModifications] = useState([]);
+  const [selectedModification, setSelectedModification] = useState("");
+  const [showAllMakers, setShowAllMakers] = useState(false);
+  const [partNumber, setPartNumber] = useState("");
 
-    // ✅ Full Car Data (Maker → Model → Year → Modifications)
-    const carData = {
-        CHEVROLET: {
-            AVEO: { 2022: ["Base", "Mid"], 2023: ["Top"] },
-            BEAT: { 2022: ["Base", "LS"], 2023: ["LT", "Diesel"] },
-            CAPTIVA: { 2022: ["LT"], 2023: ["LTZ"] },
-            CRUZE: { 2022: ["LT", "LTZ"], 2023: ["LTZ Plus"] },
-            ENJOY: { 2022: ["Base"], 2023: ["Top"] },
-            FORESTER: { 2022: ["2.0 Petrol"], 2023: ["AWD"] },
-            OPTRA: { 2022: ["Base"], 2023: ["Top"] },
-            SAIL: { 2022: ["Base"], 2023: ["Top"] },
-            SPARK: { 2022: ["LS"], 2023: ["LT"] },
-            TAVERA: { 2022: ["Base"], 2023: ["Neo 3"] },
-            TRAILBLAZER: { 2022: ["LT"], 2023: ["LTZ"] },
-        },
-        FIAT: {
-            Linea: { 2022: ["Active", "Emotion"], 2023: ["T-Jet"] },
-            Punto: { 2022: ["Active", "Sports"], 2023: ["Evo"] },
-            Abarth: { 2022: ["Base"], 2023: ["Competizione"] },
-        },
-        FORD: {
-            EcoSport: { 2022: ["Trend", "Titanium"], 2023: ["Thunder"] },
-            Endeavour: { 2022: ["Titanium"], 2023: ["Sport"] },
-            Figo: { 2022: ["Base", "Titanium"], 2023: ["Blu"] },
-            Aspire: { 2022: ["Trend"], 2023: ["Titanium+"] },
-        },
-        HONDA: {
-            City: { 2022: ["SV", "V"], 2023: ["VX", "ZX"] },
-            Civic: { 2022: ["V", "VX"], 2023: ["ZX"] },
-            Amaze: { 2022: ["E", "S"], 2023: ["VX"] },
-            Jazz: { 2022: ["V", "VX"], 2023: ["ZX"] },
-        },
-        HYUNDAI: {
-            i20: { 2022: ["Magna", "Sportz"], 2023: ["Asta"] },
-            Creta: { 2022: ["E", "EX"], 2023: ["SX", "SX(O)"] },
-            Venue: { 2022: ["S", "SX"], 2023: ["N Line"] },
-            Verna: { 2022: ["S", "SX"], 2023: ["SX(O)"] },
-        },
-        KIA: {
-            Seltos: { 2022: ["HTE", "HTK"], 2023: ["GTX", "X-Line"] },
-            Sonet: { 2022: ["HTE", "HTK"], 2023: ["GTX+"] },
-            Carnival: { 2022: ["Premium"], 2023: ["Limousine"] },
-        },
-        MAHINDRA: {
-            XUV300: { 2022: ["W4", "W6"], 2023: ["W8", "W8(O)"] },
-            Scorpio: { 2022: ["S3", "S5"], 2023: ["S11"] },
-            Thar: { 2022: ["AX", "LX"], 2023: ["Diesel", "Petrol"] },
-            Bolero: { 2022: ["B4", "B6"], 2023: ["B8"] },
-        },
-        MARUTI: {
-            Swift: {
-                2022: ["LXI", "VXI"],
-                2023: ["ZXI", "ZXI+"]
-            },
-            Baleno: {
-                2022: ["Delta", "Zeta"],
-                2023: ["Alpha"]
-            },
-            WagonR: {
-                2022: ["LXI", "VXI"],
-                2023: ["ZXI"]
-            },
-            Alto: {
-                2022: ["Std", "LXI"],
-                2023: ["VXI+"]
-            },
-            Dzire: {
-                2022: ["LXI", "VXI"],
-                2023: ["ZXI"]
-            },
-        },
-        NISSAN: {
-            Magnite: { 2022: ["XE", "XL"], 2023: ["XV Premium"] },
-            Kicks: { 2022: ["XL"], 2023: ["XV"] },
-            Sunny: { 2022: ["XE", "XL"], 2023: ["XV"] },
-        },
-        RENAULT: {
-            Kwid: { 2022: ["RXE", "RXL"], 2023: ["Climber"] },
-            Triber: { 2022: ["RXE", "RXL"], 2023: ["RXZ"] },
-            Duster: { 2022: ["RXE", "RXL"], 2023: ["RXZ AWD"] },
-        },
-        SKODA: {
-            Octavia: { 2022: ["Style"], 2023: ["L&K"] },
-            Rapid: { 2022: ["Active"], 2023: ["Monte Carlo"] },
-            Kushaq: { 2022: ["Ambition"], 2023: ["Style"] },
-        },
-        TATA: {
-            Nexon: { 2022: ["XE", "XM"], 2023: ["XZ", "XZ+"] },
-            Harrier: { 2022: ["XT", "XZ"], 2023: ["XZ+"] },
-            Safari: { 2022: ["XE", "XM"], 2023: ["XZ+"] },
-            Tiago: { 2022: ["XE", "XM"], 2023: ["XZ+"] },
-        },
-        TOYOTA: {
-            Innova: { 2022: ["GX", "VX"], 2023: ["Crysta", "ZX"] },
-            Fortuner: { 2022: ["2.7 Petrol"], 2023: ["Legender"] },
-            Corolla: { 2022: ["Altis"], 2023: ["Hybrid"] },
-            Glanza: { 2022: ["G"], 2023: ["V"] },
-        },
-        VW: {
-            Polo: { 2022: ["Trendline", "Highline"], 2023: ["GT"] },
-            Vento: { 2022: ["Comfortline"], 2023: ["Highline+"] },
-            Tiguan: { 2022: ["Elegance"], 2023: ["R-Line"] },
-        },
-        AUDI: {
-            A3: { 2022: ["Premium"], 2023: ["Technology"] },
-            A4: { 2022: ["Premium", "Technology"], 2023: ["S Line"] },
-            A5: { 2022: ["Sportback"], 2023: ["S Line"] },
-            A6: { 2022: ["Premium"], 2023: ["Technology"] },
-            A7: { 2022: ["Sportback"], 2023: ["S Line"] },
-            A8: { 2022: ["L"], 2023: ["L Technology"] },
-            Q2: { 2022: ["Premium"], 2023: ["Technology"] },
-            Q3: { 2022: ["Premium Plus"], 2023: ["Technology"] },
-            Q5: { 2022: ["Premium Plus"], 2023: ["Technology"] },
-            Q7: { 2022: ["Premium Plus"], 2023: ["Technology"] },
-            Q8: { 2022: ["Standard"], 2023: ["Technology"] },
-            R8: { 2022: ["V10"], 2023: ["V10 Plus"] },
-            S4: { 2022: ["Standard"], 2023: ["Performance"] },
-            S5: { 2022: ["Sportback"], 2023: ["S Line"] },
-            TT: { 2022: ["Coupe"], 2023: ["Roadster"] },
-        },
-    };
+  // ✅ Car Data
+ const carData = {
+  CHEVROLET: {
+    AVEO: {
+      2021: ["Base", "Mid"],
+      2022: ["Base", "Mid"],
+      2023: ["Top"],
+      2024: ["Premier", "LTZ"],
+      2025: ["Hybrid LTZ"],
+    },
+    BEAT: {
+      2021: ["PS", "LS"],
+      2022: ["Base", "LS"],
+      2023: ["LT", "Diesel"],
+      2024: ["LTZ", "Premier Edition"],
+      2025: ["EV Prototype"],
+    },
+    CAPTIVA: {
+      2021: ["LT", "LTZ"],
+      2022: ["LT"],
+      2023: ["LTZ"],
+      2024: ["Premier"],
+      2025: ["Hybrid AWD"],
+    },
+    CRUZE: {
+      2021: ["LT", "LTZ"],
+      2022: ["LT", "LTZ"],
+      2023: ["LTZ Plus"],
+      2024: ["RS", "Premier Turbo"],
+      2025: ["Cruze Hybrid"],
+    },
+    ENJOY: {
+      2021: ["Base", "LS"],
+      2022: ["Base"],
+      2023: ["Top"],
+      2024: ["LTZ", "Premier"],
+      2025: ["CNG Variant"],
+    },
+    FORESTER: {
+      2021: ["2.0 Petrol"],
+      2022: ["2.0 Petrol"],
+      2023: ["AWD"],
+      2024: ["AWD XT"],
+      2025: ["Hybrid AWD"],
+    },
+    OPTRA: {
+      2021: ["Base"],
+      2022: ["Base"],
+      2023: ["Top"],
+      2024: ["LTZ"],
+      2025: ["Premier Edition"],
+    },
+    SAIL: {
+      2021: ["Base", "LS"],
+      2022: ["Base"],
+      2023: ["Top"],
+      2024: ["LTZ"],
+      2025: ["EV Concept"],
+    },
+    SPARK: {
+      2021: ["LS"],
+      2022: ["LS"],
+      2023: ["LT"],
+      2024: ["LTZ"],
+      2025: ["Spark EV"],
+    },
+    TAVERA: {
+      2021: ["Neo 2", "Base"],
+      2022: ["Base"],
+      2023: ["Neo 3"],
+      2024: ["Neo+"],
+      2025: ["CNG Neo+"],
+    },
+    TRAILBLAZER: {
+      2021: ["LT"],
+      2022: ["LT"],
+      2023: ["LTZ"],
+      2024: ["Premier AWD"],
+      2025: ["EV RS"],
+    },
+  },
 
-    // ✅ Handle Maker change
-    const handleMakerChange = (e) => {
-        const maker = e.target.value;
-        setSelectedMaker(maker);
-        setModels(maker ? Object.keys(carData[maker]) : []);
-        setSelectedModel("");
-        setSelectedYear("");
-        setYears([]);
-        setModifications([]);
-    };
+  FIAT: {
+    LINEA: {
+      2021: ["Active", "Dynamic"],
+      2022: ["Active", "Emotion"],
+      2023: ["T-Jet"],
+      2024: ["T-Jet Plus"],
+      2025: ["Hybrid"],
+    },
+    PUNTO: {
+      2021: ["Active", "Emotion"],
+      2022: ["Active", "Sports"],
+      2023: ["Evo"],
+      2024: ["Abarth Edition"],
+      2025: ["Evo Turbo"],
+    },
+    ABARTH: {
+      2021: ["Base"],
+      2022: ["Base"],
+      2023: ["Competizione"],
+      2024: ["Performance Edition"],
+      2025: ["Abarth EV Concept"],
+    },
+  },
 
-    // ✅ Handle Model change
-    const handleModelChange = (e) => {
-        const model = e.target.value;
-        setSelectedModel(model);
-        setYears(model ? Object.keys(carData[selectedMaker][model]) : []);
-        setSelectedYear("");
-        setModifications([]);
-    };
+  FORD: {
+    ECO: {
+      2021: ["Trend", "Titanium"],
+      2022: ["Trend", "Titanium"],
+      2023: ["Thunder"],
+      2024: ["S Edition"],
+      2025: ["Eco EV"],
+    },
+    ENDEAVOUR: {
+      2021: ["Titanium", "Titanium+"],
+      2022: ["Titanium"],
+      2023: ["Sport"],
+      2024: ["Platinum"],
+      2025: ["Everest Hybrid"],
+    },
+    FIGO: {
+      2021: ["Base", "Trend"],
+      2022: ["Base", "Titanium"],
+      2023: ["Blu"],
+      2024: ["Sport Edition"],
+      2025: ["Hybrid"],
+    },
+    ASPIRE: {
+      2021: ["Trend", "Titanium"],
+      2022: ["Trend"],
+      2023: ["Titanium+"],
+      2024: ["Blu Edition"],
+      2025: ["Hybrid Titanium"],
+    },
+  },
 
-    // ✅ Handle Year change
-    const handleYearChange = (e) => {
-        const year = e.target.value;
-        setSelectedYear(year);
-        setModifications(
-            year ? carData[selectedMaker][selectedModel][year] : []
-        );
-    };
+  HONDA: {
+    City: {
+      2021: ["SV", "V"],
+      2022: ["SV", "V"],
+      2023: ["VX", "ZX"],
+      2024: ["e:HEV VX", "Hybrid ZX"],
+      2025: ["RS Hybrid"],
+    },
+    Civic: {
+      2021: ["V", "VX"],
+      2022: ["V", "VX"],
+      2023: ["ZX"],
+      2024: ["RS Turbo"],
+      2025: ["Hybrid ZX+"],
+    },
+    Amaze: {
+      2021: ["E", "S"],
+      2022: ["E", "S"],
+      2023: ["VX"],
+      2024: ["Special Edition"],
+      2025: ["e:HEV"],
+    },
+    Jazz: {
+      2021: ["V", "VX"],
+      2022: ["V", "VX"],
+      2023: ["ZX"],
+      2024: ["ZX CVT"],
+      2025: ["Hybrid ZX"],
+    },
+  },
 
-    return (
-        <section className="px-6 py-12">
-            {/* Title */}
-            <div className="flex items-center justify-between mb-6">
-                <h2 className="text-4xl font-bold text-gray-800">
-                    Search by <span className="text-red-500">Vehicle</span>
-                </h2>
+  HYUNDAI: {
+    i20: {
+      2021: ["Magna", "Sportz"],
+      2022: ["Magna", "Sportz"],
+      2023: ["Asta"],
+      2024: ["N Line"],
+      2025: ["Turbo Asta+"],
+    },
+    Creta: {
+      2021: ["E", "EX"],
+      2022: ["E", "EX"],
+      2023: ["SX", "SX(O)"],
+      2024: ["Adventure Edition", "Knight Edition"],
+      2025: ["Creta EV"],
+    },
+    Venue: {
+      2021: ["S", "SX"],
+      2022: ["S", "SX"],
+      2023: ["N Line"],
+      2024: ["Knight Edition"],
+      2025: ["Venue EV"],
+    },
+    Verna: {
+      2021: ["S", "SX"],
+      2022: ["S", "SX"],
+      2023: ["SX(O)"],
+      2024: ["Turbo DCT"],
+      2025: ["Hybrid SX(O)"],
+    },
+  },
 
-               
-            </div>
+  KIA: {
+    Seltos: {
+      2021: ["HTE", "HTK"],
+      2022: ["HTE", "HTK"],
+      2023: ["GTX", "X-Line"],
+      2024: ["Facelift HTX+", "Diesel AT"],
+      2025: ["EV X-Line"],
+    },
+    Sonet: {
+      2021: ["HTE", "HTK"],
+      2022: ["HTE", "HTK"],
+      2023: ["GTX+"],
+      2024: ["Facelift HTX", "X-Line"],
+      2025: ["Sonet EV"],
+    },
+    Carnival: {
+      2021: ["Premium", "Prestige"],
+      2022: ["Premium"],
+      2023: ["Limousine"],
+      2024: ["KA4 Edition"],
+      2025: ["Carnival EV"],
+    },
+  },
 
-            {/* Dropdowns */}
-            <div className="flex flex-col md:flex-row items-center gap-8 p-6 bg-orange-200 rounded-lg shadow-sm">
-                {/* Car Maker */}
-                <select
-                    className="border border-gray-300 px-7 py-3 rounded focus:ring-2 focus:ring-sky-500"
-                    value={selectedMaker}
-                    onChange={handleMakerChange}
-                >
-                    <option value="">Select Car Maker</option>
-                    {Object.keys(carData).map((maker) => (
-                        <option key={maker} value={maker}>
-                            {maker} 
-                        </option>
-                    ))}
-                </select>
+  MAHINDRA: {
+    XUV300: {
+      2021: ["W4", "W6"],
+      2022: ["W4", "W6"],
+      2023: ["W8", "W8(O)"],
+      2024: ["TurboSportz"],
+      2025: ["XUV300 EV"],
+    },
+    Scorpio: {
+      2021: ["S3", "S5"],
+      2022: ["S3", "S5"],
+      2023: ["S11"],
+      2024: ["Scorpio N Z8L"],
+      2025: ["Scorpio EV"],
+    },
+    Thar: {
+      2021: ["AX", "LX"],
+      2022: ["AX", "LX"],
+      2023: ["Diesel", "Petrol"],
+      2024: ["RWD Variant"],
+      2025: ["Thar.e"],
+    },
+    Bolero: {
+      2021: ["B2", "B4"],
+      2022: ["B4", "B6"],
+      2023: ["B8"],
+      2024: ["Neo+"],
+      2025: ["Neo EV"],
+    },
+  },
 
-                {/* Model */}
-                <select
-                    className={`border border-gray-300 px-7 py-3 rounded focus:ring-2 focus:ring-sky-500 ${!selectedMaker ? "text-gray-700 cursor-not-allowed" : ""
-                        }`}
-                    value={selectedModel}
-                    onChange={handleModelChange}
-                    disabled={!selectedMaker}
-                >
-                    <option value="">Select Model Line</option>
-                    {models.map((model) => (
-                        <option key={model} value={model}>
-                            {model}
-                        </option>
-                    ))}
-                </select>
+  MARUTI: {
+    Swift: {
+      2021: ["LXI", "VXI"],
+      2022: ["LXI", "VXI"],
+      2023: ["ZXI", "ZXI+"],
+      2024: ["CNG ZXI"],
+      2025: ["Hybrid ZXI+"],
+    },
+    Baleno: {
+      2021: ["Delta", "Zeta"],
+      2022: ["Delta", "Zeta"],
+      2023: ["Alpha"],
+      2024: ["RS Turbo"],
+      2025: ["Hybrid Alpha+"],
+    },
+    WagonR: {
+      2021: ["LXI", "VXI"],
+      2022: ["LXI", "VXI"],
+      2023: ["ZXI"],
+      2024: ["CNG VXI"],
+      2025: ["WagonR EV"],
+    },
+    Alto: {
+      2021: ["Std", "LXI"],
+      2022: ["Std", "LXI"],
+      2023: ["VXI+"],
+      2024: ["K10 CNG"],
+      2025: ["Alto EV"],
+    },
+    Dzire: {
+      2021: ["LXI", "VXI"],
+      2022: ["LXI", "VXI"],
+      2023: ["ZXI"],
+      2024: ["ZXI+"],
+      2025: ["Hybrid ZXI+"],
+    },
+  },
 
-                {/* Year */}
-                <select
-                    className={`border border-gray-300 px-7 py-3 rounded focus:ring-2 focus:ring-sky-500 ${!selectedModel ? "text-gray-700 cursor-not-allowed" : ""
-                        }`}
-                    value={selectedYear}
-                    onChange={handleYearChange}
-                    disabled={!selectedModel}
-                >
-                    <option value="">Select Year</option>
-                    {years.map((year) => (
-                        <option key={year} value={year}>
-                            {year}
-                        </option>
-                    ))}
-                </select>
+  NISSAN: {
+    Magnite: {
+      2021: ["XE", "XL"],
+      2022: ["XE", "XL"],
+      2023: ["XV Premium"],
+      2024: ["Turbo CVT"],
+      2025: ["EV Concept"],
+    },
+    Kicks: {
+      2021: ["XL"],
+      2022: ["XL"],
+      2023: ["XV"],
+      2024: ["XV Premium Turbo"],
+      2025: ["Hybrid"],
+    },
+    Sunny: {
+      2021: ["XE", "XL"],
+      2022: ["XE", "XL"],
+      2023: ["XV"],
+      2024: ["XV Premium CVT"],
+      2025: ["Sunny e-Power"],
+    },
+  },
 
-                {/* Modification */}
-                <select
-                    className={`border border-gray-300 px-7 py-3 rounded focus:ring-2 focus:ring-sky-500 ${!selectedYear ? "text-gray-700 cursor-not-allowed" : ""
-                        }`}
-                    disabled={!selectedYear}
-                >
-                    <option value="">Select Modification</option>
-                    {modifications.map((mod) => (
-                        <option key={mod} value={mod}>
-                            {mod} 
-                        </option>
-                    ))}
-                </select>
+  RENAULT: {
+    Kwid: {
+      2021: ["RXE", "RXL"],
+      2022: ["RXE", "RXL"],
+      2023: ["Climber"],
+      2024: ["AMT Climber"],
+      2025: ["EV Concept"],
+    },
+    Triber: {
+      2021: ["RXE", "RXL"],
+      2022: ["RXE", "RXL"],
+      2023: ["RXZ"],
+      2024: ["Urban Night Edition"],
+      2025: ["Triber EV"],
+    },
+    Duster: {
+      2021: ["RXE", "RXL"],
+      2022: ["RXE", "RXL"],
+      2023: ["RXZ AWD"],
+      2024: ["Next-Gen AWD"],
+      2025: ["Hybrid AWD"],
+    },
+  },
+};
 
-                {/* Search Button */}
-                <button className="bg-gray-700 font-bold hover:bg-gray-800 text-white px-7 py-3 shadow rounded">
-                    Search Parts
-                </button>
-            </div>
 
-            <div className="flex justify-end mt-2">
-                <input
-                    type="text"
-                    placeholder="Search by number plate..."
-                    className="px-4 py-3 border border-gray-300 rounded-l-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
-                />
-                <button className="bg-sky-500 hover:bg-sky-600 text-white px-3 py-3 rounded-r-lg shadow">
-                    <FaSearch />
-                </button>
-            </div>
-        </section>
-    );
+  // ✅ Maker Dropdown Handler
+  const handleMakerChange = (e) => {
+    const maker = e.target.value;
+    setSelectedMaker(maker);
+    setModels(maker ? Object.keys(carData[maker]) : []);
+    setSelectedModel("");
+    setSelectedYear("");
+    setYears([]);
+    setModifications([]);
+    setSelectedModification("");
+  };
+
+  // ✅ Model Handler
+  const handleModelChange = (e) => {
+    const model = e.target.value;
+    setSelectedModel(model);
+    setYears(model ? Object.keys(carData[selectedMaker][model]) : []);
+    setSelectedYear("");
+    setModifications([]);
+    setSelectedModification("");
+  };
+
+  // ✅ Year Handler
+  const handleYearChange = (e) => {
+    const year = e.target.value;
+    setSelectedYear(year);
+    setModifications(year ? carData[selectedMaker][selectedModel][year] : []);
+    setSelectedModification("");
+  };
+
+  // ✅ Limit and show all makers
+  const makers = Object.keys(carData);
+  const visibleMakers = showAllMakers ? makers : makers.slice(0, 10);
+
+  const openOripartsWithBackLink = () => {
+    if (!partNumber.trim()) return;
+    const pn = encodeURIComponent(partNumber.trim());
+    // Keep the {pn} placeholder UNENCODED so Oriparts can substitute it
+    const backUrlBase = `${window.location.origin}/search/`;
+    const url = `https://oriparts.com/?search=${pn}&back_url_pn=${encodeURIComponent(backUrlBase)}{pn}`;
+    window.open(url, "_blank", "noopener");
+  };
+
+  const handleVehicleSearch = () => {
+    const params = new URLSearchParams();
+    if (selectedMaker) params.set("maker", selectedMaker);
+    if (selectedModel) params.set("model", selectedModel);
+    if (selectedYear) params.set("year", selectedYear);
+    if (modifications.length) params.set("mod", modifications[0]);
+    window.location.href = `/vehicle-search?${params.toString()}`;
+  };
+
+  return (
+    <section className="px-4 md:px-6 py-8 md:py-12 bg-gradient-to-r from-blue-50 via-pink-50 to-blue-50">
+      {/* Title */}
+      <div className="text-center mb-6 md:mb-10">
+        <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight text-gray-800">
+          Search by <span className="text-red-600">Vehicle</span>
+        </h2>
+        <p className="text-gray-600 mt-2 text-sm md:text-base">
+          Find compatible car parts by selecting your car details
+        </p>
+      </div>
+
+      {/* Dropdowns */}
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 bg-white p-4 md:p-6 rounded-2xl shadow-md border border-gray-100">
+        {/* Car Maker */}
+        <div className="flex flex-col items-center">
+          <select
+            value={selectedMaker}
+            onChange={handleMakerChange}
+            className="w-full md:w-auto min-w-[180px] px-5 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-sky-500 focus:border-sky-400 transition text-gray-700 hover:border-gray-300"
+          >
+            <option value="">Select Car Maker</option>
+            {visibleMakers.map((maker) => (
+              <option key={maker} value={maker}>
+                {maker}
+              </option>
+            ))}
+          </select>
+
+          {/* View More Button */}
+          {makers.length > 10 && !showAllMakers && (
+            <button
+              onClick={() => setShowAllMakers(true)}
+              className="mt-2 text-xs md:text-sm text-sky-600 hover:underline"
+            >
+              View More
+            </button>
+          )}
+        </div>
+
+        {/* Model */}
+        <select
+          value={selectedModel}
+          onChange={handleModelChange}
+          disabled={!selectedMaker}
+          className={`w-full md:w-auto min-w-[180px] px-5 py-3 rounded-lg border ${
+            !selectedMaker
+              ? "bg-gray-100 text-gray-500 cursor-not-allowed border-gray-200"
+              : "bg-gray-50 border-gray-200 hover:border-gray-300"
+          } focus:ring-2 focus:ring-sky-500 focus:border-sky-400 transition`}
+        >
+          <option value="">Select Model</option>
+          {models.map((model) => (
+            <option key={model} value={model}>
+              {model}
+            </option>
+          ))}
+        </select>
+
+        {/* Year */}
+        <select
+          value={selectedYear}
+          onChange={handleYearChange}
+          disabled={!selectedModel}
+          className={`w-full md:w-auto min-w-[150px] px-5 py-3 rounded-lg border ${
+            !selectedModel
+              ? "bg-gray-100 text-gray-500 cursor-not-allowed border-gray-200"
+              : "bg-gray-50 border-gray-200 hover:border-gray-300"
+          } focus:ring-2 focus:ring-sky-500 focus:border-sky-400 transition`}
+        >
+          <option value="">Select Year</option>
+          {years.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+
+        {/* Modification */}
+        <select
+          value={selectedModification}
+          onChange={(e) => setSelectedModification(e.target.value)}
+          disabled={!selectedYear}
+          className={`w-full md:w-auto min-w-[180px] px-5 py-3 rounded-lg border ${
+            !selectedYear
+              ? "bg-gray-100 text-gray-500 cursor-not-allowed border-gray-200"
+              : "bg-gray-50 border-gray-200 hover:border-gray-300"
+          } focus:ring-2 focus:ring-sky-500 focus:border-sky-400 transition`}
+        >
+          <option value="">Select Modification</option>
+          {modifications.map((mod) => (
+            <option key={mod} value={mod}>
+              {mod}
+            </option>
+          ))}
+        </select>
+
+        {/* Search Button */}
+        <button onClick={handleVehicleSearch} disabled={!selectedMaker} className={`px-6 py-3 rounded-lg font-semibold shadow transition-transform transform ${selectedMaker ? "bg-gradient-to-r from-red-500 to-red-600 text-white hover:scale-105" : "bg-gray-200 text-gray-500 cursor-not-allowed"}`}>
+          Search Parts
+        </button> 
+        {selectedMaker && selectedModel && selectedYear && selectedModification && (
+          <button
+            onClick={() => {
+              const params = new URLSearchParams({
+                maker: selectedMaker,
+                model: selectedModel,
+                year: selectedYear,
+                mod: selectedModification,
+              });
+              window.location.href = `/oem-catalogue?${params.toString()}`;
+            }}
+            className="px-6 py-3 rounded-lg font-semibold shadow bg-white border border-red-300 text-red-600 hover:bg-red-50 transition-colors"
+          >
+            OEM Catalogue
+          </button>
+        )}
+      </div>
+
+      {/* Secondary Search Bar (PN → Oriparts) */}
+      <div className="flex justify-end mt-4 md:mt-6">
+        <div className="flex w-full md:w-[420px] shadow-md rounded-lg overflow-hidden bg-white border border-gray-100">
+          <input
+            type="text"
+            placeholder="Search by part number (PN)..."
+            className="flex-1 px-4 py-3 md:py-4 text-gray-700 border-0 outline-none focus:ring-2 focus:ring-sky-400 text-sm md:text-base"
+            value={partNumber}
+            onChange={(e) => setPartNumber(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                openOripartsWithBackLink();
+              }
+            }}
+          />
+          <button onClick={openOripartsWithBackLink} className="bg-red-500 text-white px-4 md:px-5 flex items-center justify-center hover:bg-red-600 transition-colors">
+            <FaSearch className="text-sm md:text-base" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default SearchSection;
-

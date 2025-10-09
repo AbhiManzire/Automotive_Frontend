@@ -26,6 +26,10 @@ import Signup from "./component/Signup";
 import VendorPage from "./component/VendorPage";
 import SearchByCategory from "./component/SearchByCategory";
 import WhyChooseAftermarket from "./component/WhyChooseAftermarket";
+import PartSearchResults from "./component/PartSearchResults";
+import VehicleSearchResults from "./component/VehicleSearchResults";
+import OEMCatalogue from "./component/OEMCatalogue";
+
 
 // Component to conditionally render Header/Footer
 const Layout = ({ children }) => {
@@ -50,6 +54,7 @@ function App() {
             path="/"
             element={
               <>
+              
                 <BoodmoUi />
                 <CurrentOffers />
                 <SearchSection />
@@ -73,6 +78,7 @@ function App() {
           <Route path="/vendor" element={<VendorPage/>} />
           <Route path="/brands" element={<Brands />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/category" element={<SearchByCategory />} />
           <Route path="/garage" element={<Garage />} />
           <Route path="/document" element={<Document />} />
           <Route path="/myprofile" element={<MyProfile />} />
@@ -80,6 +86,11 @@ function App() {
           <Route path="/mywishlist" element={<MyWishlist />} />
           <Route path="/company_gst" element={<Company_GST />} />
           <Route path="/addresses" element={<Addresses />} />
+          {/* Redirect landing after Oriparts back_url_pn */}
+          <Route path="/search/:pn" element={<PartSearchResults />} />
+          {/* Vehicle-based search landing */}
+          <Route path="/vehicle-search" element={<VehicleSearchResults />} />
+          <Route path="/oem-catalogue" element={<OEMCatalogue />} />
         </Routes>
       </Layout>
     </Router>
