@@ -29,6 +29,8 @@ import WhyChooseAftermarket from "./component/WhyChooseAftermarket";
 import PartSearchResults from "./component/PartSearchResults";
 import VehicleSearchResults from "./component/VehicleSearchResults";
 import OEMCatalogue from "./component/OEMCatalogue";
+import SpareloPage from "./component/SpareloPage";
+import { MaintenanceCatalogPage } from "./component/MaintenanceCatalogPage";
 
 
 // Component to conditionally render Header/Footer
@@ -54,16 +56,17 @@ function App() {
             path="/"
             element={
               <>
-              
+
                 <BoodmoUi />
                 <CurrentOffers />
                 <SearchSection />
                 <SearchByCategory />
-                <WhyChooseAftermarket/>
+                <WhyChooseAftermarket />
                 <BrandTrustAndCarMakers />
                 <Article_review
                   items={[{ label: "Articles and Reviews", href: "/pages/article/" }]}
                 />
+                <SpareloPage />
               </>
             }
           />
@@ -75,7 +78,7 @@ function App() {
 
           {/* Other Pages */}
           <Route path="/contact" element={<Contact />} />
-          <Route path="/vendor" element={<VendorPage/>} />
+          <Route path="/vendor" element={<VendorPage />} />
           <Route path="/brands" element={<Brands />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/category" element={<SearchByCategory />} />
@@ -85,9 +88,13 @@ function App() {
           <Route path="/myorder" element={<MyOrder />} />
           <Route path="/mywishlist" element={<MyWishlist />} />
           <Route path="/company_gst" element={<Company_GST />} />
+          <Route path="/sparelopage" element={<SpareloPage />} />
           <Route path="/addresses" element={<Addresses />} />
+          <Route path="/maintenancecatalog" element={<MaintenanceCatalogPage />} />
+          
           {/* Redirect landing after Oriparts back_url_pn */}
           <Route path="/search/:pn" element={<PartSearchResults />} />
+
           {/* Vehicle-based search landing */}
           <Route path="/vehicle-search" element={<VehicleSearchResults />} />
           <Route path="/oem-catalogue" element={<OEMCatalogue />} />

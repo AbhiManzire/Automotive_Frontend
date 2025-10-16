@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion"; // 🌀 for smooth animations
 
 const categories = [
-  { title: "Maintenance Service Parts", href: "/catalog/3403-maintenance_service_parts/", img: "https://boodmo.com/media/images/categories/ebba234.svg" },
+  { title: "Maintenance Service Parts", href: "/maintenancecatalog", img: "https://boodmo.com/media/images/categories/ebba234.svg" },
   { title: "Filters", href: "/catalog/4328-filters/", img: "https://boodmo.com/media/images/categories/fab8332.svg" },
   { title: "Windscreen Cleaning System", href: "/catalog/4193-windscreen_cleaning_system/", img: "https://boodmo.com/media/images/categories/d36974e.svg" },
   { title: "Car Accessories", href: "/catalog/4037-accessories/", img: "https://boodmo.com/media/images/categories/4372565.svg" },

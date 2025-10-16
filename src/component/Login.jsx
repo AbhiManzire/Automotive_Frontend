@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import loginOffice from "../assets/img/login-office.jpeg";
+import loginOffice from "../assets/img/login-office1.jpg";
 import loginOfficeDark from "../assets/img/login-office-dark.jpeg";
 
 const Login = () => {

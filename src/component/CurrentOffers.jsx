@@ -6,6 +6,15 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const CurrentOffers = () => {
+  // Array of images in the public folder
+  const images = [
+    "/fd1.jpeg",
+    "/fd2.png",
+    "/fd1.jpeg",
+    "/fd2.png",
+    "/fd1.jpeg",
+  ];
+
   return (
     <section className="px-6 py-12">
       <h2 className="text-4xl font-bold text-gray-800 mb-6">
@@ -20,44 +29,21 @@ const CurrentOffers = () => {
         autoplay={{ delay: 2000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
         className="w-full"
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
       >
-
-        <SwiperSlide>
-          <img
-            src="https://boodmo.com/media/images/slider/dd4ba16.webp"
-            className="rounded-lg shadow-md w-full h-64 object-cover"
-          />
-        </SwiperSlide>
-
-
-        <SwiperSlide>
-          <img
-            src="https://boodmo.com/media/images/slider/dd4ba16.webp"
-            className="rounded-lg shadow-md w-full h-64 object-cover"
-          />
-        </SwiperSlide>
-
-
-        <SwiperSlide>
-          <img
-            src="https://boodmo.com/media/images/slider/8a7f220.webp"
-            className="rounded-lg shadow-md w-full h-64 object-cover"
-          />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <img
-            src="https://boodmo.com/media/images/slider/e86b916.webp"
-            className="rounded-lg shadow-md w-full h-64 object-cover"
-          />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <img
-            src="https://boodmo.com/media/images/slider/de458dc.webp"
-            className="rounded-lg shadow-md w-full h-64 object-cover"
-          />
-        </SwiperSlide>
+        {images.map((src, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={src}
+              alt={`Offer ${index + 1}`}
+              className="rounded-lg shadow-md w-full h-64 object-cover"
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </section>
   );

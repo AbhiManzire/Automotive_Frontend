@@ -13,7 +13,7 @@ const SearchSection = () => {
   const [partNumber, setPartNumber] = useState("");
 
   // ✅ Car Data
- const carData = {
+  const carData = {
   CHEVROLET: {
     AVEO: {
       2021: ["Base", "Mid"],
@@ -156,6 +156,7 @@ const SearchSection = () => {
       2023: ["VX", "ZX"],
       2024: ["e:HEV VX", "Hybrid ZX"],
       2025: ["RS Hybrid"],
+
     },
     Civic: {
       2021: ["V", "VX"],
@@ -350,11 +351,20 @@ const SearchSection = () => {
       2024: ["Next-Gen AWD"],
       2025: ["Hybrid AWD"],
     },
+    Captur: {
+      2021: ["RXT", "RXZ"],
+      2022: ["RXT", "RXZ"],
+      2023: ["Turbo RXZ"],
+      2024: ["Turbo RXZ+"],
+      2025: ["Captur EV"],
+    },
+
+    
   },
-};
 
+  };
 
-  // ✅ Maker Dropdown Handler
+  // ✅ Handlers
   const handleMakerChange = (e) => {
     const maker = e.target.value;
     setSelectedMaker(maker);
@@ -376,7 +386,6 @@ const SearchSection = () => {
     setSelectedModification("");
   };
 
-  // ✅ Year Handler
   const handleYearChange = (e) => {
     const year = e.target.value;
     setSelectedYear(year);
@@ -408,7 +417,7 @@ const SearchSection = () => {
 
   return (
     <section className="px-4 md:px-6 py-8 md:py-12 bg-gradient-to-r from-blue-50 via-pink-50 to-blue-50">
-      {/* Title */}
+      {/* 🔹 Title */}
       <div className="text-center mb-6 md:mb-10">
         <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight text-gray-800">
           Search by <span className="text-red-600">Vehicle</span>
@@ -418,9 +427,9 @@ const SearchSection = () => {
         </p>
       </div>
 
-      {/* Dropdowns */}
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 bg-white p-4 md:p-6 rounded-2xl shadow-md border border-gray-100">
-        {/* Car Maker */}
+      {/* 🔹 Dropdowns and Buttons */}
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 bg-white p-4 md:p-6 rounded-2xl shadow-md border border-gray-100 flex-wrap">
+        {/* Maker */}
         <div className="flex flex-col items-center">
           <select
             value={selectedMaker}
@@ -434,8 +443,6 @@ const SearchSection = () => {
               </option>
             ))}
           </select>
-
-          {/* View More Button */}
           {makers.length > 10 && !showAllMakers && (
             <button
               onClick={() => setShowAllMakers(true)}
@@ -503,11 +510,24 @@ const SearchSection = () => {
           ))}
         </select>
 
-        {/* Search Button */}
-        <button onClick={handleVehicleSearch} disabled={!selectedMaker} className={`px-6 py-3 rounded-lg font-semibold shadow transition-transform transform ${selectedMaker ? "bg-gradient-to-r from-red-500 to-red-600 text-white hover:scale-105" : "bg-gray-200 text-gray-500 cursor-not-allowed"}`}>
+        {/* 🔹 Search Button */}
+        <button
+          onClick={handleVehicleSearch}
+          disabled={!selectedMaker}
+          className={`px-6 py-3 rounded-lg font-semibold shadow transition-transform transform ${
+            selectedMaker
+              ? "bg-gradient-to-r from-red-500 to-red-600 text-white hover:scale-105"
+              : "bg-gray-200 text-gray-500 cursor-not-allowed"
+          }`}
+        >
           Search Parts
-        </button> 
-        {selectedMaker && selectedModel && selectedYear && selectedModification && (
+        </button>
+      </div>
+
+      {/* 🔹 Dynamic Buttons Section */}
+      {selectedMaker && selectedModel && selectedYear && selectedModification && (
+        <div className="flex flex-wrap justify-center gap-4 mt-6">
+          {/* OEM Catalogue */}
           <button
             onClick={() => {
               const params = new URLSearchParams({
@@ -522,10 +542,58 @@ const SearchSection = () => {
           >
             OEM Catalogue
           </button>
-        )}
-      </div>
 
-      {/* Secondary Search Bar (PN → Oriparts) */}
+          {/* OEM Service Kit */}
+          <button
+            onClick={() => {
+              const params = new URLSearchParams({
+                maker: selectedMaker,
+                model: selectedModel,
+                year: selectedYear,
+                mod: selectedModification,
+              });
+              window.location.href = `/oem-service-kit?${params.toString()}`;
+            }}
+            className="px-6 py-3 rounded-lg font-semibold shadow bg-white border border-blue-300 text-blue-600 hover:bg-blue-50 transition-colors"
+          >
+            OEM Service Kit
+          </button>
+
+          {/* Aftermarket Service Kit */}
+          <button
+            onClick={() => {
+              const params = new URLSearchParams({
+                maker: selectedMaker,
+                model: selectedModel,
+                year: selectedYear,
+                mod: selectedModification,
+              });
+              window.location.href = `/aftermarket-service-kit?${params.toString()}`;
+            }}
+            className="px-6 py-3 rounded-lg font-semibold shadow bg-white border border-green-300 text-green-600 hover:bg-green-50 transition-colors"
+          >
+            Aftermarket Service Kit
+          </button>
+
+          {/* Save Car in My Garage */}
+          <button
+            onClick={() => {
+              const params = new URLSearchParams({
+                maker: selectedMaker,
+                model: selectedModel,
+                year: selectedYear,
+                mod: selectedModification,
+              });
+              window.location.href = `/my-garage/save?${params.toString()}`;
+            }}
+            className="px-6 py-3 rounded-lg font-semibold shadow bg-white border border-yellow-300 text-yellow-600 hover:bg-yellow-50 transition-colors"
+          >
+            Save Car in My Garage
+          </button>
+        </div>
+      )}
+
+      {/* 🔹 Part Number Search */}
       <div className="flex justify-end mt-4 md:mt-6">
         <div className="flex w-full md:w-[420px] shadow-md rounded-lg overflow-hidden bg-white border border-gray-100">
           <input
@@ -535,12 +603,13 @@ const SearchSection = () => {
             value={partNumber}
             onChange={(e) => setPartNumber(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                openOripartsWithBackLink();
-              }
+              if (e.key === "Enter") openOripartsWithBackLink();
             }}
           />
-          <button onClick={openOripartsWithBackLink} className="bg-red-500 text-white px-4 md:px-5 flex items-center justify-center hover:bg-red-600 transition-colors">
+          <button
+            onClick={openOripartsWithBackLink}
+            className="bg-red-500 text-white px-4 md:px-5 flex items-center justify-center hover:bg-red-600 transition-colors"
+          >
             <FaSearch className="text-sm md:text-base" />
           </button>
         </div>

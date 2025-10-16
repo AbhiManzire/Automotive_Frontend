@@ -16,54 +16,344 @@ const SearchSection = () => {
   const [modifications, setModifications] = useState([]);
 
   const carData = {
-    CHEVROLET: {
-      AVEO: { 2022: ["Base", "Mid"], 2023: ["Top", "RS"] },
-      BEAT: { 2022: ["LS", "LT"], 2023: ["LTZ", "Diesel"] },
-      CRUZE: { 2021: ["LT", "LTZ"], 2022: ["LTZ"] },
+  CHEVROLET: {
+    AVEO: {
+      2021: ["Base", "Mid"],
+      2022: ["Base", "Mid"],
+      2023: ["Top"],
+      2024: ["Premier", "LTZ"],
+      2025: ["Hybrid LTZ"],
     },
-    HONDA: {
-      City: { 2021: ["SV", "V"], 2022: ["VX", "ZX"], 2023: ["ZX+", "Sport"] },
-      Civic: { 2021: ["V", "VX"], 2022: ["ZX"], 2023: ["ZX+", "Type R"] },
-      Amaze: { 2022: ["E", "S"], 2023: ["VX", "ZX"] },
+    BEAT: {
+      2021: ["PS", "LS"],
+      2022: ["Base", "LS"],
+      2023: ["LT", "Diesel"],
+      2024: ["LTZ", "Premier Edition"],
+      2025: ["EV Prototype"],
     },
-    MARUTI: {
-      Swift: { 2021: ["LXI", "VXI"], 2022: ["ZXI", "ZXI+"], 2023: ["ZXI+", "Sport"] },
-      Alto: { 2021: ["Std", "LXI"], 2022: ["VXI", "VXI+"], 2023: ["VXI+"] },
-      Dzire: { 2022: ["LXI", "VXI"], 2023: ["ZXI", "ZXI+"] },
-      Baleno: { 2022: ["Sigma", "Delta"], 2023: ["Zeta", "Alpha"] },
+    CAPTIVA: {
+      2021: ["LT", "LTZ"],
+      2022: ["LT"],
+      2023: ["LTZ"],
+      2024: ["Premier"],
+      2025: ["Hybrid AWD"],
     },
-    HYUNDAI: {
-      Creta: { 2021: ["E", "S"], 2022: ["SX", "SX+"], 2023: ["SX+", "SX(O)"] },
-      Venue: { 2022: ["E", "S"], 2023: ["SX", "SX(O)"] },
-      i20: { 2021: ["Magna", "Sportz"], 2022: ["Asta", "Asta(O)"] },
+    CRUZE: {
+      2021: ["LT", "LTZ"],
+      2022: ["LT", "LTZ"],
+      2023: ["LTZ Plus"],
+      2024: ["RS", "Premier Turbo"],
+      2025: ["Cruze Hybrid"],
     },
-    KIA: {
-      Seltos: { 2021: ["HTK+", "HTX"], 2022: ["HTX+", "GT Line"] },
-      Sonet: { 2022: ["HTE", "HTK"], 2023: ["HTX", "HTX+"] },
+    ENJOY: {
+      2021: ["Base", "LS"],
+      2022: ["Base"],
+      2023: ["Top"],
+      2024: ["LTZ", "Premier"],
+      2025: ["CNG Variant"],
     },
-    TATA: {
-      Nexon: { 2021: ["XE", "XM"], 2022: ["XZ", "XZ+"] },
-      Harrier: { 2022: ["XE", "XZ"], 2023: ["XZ+", "XZA"] },
-      Altroz: { 2022: ["XE", "XT"], 2023: ["XZ", "XZ+"] },
+    FORESTER: {
+      2021: ["2.0 Petrol"],
+      2022: ["2.0 Petrol"],
+      2023: ["AWD"],
+      2024: ["AWD XT"],
+      2025: ["Hybrid AWD"],
     },
-    TOYOTA: {
-      Fortuner: { 2021: ["GX", "VX"], 2022: ["ZX", "ZX(O)"] },
-      Innova: { 2022: ["E", "G"], 2023: ["V", "Z"] },
+    OPTRA: {
+      2021: ["Base"],
+      2022: ["Base"],
+      2023: ["Top"],
+      2024: ["LTZ"],
+      2025: ["Premier Edition"],
     },
-    FORD: {
-      EcoSport: { 2021: ["Ambiente", "Trend"], 2022: ["Titanium", "Titanium+"] },
-      Figo: { 2021: ["Trend", "Titanium"], 2022: ["Titanium+", "Sports"] },
+    SAIL: {
+      2021: ["Base", "LS"],
+      2022: ["Base"],
+      2023: ["Top"],
+      2024: ["LTZ"],
+      2025: ["EV Concept"],
     },
-    NISSAN: {
-      Magnite: { 2022: ["XE", "XL"], 2023: ["XV", "XV Premium"] },
-      Kicks: { 2022: ["XL", "XV"], 2023: ["XV Premium", "XV Premium (O)"] },
+    SPARK: {
+      2021: ["LS"],
+      2022: ["LS"],
+      2023: ["LT"],
+      2024: ["LTZ"],
+      2025: ["Spark EV"],
     },
-    RENAULT: {
-      Kwid: { 2021: ["RXT", "RXL"], 2022: ["RXZ", "RXZ Opt"] },
-      Duster: { 2021: ["RxE", "RxL"], 2022: ["RxZ", "RxZ Opt"] },
+    TAVERA: {
+      2021: ["Neo 2", "Base"],
+      2022: ["Base"],
+      2023: ["Neo 3"],
+      2024: ["Neo+"],
+      2025: ["CNG Neo+"],
     },
-  };
+    TRAILBLAZER: {
+      2021: ["LT"],
+      2022: ["LT"],
+      2023: ["LTZ"],
+      2024: ["Premier AWD"],
+      2025: ["EV RS"],
+    },
+  },
 
+  FIAT: {
+    LINEA: {
+      2021: ["Active", "Dynamic"],
+      2022: ["Active", "Emotion"],
+      2023: ["T-Jet"],
+      2024: ["T-Jet Plus"],
+      2025: ["Hybrid"],
+    },
+    PUNTO: {
+      2021: ["Active", "Emotion"],
+      2022: ["Active", "Sports"],
+      2023: ["Evo"],
+      2024: ["Abarth Edition"],
+      2025: ["Evo Turbo"],
+    },
+    ABARTH: {
+      2021: ["Base"],
+      2022: ["Base"],
+      2023: ["Competizione"],
+      2024: ["Performance Edition"],
+      2025: ["Abarth EV Concept"],
+    },
+  },
+
+  FORD: {
+    ECO: {
+      2021: ["Trend", "Titanium"],
+      2022: ["Trend", "Titanium"],
+      2023: ["Thunder"],
+      2024: ["S Edition"],
+      2025: ["Eco EV"],
+    },
+    ENDEAVOUR: {
+      2021: ["Titanium", "Titanium+"],
+      2022: ["Titanium"],
+      2023: ["Sport"],
+      2024: ["Platinum"],
+      2025: ["Everest Hybrid"],
+    },
+    FIGO: {
+      2021: ["Base", "Trend"],
+      2022: ["Base", "Titanium"],
+      2023: ["Blu"],
+      2024: ["Sport Edition"],
+      2025: ["Hybrid"],
+    },
+    ASPIRE: {
+      2021: ["Trend", "Titanium"],
+      2022: ["Trend"],
+      2023: ["Titanium+"],
+      2024: ["Blu Edition"],
+      2025: ["Hybrid Titanium"],
+    },
+  },
+
+  HONDA: {
+    City: {
+      2021: ["SV", "V"],
+      2022: ["SV", "V"],
+      2023: ["VX", "ZX"],
+      2024: ["e:HEV VX", "Hybrid ZX"],
+      2025: ["RS Hybrid"],
+    },
+    Civic: {
+      2021: ["V", "VX"],
+      2022: ["V", "VX"],
+      2023: ["ZX"],
+      2024: ["RS Turbo"],
+      2025: ["Hybrid ZX+"],
+    },
+    Amaze: {
+      2021: ["E", "S"],
+      2022: ["E", "S"],
+      2023: ["VX"],
+      2024: ["Special Edition"],
+      2025: ["e:HEV"],
+    },
+    Jazz: {
+      2021: ["V", "VX"],
+      2022: ["V", "VX"],
+      2023: ["ZX"],
+      2024: ["ZX CVT"],
+      2025: ["Hybrid ZX"],
+    },
+  },
+
+  HYUNDAI: {
+    i20: {
+      2021: ["Magna", "Sportz"],
+      2022: ["Magna", "Sportz"],
+      2023: ["Asta"],
+      2024: ["N Line"],
+      2025: ["Turbo Asta+"],
+    },
+    Creta: {
+      2021: ["E", "EX"],
+      2022: ["E", "EX"],
+      2023: ["SX", "SX(O)"],
+      2024: ["Adventure Edition", "Knight Edition"],
+      2025: ["Creta EV"],
+    },
+    Venue: {
+      2021: ["S", "SX"],
+      2022: ["S", "SX"],
+      2023: ["N Line"],
+      2024: ["Knight Edition"],
+      2025: ["Venue EV"],
+    },
+    Verna: {
+      2021: ["S", "SX"],
+      2022: ["S", "SX"],
+      2023: ["SX(O)"],
+      2024: ["Turbo DCT"],
+      2025: ["Hybrid SX(O)"],
+    },
+  },
+
+  KIA: {
+    Seltos: {
+      2021: ["HTE", "HTK"],
+      2022: ["HTE", "HTK"],
+      2023: ["GTX", "X-Line"],
+      2024: ["Facelift HTX+", "Diesel AT"],
+      2025: ["EV X-Line"],
+    },
+    Sonet: {
+      2021: ["HTE", "HTK"],
+      2022: ["HTE", "HTK"],
+      2023: ["GTX+"],
+      2024: ["Facelift HTX", "X-Line"],
+      2025: ["Sonet EV"],
+    },
+    Carnival: {
+      2021: ["Premium", "Prestige"],
+      2022: ["Premium"],
+      2023: ["Limousine"],
+      2024: ["KA4 Edition"],
+      2025: ["Carnival EV"],
+    },
+  },
+
+  MAHINDRA: {
+    XUV300: {
+      2021: ["W4", "W6"],
+      2022: ["W4", "W6"],
+      2023: ["W8", "W8(O)"],
+      2024: ["TurboSportz"],
+      2025: ["XUV300 EV"],
+    },
+    Scorpio: {
+      2021: ["S3", "S5"],
+      2022: ["S3", "S5"],
+      2023: ["S11"],
+      2024: ["Scorpio N Z8L"],
+      2025: ["Scorpio EV"],
+    },
+    Thar: {
+      2021: ["AX", "LX"],
+      2022: ["AX", "LX"],
+      2023: ["Diesel", "Petrol"],
+      2024: ["RWD Variant"],
+      2025: ["Thar.e"],
+    },
+    Bolero: {
+      2021: ["B2", "B4"],
+      2022: ["B4", "B6"],
+      2023: ["B8"],
+      2024: ["Neo+"],
+      2025: ["Neo EV"],
+    },
+  },
+
+  MARUTI: {
+    Swift: {
+      2021: ["LXI", "VXI"],
+      2022: ["LXI", "VXI"],
+      2023: ["ZXI", "ZXI+"],
+      2024: ["CNG ZXI"],
+      2025: ["Hybrid ZXI+"],
+    },
+    Baleno: {
+      2021: ["Delta", "Zeta"],
+      2022: ["Delta", "Zeta"],
+      2023: ["Alpha"],
+      2024: ["RS Turbo"],
+      2025: ["Hybrid Alpha+"],
+    },
+    WagonR: {
+      2021: ["LXI", "VXI"],
+      2022: ["LXI", "VXI"],
+      2023: ["ZXI"],
+      2024: ["CNG VXI"],
+      2025: ["WagonR EV"],
+    },
+    Alto: {
+      2021: ["Std", "LXI"],
+      2022: ["Std", "LXI"],
+      2023: ["VXI+"],
+      2024: ["K10 CNG"],
+      2025: ["Alto EV"],
+    },
+    Dzire: {
+      2021: ["LXI", "VXI"],
+      2022: ["LXI", "VXI"],
+      2023: ["ZXI"],
+      2024: ["ZXI+"],
+      2025: ["Hybrid ZXI+"],
+    },
+  },
+
+  NISSAN: {
+    Magnite: {
+      2021: ["XE", "XL"],
+      2022: ["XE", "XL"],
+      2023: ["XV Premium"],
+      2024: ["Turbo CVT"],
+      2025: ["EV Concept"],
+    },
+    Kicks: {
+      2021: ["XL"],
+      2022: ["XL"],
+      2023: ["XV"],
+      2024: ["XV Premium Turbo"],
+      2025: ["Hybrid"],
+    },
+    Sunny: {
+      2021: ["XE", "XL"],
+      2022: ["XE", "XL"],
+      2023: ["XV"],
+      2024: ["XV Premium CVT"],
+      2025: ["Sunny e-Power"],
+    },
+  },
+
+  RENAULT: {
+    Kwid: {
+      2021: ["RXE", "RXL"],
+      2022: ["RXE", "RXL"],
+      2023: ["Climber"],
+      2024: ["AMT Climber"],
+      2025: ["EV Concept"],
+    },
+    Triber: {
+      2021: ["RXE", "RXL"],
+      2022: ["RXE", "RXL"],
+      2023: ["RXZ"],
+      2024: ["Urban Night Edition"],
+      2025: ["Triber EV"],
+    },
+    Duster: {
+      2021: ["RXE", "RXL"],
+      2022: ["RXE", "RXL"],
+      2023: ["RXZ AWD"],
+      2024: ["Next-Gen AWD"],
+      2025: ["Hybrid AWD"],
+    },
+  },
+};
   const handleMakerChange = (e) => {
     const maker = e.target.value;
     setSelectedMaker(maker);
