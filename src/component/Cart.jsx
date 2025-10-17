@@ -1,109 +1,65 @@
-// import React from 'react';
-// import { MdShoppingCart } from 'react-icons/md';
-// import { FaLocationDot, FaSackDollar } from 'react-icons/fa6';
-// import { PiNotepadFill } from 'react-icons/pi';
-
-// const Cart = () => {
-//   const steps = [
-//     { name: 'Cart', icon: <MdShoppingCart /> },
-//     { name: 'Address', icon: <FaLocationDot /> },
-//     { name: 'Review', icon: <PiNotepadFill /> },
-//     { name: 'Pay', icon: <FaSackDollar /> },
-//   ];
-
-//   return (
-//     <div className="flex flex-col bg-white">
-
-//       <div className="relative bg-blue-50 py-10">
-//         <div className="relative z-10 flex justify-center gap-12">
-//           {steps.map((step, index) => (
-//             <div key={index} className="flex flex-col items-center text-blue-600 w-24 relative">
-//               {/* Line between icons */}
-//               {index < steps.length - 1 && (
-//                 <div className="absolute top-1/2 left-full w-12 h-0.5 bg-blue-300 z-0"></div>
-//               )}
-
-//               <div className="w-14 h-14 flex items-center justify-center bg-gray-200 border-2 border-gray-300 rounded-full text-3xl z-10">
-//                 {step.icon}
-//               </div>
-
-//               {/* Label */}
-//               <span className="mt-2 text-sm text-center">{step.name}</span>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-
-
-//       <div className=" font-semibold my-12">
-//         <p className="text-lg border-b-2 py-2 text-gray-600 mb-4">Shopping cart is empty</p>
-//         <button className="border border-black hover:border-white text-black-600 px-4 py-3 rounded hover:bg-red-400 hover:text-white transition">
-//           Continue shopping
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Cart;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React from "react";
-import { MdShoppingCart, MdLocalShipping, MdDone, MdOutlineHome } from "react-icons/md";
+import {
+  MdShoppingCart,
+  MdLocalShipping,
+  MdDone,
+  MdOutlineHome,
+  MdOutlinePayment,
+  MdOutlineInventory,
+} from "react-icons/md";
 
 const shippingSteps = [
   { name: "Order Placed", icon: <MdShoppingCart /> },
-  { name: "Processing", icon: <MdDone /> },
+  { name: "Processing", icon: <MdOutlineInventory /> },
+  { name: "Payment Confirmed", icon: <MdOutlinePayment /> },
   { name: "Shipped", icon: <MdLocalShipping /> },
   { name: "Out for Delivery", icon: <MdOutlineHome /> },
   { name: "Delivered", icon: <MdDone /> },
 ];
 
-export default function ShippingStatus({ currentStep = 2 }) {
-  // currentStep: 0-based index for progress
+export default function ShippingStatus({ currentStep = 3 }) {
   return (
-    <div className="flex flex-col items-center p-6 py-20 bg-white rounded-xl shadow-md w-full max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Shipping Status</h2>
+    <div className="flex flex-col items-center p-8 md:p-12 bg-gradient-to-br from-blue-50 via-pink-50 to-purple-50 rounded-2xl shadow-2xl w-full max-w-6xl mx-auto border border-gray-200">
+      {/* Header 🚚 */}
+      <h2 className="text-3xl font-bold mb-10 text-gray-800 tracking-wide">
+         Shipping Progress Tracker
+      </h2>
 
-      <div className="relative flex justify-between items-center w-full">
+      {/* Steps */}
+      <div className="relative flex flex-wrap justify-between items-center w-full px-4 md:px-10">
         {shippingSteps.map((step, index) => {
           const isCompleted = index < currentStep;
           const isActive = index === currentStep;
 
           return (
-            <div key={index} className="flex flex-col items-center relative w-1/5">
+            <div key={index} className="flex flex-col items-center relative flex-1 min-w-[80px]">
               {/* Connector line */}
               {index < shippingSteps.length - 1 && (
                 <div
-                  className={`absolute top-1/2 left-full h-1 w-full transform -translate-y-1/2 ${index < currentStep ? "bg-green-500" : "bg-gray-300"
-                    }`}
+                  className={`absolute top-1/2 left-1/2 h-1 w-full transform -translate-y-1/2 z-0 transition-all duration-700 ${
+                    index < currentStep ? "bg-gradient-to-r from-green-400 to-blue-500" : "bg-gray-300"
+                  }`}
                 />
               )}
 
               {/* Step icon */}
               <div
-                className={`w-12 h-12 flex items-center justify-center rounded-full text-white text-2xl mb-2
-                  ${isCompleted ? "bg-green-500" : isActive ? "bg-blue-500 scale-110 shadow-lg" : "bg-gray-300"}`}
+                className={`z-10 w-14 h-14 flex items-center justify-center rounded-full text-white text-2xl shadow-md transition-all duration-500 transform hover:scale-110 ${
+                  isCompleted
+                    ? "bg-gradient-to-br from-green-500 to-emerald-600 ring-4 ring-green-200"
+                    : isActive
+                    ? "bg-gradient-to-br from-blue-500 to-indigo-600 ring-4 ring-blue-200 animate-pulse"
+                    : "bg-gray-300"
+                }`}
               >
                 {step.icon}
               </div>
 
               {/* Step label */}
               <span
-                className={`text-xs text-center font-medium ${isCompleted ? "text-green-500" : isActive ? "text-blue-500" : "text-gray-500"
-                  }`}
+                className={`text-sm mt-2 font-semibold text-center transition-colors ${
+                  isCompleted ? "text-green-600" : isActive ? "text-blue-600" : "text-gray-500"
+                }`}
               >
                 {step.name}
               </span>
@@ -112,19 +68,40 @@ export default function ShippingStatus({ currentStep = 2 }) {
         })}
       </div>
 
-      {/* Optional Message */}
-      {/* <p className="mt-6 text-gray-600 text-center">
-        Your package is currently <span className="font-semibold text-blue-500">{shippingSteps[currentStep].name}</span>.
-      </p> */}
+      {/* Status Message */}
+      <div className="mt-12 text-center">
+        <p className="text-lg text-gray-700">
+          Current Status:{" "}
+          <span className="font-semibold text-blue-600">
+            {shippingSteps[currentStep]?.name || "Delivered"}
+          </span>
+        </p>
+        <p className="text-sm text-gray-500 mt-1">
+          Your order is being processed. We’ll notify you once it moves to the next stage.
+        </p>
+      </div>
 
-     
-      <div className=" font-semibold my-12">
-        <p className="text-lg border-b-2 py-2 text-gray-600 mb-4">Shopping cart is empty</p>
-        <button className="border border-black hover:border-white text-black-600 px-4 py-3 rounded hover:bg-red-400 hover:text-white transition">
-          Continue shopping
+      {/* Empty Cart Section */}
+      <div className="mt-14 w-full text-center">
+        <p className="text-lg border-b-2 border-gray-200 py-3 text-gray-600 mb-6 font-medium">
+          🛒 Your Shopping Cart is Empty
+        </p>
+        <button className="bg-gradient-to-r from-pink-500 to-blue-500 text-white font-semibold px-6 py-3 rounded-full hover:opacity-90 transition transform hover:scale-105 shadow-lg">
+          Continue Shopping
         </button>
-      </div> 
+      </div>
 
+      {/* Categories Section */}
+      <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
+        {["Electronics", "Lighting", "Car Accessories", "Filters", "Maintenance Service Parts", "Bearings"].map((cat) => (
+          <div
+            key={cat}
+            className="bg-white shadow-md hover:shadow-xl rounded-xl p-4 text-center cursor-pointer transition transform hover:-translate-y-2"
+          >
+            <p className="text-gray-700 font-semibold">{cat}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
