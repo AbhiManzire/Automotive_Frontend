@@ -77,7 +77,7 @@ const Footer = () => {
                             {[
                                 "About us", "Contact us", "FAQ", "Careers",
                                 "Investor Relations", "Suppliers Relations",
-                                "Discovery Points", "boodmo API Solution", "Become a Vendor"
+                                "Discovery Points", "Sparelo API Solution", "Become a Vendor"
                             ].map((link, i) => (
                                 <li key={i}>
                                     <a href="#" className="hover:underline">{link}</a>

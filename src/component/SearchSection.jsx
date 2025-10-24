@@ -536,7 +536,7 @@ const SearchSection = () => {
                 year: selectedYear,
                 mod: selectedModification,
               });
-              window.location.href = `/oem-catalogue?${params.toString()}`;
+              window.location.href = `/catalog?${params.toString()}`;
             }}
             className="px-6 py-3 rounded-lg font-semibold shadow bg-white border border-red-300 text-red-600 hover:bg-red-50 transition-colors"
           >

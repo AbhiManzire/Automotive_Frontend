@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
               ₹{product.price}
             </span>
           )}
-          <button className="mt-3 w-full bg-blue-600 text-white rounded px-3 py-2 hover:bg-blue-700 transition">
+          <button className="mt-3 w-full bg-red-600 text-white rounded px-3 py-2 hover:bg-red-700 transition">
             Add to Cart
           </button>
         </div>
@@ -141,7 +141,7 @@ const VehicleFilter = ({ onSelectMaker }) => {
           setSelectedMaker(e.target.value);
           onSelectMaker(e.target.value);
         }}
-        className="w-full border border-gray-300 text-gray-700 rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full border border-gray-300 text-gray-700 rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400"
       >
         <option value="">Choose car maker</option>
         <optgroup label="Popular carmakers">
@@ -225,7 +225,7 @@ export const MaintenanceCatalogPage = () => {
     <div className="bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-2xl font-bold mb-6">
-          Maintenance & Service Parts
+          Maintenance Service Parts
         </h1>
 
         <div className="flex">
@@ -273,7 +273,7 @@ export const MaintenanceCatalogPage = () => {
             <div className="lg:hidden mb-4">
               <button
                 onClick={() => setIsFilterOpenMobile(true)}
-                className="px-4 py-2 bg-blue-600 text-white rounded"
+                className="px-4 py-2 bg-red-600 text-white rounded"
               >
                 Filters & Sort
               </button>
@@ -357,7 +357,7 @@ export const MaintenanceCatalogPage = () => {
             <section class="bg-white text-gray-800 py-10 px-6 max-w-5xl mx-auto">
               <div class="space-y-6">
                 {/* <!-- Section Title --> */}
-                <h2 class="text-2xl md:text-3xl font-bold text-blue-700 border-b-2 border-blue-300 inline-block pb-2">
+                <h2 class="text-2xl md:text-3xl font-bold text-red-700 border-b-2 border-red-300 inline-block pb-2">
                   About Car Maintenance Parts
                 </h2>
 
@@ -376,7 +376,7 @@ export const MaintenanceCatalogPage = () => {
                 </p>
 
                 {/* <!-- Replacement Timing --> */}
-                <h3 class="text-xl font-semibold text-blue-700 mt-8">
+                <h3 class="text-xl font-semibold text-red-700 mt-8">
                   When should car maintenance part be replaced?
                 </h3>
                 <p class="font-medium leading-relaxed">
@@ -398,9 +398,9 @@ export const MaintenanceCatalogPage = () => {
                 </ul>
 
                 {/* <!-- Advantages --> */}
-                <h3 class="text-xl font-semibold text-blue-700 mt-8">Our Advantages</h3>
+                <h3 class="text-xl font-semibold text-red-700 mt-8">Our Advantages</h3>
                 <p class="font-medium leading-relaxed">
-                  When you choose <span class="text-blue-600 font-semibold">Sparelo</span> — India's largest online marketplace
+                  When you choose <span class="text-red-600 font-semibold">Sparelo</span> — India's largest online marketplace
                   for car spare parts and accessories, you get access to the best services and the richest database of
                   products in the national market. You can count to:
                 </p>
@@ -427,14 +427,14 @@ export const MaintenanceCatalogPage = () => {
                 {/* <!-- Closing Paragraph --> */}
                 <p class="font-medium leading-relaxed">
                   Do you have any problems with your car? Fix it by signing in on our platform or exploring
-                  <span class="text-blue-600 font-semibold">Sparelo’s</span> unmatched catalogue with the widest range
+                  <span class="text-red-600 font-semibold">Sparelo’s</span> unmatched catalogue with the widest range
                   of car spare parts — even without registration. We are sure you will find the replacement you need!
                 </p>
 
                 {/* <!-- View More Button --> */}
                 <div class="text-center mt-8">
                   <button
-                    class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-all duration-200 shadow-md"
+                    class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-all duration-200 shadow-md"
                   >
                     View More
                   </button>

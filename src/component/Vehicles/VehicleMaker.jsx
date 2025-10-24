@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-// Example vehicle makers data
+// Vehicle makers data
 const vehicleMakers = [
   { name: "MARUTI", link: "/vehicles/maruti-286/", popular: true },
   { name: "HYUNDAI", link: "/vehicles/hyundai-212/", popular: true },
@@ -39,12 +39,23 @@ const vehicleMakers = [
   { name: "PORSCHE", link: "/vehicles/porsche-360/", popular: false },
   { name: "PREMIER", link: "/vehicles/premier-361/", popular: false },
   { name: "VOLVO", link: "/vehicles/volvo-459/", popular: false },
+  { name: "MARUTI COMMERCIAL", link: "/vehicles/maruti_commercial-12345/", popular: false },
+  { name: "SUZUKI", link: "/vehicles/suzuki-501/", popular: false },
+  { name: "TESLA", link: "/vehicles/tesla-502/", popular: false },
+  { name: "MOTO GUZZI", link: "/vehicles/motoguzzi-503/", popular: false },
+  { name: "HARLEY-DAVIDSON", link: "/vehicles/harley-davidson-504/", popular: false },
+  { name: "HINO", link: "/vehicles/hino-505/", popular: false },
+  { name: "Bajaj", link: "/vehicles/bajaj-506/", popular: false },
+  { name: "TVS", link: "/vehicles/tvs-507/", popular: false },
+  { name: "KTM", link: "/vehicles/ktm-508/", popular: false },
+  { name: "ROYAL ENFIELD", link: "/vehicles/royalenfield-509/", popular: false },
 ];
 
-const Vehicle = () => {
+
+const VehicleMaker = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Filter makers based on search term
+  // Filter makers
   const filteredMakers = vehicleMakers.filter((maker) =>
     maker.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -57,35 +68,42 @@ const Vehicle = () => {
     return groups;
   }, {});
 
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const alphabet = "ABCDFHIJKLMNOPRSTV".split("");
+
+  // Scroll to section
+  const handleLetterClick = (letter) => {
+    const el = document.getElementById(letter);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <section className="p-6">
-      {/* Heading and Search */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <h1 className="text-3xl font-bold">
-          Search Parts by <span className="text-red-500">VEHICLE MAKERS</span>
+    <section className="max-w-6xl mx-auto px-4 py-8">
+      {/* Heading & Search */}
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+          Search Parts by{" "}
+          <span className="text-red-500">VEHICLE MAKERS</span>
         </h1>
         <input
           type="search"
           placeholder="Filter Car Maker"
-          className="border rounded-lg px-4 py-2 w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-sky-500"
+          className="border border-gray-300 rounded-lg px-4 py-2 w-full md:w-1/3 focus:outline-none focus:ring-2 transition"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
       {/* Popular Makers */}
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Popular Vehicle Makers</h3>
-        <div className="flex flex-wrap gap-2">
+      <div className="mb-8">
+        <h3 className="text-xl md:text-2xl font-semibold mb-3">Popular Vehicle Makers</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {vehicleMakers
             .filter((maker) => maker.popular)
             .map((maker, idx) => (
               <a
                 key={idx}
                 href={maker.link}
-                className="bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200 transition"
+                className="flex justify-center items-center bg-white text-red-500 font-semibold px-3 py-4 rounded-lg hover:bg-gray-50 transition transform hover:scale-110 shadow-sm"
               >
                 {maker.name}
               </a>
@@ -94,33 +112,38 @@ const Vehicle = () => {
       </div>
 
       {/* Alphabet Navigation */}
-      <ul className="flex flex-wrap gap-2 mb-4 text-sm font-medium">
+      <ul className="flex flex-wrap gap-4 mb-6 text-sm font-medium justify-center md:justify-start">
         {alphabet.map((letter) => (
-          <li key={letter} className="cursor-pointer hover:text-sky-500">
+          <li
+            key={letter}
+            onClick={() => handleLetterClick(letter)}
+            className="cursor-pointer px-4 py-3 bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 transition transform hover:scale-110"
+          >
             {letter}
           </li>
         ))}
       </ul>
 
       {/* Makers List */}
-      <div className="space-y-4">
+      <div className="space-y-8">
         {alphabet.map(
           (letter) =>
             groupedMakers[letter] && (
-              <div key={letter}>
-                <p className="text-lg font-semibold mb-2">{letter}</p>
-                <ul className="flex flex-wrap gap-2">
+              <div key={letter} id={letter}>
+                <p className="text-2xl font-bold text-gray-800 mb-3 border-b-2 border-red-200 inline-block pb-1">
+                  {letter}
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
                   {groupedMakers[letter].map((maker, idx) => (
-                    <li key={idx}>
-                      <a
-                        href={maker.link}
-                        className="bg-gray-100 px-3 py-1 rounded hover:bg-gray-200 transition"
-                      >
-                        {maker.name}
-                      </a>
-                    </li>
+                    <a
+                      key={idx}
+                      href={maker.link}
+                      className="flex justify-center items-center bg-gray-100 text-gray-800 px-3 py-4 rounded-lg hover:bg-gray-200 hover:text-red-600 transition transform hover:scale-105 shadow-sm"
+                    >
+                      {maker.name}
+                    </a>
                   ))}
-                </ul>
+                </div>
               </div>
             )
         )}
@@ -129,4 +152,4 @@ const Vehicle = () => {
   );
 };
 
-export default Vehicle;
+export default VehicleMaker;

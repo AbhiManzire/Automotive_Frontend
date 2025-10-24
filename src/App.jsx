@@ -28,9 +28,12 @@ import SearchByCategory from "./component/SearchByCategory";
 import WhyChooseAftermarket from "./component/WhyChooseAftermarket";
 import PartSearchResults from "./component/PartSearchResults";
 import VehicleSearchResults from "./component/VehicleSearchResults";
-import OEMCatalogue from "./component/OEMCatalogue";
+import OEMCatalogue from "./component/catalogue/OEMCatalogue";
 import SpareloPage from "./component/SpareloPage";
-import { MaintenanceCatalogPage } from "./component/MaintenanceCatalogPage";
+import { MaintenanceCatalogPage } from "./component/catalogue/MaintenanceCatalogPage";
+import CatalogPage from "./component/catalogue/CataloguePage";
+import VehicleMaker from "./component/Vehicles/VehicleMaker";
+
 
 
 // Component to conditionally render Header/Footer
@@ -91,6 +94,8 @@ function App() {
           <Route path="/sparelopage" element={<SpareloPage />} />
           <Route path="/addresses" element={<Addresses />} />
           <Route path="/maintenancecatalog" element={<MaintenanceCatalogPage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
+
           
           {/* Redirect landing after Oriparts back_url_pn */}
           <Route path="/search/:pn" element={<PartSearchResults />} />
@@ -98,6 +103,7 @@ function App() {
           {/* Vehicle-based search landing */}
           <Route path="/vehicle-search" element={<VehicleSearchResults />} />
           <Route path="/oem-catalogue" element={<OEMCatalogue />} />
+          <Route path="/vehicles" element={<VehicleMaker />} />
         </Routes>
       </Layout>
     </Router>
