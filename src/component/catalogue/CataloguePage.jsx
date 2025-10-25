@@ -14,7 +14,7 @@ const CatalogPage = () => {
 
       {/* Heading */}
       <h1 className="text-4xl font-bold text-gray-800 mb-10 text-center">
-        Genuine (OEM) & Aftermarket Spare Parts
+       Genuine (Original Equipment Manufacturer) & Aftermarket Spare Parts
       </h1>
 
       {/* OEM Catalogue */}

@@ -5,3 +5,4 @@ export const Fuelsupply_System = () => {
     <div>Fuelsupply_System</div>
   )
 }
+export default Fuelsupply_System;

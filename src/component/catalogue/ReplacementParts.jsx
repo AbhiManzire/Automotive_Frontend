@@ -5,7 +5,7 @@ const replacementPartsData = [
   {
     name: "Maintenance Service Parts",
     img: "https://boodmo.com/media/images/categories/ebba234.svg",
-     link: "/catalog/maintenance_service_parts/",
+    link: "/catalog/maintenance_service_parts/",
   },
   {
     name: "Filters",

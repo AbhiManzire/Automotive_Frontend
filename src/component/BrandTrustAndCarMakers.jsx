@@ -1,6 +1,7 @@
 
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -29,6 +30,16 @@ const carMakers = [
 ];
 
 export default function BrandTrustAndCarMakers() {
+
+  const navigate = useNavigate();
+
+  const handleBrandViewAll = () => {
+    navigate("/Brands");   // This will navigate to your Brands page
+  };
+
+   const handleCarMakerViewAll = () => {
+    navigate("/vehicles");   // This will navigate to your car makers page
+  };
   return (
     <div className="px-6 py-12 bg-gray-50">
       {/* Brands Section */}
@@ -38,9 +49,13 @@ export default function BrandTrustAndCarMakers() {
             Brands we <span className="text-red-500">Trust</span>
           </h2>
           <div className="w-full  text-right flex justify-end px-4">
-            <a href="#" className="text-sm text-blue-600 hover:underline font-medium">
+            <a
+              onClick={handleBrandViewAll}
+              className="text-sm text-blue-600 hover:underline font-medium cursor-pointer"
+            >
               VIEW ALL
             </a>
+
           </div>
         </div>
 
@@ -79,7 +94,10 @@ export default function BrandTrustAndCarMakers() {
           </h2>
 
           <div className="w-full  text-right flex justify-end px-4">
-            <a href="#" className="text-sm text-blue-600 hover:underline font-medium">
+            <a
+              onClick={handleCarMakerViewAll}
+              className="text-sm text-blue-600 hover:underline font-medium cursor-pointer"
+            >
               VIEW ALL
             </a>
           </div>
