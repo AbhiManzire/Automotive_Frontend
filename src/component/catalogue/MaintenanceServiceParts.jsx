@@ -4,7 +4,6 @@ import Breadcrumbs from "./Breadcrumbs";
 import SearchFilterBar from "./SearchFilterBar";
 import CatalogueSidebar from "./CatalogueSidebar";
 
-// Catalog Categories
 const catalogCategories = [
   { id: 1, name: "Belt", img: "https://boodmo.com/media/cache/catalog_image/images/categories/ddbeb81.jpg", link: "/catalog/4032-belts/" },
   { id: 2, name: "Brake", img: "https://boodmo.com/media/cache/catalog_image/images/categories/437bfd0.jpg", link: "/catalog/3713-brakes/" },
@@ -26,8 +25,8 @@ const MaintenanceServiceParts = () => {
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
   const [filteredCategories, setFilteredCategories] = useState(catalogCategories);
+  const [showMore, setShowMore] = useState(false);
 
-  // Filter categories by search
   useEffect(() => {
     const filtered = catalogCategories.filter((item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -35,7 +34,6 @@ const MaintenanceServiceParts = () => {
     setFilteredCategories(filtered);
   }, [searchTerm]);
 
-  // Sort categories by name
   const handleSort = (value) => {
     setSortBy(value);
     let sorted = [...filteredCategories];
@@ -46,17 +44,20 @@ const MaintenanceServiceParts = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-8">
       <div className="max-w-7xl mx-auto px-4">
         <Breadcrumbs />
 
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Maintenance Service Parts</h1>
-          <p className="text-gray-600">High-quality maintenance parts for your vehicle</p>
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-extrabold text-gray-800 mb-3 tracking-tight">
+            Maintenance Service Parts
+          </h1>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Discover high-quality maintenance parts designed to keep your vehicle in top performance and condition.
+          </p>
         </div>
 
-        {/* Search & Filter Bar */}
         <SearchFilterBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -67,25 +68,29 @@ const MaintenanceServiceParts = () => {
           categoryName="Maintenance Parts"
         />
 
-        <div className="flex gap-6">
-          {/* Sidebar */}
+        <div className="flex flex-col md:flex-row gap-6">
           <CatalogueSidebar />
 
-          {/* Categories Grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 my-8">
+            {/* Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 my-8">
               {filteredCategories.map((category) => (
                 <Link
                   key={category.id}
                   to={category.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 text-center overflow-hidden border border-gray-100"
                 >
                   <img
                     src={category.img}
                     alt={category.name}
-                    className="w-full h-28 object-cover mb-2 rounded"
+                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">{category.name}</span>
+
+                  <div className="p-3">
+                    <span className="text-gray-800 font-semibold text-sm md:text-base">
+                      {category.name}
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -95,8 +100,8 @@ const MaintenanceServiceParts = () => {
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">No categories found matching your criteria.</p>
                 <button
-                  onClick={() => setSearchTerm('')}
-                  className="mt-4 text-red-600 hover:text-red-700"
+                  onClick={() => setSearchTerm("")}
+                  className="mt-4 text-red-600 hover:text-red-700 underline"
                 >
                   Clear search
                 </button>
@@ -104,94 +109,70 @@ const MaintenanceServiceParts = () => {
             )}
 
             {/* Content Section */}
-            <section class="bg-white text-gray-800 py-10 px-6 max-w-5xl mx-auto">
-              <div class="space-y-6">
-                {/* <!-- Section Title --> */}
-                <h2 class="text-2xl md:text-3xl font-bold text-red-700 border-b-2 border-red-300 inline-block pb-2">
+            <section className="bg-white text-gray-800 py-10 px-6 rounded-2xl shadow-sm mt-6">
+              <div className={`transition-all duration-500 ease-in-out ${showMore ? "max-h-full" : "max-h-[600px] overflow-hidden"}`}>
+                <h2 className="text-2xl md:text-3xl font-bold text-red-700 border-b-2 border-red-300 inline-block pb-2 mb-4">
                   About Car Maintenance Parts
                 </h2>
 
-                {/* <!-- Intro Paragraphs --> */}
-                <p class="font-medium leading-relaxed">
+                <p className="font-medium leading-relaxed mb-4">
                   There are regular maintenance parts like oil and air filters, headlights, drive belts, brake pads,
-                  wheel speed, humidity and temperature sensors, joints, and others. They may last longer, though, of
-                  course, the result depends on driving habits and environment conditions.
+                  wheel speed, humidity and temperature sensors, joints, and others. They may last longer, though the
+                  result depends on driving habits and environment conditions.
                 </p>
 
-                <p class="font-medium leading-relaxed">
-                  It is vital to take preventative measures with maintenance to avoid paying to the mechanics. If you
-                  inspect a car regularly, it will run in a smooth and safe manner longer. Thus you should look through
-                  an owner’s manual for your car covering all its components and suggested maintenance schedule. It will
-                  tell you how often you should change fluids or replace parts.
+                <p className="font-medium leading-relaxed mb-4">
+                  It is vital to take preventative measures with maintenance to avoid paying to the mechanics. Inspecting
+                  your car regularly ensures it runs smoothly and safely for longer. Always refer to your owner’s manual
+                  for recommended service intervals.
                 </p>
 
-                {/* <!-- Replacement Timing --> */}
-                <h3 class="text-xl font-semibold text-red-700 mt-8">
-                  When should car maintenance part be replaced?
+                <h3 className="text-xl font-semibold text-red-700 mt-8 mb-2">
+                  When should car maintenance parts be replaced?
                 </h3>
-                <p class="font-medium leading-relaxed">
-                  The car makers usually determine the time when maintenance should be performed. The timing difference
-                  is associated with mileage. Some maintenance service parts should be replaced already after 30,000 miles.
-                  The others will last until the car runs 90,000 miles. Anyway, when getting every service, you should
-                  take care of:
+                <p className="font-medium leading-relaxed mb-4">
+                  Car makers usually determine the time when maintenance should be performed. Some parts need replacement
+                  after 30,000 miles, others can last up to 90,000 miles. Always check:
                 </p>
 
-                {/* <!-- List --> */}
-                <ul class="list-disc list-inside space-y-2 ml-4 text-gray-700 font-medium">
-                  <li>Engine oil and other fluids which should not look muddy and dark.</li>
-                  <li>Battery which provides a car with power making it run smoothly.</li>
-                  <li>Tires which should have enough air inside and do not go too low.</li>
-                  <li>
-                    Filters, including the air and cabin ones protecting an engine and cabin from dirt and various contaminants.
-                  </li>
-                  <li>Belts which may lose tension, crack or fray and other parts.</li>
+                <ul className="list-disc list-inside space-y-2 ml-4 text-gray-700 font-medium">
+                  <li>Engine oil and fluids — should not appear muddy or dark.</li>
+                  <li>Battery — ensures the vehicle runs smoothly.</li>
+                  <li>Tires — must be properly inflated and checked regularly.</li>
+                  <li>Filters — keep the air and engine clean from contaminants.</li>
+                  <li>Belts — replace if cracked, loose, or frayed.</li>
                 </ul>
 
-                {/* <!-- Advantages --> */}
-                <h3 class="text-xl font-semibold text-red-700 mt-8">Our Advantages</h3>
-                <p class="font-medium leading-relaxed">
-                  When you choose <span class="text-red-600 font-semibold">Sparelo</span> — India's largest online marketplace
-                  for car spare parts and accessories, you get access to the best services and the richest database of
-                  products in the national market. You can count to:
+                <h3 className="text-xl font-semibold text-red-700 mt-8 mb-2">Our Advantages</h3>
+                <p className="font-medium leading-relaxed mb-4">
+                  When you choose <span className="text-red-600 font-semibold">Sparelo</span> — India's largest online marketplace
+                  for car parts, you get access to:
                 </p>
 
-                {/* <!-- Ordered List --> */}
-                <ol class="list-decimal list-inside space-y-2 ml-4 text-gray-700 font-medium">
-                  <li>
-                    Get a limited, revocable license to use our online platform to benefit from all options and services
-                    for your own personal purpose.
-                  </li>
-                  <li>
-                    Choose from a large number of quality aftermarket and OEM items provided by reputable manufacturers
-                    and suppliers.
-                  </li>
-                  <li>
-                    Get updated and accurate information about the products and services including their prices, pictures,
-                    and specifications.
-                  </li>
-                  <li>
-                    Pay for goods from international cards though they can be delivered only within the territory of India.
-                  </li>
+                <ol className="list-decimal list-inside space-y-2 ml-4 text-gray-700 font-medium">
+                  <li>Licensed access to a vast database of auto parts and services.</li>
+                  <li>High-quality aftermarket and OEM components from trusted suppliers.</li>
+                  <li>Accurate, updated information with prices, pictures, and specs.</li>
+                  <li>Secure online payment options, supporting international cards.</li>
                 </ol>
 
-                {/* <!-- Closing Paragraph --> */}
-                <p class="font-medium leading-relaxed">
-                  Do you have any problems with your car? Fix it by signing in on our platform or exploring
-                  <span class="text-red-600 font-semibold">Sparelo’s</span> unmatched catalogue with the widest range
-                  of car spare parts — even without registration. We are sure you will find the replacement you need!
+                <p className="font-medium leading-relaxed mt-4">
+                  Fix your car issues today by exploring
+                  <span className="text-red-600 font-semibold"> Sparelo’s</span> unmatched catalogue of spare parts — even
+                  without registration. You’re sure to find what you need!
                 </p>
+              </div>
 
-                {/* <!-- View More Button --> */}
-                <div class="text-center mt-8">
-                  <button
-                    class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-all duration-200 shadow-md"
-                  >
-                    View More
-                  </button>
-                </div>
+              {/* View More / Less Button */}
+              <div className="text-center mt-6">
+                <button
+                  onClick={() => setShowMore(!showMore)}
+                  className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-all duration-200 shadow-md"
+                >
+                  {showMore ? "View Less" : "View More"}
+                </button>
               </div>
             </section>
-
           </div>
         </div>
       </div>

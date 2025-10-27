@@ -29,14 +29,13 @@ import PartSearchResults from "./component/PartSearchResults";
 import VehicleSearchResults from "./component/VehicleSearchResults";
 import OEMCatalogue from "./component/catalogue/OEMCatalogue";
 import SpareloPage from "./component/SpareloPage";
-// import { MaintenanceCatalogPage } from "./component/catalogue/MaintenanceCatalogPage";
 import CatalogPage from "./component/catalogue/CataloguePage";
 import VehicleMaker from "./component/Vehicles/VehicleMaker";
 import MaintenanceServiceParts from "./component/catalogue/MaintenanceServiceParts";
 import Filters from "./component/catalogue/Filters";
 import  Windscreen_Cleaning_System  from "./component/catalogue/Windscreen_Cleaning_System";
-import { Car_Accessories } from "./component/catalogue/Car_Accessories";
-import { Lighting } from "./component/catalogue/Lighting";
+import Car_Accessories from "./component/catalogue/Car_Accessories";
+import  Lighting  from "./component/catalogue/Lighting";
 import { Control_Cables } from "./component/catalogue/Control_Cables";
 import Break_System from "./component/catalogue/Break_System";
 import { Bearing } from "./component/catalogue/Bearing";
@@ -130,35 +129,35 @@ function App() {
           <Route path="/catalog/maintenance_service_parts/" element={<MaintenanceServiceParts />} />
           <Route path="/catalog/filters/" element={<Filters />} />
           <Route path="/catalog/windscreen_cleaning_system/" element={<Windscreen_Cleaning_System />} />
-          <Route path="/catalog/accessories/" element={<Car_Accessories />} />
+          <Route path="/catalog/car_accessories/" element={<Car_Accessories />} />
           <Route path="/catalog/lighting/" element={<Lighting />} />
           <Route path="/catalog/control_cables/" element={<Control_Cables />} />
-          <Route path="/catalog/brake_system/" element={<Break_System />} />
+          <Route path="/catalog/brakes/" element={<Break_System />} />
           <Route path="/catalog/bearings/" element={<Bearing />} />
-          <Route path="/catalog/clutch_system/" element={<Clutch_System />} />
+          <Route path="/catalog/clutch/" element={<Clutch_System />} />
           <Route path="/catalog/electric_components/" element={<Electric_Components />} />
           <Route path="/catalog/engine/" element={<Engine />} />
-          <Route path="/catalog/engine_cooling_system/" element={<Engine_Cooling_System />} />
-          <Route path="/catalog/exhaust_system/" element={<Exhaust_System />} />
+          <Route path="/catalog/cooling_system/" element={<Engine_Cooling_System />} />
+          <Route path="/catalog/exhaust/" element={<Exhaust_System />} />
           <Route path="/catalog/air_conditioning/" element={<AirConditioning />} />
-          <Route path="/catalog/fuel_supply_system/" element={<Fuelsupply_System />} />
-          <Route path="/catalog/gaskets_and_sealing_rings/" element={<Gasket_SealingRings />} />
-          <Route path="/catalog/ignition_and_glowplug_system/" element={<Ignition_Glowplug />} />
-          <Route path="/catalog/interior_and_comfort/" element={<Inerior_Comfort />} />
+          <Route path="/catalog/fuelsystem/" element={<Fuelsupply_System />} />
+          <Route path="/catalog/Gasket_SealingRings/" element={<Gasket_SealingRings />} />
+          <Route path="/catalog/ignition_glowplug/" element={<Ignition_Glowplug />} />
+          <Route path="/catalog/interior_comfort/" element={<Inerior_Comfort />} />
           <Route path="/catalog/body/" element={<Body />} />
-          <Route path="/catalog/lubricants/" element={<Oil_Fluids />} />
-          <Route path="/catalog/pipes_and_hoses/" element={<Pipes_Hoses />} />
+          <Route path="/catalog/oilsfluids/" element={<Oil_Fluids />} />
+          <Route path="/catalog/pipes_hoses/" element={<Pipes_Hoses />} />
           <Route path="/catalog/repair_kits/" element={<RepairKits />} />
-          <Route path="/catalog/sensors_relays_control_units/" element={<Sensors_ControlUnits />} />
+          <Route path="/catalog/sensors_control_units/" element={<Sensors_ControlUnits />} />
           <Route path="/catalog/steering/" element={<Steering />} />
-          <Route path="/catalog/suspension_and_arms/" element={<Suspention_Arms />} />
-          <Route path="/catalog/towbar_parts/" element={<TowbarParts />} />
+          <Route path="/catalog/suspension/" element={<Suspention_Arms />} />
+          <Route path="/catalog/towbar/" element={<TowbarParts />} />
           <Route path="/catalog/transmission/" element={<Transmission />} />
           <Route path="/catalog/trims/" element={<Trims />} />
           <Route path="/catalog/tyres_and_alloys/" element={<Tyres_Alloys />} />
           <Route path="/catalog/universal/" element={<Universal />} />
           <Route path="/catalog/wheels/" element={<Wheels />} />
-          <Route path="/catalog/belts_chains_rollers/" element={<Belts_Chains_Rollers />} />
+          <Route path="/catalog/drive_belts/" element={<Belts_Chains_Rollers />} />
 
           {/* Redirect landing after Oriparts back_url_pn */}
           <Route path="/search/:pn" element={<PartSearchResults />} />

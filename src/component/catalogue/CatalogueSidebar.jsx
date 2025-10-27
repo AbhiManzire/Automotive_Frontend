@@ -1,49 +1,55 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link, useLocation } from "react-router-dom";
 
 const CatalogueSidebar = () => {
-
-
+  const location = useLocation(); // ✅ Get current path
 
   const categories = [
-    { name: "Maintenance Service Parts", link: "/catalog/maintenance_service_parts/" },
-    { name: "Filters", link: "/catalog/filters/" },
-    { name: "Windscreen Cleaning System", link: "/catalog/windscreen_cleaning_system/" },
-    { name: "Brakes", link: "/catalog/brakes/" },
-    { name: "Lighting", link: "/catalog/lighting/" },
-    { name: "Engine Parts", link: "/catalog/engine_parts/" },
-    { name: "Suspension", link: "/catalog/suspension/" },
-    { name: "Transmission", link: "/catalog/transmission/" },
-    { name: "Exhaust", link: "/catalog/exhaust/" },
-    { name: "Steering", link: "/catalog/steering/" },
-    { name: "Cooling System", link: "/catalog/cooling_system/" },
-    { name: "Fuel System", link: "/catalog/fuel_system/" },
-    { name: "Clutch", link: "/catalog/clutch/" },
-    { name: "Drive Belts", link: "/catalog/drive_belts/" },
-    { name: "Battery", link: "/catalog/battery/" },
-    { name: "Wipers & Washers", link: "/catalog/wipers_washers/" },
-    { name: "Electrical Components", link: "/catalog/electrical_components/" },
-    { name: "Sensors & Modules", link: "/catalog/sensors_modules/" },
-    { name: "Gaskets & Seals", link: "/catalog/gaskets_seals/" },
-    { name: "Timing Parts", link: "/catalog/timing_parts/" },
-    { name: "Turbochargers", link: "/catalog/turbochargers/" },
-    { name: "Differential", link: "/catalog/differential/" },
-    { name: "Axles & CV Joints", link: "/catalog/axles_cv_joints/" },
-    { name: "Shock Absorbers", link: "/catalog/shock_absorbers/" },
+    { name: "Air Conditioning", link: "/catalog/air_conditioning/" },
+    { name: "Body", link: "/catalog/body/" },
     { name: "Bearings", link: "/catalog/bearings/" },
-    { name: "Hoses & Pipes", link: "/catalog/hoses_pipes/" },
-    { name: "Air Intake", link: "/catalog/air_intake/" },
-    { name: "Exhaust Manifold", link: "/catalog/exhaust_manifold/" },
+    { name: "Belts Chains And Rollers", link: "/catalog/drive_belts/" },
+    { name: "Break System", link: "/catalog/brakes/" },
+    { name: "Car Accessories", link: "/catalog/car_accessories/" },
+    { name: "Clutch", link: "/catalog/clutch/" },
+    { name: "Control Cables", link: "/catalog/control_cables/" },
+    { name: "Electrical Components", link: "/catalog/electric_components/" },
+    { name: "Engine", link: "/catalog/engine/" },
+    { name: "Engine Cooling System", link: "/catalog/cooling_system/" },
+    { name: "Exhaust System", link: "/catalog/exhaust/" },
+    { name: "Filters", link: "/catalog/filters/" },
+    { name: "Fuel Supply System", link: "/catalog/fuelsystem/" },
+    { name: "Gaskets & Seals", link: "/catalog/Gasket_SealingRings/" },
+    { name: "Ignition & Glowplug System", link: "/catalog/ignition_glowplug/" },
+    { name: "Interior Comfort", link: "/catalog/interior_comfort/" },
+    { name: "Lighting", link: "/catalog/lighting/" },
+    { name: "Maintenance Service Parts", link: "/catalog/maintenance_service_parts/" },
+    { name: "Oils & Fluids", link: "/catalog/oilsfluids/" },
+    { name: "Pipes & Hoses", link: "/catalog/pipes_hoses/" },
+    { name: "Repair Kits", link: "/catalog/repair_kits/" },
+    { name: "Sensors Relay and Control Units", link: "/catalog/sensors_control_units/" },
+    { name: "Steering", link: "/catalog/steering/" },
+    { name: "Suspension and Arms", link: "/catalog/suspension/" },
+    { name: "Towbar Parts", link: "/catalog/towbar/" },
+    { name: "Trims", link: "/catalog/trims/" },
+    { name: "Tyres and Alloys", link: "/catalog/tyres_and_alloys/" },
+    { name: "Transmission", link: "/catalog/transmission/" },
+    { name: "Universal", link: "/catalog/universal/" },
+    { name: "Wheels", link: "/catalog/wheels/" },
+    { name: "Windscreen Cleaning System", link: "/catalog/windscreen_cleaning_system/" },
   ];
 
   const brands = [
-    { name: "Bosch", link: "/catalog/brand/bosch/" },
-    { name: "Mann Filter", link: "/catalog/brand/mann_filter/" },
-    { name: "Mahle", link: "/catalog/brand/mahle/" },
-    { name: "Fram", link: "/catalog/brand/fram/" },
-    { name: "Wix", link: "/catalog/brand/wix/" },
-    { name: "Hengst", link: "/catalog/brand/hengst/" },
+    { name: "Bosch", link: "/catalog/brands/bosch/" },
+    { name: "Fram", link: "/catalog/brands/fram/" },
+    { name: "Hengst", link: "/catalog/brands/hengst/" },
+    { name: "Mahle", link: "/catalog/brands/mahle/" },
+    { name: "Mann Filter", link: "/catalog/brands/mann_filter/" },
+    { name: "Wix", link: "/catalog/brands/wix/" },
   ];
+
+  // 🔥 Active link check helper
+  const isActive = (path) => location.pathname === path;
 
   return (
     <div className="hidden md:block w-full md:w-64 flex-shrink-0">
@@ -54,20 +60,7 @@ const CatalogueSidebar = () => {
           <button className="text-sm text-red-600 hover:text-red-700">Clear All</button>
         </div>
 
-        {/* price-range */}
-        {/* <div className="mb-6">
-          <h4 className="font-medium text-gray-700 mb-3">Price Range</h4>
-          <div className="space-y-2">
-            {["Under ₹500", "₹500 - ₹1000", "₹1000 - ₹2000", "Above ₹2000"].map((price) => (
-              <label key={price} className="flex items-center text-sm">
-                <input type="checkbox" className="mr-2" />
-                {price}
-              </label>
-            ))}
-          </div>
-        </div> */}
-        
-        {/* Category */}
+        {/* Category Section */}
         <div className="mb-6 bg-blue-50 p-3 rounded">
           <h4 className="font-medium text-gray-700 mb-3">Category</h4>
           <div className="space-y-2">
@@ -75,7 +68,11 @@ const CatalogueSidebar = () => {
               <Link
                 key={category.name}
                 to={category.link}
-                className="block text-sm text-gray-700 hover:text-red-600"
+                className={`block text-sm px-2 py-1 rounded transition-all duration-200 ${
+                  isActive(category.link)
+                    ? "font-semibold text-blue-500 "
+                    : "text-gray-700 hover:text-blue-600 hover:bg-blue-100"
+                }`}
               >
                 {category.name}
               </Link>
@@ -83,7 +80,7 @@ const CatalogueSidebar = () => {
           </div>
         </div>
 
-        {/* Brand */}
+        {/* Brand Section */}
         <div className="mb-6">
           <h4 className="font-medium text-gray-700 mb-3">Brand</h4>
           <div className="space-y-2">
@@ -91,7 +88,11 @@ const CatalogueSidebar = () => {
               <Link
                 key={brand.name}
                 to={brand.link}
-                className="block text-sm text-gray-700 hover:text-red-600"
+                className={`block text-sm px-2 py-1 rounded transition-all duration-200 ${
+                  isActive(brand.link)
+                    ? "font-semibold text-white bg-blue-600"
+                    : "text-gray-700 hover:text-blue-600 hover:bg-blue-100"
+                }`}
               >
                 {brand.name}
               </Link>

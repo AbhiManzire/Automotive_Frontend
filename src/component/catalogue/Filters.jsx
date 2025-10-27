@@ -80,10 +80,10 @@ const Filters = () => {
                   to={product.link}
                   className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
-                  <img
+                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-full h-28 object-cover mb-2 rounded"
+                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
                   />
                   <span className="text-gray-800 font-medium">{product.name}</span>
                 </Link>

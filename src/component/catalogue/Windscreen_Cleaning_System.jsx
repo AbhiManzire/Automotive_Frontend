@@ -179,11 +179,11 @@ const Windscreen_Cleaning_System = () => {
               {filteredProducts.map((product) => (
                 <div key={product.id} className="bg-white p-3 rounded-lg shadow-sm text-center">
                   <a href={product.link} target="_blank" rel="noopener noreferrer">
-                    <img
-                      src={product.img}
-                      alt={product.name}
-                      className="w-full h-28 object-cover mb-2 rounded-md"
-                    />
+                     <img
+                    src={product.img}
+                    alt={product.name}
+                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                  />
                     <h3 className="text-gray-800 font-semibold text-sm mb-1">{product.name}</h3>
                   </a>
                   {/* <p className="text-gray-500 text-xs mb-1">Brand: {product.brand}</p>
