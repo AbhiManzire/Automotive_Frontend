@@ -4,7 +4,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import SearchFilterBar from "./SearchFilterBar";
 import CatalogueSidebar from "./CatalogueSidebar";
 
-const catalogCategories = [
+const MaintainanceCategories = [
   { id: 1, name: "Belt", img: "https://boodmo.com/media/cache/catalog_image/images/categories/ddbeb81.jpg", link: "/catalog/4032-belts/" },
   { id: 2, name: "Brake", img: "https://boodmo.com/media/cache/catalog_image/images/categories/437bfd0.jpg", link: "/catalog/3713-brakes/" },
   { id: 3, name: "Catalogue Service Manual", img: "https://boodmo.com/media/cache/catalog_image/images/categories/140c4a2.jpg", link: "/catalog/4054-catalogues_service_manuals/" },
@@ -24,11 +24,11 @@ const MaintenanceServiceParts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
-  const [filteredCategories, setFilteredCategories] = useState(catalogCategories);
+  const [filteredCategories, setFilteredCategories] = useState(MaintainanceCategories);
   const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
-    const filtered = catalogCategories.filter((item) =>
+    const filtered = MaintainanceCategories.filter((item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredCategories(filtered);

@@ -4,7 +4,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import SearchFilterBar from "./SearchFilterBar";
 import CatalogueSidebar from "./CatalogueSidebar";
 
-const catalogCategories = [
+const lightingcategories = [
   {
     id: 1,
     name: "Auxiliary Exterior Light",
@@ -113,10 +113,10 @@ const Lighting = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
-  const [filteredProducts, setFilteredProducts] = useState(catalogCategories);
+  const [filteredProducts, setFilteredProducts] = useState(lightingcategories);
 
   useEffect(() => {
-    const filtered = catalogCategories.filter((item) =>
+    const filtered = lightingcategories.filter((item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
