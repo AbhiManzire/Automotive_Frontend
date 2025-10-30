@@ -33,36 +33,36 @@ import CatalogPage from "./component/catalogue/CataloguePage";
 import VehicleMaker from "./component/Vehicles/VehicleMaker";
 import MaintenanceServiceParts from "./component/catalogue/MaintenanceServiceParts";
 import Filters from "./component/catalogue/Filters";
-import  Windscreen_Cleaning_System  from "./component/catalogue/Windscreen_Cleaning_System";
+import Windscreen_Cleaning_System from "./component/catalogue/Windscreen_Cleaning_System";
 import Car_Accessories from "./component/catalogue/Car_Accessories";
-import  Lighting  from "./component/catalogue/Lighting";
+import Lighting from "./component/catalogue/Lighting";
 import { Control_Cables } from "./component/catalogue/Control_Cables";
 import Break_System from "./component/catalogue/Break_System";
 import { Bearing } from "./component/catalogue/Bearing";
 import { Clutch_System } from "./component/catalogue/Clutch_System";
 import { Electric_Components } from "./component/catalogue/Electric_Components";
 import Engine from "./component/catalogue/Engine";
-import { Engine_Cooling_System } from "./component/catalogue/Engine_Cooling_System";
-import { Exhaust_System } from "./component/catalogue/Exhaust_System";
-import { AirConditioning } from "./component/catalogue/AirConditioning";
-import { Fuelsupply_System } from "./component/catalogue/Fuelsupply_System";
-import { Gasket_SealingRings } from "./component/catalogue/Gasket_SealingRings";
-import { Ignition_Glowplug } from "./component/catalogue/Ignition_Glowplug";
-import { Inerior_Comfort } from "./component/catalogue/Inerior_Comfort";
-import { Body } from "./component/catalogue/Body";
-import { Oil_Fluids } from "./component/catalogue/Oil_Fluids";
-import { Pipes_Hoses } from "./component/catalogue/Pipes_Hoses";
-import { RepairKits } from "./component/catalogue/RepairKits";
-import { Sensors_ControlUnits } from "./component/catalogue/Sensors_ControlUnits";
-import { Steering } from "./component/catalogue/Steering";
-import { Suspention_Arms } from "./component/catalogue/Suspention_Arms";
-import { TowbarParts } from "./component/catalogue/TowbarParts";
-import { Transmission } from "./component/catalogue/Transmission";
-import { Trims } from "./component/catalogue/Trims";
-import { Tyres_Alloys } from "./component/catalogue/Tyres_Alloys";
-import { Universal } from "./component/catalogue/Universal";
-import { Wheels } from "./component/catalogue/Wheels";
-import { Belts_Chains_Rollers } from "./component/catalogue/Belts_Chains_Rollers";
+import Engine_Cooling_System from "./component/catalogue/Engine_Cooling_System";
+import Exhaust_System from "./component/catalogue/Exhaust_System";
+import AirConditioning from "./component/catalogue/AirConditioning";
+import Fuelsupply_System from "./component/catalogue/Fuelsupply_System";
+import Gasket_SealingRings from "./component/catalogue/Gasket_SealingRings";
+import Ignition_Glowplug from "./component/catalogue/Ignition_Glowplug";
+import Interior_Comfort from "./component/catalogue/Interior_Comfort";
+import Body from "./component/catalogue/Body";
+import Oil_Fluids from "./component/catalogue/Oil_Fluids";
+import Pipes_Hoses from "./component/catalogue/Pipes_Hoses";
+import RepairKits from "./component/catalogue/RepairKits";
+import Sensors_ControlUnits from "./component/catalogue/Sensors_ControlUnits";
+import Steering from "./component/catalogue/Steering";
+import Suspention_Arms from "./component/catalogue/Suspention_Arms";
+import TowbarParts from "./component/catalogue/TowbarParts";
+import  Transmission  from "./component/catalogue/Transmission";
+import  Trims  from "./component/catalogue/Trims";
+import  Tyres_Alloys  from "./component/catalogue/Tyres_Alloys";
+import Universal  from "./component/catalogue/Universal";
+import  Wheels  from "./component/catalogue/Wheels";
+import  Belts_Chains_Rollers  from "./component/catalogue/Belts_Chains_Rollers";
 import { Brands } from "./component/brand/Brands";
 
 
@@ -124,7 +124,7 @@ function App() {
           <Route path="/company_gst" element={<Company_GST />} />
           <Route path="/sparelopage" element={<SpareloPage />} />
           <Route path="/addresses" element={<Addresses />} />
-          {/* <Route path="/maintenancecatalog" element={<MaintenanceCatalogPage />} /> */}
+
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/maintenance_service_parts/" element={<MaintenanceServiceParts />} />
           <Route path="/catalog/filters/" element={<Filters />} />
@@ -143,7 +143,7 @@ function App() {
           <Route path="/catalog/fuelsystem/" element={<Fuelsupply_System />} />
           <Route path="/catalog/Gasket_SealingRings/" element={<Gasket_SealingRings />} />
           <Route path="/catalog/ignition_glowplug/" element={<Ignition_Glowplug />} />
-          <Route path="/catalog/interior_comfort/" element={<Inerior_Comfort />} />
+          <Route path="/catalog/interior_comfort/" element={<Interior_Comfort />} />
           <Route path="/catalog/body/" element={<Body />} />
           <Route path="/catalog/oilsfluids/" element={<Oil_Fluids />} />
           <Route path="/catalog/pipes_hoses/" element={<Pipes_Hoses />} />
