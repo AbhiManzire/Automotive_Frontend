@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 
 const carBrands = [
-  "AUDI","BMW","CHEVROLET","DATSUN","FIAT","FORD","HONDA","HYUNDAI","ISUZU",
-  "JEEP","KIA","LEXUS","MAHINDRA","MARUTI","MERCEDES-BENZ","NISSAN","RENAULT",
-  "SKODA","TATA","TATA COMMERCIAL","TOYOTA","VOLVO","VW"
+  { name: "MARUTI", link: "/vehicles/maruti/" },
+  { name: "HYUNDAI", link: "/vehicles/hyundai/" },
+  { name: "MAHINDRA", link: "/vehicles/mahindra/" },
+  { name: "TATA", link: "/vehicles/tata/" },
+  { name: "CHEVROLET", link: "/vehicles/chevrolet/" },
+  { name: "HONDA", link: "/vehicles/honda/" },
+  { name: "SKODA", link: "/vehicles/skoda/" },
+  { name: "VW", link: "/vehicles/vw/" },
+  { name: "TOYOTA", link: "/vehicles/toyota/" },
+  { name: "NISSAN", link: "/vehicles/nissan/" },
+  { name: "RENAULT", link: "/vehicles/renault/" },
+  { name: "FORD", link: "/vehicles/ford/" },
+  { name: "FIAT", link: "/vehicles/fiat/" },
+  { name: "KIA", link: "/vehicles/kia/" },
 ];
 
 const OEMCatalogue = () => {
   const [filter, setFilter] = useState("");
 
+  // ✅ Fix: use brand.name instead of brand
   const filteredBrands = carBrands.filter((brand) =>
-    brand.toLowerCase().includes(filter.toLowerCase())
+    brand.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
@@ -31,11 +43,11 @@ const OEMCatalogue = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
         {filteredBrands.map((brand) => (
           <a
-            key={brand}
-            href="#"
+            key={brand.name}
+            href={brand.link}
             className="block text-center py-4 bg-white hover:bg-gray-50 hover:shadow-md rounded-xl font-medium text-gray-700 shadow-sm transition"
           >
-            {brand}
+            {brand.name}
           </a>
         ))}
       </div>

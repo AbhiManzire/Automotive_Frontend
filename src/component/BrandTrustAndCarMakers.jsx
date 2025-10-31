@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -25,37 +23,43 @@ const brands = [
 ];
 
 const carMakers = [
-  "MARUTI", "HYUNDAI", "MAHINDRA", "TATA", "CHEVROLET", "HONDA",
-  "SKODA", "VW", "TOYOTA", "NISSAN", "RENAULT", "FORD", "FIAT", "KIA",
+  { name: "MARUTI", link: "/vehicles/maruti/" },
+  { name: "HYUNDAI", link: "/vehicles/hyundai/" },
+  { name: "MAHINDRA", link: "/vehicles/mahindra/" },
+  { name: "TATA", link: "/vehicles/tata/" },
+  { name: "CHEVROLET", link: "/vehicles/chevrolet/" },
+  { name: "HONDA", link: "/vehicles/honda/" },
+  { name: "SKODA", link: "/vehicles/skoda/" },
+  { name: "VW", link: "/vehicles/vw/" },
+  { name: "TOYOTA", link: "/vehicles/toyota/" },
+  { name: "NISSAN", link: "/vehicles/nissan/" },
+  { name: "RENAULT", link: "/vehicles/renault/" },
+  { name: "FORD", link: "/vehicles/ford/" },
+  { name: "FIAT", link: "/vehicles/fiat/" },
+  { name: "KIA", link: "/vehicles/kia/" },
 ];
 
 export default function BrandTrustAndCarMakers() {
-
   const navigate = useNavigate();
 
-  const handleBrandViewAll = () => {
-    navigate("/Brands");   // This will navigate to your Brands page
-  };
+  const handleBrandViewAll = () => navigate("/brands");
+  const handleCarMakerViewAll = () => navigate("/vehicles");
 
-   const handleCarMakerViewAll = () => {
-    navigate("/vehicles");   // This will navigate to your car makers page
-  };
   return (
     <div className="px-6 py-12 bg-gray-50">
-      {/* Brands Section */}
+      {/* ===================== BRANDS SECTION ===================== */}
       <section className="mb-16">
         <div className="flex flex-col items-center mb-8 gap-2">
           <h2 className="text-4xl font-bold text-gray-800 text-center">
             Brands we <span className="text-red-500">Trust</span>
           </h2>
-          <div className="w-full  text-right flex justify-end px-4">
-            <a
+          <div className="w-full text-right flex justify-end px-4">
+            <button
               onClick={handleBrandViewAll}
               className="text-sm text-blue-600 hover:underline font-medium cursor-pointer"
             >
               VIEW ALL
-            </a>
-
+            </button>
           </div>
         </div>
 
@@ -64,7 +68,7 @@ export default function BrandTrustAndCarMakers() {
           modules={[Autoplay]}
           spaceBetween={12}
           slidesPerView={6}
-          loop={true}
+          loop
           autoplay={{ delay: 0, disableOnInteraction: false }}
           speed={4000}
           breakpoints={{
@@ -79,38 +83,43 @@ export default function BrandTrustAndCarMakers() {
                 href={brand.link}
                 className="flex items-center justify-center p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:scale-105 transition-transform duration-300"
               >
-                <img src={brand.logo} alt={brand.name} className="h-14 object-contain" />
+                <img
+                  src={brand.logo}
+                  alt={brand.name}
+                  className="h-14 object-contain"
+                />
               </a>
             </SwiperSlide>
           ))}
         </Swiper>
       </section>
 
-      {/* Car Makers Section */}
+      {/* ===================== CAR MAKERS SECTION ===================== */}
       <section>
         <div className="flex flex-col items-center mb-8 gap-2">
           <h2 className="text-4xl font-bold text-gray-800 text-center">
             Popular <span className="text-red-500">Car Makers</span>
           </h2>
 
-          <div className="w-full  text-right flex justify-end px-4">
-            <a
+          <div className="w-full text-right flex justify-end px-4">
+            <button
               onClick={handleCarMakerViewAll}
               className="text-sm text-blue-600 hover:underline font-medium cursor-pointer"
             >
               VIEW ALL
-            </a>
+            </button>
           </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6">
           {carMakers.map((maker) => (
             <button
-              key={maker}
+              key={maker.name}
+              onClick={() => navigate(maker.link)}
               className="bg-white border border-gray-200 shadow-sm py-4 px-3 rounded-lg font-medium text-gray-700 
                          hover:bg-sky-50 hover:shadow-md hover:border-sky-300 hover:scale-105 transition-transform duration-300"
             >
-              {maker}
+              {maker.name}
             </button>
           ))}
         </div>
@@ -118,4 +127,3 @@ export default function BrandTrustAndCarMakers() {
     </div>
   );
 }
-

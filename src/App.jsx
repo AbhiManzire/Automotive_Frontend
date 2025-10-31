@@ -64,6 +64,25 @@ import Universal  from "./component/catalogue/Universal";
 import  Wheels  from "./component/catalogue/Wheels";
 import  Belts_Chains_Rollers  from "./component/catalogue/Belts_Chains_Rollers";
 import { Brands } from "./component/brand/Brands";
+import VehiclePage from "./component/Vehicles/VehiclePage";
+import { Maruti } from "./component/Vehicles/Maruti";
+import { Hyundai } from "./component/Vehicles/Hyundai";
+import { Mahindra } from "./component/Vehicles/Mahindra";
+import { Tata } from "./component/Vehicles/Tata";
+import { Chevrolet } from "./component/Vehicles/Chevrolet";
+import { Honda } from "./component/Vehicles/Honda";
+import { Skoda } from "./component/Vehicles/Skoda";
+import { Vw } from "./component/Vehicles/Vw";
+import { Toyota } from "./component/Vehicles/Toyota";
+import { Nissan } from "./component/Vehicles/Nissan";
+import { Renault } from "./component/Vehicles/Renault";
+import { Ford } from "./component/Vehicles/Ford";
+import { Fiat } from "./component/Vehicles/Fiat";
+import { Kia } from "./component/Vehicles/Kia";
+import { AshokLayland } from "./component/Vehicles/AshokLayland";
+import { Audi } from "./component/Vehicles/Audi";
+
+
 
 
 
@@ -158,6 +177,25 @@ function App() {
           <Route path="/catalog/universal/" element={<Universal />} />
           <Route path="/catalog/wheels/" element={<Wheels />} />
           <Route path="/catalog/drive_belts/" element={<Belts_Chains_Rollers />} />
+
+
+             <Route path="/vehicles/vehiclepage" element={<VehiclePage />} />
+             <Route path="/vehicles/maruti" element={<Maruti/>} />
+             <Route path="/vehicles/hyundai" element={<Hyundai/>} />
+             <Route path="/vehicles/mahindra" element={<Mahindra/>} />
+             <Route path="/vehicles/tata" element={<Tata/>} />
+             <Route path="/vehicles/chevrolet" element={<Chevrolet/>} />
+             <Route path="/vehicles/honda" element={<Honda/>} />
+             <Route path="/vehicles/skoda" element={<Skoda/>} />
+             <Route path="/vehicles/vw" element={<Vw/>} />
+              <Route path="/vehicles/toyota" element={<Toyota/>} />
+              <Route path="/vehicles/nissan" element={<Nissan/>} />
+              <Route path="/vehicles/renault" element={<Renault/>} />
+              <Route path="/vehicles/ford" element={<Ford/>} />
+              <Route path="/vehicles/fiat" element={<Fiat/>} />
+              <Route path="/vehicles/kia" element={<Kia/>} />
+              <Route path="/vehicles/ashok-layland" element={<AshokLayland/>} />
+              <Route path="/vehicles/audi" element={<Audi/>} />
 
           {/* Redirect landing after Oriparts back_url_pn */}
           <Route path="/search/:pn" element={<PartSearchResults />} />

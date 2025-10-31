@@ -16,8 +16,8 @@ const CurrentOffers = () => {
   ];
 
   return (
-    <section className="px-6 py-12">
-      <h2 className="text-4xl font-bold text-gray-800 mb-6">
+    <section className="px-6 mt-10 py-12">
+      <h2 className="text-4xl font-bold text-gray-800 mb-8 mt-10">
         Current <span className="text-red-500">Offers</span>
       </h2>
 
