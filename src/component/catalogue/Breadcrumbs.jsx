@@ -17,7 +17,7 @@ const Breadcrumbs = () => {
 
   return (
     <nav className="mb-6">
-      <ol className="flex items-center space-x-2 text-sm text-gray-600">
+      <ol className="flex items-center space-x-2 text-md font-semibold text-gray-600">
         <li>
           <Link to="/" className="hover:text-red-600">
             Home

@@ -46,47 +46,47 @@ export default function BrandTrustAndCarMakers() {
   const handleCarMakerViewAll = () => navigate("/vehicles");
 
   return (
-    <div className="px-6 py-12 bg-gray-50">
+    <div className="px-6 md:px-12 lg:px-20 py-16 bg-gray-50 text-gray-800">
       {/* ===================== BRANDS SECTION ===================== */}
-      <section className="mb-16">
-        <div className="flex flex-col items-center mb-8 gap-2">
-          <h2 className="text-4xl font-bold text-gray-800 text-center">
+      <section className="mb-20">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
             Brands we <span className="text-red-500">Trust</span>
           </h2>
-          <div className="w-full text-right flex justify-end px-4">
-            <button
-              onClick={handleBrandViewAll}
-              className="text-sm text-blue-600 hover:underline font-medium cursor-pointer"
-            >
-              VIEW ALL
-            </button>
-          </div>
+          <button
+            onClick={handleBrandViewAll}
+            className="mt-4 md:mt-0 text-sm text-blue-600 hover:underline font-semibold transition-colors"
+          >
+            VIEW ALL
+          </button>
         </div>
 
         {/* Swiper for Brands */}
         <Swiper
           modules={[Autoplay]}
-          spaceBetween={12}
+          spaceBetween={2}
           slidesPerView={6}
           loop
           autoplay={{ delay: 0, disableOnInteraction: false }}
           speed={4000}
+          className="w-full"
           breakpoints={{
-            320: { slidesPerView: 2, spaceBetween: 6 },
-            640: { slidesPerView: 3, spaceBetween: 8 },
-            1024: { slidesPerView: 6, spaceBetween: 12 },
+            320: { slidesPerView: 2, spaceBetween: 8 },
+            640: { slidesPerView: 3, spaceBetween: 10 },
+            1024: { slidesPerView: 6, spaceBetween: 16 },
           }}
         >
           {brands.map((brand, idx) => (
             <SwiperSlide key={idx}>
               <a
                 href={brand.link}
-                className="flex items-center justify-center p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg hover:scale-105 transition-transform duration-300"
+                className="flex items-center justify-center p-8 rounded-md 
+                           shadow-sm hover:shadow-md hover:scale-105 transition-transform duration-300 group"
               >
                 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="h-14 object-contain"
+                  className="h-14 w-auto object-contain transition"
                 />
               </a>
             </SwiperSlide>
@@ -96,28 +96,25 @@ export default function BrandTrustAndCarMakers() {
 
       {/* ===================== CAR MAKERS SECTION ===================== */}
       <section>
-        <div className="flex flex-col items-center mb-8 gap-2">
-          <h2 className="text-4xl font-bold text-gray-800 text-center">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
             Popular <span className="text-red-500">Car Makers</span>
           </h2>
-
-          <div className="w-full text-right flex justify-end px-4">
-            <button
-              onClick={handleCarMakerViewAll}
-              className="text-sm text-blue-600 hover:underline font-medium cursor-pointer"
-            >
-              VIEW ALL
-            </button>
-          </div>
+          <button
+            onClick={handleCarMakerViewAll}
+            className="mt-4 md:mt-0 text-sm text-blue-600 hover:underline font-semibold transition-colors"
+          >
+            VIEW ALL
+          </button>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {carMakers.map((maker) => (
             <button
               key={maker.name}
               onClick={() => navigate(maker.link)}
-              className="bg-white border border-gray-200 shadow-sm py-4 px-3 rounded-lg font-medium text-gray-700 
-                         hover:bg-sky-50 hover:shadow-md hover:border-sky-300 hover:scale-105 transition-transform duration-300"
+              className="bg-white border border-gray-200 rounded-xl py-4 px-3 text-base font-medium text-gray-700
+                         shadow-sm hover:shadow-md hover:border-sky-300 hover:bg-sky-50 hover:scale-105 transition-all duration-300"
             >
               {maker.name}
             </button>
