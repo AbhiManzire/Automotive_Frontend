@@ -80,13 +80,13 @@ export default function BrandTrustAndCarMakers() {
             <SwiperSlide key={idx}>
               <a
                 href={brand.link}
-                className="flex items-center justify-center p-8 rounded-md 
+                className="flex items-center justify-center p-6 rounded-md 
                            shadow-sm hover:shadow-md hover:scale-105 transition-transform duration-300 group"
               >
                 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="h-14 w-auto object-contain transition"
+                  className="h-18 w-auto object-contain transition"
                 />
               </a>
             </SwiperSlide>

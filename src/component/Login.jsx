@@ -27,7 +27,7 @@ const Login = () => {
 
     // Example role-based navigation
     const dashboards = {
-      superadmin: "/superadmin/dashboard",
+      superadmin: "/",
       manufacturer: "/manufacturer/dashboard",
       vendor: "/vendor/dashboard",
       mechanic: "/mechanic/dashboard",
@@ -69,7 +69,7 @@ const Login = () => {
 
             <form className="space-y-4" onSubmit={handleLogin}>
               {/* Role Selection */}
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-300">Select Role</label>
                 <select
                   value={role}
@@ -81,7 +81,7 @@ const Login = () => {
                   <option value="vendor">Vendor</option>
                   <option value="mechanic">Mechanic</option>
                 </select>
-              </div>
+              </div> */}
 
               {/* Email */}
               <div>

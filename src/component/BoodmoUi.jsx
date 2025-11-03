@@ -491,7 +491,7 @@ export const BoodmoUi = () => {
           <img
             src={sparelobanner}
             alt="Sparelo Banner"
-            className="w-full min-h-full md:h-[400px] object-cover rounded-b-lg shadow-md"
+            className="w-full min-h-full md:h-[400px] object-cover shadow-md"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent rounded-b-lg" />
         </div>

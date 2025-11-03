@@ -40,7 +40,7 @@ const VehiclePage = ({ brand }) => {
         {/* Button to open OEM Catalogue */}
         <button
           onClick={() => OpenOemCatalogue(link)}
-          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-full shadow transition"
+          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 mt-4 rounded-full shadow transition"
         >
           View OEM Catalogue
         </button>
