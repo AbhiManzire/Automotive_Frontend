@@ -5,7 +5,7 @@ import { FaSearch, FaCar } from "react-icons/fa";
 import engine1 from "../assets/img/engine1.png";
 import engine2 from "../assets/img/engine2.jpg";
 import engine3 from "../assets/img/engine3.jpg";
-import sparelobanner from "../assets/img/sparelobanner.jpg";
+import bannerui from "../assets/img/bannerui.jpg";
 
 const SearchSection = () => {
   const [selectedMaker, setSelectedMaker] = useState("");
@@ -15,8 +15,8 @@ const SearchSection = () => {
   const [years, setYears] = useState([]);
   const [modifications, setModifications] = useState([]);
 
-  // ✅ Car Data
-  const carData = {
+  // ✅ Car Data (keeping your existing data)
+    const carData = {
     CHEVROLET: {
       AVEO: {
         2021: ["Base", "Mid"],
@@ -485,50 +485,57 @@ export const BoodmoUi = () => {
   return (
     <section className="bg-red-50">
       {/* 🔹 Banner Section */}
-      <div className="relative w-full flex flex-col md:flex-row items-center justify-between bg-black/60">
-        {/* 🔹 Left side content (Search + Add Car) */}
-        <div className="absolute inset-0">
+      <div className="relative w-full h-[70vh] md:h-[80vh] flex items-center justify-center">
+        {/* 🔹 Background Image */}
+        <div className="absolute inset-0 w-full h-full">
           <img
-            src={sparelobanner}
+            src={bannerui}
             alt="Sparelo Banner"
-            className="w-full min-h-full md:h-[400px] object-cover shadow-md"
+            className="w-full h-full object-cover opacity-70"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent rounded-b-lg" />
+          {/* 🔹 Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        {/* 🔹 Content overlay */}
-        <div className="relative z-10 w-full md:w-1/2 px-6 md:px-12 py-12 flex flex-col justify-center text-white">
-          <h1 className="text-3xl md:text-3xl font-semibold mb-6 ">
-            Find Genuine OEM & Aftermarket Auto Parts with Ease
+        {/* 🔹 Centered Content - No Background */}
+        <div className="relative z-10 w-full max-w-6xl px-6 md:px-8 text-center text-white">
+          {/* Main Heading */}
+          <h1 className="text-4xl md:text-6xl mb-6 font-semibold">
+            Find Genuine <span className="text-red-400">OEM</span> & <br />
+            <span className="text-blue-400">Aftermarket</span> Auto Parts
           </h1>
+          
+          {/* Subheading */}
+          <p className="text-xl md:text-2xl mb-8 text-gray-200 font-light">
+            Your one-stop solution for all automotive spare parts
+          </p>
 
-          {/* Search input and button */}
-          <div className="flex bg-white rounded-lg overflow-hidden shadow-md text-lg w-min mb-2">
-            <input
-              type="text"
-              placeholder='Search: "Maruti Alto Oil Filter"'
-              className="flex-1 px-4 py-3 text-sm outline-none text-gray-700"
-            />
-            <button className="bg-red-500 text-white px-6 flex items-center justify-center hover:bg-red-600 transition">
-              <FaSearch className="text-lg" />
+          {/* Search Section */}
+          <div className="max-w-2xl mx-auto mb-8">
+            {/* Search input and button */}
+            <div className="flex bg-white rounded-xl overflow-hidden shadow-2xl text-lg mb-4 transform hover:scale-105 transition-transform duration-300">
+              <input
+                type="text"
+                placeholder='Search: "Maruti Alto Oil Filter"'
+                className="flex-1 px-6 py-4 text-base outline-none text-gray-800 placeholder-gray-500"
+              />
+              <button className="bg-red-500 text-white px-8 flex items-center justify-center hover:bg-red-600 transition-all duration-300">
+                <FaSearch className="text-xl" />
+              </button>
+            </div>
+
+            {/* Add Car button */}
+            <button
+              className=" text-lg font-semibold text-white flex items-center justify-center gap-3 px-8 py-4 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl mx-auto"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <FaCar className="text-2xl" />
+              ADD CAR TO MY GARAGE
             </button>
           </div>
-
-          {/* Add Car button */}
-          <button
-            className=" text-sm font-semibold text-white flex items-center justify-center gap-3 px-6 py-3 rounded-md shadow-md  transition w-fit"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <FaCar className="text-2xl" />
-            ADD CAR TO MY GARAGE
-          </button>
+         
         </div>
-
-        {/* 🔹 Optional: right side empty space to balance layout */}
-        <div className="hidden md:block md:w-1/2"></div>
       </div>
-
-
 
       {/* 🔹 Modal */}
       {isModalOpen && (

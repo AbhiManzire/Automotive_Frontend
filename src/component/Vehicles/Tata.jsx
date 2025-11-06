@@ -3,6 +3,7 @@ import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
 import Article_Review from "../Article_Review";
 
 export const Tata = () => {
+
   const link =
     "https://oriparts.com/3?back_url_id=https%3A%2F%2Fboodmo.com%2Fcatalog%2Fpart-p-%7Bitem_id%7D%2F&back_url_pn=https%3A%2F%2Fboodmo.com%2Fsearch%2F%7Bpn%7D%2F";
 
@@ -119,127 +120,654 @@ export const Tata = () => {
         },
       ],
     },
-{
-  id: 2,
-  name: "TATA ARIA",
-  image: "https://boodmo.com/media/cache/vehicle_model/images/model/d64f042.webp",
-  years: "10.2010 - 04.2017",
-  link: "/vehicles/tata-429/aria-11374/",
-  modifications: [
     {
-      generation: "ARIA 10.2010 - 04.2014",
-      options: [
-        "2.2L Diesel 138h.p. BS3",
-        "2.2L Diesel 138h.p. BS4",
-        "2.2L 4WD Diesel 138h.p. BS3",
-        "2.2L 4WD Diesel 138h.p. BS4"
+      id: 2,
+      name: "TATA ARIA",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/d64f042.webp",
+      years: "10.2010 - 04.2017",
+      link: "/vehicles/tata-429/aria-11374/",
+      modifications: [
+        {
+          generation: "ARIA 10.2010 - 04.2014",
+          options: [
+            "2.2L Diesel 138h.p. BS3",
+            "2.2L Diesel 138h.p. BS4",
+            "2.2L 4WD Diesel 138h.p. BS3",
+            "2.2L 4WD Diesel 138h.p. BS4"
+          ]
+        },
+        {
+          generation: "ARIA LET 05.2014 - 04.2017",
+          options: [
+            "2.2L Diesel BS4",
+            "2.2L 4WD Diesel BS4"
+          ]
+        }
       ]
     },
     {
-      generation: "ARIA LET 05.2014 - 04.2017",
-      options: [
-        "2.2L Diesel BS4",
-        "2.2L 4WD Diesel BS4"
-      ]
-    }
-  ]
-},
-{
-  id: 3,
-  name: "TATA BOLT",
-  image: "https://boodmo.com/media/cache/vehicle_model/images/model/d3426fd.webp",
-  years: "01.2015 - 04.2019",
-  link: "/vehicles/tata-429/bolt-11382/",
-  modifications: [
-    {
-      generation: "BOLT 01.2015 - 04.2019",
-      options: [
-        "1.2L Petrol 90h.p. BS4",
-        "1.3L Diesel 75h.p. BS4"
-      ]
-    }
-  ]
-},
-{
-  id: 4,
-  name: "TATA CURVV",
-  image: "https://boodmo.com/media/cache/vehicle_model/images/model/a5c4d54.webp",
-  years: "08.2024 - now",
-  link: "/vehicles/tata-429/curvv-12844/",
-  modifications: [
-    {
-      generation: "CURVV EV 08.2024 - now",
-      options: [
-        "45 kWh ACCOMPLISHED Electric",
-        "45 kWh ACCOMPLISHED+ A Electric",
-        "45 kWh ACCOMPLISHED+ S Electric",
-        "45 kWh CREATIVE Electric",
-        "45 kWh EMPOWERED+ S Electric",
-        "45 kWh EMPOWERED+ SA Electric",
-        "55 kWh ACCOMPLISHED Electric",
-        "55 kWh ACCOMPLISHED+ S Electric",
-        "55 kWh EMPOWERED+ Electric",
-        "55 kWh EMPOWERED+ A Electric",
-        "55 kWh EMPOWERED+ S Electric",
-        "55 kWh EMPOWERED+ SA Electric"
+      id: 3,
+      name: "TATA BOLT",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/d3426fd.webp",
+      years: "01.2015 - 04.2019",
+      link: "/vehicles/tata-429/bolt-11382/",
+      modifications: [
+        {
+          generation: "BOLT 01.2015 - 04.2019",
+          options: [
+            "1.2L Petrol 90h.p. BS4",
+            "1.3L Diesel 75h.p. BS4"
+          ]
+        }
       ]
     },
     {
-      generation: "CURVV 09.2024 - now",
-      options: [
-        "1.2L ACCOMPLISHED S DCA Petrol 123h.p. BS6.2",
-        "1.2L ACCOMPLISHED S DCA Petrol 118h.p. BS6.2",
-        "1.2L ACCOMPLISHED S MT Petrol 123h.p. BS6.2",
-        "1.2L ACCOMPLISHED S MT Petrol 118h.p. BS6.2",
-        "1.2L ACCOMPLISHED+ A DCA Petrol BS6.2",
-        "1.2L ACCOMPLISHED+ A MT Petrol BS6.2",
-        "1.2L CREATIVE DCA Petrol BS6.2",
-        "1.2L CREATIVE MT Petrol BS6.2",
-        "1.2L CREATIVE S DCA Petrol BS6.2",
-        "1.2L CREATIVE S MT Petrol 123h.p. BS6.2",
-        "1.2L CREATIVE S MT Petrol 118h.p. BS6.2",
-        "1.2L CREATIVE+ S DCA Petrol 123h.p. BS6.2",
-        "1.2L CREATIVE+ S DCA Petrol 118h.p. BS6.2",
-        "1.2L CREATIVE+ S MT Petrol 118h.p. BS6.2",
-        "1.2L CREATIVE+ S MT Petrol 123h.p. BS6.2",
-        "1.2L PURE+ DCA Petrol BS6.2",
-        "1.2L PURE+ MT Petrol BS6.2",
-        "1.2L PURE+ S DCA Petrol BS6.2",
-        "1.2L PURE+ S MT Petrol BS6.2",
-        "1.2L SMART MT Petrol BS6.2",
-        "1.5L ACCOMPLISHED S DCA Diesel BS6.2",
-        "1.5L ACCOMPLISHED S MT Diesel BS6.2",
-        "1.5L ACCOMPLISHED+ A DCA Diesel BS6.2",
-        "1.5L ACCOMPLISHED+ A MT Diesel BS6.2",
-        "1.5L CREATIVE MT Diesel BS6.2",
-        "1.5L CREATIVE S DCA Diesel BS6.2",
-        "1.5L CREATIVE S MT Diesel BS6.2",
-        "1.5L CREATIVE+ S DCA Diesel BS6.2",
-        "1.5L CREATIVE+ S MT Diesel BS6.2",
-        "1.5L PURE+ DCA Diesel BS6.2",
-        "1.5L PURE+ MT Diesel BS6.2",
-        "1.5L PURE+ S DCA Diesel BS6.2",
-        "1.5L PURE+ S MT Diesel BS6.2",
-        "1.5L SMART MT Diesel BS6.2"
+      id: 4,
+      name: "TATA CURVV",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/a5c4d54.webp",
+      years: "08.2024 - now",
+      link: "/vehicles/tata-429/curvv-12844/",
+      modifications: [
+        {
+          generation: "CURVV EV 08.2024 - now",
+          options: [
+            "45 kWh ACCOMPLISHED Electric",
+            "45 kWh ACCOMPLISHED+ A Electric",
+            "45 kWh ACCOMPLISHED+ S Electric",
+            "45 kWh CREATIVE Electric",
+            "45 kWh EMPOWERED+ S Electric",
+            "45 kWh EMPOWERED+ SA Electric",
+            "55 kWh ACCOMPLISHED Electric",
+            "55 kWh ACCOMPLISHED+ S Electric",
+            "55 kWh EMPOWERED+ Electric",
+            "55 kWh EMPOWERED+ A Electric",
+            "55 kWh EMPOWERED+ S Electric",
+            "55 kWh EMPOWERED+ SA Electric"
+          ]
+        },
+        {
+          generation: "CURVV 09.2024 - now",
+          options: [
+            "1.2L ACCOMPLISHED S DCA Petrol 123h.p. BS6.2",
+            "1.2L ACCOMPLISHED S DCA Petrol 118h.p. BS6.2",
+            "1.2L ACCOMPLISHED S MT Petrol 123h.p. BS6.2",
+            "1.2L ACCOMPLISHED S MT Petrol 118h.p. BS6.2",
+            "1.2L ACCOMPLISHED+ A DCA Petrol BS6.2",
+            "1.2L ACCOMPLISHED+ A MT Petrol BS6.2",
+            "1.2L CREATIVE DCA Petrol BS6.2",
+            "1.2L CREATIVE MT Petrol BS6.2",
+            "1.2L CREATIVE S DCA Petrol BS6.2",
+            "1.2L CREATIVE S MT Petrol 123h.p. BS6.2",
+            "1.2L CREATIVE S MT Petrol 118h.p. BS6.2",
+            "1.2L CREATIVE+ S DCA Petrol 123h.p. BS6.2",
+            "1.2L CREATIVE+ S DCA Petrol 118h.p. BS6.2",
+            "1.2L CREATIVE+ S MT Petrol 118h.p. BS6.2",
+            "1.2L CREATIVE+ S MT Petrol 123h.p. BS6.2",
+            "1.2L PURE+ DCA Petrol BS6.2",
+            "1.2L PURE+ MT Petrol BS6.2",
+            "1.2L PURE+ S DCA Petrol BS6.2",
+            "1.2L PURE+ S MT Petrol BS6.2",
+            "1.2L SMART MT Petrol BS6.2",
+            "1.5L ACCOMPLISHED S DCA Diesel BS6.2",
+            "1.5L ACCOMPLISHED S MT Diesel BS6.2",
+            "1.5L ACCOMPLISHED+ A DCA Diesel BS6.2",
+            "1.5L ACCOMPLISHED+ A MT Diesel BS6.2",
+            "1.5L CREATIVE MT Diesel BS6.2",
+            "1.5L CREATIVE S DCA Diesel BS6.2",
+            "1.5L CREATIVE S MT Diesel BS6.2",
+            "1.5L CREATIVE+ S DCA Diesel BS6.2",
+            "1.5L CREATIVE+ S MT Diesel BS6.2",
+            "1.5L PURE+ DCA Diesel BS6.2",
+            "1.5L PURE+ MT Diesel BS6.2",
+            "1.5L PURE+ S DCA Diesel BS6.2",
+            "1.5L PURE+ S MT Diesel BS6.2",
+            "1.5L SMART MT Diesel BS6.2"
+          ]
+        }
       ]
-    }
-  ]
-},
-{
-  id: 5,
-  name: "TATA ESTATE",
-  image: "https://boodmo.com/media/cache/vehicle_model/images/model/a13ea63.webp",
-  years: "01.1992 - 01.2000",
-  link: "/vehicles/tata-429/estate-12759/",
-  modifications: [
+    },
     {
-      generation: "ESTATE 01.1992 - 01.2000",
-      options: [
-        "1.9L STD Diesel BS1"
+      id: 5,
+      name: "TATA ESTATE",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/a13ea63.webp",
+      years: "01.1992 - 01.2000",
+      link: "/vehicles/tata-429/estate-12759/",
+      modifications: [
+        {
+          generation: "ESTATE 01.1992 - 01.2000",
+          options: [
+            "1.9L STD Diesel BS1"
+          ]
+        }
       ]
-    }
-  ]
-},
+    },
+    {
+      id: 6,
+      name: "TATA HARRIER",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/869ef1a.webp",
+      years: "01.2019 - now",
+      link: "/vehicles/tata-429/harrier-12306/",
+      modifications: [
+        {
+          generation: "HARRIER 1ST GEN 01.2019 - 12.2019",
+          options: [
+            "2.0L DARK EDITION XT Diesel BS4",
+            "2.0L DARK EDITION XZ Diesel BS4",
+            "2.0L XE Diesel BS4",
+            "2.0L XM Diesel 138h.p. BS4",
+            "2.0L XT Diesel BS4",
+            "2.0L XZ Diesel BS4"
+          ]
+        },
+        {
+          generation: "HARRIER 1ST GEN F/L 01.2020 - 09.2023",
+          options: [
+            "2.0L XE Diesel BS6.2",
+            "2.0L XM 4X2 Diesel BS6",
+            "2.0L XMA AT 4X2 Diesel BS6",
+            "2.0L XMAS Diesel BS6.2",
+            "2.0L XMS (PH-2) Diesel BS6.2",
+            "2.0L XT 4X2 Diesel BS6",
+            "2.0L XT DARK Diesel BS6",
+            "2.0L XT+ Diesel 167h.p. BS6",
+            "2.0L XT+ Diesel 167h.p. BS6.2",
+            "2.0L XT+ DARK Diesel BS6",
+            "2.0L XTA+ Diesel BS6.2",
+            "2.0L XZ Diesel BS6.2",
+            "2.0L XZ 4X2 Diesel BS6",
+            "2.0L XZ+ Diesel 167h.p. BS6",
+            "2.0L XZ+ Diesel 167h.p. BS6.2",
+            "2.0L XZ+ BLACK Diesel BS6",
+            "2.0L XZ+ DARK EDITION Diesel BS6",
+            "2.0L XZA Diesel BS6.2",
+            "2.0L XZA AT Diesel BS6",
+            "2.0L XZA+ Diesel BS6.2",
+            "2.0L XZA+ AT Diesel BS6",
+            "2.0L XZA+ DARK EDITION Diesel BS6",
+            "2.0L XZA+ O Diesel BS6.2"
+          ]
+        },
+        {
+          generation: "HARRIER CAMO 11.2020 - 09.2021",
+          options: [
+            "2.0L XT CAMO Diesel BS6",
+            "2.0L XT+ CAMO Diesel BS6",
+            "2.0L XZ CAMO Diesel BS6",
+            "2.0L XZ+ CAMO Diesel BS6",
+            "2.0L XZA CAMO Diesel BS6",
+            "2.0L XZA+ CAMO Diesel BS6"
+          ]
+        },
+        {
+          generation: "HARRIER DARK EDITION 07.2021 - 09.2023",
+          options: [
+            "2.0L XT+ Diesel BS6.2",
+            "2.0L XTA+ Diesel 167h.p. BS6",
+            "2.0L XTA+ Diesel 167h.p. BS6.2",
+            "2.0L XZ+ Diesel 167h.p. BS6",
+            "2.0L XZ+ Diesel 167h.p. BS6.2",
+            "2.0L XZA+ Diesel 167h.p. BS6",
+            "2.0L XZA+ Diesel 167h.p. BS6.2",
+            "2.0L XZA+O Diesel BS6.2"
+          ]
+        },
+        {
+          generation: "HARRIER KAZIRANGA 02.2022 - 02.2024",
+          options: [
+            "2.0L XZ+ Diesel",
+            "2.0L XZA+ Diesel"
+          ]
+        },
+        {
+          generation: "HARRIER JET EDITION 08.2022 - 01.2024",
+          options: [
+            "2.0L XZ+ Diesel",
+            "2.0L XZA+ AT Diesel"
+          ]
+        },
+        {
+          generation: "HARRIER RED DARK EDITION 02.2023 - 09.2024",
+          options: [
+            "2.0L XZ+ Diesel",
+            "2.0L XZA+ Diesel",
+            "2.0L XZA+(O) Diesel"
+          ]
+        },
+        {
+          generation: "HARRIER 2ND GEN F/L 10.2023 - now",
+          options: [
+            "2.0L ADVENTURE Diesel BS6.2",
+            "2.0L ADVENTURE+ Diesel BS6.2",
+            "2.0L ADVENTURE+ AT Diesel BS6.2",
+            "2.0L ADVENTURE+A Diesel BS6.2",
+            "2.0L ADVENTURE+A AT Diesel BS6.2",
+            "2.0L FEARLESS Diesel BS6.2",
+            "2.0L FEARLESS AT Diesel BS6.2",
+            "2.0L FEARLESS+ Diesel BS6.2",
+            "2.0L FEARLESS+ AT Diesel BS6.2",
+            "2.0L PURE(O) Diesel BS6.2",
+            "2.0L SMART(O) Diesel BS6.2"
+          ]
+        },
+        {
+          generation: "HARRIER EV 06.2025 - now",
+          options: [
+            "65 kWh ADVENTURE Electric",
+            "65 kWh ADVENTURE S Electric",
+            "65 kWh FEARLESS+ Electric",
+            "75 kWh EMPOWERED Electric",
+            "75 kWh EMPOWERED AWD Electric",
+            "75 kWh FEARLESS+ Electric"
+          ]
+        },
+        {
+          generation: "HARRIER EV STEALTH EDITION 06.2025 - now",
+          options: [
+            "75 kWh EMPOWERED Electric",
+            "75 kWh EMPOWERED AWD Electric"
+          ]
+        }
+      ]
+    },
+    {
+      id: 7,
+      name: "TATA HEXA",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/08ccb10.webp",
+      years: "01.2017 - 04.2020",
+      link: "/vehicles/tata-429/hexa-12171/",
+      modifications: [
+        {
+          generation: "HEXA 01.2017 - 04.2020",
+          options: [
+            "2.2L XE MT/Diesel/BS4",
+            "2.2L XM MT ABS A/B MT/Diesel/BS4",
+            "2.2L XMA 4X2 AT/Diesel/BS4",
+            "2.2L XMA 4X4 AT/Diesel/BS4",
+            "2.2L XT 4X2 A/B MT/Diesel/BS4",
+            "2.2L XT 4X4 A/B MT/Diesel/BS4",
+            "2.2L XTA 4X2 A/B/Diesel/BS4"
+          ]
+        }
+      ]
+    },
+    {
+      id: 8,
+      name: "TATA INDICA",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/19035f2.webp",
+      years: "12.1998 - 08.2019",
+      link: "/vehicles/tata-429/indica-12007/",
+      modifications: [
+        {
+          generation: "INDICA 12.1998 - 05.2001",
+          options: [
+            "1.4L DL MT/Diesel/BS2",
+            "1.4L DLE MT/Diesel/BS2",
+            "1.4L DLX MT/Diesel/BS2"
+          ]
+        },
+        {
+          generation: "INDICA V2 05.2001 - 06.2013",
+          options: [
+            "1.4L DiCOR MT/Diesel/BS3",
+            "1.4L DiCOR REFRESHED MT/Diesel/BS4",
+            "1.4L MT/Diesel/53h.p./BS2",
+            "1.4L MT/Petrol/BS3",
+            "1.4L MT/Diesel/70h.p./BS3",
+            "1.4L TURBO MT/Diesel/BS3",
+            "1.4L TURBOMAX MT/Diesel/BS4"
+          ]
+        },
+        {
+          generation: "INDICA XETA 11.2006 - 08.2019",
+          options: [
+            "1.2L E-MAX MT/Petrol/63h.p./BS3",
+            "1.2L E-MAX MT/Petrol/62h.p./BS4",
+            "1.2L E-MAX MT/Petrol/56h.p./BS4",
+            "1.2L MT/Petrol/65h.p./BS4",
+            "1.2L MT/Petrol/65h.p./BS3",
+            "1.4L MT/Petrol/BS3"
+          ]
+        },
+        {
+          generation: "INDICA VISTA 01.2008 - 12.2012",
+          options: [
+            "1.2L MT/Petrol/65h.p./BS3",
+            "1.2L MT/Petrol/65h.p./BS4",
+            "1.3L MT/Diesel/75h.p./BS3",
+            "1.3L MT/Diesel/75h.p./BS4",
+            "1.4L MT/Diesel/70h.p./BS3",
+            "1.4L MT/Diesel/70h.p./BS3",
+            "1.4L MT/Petrol/BS4"
+          ]
+        },
+        {
+          generation: "INDICA VISTA REFRESH 12.2012 - 12.2014",
+          options: [
+            "1.2L MT/Petrol/BS4",
+            "1.3L MT/Diesel/75h.p./BS4",
+            "1.3L MT/Diesel/90h.p./BS4",
+            "1.4L MT/Petrol/BS4",
+            "1.4L MT/Diesel/70h.p./BS3",
+            "1.4L MT/Diesel/70h.p./BS4"
+          ]
+        },
+        {
+          generation: "INDICA EV2 05.2013 - 04.2018",
+          options: [
+            "1.4L MT/Diesel/69h.p./BS4",
+            "1.4L MT/Diesel/48h.p./BS3"
+          ]
+        },
+        {
+          generation: "INDICA VISTA TECH 01.2014 - 12.2015",
+          options: [
+            "1.3L MT/Diesel/BS4",
+            "1.4L MT/Diesel/BS3"
+          ]
+        }
+      ]
+    },
+    {
+      id: 9,
+      name: "TATA INDIGO",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/ef9202c.webp",
+      years: "06.2002 - 05.2018",
+      link: "/vehicles/tata-429/indigo-11376/",
+      modifications: [
+        {
+          generation: "INDIGO 06.2002 - 12.2009",
+          options: [
+            "1.4L DLS MT/Petrol/BS3",
+            "1.4L GLE MT/Petrol/BS3",
+            "1.4L GLX MT/Petrol/BS3",
+            "1.4L GSX MT/Petrol/BS3",
+            "1.4L LE MT/Diesel/BS3",
+            "1.4L LS MT/Diesel/70h.p./BS3",
+            "1.4L LX MT/Diesel/70h.p./BS3",
+            "1.4L SX MT/Diesel/BS3",
+            "1.4L V MT/Diesel/BS3",
+            "1.4L VE MT/Diesel/BS3",
+            "1.4L VS MT/Diesel/BS3",
+          ],
+        },
+        {
+          generation: "INDIGO XL 05.2007 - 12.2011",
+          options: [
+            "1.4L CLASSIC MT/Petrol/BS3",
+            "1.4L CLASSIC MT/Diesel/70h.p./BS3",
+            "1.4L CLASSIC MT/Diesel/70h.p./BS4",
+            "1.4L GRAND MT/Diesel/70h.p./BS3",
+            "1.4L GRAND MT/Diesel/70h.p./BS4",
+            "1.4L MT/Petrol/BS3",
+            "1.4L MT/Diesel/BS3",
+            "1.4L MT/Petrol/CNG/BS4",
+            "1.4L SD MT/Diesel/BS4",
+          ],
+        },
+        {
+          generation: "INDIGO CS 01.2008 - 12.2012",
+          options: [
+            "1.2L EGLX MT/Petrol/BS4",
+            "1.2L GLE MT/Petrol/65h.p./BS3",
+            "1.2L GLE MT/Petrol/65h.p./BS4",
+            "1.2L GLS MT/Petrol/65h.p./BS3",
+            "1.2L GLS MT/Petrol/65h.p./BS4",
+            "1.2L GLX MT/Petrol/65h.p./BS3",
+            "1.2L GLX MT/Petrol/65h.p./BS4",
+            "1.2L GV MT/Petrol/BS4",
+            "1.4L ELX MT/Diesel/BS4",
+            "1.4L LE MT/Diesel/70h.p./BS3",
+            "1.4L LE MT/Diesel/70h.p./BS4",
+            "1.4L LS MT/Diesel/70h.p./BS3",
+            "1.4L LS MT/Diesel/70h.p./BS4",
+            "1.4L LX MT/Diesel/70h.p./BS3",
+            "1.4L LX MT/Diesel/70h.p./BS4",
+            "1.4L V MT/Diesel/BS4",
+          ],
+        },
+        {
+          generation: "INDIGO MANZA 08.2009 - 12.2015",
+          options: [
+            "1.3L CELEBRATION MT/Diesel/BS4",
+            "1.3L MT/Diesel/89h.p./BS3",
+            "1.3L MT/Diesel/89h.p./BS4",
+            "1.4L CELEBRATION MT/Petrol/BS4",
+            "1.4L MT/Petrol/89h.p./BS3",
+            "1.4L MT/Petrol/89h.p./BS4",
+          ],
+        },
+        {
+          generation: "INDIGO MANZA CLUB CLASS 10.2012 - 12.2015",
+          options: ["1.3L MT/Diesel/BS4", "1.4L MT/Petrol/BS4"],
+        },
+        {
+          generation: "INDIGO eCS 06.2013 - 05.2018",
+          options: [
+            "1.2L GLE MT/Petrol/BS4",
+            "1.2L GLS MT/Petrol/55h.p./BS4",
+            "1.2L GLS MT/Petrol/65h.p./BS4",
+            "1.2L GLX MT/Petrol/55h.p./BS4",
+            "1.2L GLX MT/Petrol/65h.p./BS4",
+            "1.2L GVX MT/Petrol/BS4",
+            "1.4L L MT/Diesel/BS4",
+            "1.4L LE MT/Diesel/BS4",
+            "1.4L LS MT/Diesel/70h.p./BS3",
+            "1.4L LS MT/Diesel/70h.p./BS4",
+            "1.4L LX MT/Diesel/70h.p./BS3",
+            "1.4L LX MT/Diesel/70h.p./BS4",
+            "1.4L MT/Diesel/BS3",
+            "1.4L VX MT/Diesel/70h.p./BS4",
+            "1.4L VX MT/Diesel/70h.p./BS3",
+          ],
+        },
+      ],
+    },
+    {
+      id: 10,
+      name: "TATA INDIGO MARINA",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/5c53773.webp",
+      years: "01.2003 - 12.2010",
+      link: "/vehicles/tata-429/indigo_marina-12063/",
+      modifications: [
+        {
+          generation: "INDIGO MARINA 01.2003 - 12.2010",
+          options: [
+            "1.4L DICOR MT/Diesel/BS3",
+            "1.4L MPFI MT/Petrol/BS3",
+            "1.4L MT/Petrol/BS3",
+            "1.4L TCIC MT/Diesel/BS3",
+          ],
+        },
+      ],
+    },
+    {
+      id: 11,
+      name: "TATA MOVUS",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/faeb9c5.webp",
+      years: "05.2014 - 04.2015",
+      link: "/vehicles/tata-429/movus-11384/",
+      modifications: [
+        {
+          generation: "MOVUS 05.2014 - 04.2015",
+          options: [
+            "2.2L CX/Diesel/BS4",
+            "2.2L EX/Diesel/BS4",
+            "2.2L LX/Diesel/BS4"
+          ]
+        }
+      ]
+    },
+    {
+      id: 12,
+      name: "TATA NANO",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/cc8f11f.webp",
+      years: "03.2009 - 09.2018",
+      link: "/vehicles/tata-429/nano-11377/",
+      modifications: [
+        {
+          generation: "NANO 03.2009 - 09.2018",
+          options: [
+            "0.6L AMT/Petrol/BS4",
+            "0.6L MT/Petrol/38h.p./BS2",
+            "0.6L MT/Petrol/38h.p./BS3",
+            "0.6L MT/Petrol/38h.p./BS4",
+            "0.6L MT/Petrol/38h.p./BS3",
+            "0.6L MT/Petrol/CNG/BS4",
+            "0.6L MT/Petrol/38h.p./BS4"
+          ]
+        },
+        {
+          generation: "NANO TWIST 01.2014 - 08.2018",
+          options: [
+            "0.6L MT/Petrol/38h.p./BS3",
+            "0.6L MT/Petrol/38h.p./BS4"
+          ]
+        },
+        {
+          generation: "NANO GenX 05.2015 - 08.2018",
+          options: [
+            "0.6L FTG MT/Petrol/BS4",
+            "0.6L OTG AMT/Petrol/BS4",
+            "0.6L OTG MT/Petrol/BS4"
+          ]
+        }
+      ]
+    },
+    {
+      id: 13,
+      name: "TATA NEXON",
+      image: "https://boodmo.com/media/cache/vehicle_model/images/model/1e988ee.webp",
+      years: "03.2017 - now",
+      link: "/vehicles/tata-429/nexon-12240/",
+      modifications: [
+        {
+          generation: "NEXON 1ST GEN 03.2017 - 12.2019",
+          options: [
+            "1.2L XE MT/Petrol/BS4",
+            "1.2L XM MT/Petrol/BS4",
+            "1.2L XT MT/Petrol/BS4",
+            "1.2L XZ MT/Petrol/BS4",
+            "1.2L XZ+ MT/Petrol/BS4",
+            "1.2L XZA+ AMT/Petrol/BS4",
+            "1.5L XE MT/Diesel/BS4",
+            "1.5L XM MT/Diesel/BS4",
+            "1.5L XT MT/Diesel/BS4",
+            "1.5L XZ MT/Diesel/BS4",
+            "1.5L XZ+ MT/Diesel/BS4",
+            "1.5L XZA+ AMT/Diesel/BS4"
+          ]
+        },
+        {
+          generation: "NEXON 1ST GEN F/L 11.2019 - 08.2023",
+          options: [
+            "1.2L XE MT/Petrol/BS6",
+            "1.2L XM MT/Petrol/BS6",
+            "1.2L XMA AMT/Petrol/BS6",
+            "1.2L XZ MT/Petrol/BS6",
+            "1.2L XZ+ MT/Petrol/BS6",
+            "1.2L XZA+ AMT/Petrol/BS6",
+            "1.2L XZ+S MT/Petrol/BS6",
+            "1.2L XZA+S AMT/Petrol/BS6",
+            "1.2L XZ+ LUX MT/Petrol/BS6.2",
+            "1.2L XZA+ LUX AMT/Petrol/BS6.2",
+            "1.2L XZ+ LUX MT/Petrol/BS6",
+            "1.5L XE MT/Diesel/BS6",
+            "1.5L XM MT/Diesel/BS6",
+            "1.5L XMA AMT/Diesel/BS6",
+            "1.5L XZ MT/Diesel/BS6",
+            "1.5L XZ+ MT/Diesel/BS6",
+            "1.5L XZA+ AMT/Diesel/BS6",
+            "1.5L XZ+S MT/Diesel/BS6",
+            "1.5L XZA+S AMT/Diesel/BS6",
+            "1.5L XZ+ LUX MT/Diesel/BS6.2",
+            "1.5L XZA+ LUX AMT/Diesel/BS6.2"
+          ]
+        },
+        {
+          generation: "NEXON EV 01.2020 - 09.2023",
+          options: [
+            "30.2kWh XM/Electric",
+            "30.2kWh XZ+ LUX/Electric",
+            "30.2kWh XZ+/Electric",
+            "40.5kWh XZ+ LUX MAX/Electric"
+          ]
+        },
+        {
+          generation: "NEXON DARK EDITION 07.2021 - 09.2023",
+          options: [
+            "1.2L XZ+ LX MT/Petrol/BS6.2",
+            "1.2L XZA+ LX AMT/Petrol/BS6.2",
+            "1.5L XZ+ LX MT/Diesel/BS6.2",
+            "1.5L XZA+ LX AMT/Diesel/BS6.2"
+          ]
+        },
+        {
+          generation: "NEXON KAZIRANGA EDITION 02.2022 - 09.2023",
+          options: [
+            "1.2L XZ+ LX MT/Petrol/BS6.2",
+            "1.2L XZA+ LX AMT/Petrol/BS6.2",
+            "1.5L XZ+ LX MT/Diesel/BS6.2",
+            "1.5L XZA+ LXS AMT/Diesel/BS6.2"
+          ]
+        },
+        {
+          generation: "NEXON JET EDITION 08.2022 - 01.2023",
+          options: [
+            "1.2L XZ+ (P) MT/Petrol/BS6",
+            "1.5L XZ+ (P) MT/Diesel/BS6"
+          ]
+        },
+        {
+          generation: "NEXON EV JET EDITION 08.2022 - 01.2023",
+          options: [
+            "30.2kWh XZ+ LUX/Electric"
+          ]
+        },
+        {
+          generation: "NEXON RED DARK EDITION 02.2023 - 09.2023",
+          options: [
+            "1.2L XZ+ LUX MT/Petrol/BS6.2",
+            "1.2L XZA+ LUX AMT/Petrol/BS6.2",
+            "1.5L XZ+ LUX MT/Diesel/BS6.2",
+            "1.5L XZA+ LXS AMT/Diesel/BS6.2"
+          ]
+        },
+        {
+          generation: "NEXON 2ND GEN F/L 09.2023 - now",
+          options: [
+            "1.2L FEARLESS+(O) MT/Petrol/BS6.2",
+            "1.2L FEARLESS+ MT/Petrol/BS6.2",
+            "1.2L FEARLESS MT/Petrol/BS6.2",
+            "1.2L CREATIVE+(O) MT/Petrol/BS6.2",
+            "1.2L CREATIVE+ MT/Petrol/BS6.2",
+            "1.2L CREATIVE MT/Petrol/BS6.2",
+            "1.2L PURE+(S) MT/Petrol/BS6.2",
+            "1.2L PURE+ MT/Petrol/BS6.2",
+            "1.2L PURE MT/Petrol/BS6.2",
+            "1.2L SMART+(S) MT/Petrol/BS6.2",
+            "1.2L SMART+ MT/Petrol/BS6.2",
+            "1.2L SMART MT/Petrol/BS6.2",
+            "1.5L FEARLESS+(O) MT/Diesel/BS6.2",
+            "1.5L FEARLESS+ MT/Diesel/BS6.2",
+            "1.5L FEARLESS MT/Diesel/BS6.2",
+            "1.5L CREATIVE+(O) MT/Diesel/BS6.2",
+            "1.5L CREATIVE+ MT/Diesel/BS6.2",
+            "1.5L CREATIVE MT/Diesel/BS6.2",
+            "1.5L PURE+(S) MT/Diesel/BS6.2",
+            "1.5L PURE+ MT/Diesel/BS6.2",
+            "1.5L PURE MT/Diesel/BS6.2",
+            "1.5L SMART+(S) MT/Diesel/BS6.2",
+            "1.5L SMART+ MT/Diesel/BS6.2",
+            "1.5L SMART MT/Diesel/BS6.2"
+          ]
+        }
+      ]
+    },
+
+
+
+
+
 
 
 
@@ -295,7 +823,7 @@ export const Tata = () => {
 
 
   return (
-   <section className="min-h-screen py-6 bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section className="min-h-screen py-6 bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Breadcrumbs */}
       <div className="w-full mb-8 px-4">
         <VehicleBreadcrumbs />
@@ -354,7 +882,7 @@ export const Tata = () => {
 
 
       {/* Model Filter Section */}
-     <div className="heading-filters flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-gray-200 pb-3 px-4 mb-6">
+      <div className="heading-filters flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-gray-200 pb-3 px-4 mb-6">
         <div className="h2-section text-2xl sm:text-3xl font-semibold text-gray-800">
           Choose Your{" "}
           <span className="h2-section__name text-red-500 font-bold">
@@ -372,7 +900,7 @@ export const Tata = () => {
             className="form-control form-control--search w-64 sm:w-72 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-red-400 transition duration-200"
           />
         </div>
-       </div>
+      </div>
 
       {/* Models Grid */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
