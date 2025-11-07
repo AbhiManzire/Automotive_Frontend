@@ -6,6 +6,7 @@ const useQuery = () => new URLSearchParams(useLocation().search);
 
 const VehicleSearchResults = () => {
   const query = useQuery();
+  // Cart integration removed — Add to Cart will be a no-op to keep behavior internal
   const maker = query.get("maker") || "";
   const model = query.get("model") || "";
   const year = query.get("year") || "";
@@ -15,11 +16,14 @@ const VehicleSearchResults = () => {
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState("relevance");
 
+
   // Simulate API loading
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  // (Add to Cart / external catalog handlers were removed — reverting to static UI)
 
   // Mock product data
   const products = [
@@ -326,11 +330,17 @@ const VehicleSearchResults = () => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-2">
-                  <button className="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => { /* no-op: cart disabled */ }}
+                    className="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
+                  >
                     <FaShoppingCart />
                     Add to Cart
                   </button>
-                  <button className="px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                  <button
+                    className="px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                    onClick={() => { /* detail navigation left intentionally simple */ }}
+                  >
                     Details
                   </button>
                 </div>

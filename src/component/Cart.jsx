@@ -469,6 +469,21 @@ export default function ShippingStatus({ currentStep = 3 }) {
     </div>
   );
 
+  // Cart was removed — render a static empty cart UI
+  const CartView = (
+    <div className="mt-10 sm:mt-14 w-full text-center px-2">
+      <p className="text-base sm:text-lg border-b-2 border-gray-200 py-3 text-gray-600 mb-6 font-medium">
+        🛒 Your Shopping Cart is Empty
+      </p>
+      <Link
+        to="/"
+        className="inline-block bg-gradient-to-r from-pink-500 to-blue-500 text-white font-semibold px-6 sm:px-8 py-2.5 sm:py-3 rounded-full hover:opacity-90 transition transform hover:scale-105 shadow-lg text-sm sm:text-base"
+      >
+        Continue Shopping
+      </Link>
+    </div>
+  );
+
   return (
     <div className="flex flex-col items-center p-4 sm:p-6 md:p-10 bg-gradient-to-br from-blue-50 via-pink-50 to-purple-50 rounded-2xl shadow-2xl w-full max-w-6xl mx-auto border border-gray-200">
       <h2 className="text-2xl sm:text-2xl md:text-4xl font-bold mb-8 sm:mb-10 text-gray-800 text-center tracking-wide">
@@ -564,18 +579,7 @@ export default function ShippingStatus({ currentStep = 3 }) {
         </>
       )}
 
-      {/* Empty Cart */}
-      <div className="mt-10 sm:mt-14 w-full text-center px-2">
-        <p className="text-base sm:text-lg border-b-2 border-gray-200 py-3 text-gray-600 mb-6 font-medium">
-          🛒 Your Shopping Cart is Empty
-        </p>
-        <Link
-          to="/"
-          className="inline-block bg-gradient-to-r from-pink-500 to-blue-500 text-white font-semibold px-6 sm:px-8 py-2.5 sm:py-3 rounded-full hover:opacity-90 transition transform hover:scale-105 shadow-lg text-sm sm:text-base"
-        >
-          Continue Shopping
-        </Link>
-      </div>
+  {CartView}
 
       {/* Categories with Links */}
       <div className="mt-12 sm:mt-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-6 w-full px-2">

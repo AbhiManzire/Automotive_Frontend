@@ -19,8 +19,9 @@ import {
   FaTruck,
   FaShieldAlt,
   FaStore,
+  FaSignOutAlt,
 } from "react-icons/fa";
-import { MdAccountCircle, MdCompare, MdLanguage } from "react-icons/md";
+import { MdAccountCircle, MdCompare, MdLanguage, MdOutlineInventory } from "react-icons/md";
 import { IoReorderThreeOutline, IoSparkles } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import logo3 from "./logo3.png";
@@ -40,6 +41,15 @@ export const Header = () => {
   const [showCartMenu, setShowCartMenu] = useState(false);
   const [currentVehicle, setCurrentVehicle] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
+  
+  // Mock user state - replace with your actual auth context
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const mockUser = {
+    name: "John Doe",
+    email: "john@example.com",
+    avatar: "https://via.placeholder.com/40",
+    role: "Customer"
+  };
 
   // Scroll effect for header
   useEffect(() => {
@@ -300,14 +310,15 @@ export const Header = () => {
 
   return (
     <motion.header
-      className={`w-full bg-white shadow-sm sticky top-0 z-50 transition-all duration-300 ${isScrolled ? "shadow-xl bg-white/95 backdrop-blur-sm" : "shadow-sm"
+      className={`w-full bg-white shadow-sm sticky top-0 z-50 transition-all duration-300
+         ${isScrolled ? "shadow-xl bg-white/95 backdrop-blur-sm" : "shadow-sm"
         }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
       {/* ===== TOPBAR ===== */}
-      <div className="border-b bg-gradient-to-r from-red-600 to-purple-600 text-white">
+      <div className="border-b bg-gradient-to-r from-red-600 to-orange-600 text-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-wrap items-center justify-between py-2 gap-2">
             {/* Left side - Store Info */}
@@ -365,88 +376,6 @@ export const Header = () => {
                     <Icon />
                   </motion.a>
                 ))}
-              </div>
-
-              {/* Currency & Language for larger screens */}
-              <div className="hidden lg:flex items-center space-x-4">
-                {/* Currency Selector */}
-                <div className="relative">
-                  <motion.button
-                    className="flex items-center space-x-1 hover:text-yellow-300 transition-colors"
-                    onClick={() => setShowCurrencyMenu(!showCurrencyMenu)}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <span>Currency:</span>
-                    <span className="font-semibold">USD</span>
-                    <FaChevronDown
-                      className={`text-xs transition-transform ${showCurrencyMenu ? "rotate-180" : ""
-                        }`}
-                    />
-                  </motion.button>
-
-                  <AnimatePresence>
-                    {showCurrencyMenu && (
-                      <motion.div
-                        variants={dropdownVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
-                        className="absolute top-full right-0 mt-2 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-50 min-w-32"
-                      >
-                        {currencies.map((currency, index) => (
-                          <motion.button
-                            key={index}
-                            className="block w-full text-left px-4 py-2 hover:bg-red-50 transition-colors first:rounded-t-lg last:rounded-b-lg"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setShowCurrencyMenu(false)}
-                          >
-                            {currency}
-                          </motion.button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                {/* Language Selector */}
-                <div className="relative">
-                  <motion.button
-                    className="flex items-center space-x-1 hover:text-yellow-300 transition-colors"
-                    onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <MdLanguage className="text-lg" />
-                    <span className="font-semibold">EN</span>
-                    <FaChevronDown
-                      className={`text-xs transition-transform ${showLanguageMenu ? "rotate-180" : ""
-                        }`}
-                    />
-                  </motion.button>
-
-                  <AnimatePresence>
-                    {showLanguageMenu && (
-                      <motion.div
-                        variants={dropdownVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
-                        className="absolute top-full right-0 mt-2 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-xl z-50 min-w-32"
-                      >
-                        {languages.map((language, index) => (
-                          <motion.button
-                            key={index}
-                            className="flex items-center space-x-2 w-full text-left px-4 py-2 hover:bg-red-50 transition-colors first:rounded-t-lg last:rounded-b-lg"
-                            whileHover={{ x: 5 }}
-                            onClick={() => setShowLanguageMenu(false)}
-                          >
-                            <span className="font-medium">{language.code}</span>
-                            <span className="text-sm text-gray-600">{language.name}</span>
-                          </motion.button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
               </div>
 
               {/* Auth Links */}
@@ -656,8 +585,8 @@ export const Header = () => {
             >
               <MdAccountCircle className="text-2xl text-red-900" />
               <div className="hidden sm:block text-left">
-                <div className="text-xs text-gray-500">Hello, Log In</div>
-                <div className="text-sm font-semibold">My Account</div>
+                <div className="text-xs text-gray-500"> Hello </div>
+                <div className="text-sm font-semibold"> My Account</div>
               </div>
             </motion.button>
 
@@ -671,39 +600,67 @@ export const Header = () => {
                   className="absolute top-full right-0 mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 min-w-64"
                 >
                   <div className="p-4">
-                    <div className="font-semibold mb-3 text-gray-800">Log In to Your Account</div>
-                    <div className="space-y-3">
-                      <input
-                        type="email"
-                        placeholder="customer@example.com"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                      />
-                      <div className="flex items-center space-x-2">
-                        <input
-                          type="password"
-                          placeholder="Password"
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                        />
-                        <button className="text-red-600 text-sm hover:underline whitespace-nowrap">
-                          Forgot?
-                        </button>
-                      </div>
-                      <motion.button
-                        className="w-full bg-gradient-to-r from-red-600 to-purple-600 text-white py-2 rounded-lg hover:from-red-700 hover:to-purple-700 transition-all duration-300 shadow-lg"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        Login
-                      </motion.button>
-                      <div className="text-center">
-                        <button
-                          onClick={goToCreateAcc}
-                          className="text-red-600 text-sm hover:underline font-medium"
+                  <div className="space-y-4">
+                        <div className="flex items-center space-x-3 pb-3 border-b">
+                          <img
+                            src={mockUser.avatar}
+                            alt={mockUser.name}
+                            className="w-10 h-10 rounded-full"
+                          />
+                          <div>
+                            <div className="font-semibold text-gray-800">{mockUser.name}</div>
+                            <div className="text-sm text-gray-500">{mockUser.email}</div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Link
+                            to="/myprofile"
+                            className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
+                          >
+                            <FaUser className="text-sm" />
+                            <span>My Profile</span>
+                          </Link>
+                          
+                          <Link
+                            to="/myorders"
+                            className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
+                          >
+                            <MdOutlineInventory className="text-sm" />
+                            <span>My Orders</span>
+                          </Link>
+                          
+                          <Link
+                            to="/mywishlist"
+                            className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
+                          >
+                            <FaHeart className="text-sm" />
+                            <span>My Wishlist</span>
+                          </Link>
+                          
+                          <Link
+                            to="/garage"
+                            className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
+                          >
+                            <FaCar className="text-sm" />
+                            <span>My Garage</span>
+                          </Link>
+                        </div>
+                        
+                        <motion.button
+                          onClick={() => {
+                            setIsLoggedIn(false);
+                            setShowAccountMenu(false);
+                          }}
+                          className="w-full flex items-center justify-center space-x-2 bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                         >
-                          Create An Account
-                        </button>
+                          <FaSignOutAlt className="text-sm" />
+                          <span>Sign Out</span>
+                        </motion.button>
                       </div>
-                    </div>
+                  
                   </div>
                 </motion.div>
               )}

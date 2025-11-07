@@ -10,10 +10,10 @@ const Contact = () => {
           Help & <span className="text-red-500">Support</span>
         </h1>
         <div className="flex gap-6 text-red-600 font-medium">
-          <a href="#" className="hover:underline">
+          <a href="/faq" className="hover:underline">
             FAQ
           </a>
-          <a href="#" className="hover:underline">
+          <a href="/my-tickets" className="hover:underline">
             My Tickets
           </a>
         </div>

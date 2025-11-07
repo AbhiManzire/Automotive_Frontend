@@ -79,7 +79,11 @@ const Signup = () => {
                   <option value="" hidden>Staff role</option>
                   <option value="Super Admin">Super Admin</option>
                   <option value="Vendor">Vendor</option>
-                  <option value="Accountant">Accountant</option>
+                  <option value="Accountant">Mechanics</option>
+                  <option value="Accountant">Garage</option>
+                  <option value="Accountant">Customer</option>
+
+
                 </select>
               </div>
 

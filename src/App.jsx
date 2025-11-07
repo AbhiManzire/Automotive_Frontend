@@ -3,6 +3,14 @@ import './App.css';
 
 import Header from './component/Header';
 import Footer from "./component/Footer";
+import { AuthProvider } from './auth/AuthContext';
+import { CartProvider } from './features/cart/CartContext';
+import ProtectedRoute from './auth/ProtectedRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import EnhancedLogin from './auth/EnhancedLogin';
+import DiagnosticForm from './features/diagnostics/DiagnosticForm';
+import ChatbotSupport from './features/support/ChatbotSupport';
 
 import { Navbar } from './component/Navbar';
 import Cart from './component/Cart';
@@ -81,6 +89,8 @@ import { Fiat } from "./component/Vehicles/Fiat";
 import { Kia } from "./component/Vehicles/Kia";
 import { AshokLayland } from "./component/Vehicles/AshokLayland";
 import { Audi } from "./component/Vehicles/Audi";
+import FAQ from "./features/support/FAQ";
+import ReturnPolicy from "./features/support/ReturnPolicy";
 
 
 
@@ -94,16 +104,20 @@ const Layout = ({ children }) => {
     <>
       {!hideHeaderFooter && <Header />}
       {children}
+      <ToastContainer />
       {!hideHeaderFooter && <Footer />}
+      {!hideHeaderFooter && <ChatbotSupport />}
     </>
   );
 };
 
 function App() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <Layout>
+            <Routes>
           {/* Home Page */}
           <Route
             path="/"
@@ -125,7 +139,7 @@ function App() {
           />
 
           {/* Authentication Pages */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<EnhancedLogin />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/signup" element={<Signup />} />
 
@@ -141,8 +155,12 @@ function App() {
           <Route path="/myorder" element={<MyOrder />} />
           <Route path="/mywishlist" element={<MyWishlist />} />
           <Route path="/company_gst" element={<Company_GST />} />
-          <Route path="/sparelopage" element={<SpareloPage />} />
           <Route path="/addresses" element={<Addresses />} />
+          <Route path="/diagnostic" element={<DiagnosticForm />} />
+          <Route path="/support" element={<ChatbotSupport />} />
+          <Route path="/addresses" element={<Addresses />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/return-policy" element={<ReturnPolicy />} />
 
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/catalog/maintenance_service_parts/" element={<MaintenanceServiceParts />} />
@@ -206,7 +224,9 @@ function App() {
           <Route path="/vehicles" element={<VehicleMaker />} />
         </Routes>
       </Layout>
-    </Router>
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

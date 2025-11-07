@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import logo2 from "./logo2.png";
 
+
 const Footer = () => {
   return (
     <footer className="bg-white border-t text-sm text-gray-700">
