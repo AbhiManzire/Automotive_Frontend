@@ -623,5 +623,5 @@ const SearchSection = () => {
     </section>
   );
 };
-
 export default SearchSection;
+

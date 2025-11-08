@@ -3,15 +3,8 @@ import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
 import Article_Review from "../Article_Review";
 import { getOriPartsLink } from "../../utils/oripartsBackUrl";
 
-export const Chevrolet = () => {
-  const link = getOriPartsLink(51, "CHEVROLET");
-
-   
-     const [filter, setFilter] = useState("");
-     const [categoryFilter, setCategoryFilter] = useState("");
-   
-      // 🔹 Models Data
-  const models = [
+// 🔹 Models Data - Exported for use in other components
+export const chevroletModels = [
     {
       id: 1,
       name: "MAHINDRA ALFA",
@@ -46,8 +39,16 @@ export const Chevrolet = () => {
     },
 
 
-  ];
+];
 
+export const Chevrolet = () => {
+  const link = getOriPartsLink(51, "CHEVROLET");
+
+  const [filter, setFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
+
+  // Use exported models
+  const models = chevroletModels;
 
   const categories = [
     { name: "Maintenance Service Parts", img: "https://boodmo.com/media/images/categories/ebba234.svg", link: "/catalog/maintenance_service_parts/" },

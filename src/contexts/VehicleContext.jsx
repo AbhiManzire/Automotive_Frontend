@@ -85,6 +85,10 @@ export const VehicleProvider = ({ children }) => {
     return newVehicle;
   }, []);
 
+  const removeVehicle = useCallback((vehicleId) => {
+    setVehicles(prev => prev.filter(v => v.id !== vehicleId));
+  }, []);
+
   const lookupByRegistration = useCallback((regNumber) => {
     return vehicles.find(v => 
       v.registrationNumber?.toUpperCase() === regNumber.toUpperCase()
@@ -148,6 +152,7 @@ export const VehicleProvider = ({ children }) => {
     vehicles,
     partsDatabase,
     addVehicle,
+    removeVehicle,
     lookupByRegistration,
     lookupByVIN,
     searchByFilters,

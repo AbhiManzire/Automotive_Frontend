@@ -3,14 +3,8 @@ import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
 import Article_Review from "../Article_Review";
 import { getOriPartsLink } from "../../utils/oripartsBackUrl";
 
-export const Hyundai = () => {
-  const link = getOriPartsLink(8, "HYUNDAI");
-
-  const [filter, setFilter] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
-
-  // 🔹 Vehicle Models
-  const models = [
+// 🔹 Vehicle Models - Exported for use in other components
+export const hyundaiModels = [
     {
       id: 1,
       name: "HYUNDAI ACCENT",
@@ -1308,7 +1302,16 @@ export const Hyundai = () => {
     }
   ]
 },
-  ];
+];
+
+export const Hyundai = () => {
+  const link = getOriPartsLink(8, "HYUNDAI");
+
+  const [filter, setFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
+
+  // Use exported models
+  const models = hyundaiModels;
 
  const categories = [
     { name: "Maintenance Service Parts", img: "https://boodmo.com/media/images/categories/ebba234.svg", link: "/catalog/maintenance_service_parts/" },

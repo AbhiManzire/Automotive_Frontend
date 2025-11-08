@@ -3,14 +3,8 @@ import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
 import Article_Review from "../Article_Review";
 import { getOriPartsLink } from "../../utils/oripartsBackUrl";
 
-export const Maruti = () => {
-  const link = getOriPartsLink(7, "MARUTI");
-
-  const [filter, setFilter] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
-
-  // 🔹 Vehicle Models
-  const models = [
+// 🔹 Vehicle Models - Exported for use in other components
+export const marutiModels = [
     {
       id: 1,
       name: "MARUTI 1000",
@@ -1609,8 +1603,16 @@ export const Maruti = () => {
         }
       ]
     },
-  ];
+];
 
+export const Maruti = () => {
+  const link = getOriPartsLink(7, "MARUTI");
+
+  const [filter, setFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
+
+  // Use exported models
+  const models = marutiModels;
 
   const categories = [
     { name: "Maintenance Service Parts", img: "https://boodmo.com/media/images/categories/ebba234.svg", link: "/catalog/maintenance_service_parts/" },

@@ -3,15 +3,8 @@ import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
 import Article_Review from "../Article_Review";
 import { getOriPartsLink } from "../../utils/oripartsBackUrl";
 
-export const Tata = () => {
-  const link = getOriPartsLink(3, "TATA");
-
-  const [filter, setFilter] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
-
-
-  // 🔹 Models Data
-  const models = [
+// 🔹 Models Data - Exported for use in other components
+export const tataModels = [
     {
       id: 1,
       name: "Tata Altroz",
@@ -773,8 +766,16 @@ export const Tata = () => {
 
 
 
-  ];
+];
 
+export const Tata = () => {
+  const link = getOriPartsLink(3, "TATA");
+
+  const [filter, setFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
+
+  // Use exported models
+  const models = tataModels;
 
   const categories = [
     { name: "Maintenance Service Parts", img: "https://boodmo.com/media/images/categories/ebba234.svg", link: "/catalog/maintenance_service_parts/" },
