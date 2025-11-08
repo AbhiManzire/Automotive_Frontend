@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { FaSearch, FaShoppingCart, FaHeart, FaShare, FaStar, FaFilter, FaTruck, FaShieldAlt, FaSyncAlt, FaCheckCircle } from "react-icons/fa";
+import { useCart } from '../contexts/CartContext';
 
 const PartSearchResults = () => {
   const { pn } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { addToCart } = useCart();
+  
+  // Get car maker from URL params or location state
+  const searchParams = new URLSearchParams(location.search);
+  const carMaker = searchParams.get('maker') || location.state?.maker || null;
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("relevance");
@@ -15,6 +23,24 @@ const PartSearchResults = () => {
     return () => clearTimeout(timer);
   }, [pn]);
 
+  // Handle Add to Cart
+  const handleAddToCart = (part) => {
+    // Convert part data to match cart context format
+    const cartProduct = {
+      id: part.id,
+      name: part.name,
+      brand: part.brand,
+      price: part.originalPrice || part.price,
+      discountPrice: part.originalPrice ? part.price : null,
+      discount: part.originalPrice ? Math.round(((part.originalPrice - part.price) / part.originalPrice) * 100) : null,
+      imageUrl: part.image || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop",
+      rating: part.rating,
+      reviews: part.reviews,
+    };
+    addToCart(cartProduct);
+    alert(`${part.name} added to cart!`);
+  };
+
   // Mock parts data
   const parts = [
     {
@@ -22,8 +48,8 @@ const PartSearchResults = () => {
       name: "Genuine OEM Spark Plug",
       partNumber: "SP-1234-OEM",
       oem: pn,
-      price: 45.99,
-      originalPrice: 65.99,
+      price: 459.99,
+      originalPrice: 659.99,
       brand: "NGK",
       category: "Ignition System",
       rating: 4.8,
@@ -41,8 +67,8 @@ const PartSearchResults = () => {
       name: "Premium Aftermarket Equivalent",
       partNumber: "SP-1234-PRE",
       oem: pn,
-      price: 32.99,
-      originalPrice: 49.99,
+      price: 329.99,
+      originalPrice: 499.99,
       brand: "Bosch",
       category: "Ignition System",
       rating: 4.6,
@@ -60,8 +86,8 @@ const PartSearchResults = () => {
       name: "Performance Upgrade Version",
       partNumber: "SP-1234-PERF",
       oem: pn,
-      price: 68.99,
-      originalPrice: 89.99,
+      price: 689.99,
+      originalPrice: 899.99,
       brand: "Denso",
       category: "Ignition System",
       rating: 4.9,
@@ -79,8 +105,8 @@ const PartSearchResults = () => {
       name: "Economy Replacement",
       partNumber: "SP-1234-ECO",
       oem: pn,
-      price: 18.99,
-      originalPrice: 29.99,
+      price: 189.99,
+      originalPrice: 299.99,
       brand: "Standard Motor",
       category: "Ignition System",
       rating: 4.2,
@@ -98,8 +124,8 @@ const PartSearchResults = () => {
       name: "OEM Manufacturer Part",
       partNumber: "SP-1234-GEN",
       oem: pn,
-      price: 52.99,
-      originalPrice: 72.99,
+      price: 529.99,
+      originalPrice: 729.99,
       brand: "Original Equipment",
       category: "Ignition System",
       rating: 4.7,
@@ -117,8 +143,8 @@ const PartSearchResults = () => {
       name: "Professional Grade",
       partNumber: "SP-1234-PRO",
       oem: pn,
-      price: 39.99,
-      originalPrice: 59.99,
+      price: 399.99,
+      originalPrice: 599.99,
       brand: "Champion",
       category: "Ignition System",
       rating: 4.5,
@@ -135,7 +161,7 @@ const PartSearchResults = () => {
 
   const filters = [
     { name: "Brand", options: ["All Brands", "NGK", "Bosch", "Denso", "Champion", "Standard Motor"] },
-    { name: "Price Range", options: ["All Prices", "Under $25", "$25-$50", "$50-$75", "Above $75"] },
+    { name: "Price Range", options: ["All Prices", "Under ₹500", "₹500-₹1000", "₹1000-₹2000", "Above ₹2000"] },
     { name: "Warranty", options: ["Any Warranty", "1 Year", "2 Years", "3 Years", "5 Years+"] },
     { name: "Type", options: ["All Types", "OEM", "Aftermarket", "Performance", "Economy"] }
   ];
@@ -285,7 +311,11 @@ const PartSearchResults = () => {
         {/* Parts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {parts.map((part) => (
-            <div key={part.id} className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+            <div 
+              key={part.id} 
+              className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
+              onClick={() => navigate(`/catalog/part-p-${part.id}${carMaker ? `?maker=${carMaker}` : ''}`)}
+            >
               
               {/* Part Header */}
               <div className="p-4 border-b border-gray-100">
@@ -297,7 +327,7 @@ const PartSearchResults = () => {
                   }`}>
                     {part.isOEM ? "GENUINE OEM" : "AFTERMARKET"}
                   </span>
-                  <div className="flex gap-1">
+                  <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
                     <button className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors">
                       <FaHeart className="text-sm" />
                     </button>
@@ -374,14 +404,14 @@ const PartSearchResults = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-2xl font-bold text-red-600">${part.price}</span>
+                      <span className="text-2xl font-bold text-red-600">₹{part.price}</span>
                       {part.originalPrice && (
-                        <span className="text-lg text-gray-500 line-through">${part.originalPrice}</span>
+                        <span className="text-lg text-gray-500 line-through">₹{part.originalPrice}</span>
                       )}
                     </div>
                     {part.originalPrice && (
                       <div className="text-sm text-green-600 font-semibold">
-                        Save ${(part.originalPrice - part.price).toFixed(2)}
+                        Save ₹{(part.originalPrice - part.price).toFixed(2)}
                       </div>
                     )}
                   </div>
@@ -408,11 +438,17 @@ const PartSearchResults = () => {
                        part.stock > 5 ? "Low Stock" : "Last Few"}
                     </span>
                   </div>
-                  <div className="flex gap-2">
-                    <button className="px-3 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm">
+                  <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+                    <button 
+                      onClick={() => navigate(`/catalog/part-p-${part.id}${carMaker ? `?maker=${carMaker}` : ''}`)}
+                      className="px-3 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+                    >
                       Details
                     </button>
-                    <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2 text-sm">
+                    <button 
+                      onClick={() => handleAddToCart(part)}
+                      className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2 text-sm"
+                    >
                       <FaShoppingCart />
                       Add to Cart
                     </button>

@@ -25,30 +25,6 @@ const SearchFilterBar = ({
           />
         </div>
 
-        {/* Sort */}
-        <div className="flex items-center space-x-2">
-          <FaSort className="text-gray-400" />
-          <select
-            value={sortBy}
-            onChange={(e) => handleSort(e.target.value)}
-            className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500"
-          >
-            <option value="relevance">Sort by Relevance</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="rating">Customer Rating</option>
-            <option value="name">Name A-Z</option>
-          </select>
-        </div>
-
-        {/* Filter Toggle */}
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-        >
-          <FaFilter />
-          <span>Filters</span>
-        </button>
       </div>
     </div>
   );

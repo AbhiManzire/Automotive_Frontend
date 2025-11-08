@@ -1,9 +1,9 @@
 import React,{ useState } from "react";
 import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
+import { getOriPartsLink } from "../../utils/oripartsBackUrl";
 
 export const Kia = () => {
-  const link =
-    "https://oriparts.com/74?back_url_id=https%3A%2F%2Fboodmo.com%2Fcatalog%2Fpart-p-%7Bitem_id%7D%2F&back_url_pn=https%3A%2F%2Fboodmo.com%2Fsearch%2F%7Bpn%7D%2F";
+  const link = getOriPartsLink(74, "KIA");
 
     const [filter, setFilter] = React.useState("");
   return (

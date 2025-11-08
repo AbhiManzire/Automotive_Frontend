@@ -5,11 +5,6 @@ import {
   FaHeart,
   FaShoppingCart,
   FaSearch,
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaYoutube,
-  FaPinterest,
   FaChevronDown,
   FaChevronRight,
   FaBars,
@@ -20,28 +15,34 @@ import {
   FaShieldAlt,
   FaStore,
   FaSignOutAlt,
+  FaCamera,
+  FaVideo,
+  FaTimes,
+  FaUpload,
 } from "react-icons/fa";
 import { MdAccountCircle, MdCompare, MdLanguage, MdOutlineInventory } from "react-icons/md";
 import { IoReorderThreeOutline, IoSparkles } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import logo3 from "./logo3.png";
 import { Sider } from "./Sider";
+import { useCart } from '../contexts/CartContext';
 
 export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [headerPN, setHeaderPN] = useState("");
+  const { getTotalItems, cartItems, getTotalPrice } = useCart();
   const [selectedCategory, setSelectedCategory] = useState("0");
-  const [showVehiclePicker, setShowVehiclePicker] = useState(false);
   const [showCurrencyMenu, setShowCurrencyMenu] = useState(false);
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [showDepartmentsMenu, setShowDepartmentsMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showCartMenu, setShowCartMenu] = useState(false);
-  const [currentVehicle, setCurrentVehicle] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
-  
+  const [show360UploadModal, setShow360UploadModal] = useState(false);
+  const [uploadType, setUploadType] = useState('photo'); // 'photo' or 'video'
+
   // Mock user state - replace with your actual auth context
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const mockUser = {
@@ -59,23 +60,6 @@ export const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Data from both components
-  const vehicles = [
-    { id: '', name: 'All Vehicles' },
-    { id: '1', name: '2011 Ford Focus S', details: 'Engine 2.0L 1742DA L4 FI Turbo' },
-    { id: '2', name: '2019 Audi Q7 Premium', details: 'Engine 3.0L 5626CC L6 QK' },
-    { id: '3', name: '2015 Kia Rio LX', details: 'Engine 1.6L 8306JK L5 RL' }
-  ];
-
-  const currencies = ['€ Euro', '£ Pound Sterling', '$ US Dollar', '₽ Russian Ruble'];
-
-  const languages = [
-    { name: 'English', flag: '/images/languages/english.png', code: 'EN' },
-    { name: 'Russian', flag: '/images/languages/russian.png', code: 'RU' },
-    { name: 'French', flag: '/images/languages/french.png', code: 'FR' },
-    { name: 'Hindi', flag: '/images/languages/hindi.png', code: 'HI' }
-  ];
 
   const departments = [
     { name: 'Categories', hasSubmenu: true, href: '/category', icon: '📁' },
@@ -143,8 +127,7 @@ export const Header = () => {
             { name: 'Variant One', href: '/header-classic-one' },
             { name: 'Variant Two', href: '/header-classic-two' },
             { name: 'Variant Three', href: '/header-classic-three' },
-            { name: 'Variant Four', href: '/header-classic-four' },
-            { name: 'Variant Five', href: '/header-classic-five' }
+           
           ]
         },
         {
@@ -168,9 +151,7 @@ export const Header = () => {
             { name: "Body", href: "/catalog/body/" },
             { name: "Brake System", href: "/catalog/brakes/" },
             { name: "Car Accessories", href: "/catalog/car_accessories/" },
-            { name: "Clutch System", href: "/catalog/clutch/" },
-            { name: "Control Cables", href: "/catalog/control_cables/" },
-            { name: "Electrical Components", href: "/catalog/electric_components/" },
+          
           ]
         },
         {
@@ -179,8 +160,7 @@ export const Header = () => {
             { name: '6 Columns Full', href: '/shop-grid-6-full' },
             { name: '5 Columns Full', href: '/shop-grid-5-full' },
             { name: '4 Columns Full', href: '/shop-grid-4-full' },
-            { name: '4 Columns Sidebar', href: '/shop-grid-4-sidebar' },
-            { name: '3 Columns Sidebar', href: '/shop-grid-3-sidebar' }
+         
           ]
         },
         { name: 'Shop List', href: '/shop-list' },
@@ -240,15 +220,13 @@ export const Header = () => {
     {
       name: 'Account',
       submenu: [
-        { name: 'Login & Register', href: '/login' },
+        { name: 'Edit Profile', href: '/myprofile' },
         { name: 'Dashboard', href: '/account/dashboard' },
         { name: 'Garage', href: '/garage' },
-        { name: 'Edit Profile', href: '/myprofile' },
-        { name: 'Order History', href: '/myorders' },
         { name: 'Order Details', href: '/cart' },
         { name: 'Address Book', href: '/addresses' },
         { name: 'Edit Address', href: '/myaddresses' },
-        { name: 'Change Password', href: '/forgot-password' }
+        
       ]
     },
     {
@@ -256,11 +234,9 @@ export const Header = () => {
       submenu: [
         { name: 'About Us', href: '/about-us' },
         { name: 'Contact Us ', href: '/contact' },
-        { name: '404', href: '/not-found' },
         { name: 'Terms And Conditions', href: '/terms' },
         { name: 'FAQ', href: '/faq' },
         { name: 'Components', href: '/components' },
-        { name: 'Typography', href: '/typography' }
       ]
     }
   ];
@@ -317,91 +293,6 @@ export const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* ===== TOPBAR ===== */}
-      <div className="border-b bg-gradient-to-r from-red-600 to-orange-600 text-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-wrap items-center justify-between py-2 gap-2">
-            {/* Left side - Store Info */}
-            <div className="hidden lg:flex items-center space-x-6 text-sm">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={goToStores}
-                className="flex items-center space-x-1 hover:text-yellow-300 transition-colors"
-              >
-                <FaStore className="text-sm" />
-                <span>STORES</span>
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={goToDelivery}
-                className="flex items-center space-x-1 hover:text-yellow-300 transition-colors"
-              >
-                <FaTruck className="text-sm" />
-                <span>DELIVERY</span>
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={goToGuarantee}
-                className="flex items-center space-x-1 hover:text-yellow-300 transition-colors"
-              >
-                <FaShieldAlt className="text-sm" />
-                <span>GUARANTEE</span>
-              </motion.button>
-
-              <div className="flex items-center gap-1">
-                <FaEnvelope className="text-yellow-300" />
-                <a href="mailto:info@example.com" className="hover:text-yellow-300 transition-colors">
-                  info@example.com
-                </a>
-              </div>
-            </div>
-
-            {/* Right side - Social, Currency, Language, Auth */}
-            <div className="flex items-center gap-3 sm:gap-4 text-sm">
-              {/* Social Icons */}
-              <div className="hidden sm:flex gap-2">
-                {[FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaPinterest].map((Icon, i) => (
-                  <motion.a
-                    key={i}
-                    href="#"
-                    className="p-2 bg-white/20 rounded-full hover:bg-white hover:text-red-600 transition-all duration-300"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <Icon />
-                  </motion.a>
-                ))}
-              </div>
-
-              {/* Auth Links */}
-              <div className="flex items-center gap-2">
-                <motion.button
-                  onClick={goToLoginPage}
-                  className="hover:text-yellow-300 transition-colors flex items-center gap-1"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <FaUser className="text-sm" />
-                  <span>Login</span>
-                </motion.button>
-                <span className="text-white/50">|</span>
-                <motion.button
-                  onClick={goToCreateAcc}
-                  className="hover:text-yellow-300 transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  Register
-                </motion.button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* ===== MAIN HEADER ===== */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
         {/* Logo & Departments */}
@@ -416,9 +307,7 @@ export const Header = () => {
           </motion.div>
 
           {/* Departments Menu - Commented out as per original */}
-          <div className="hidden lg:block">
-            {/* Departments menu code commented out */}
-          </div>
+         
         </div>
 
         {/* Search Bar with Category & Vehicle Selector */}
@@ -449,17 +338,6 @@ export const Header = () => {
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />
 
-          {/* Vehicle Selector Button */}
-          <motion.button
-            className="px-4 py-3 bg-gradient-to-r from-gray-50 to-gray-100 border-l border-gray-300 hover:from-gray-200 hover:to-gray-300 transition-all duration-300 flex items-center space-x-2"
-            onClick={() => setShowVehiclePicker(!showVehiclePicker)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaCar className="text-gray-600" />
-            <span className="hidden sm:block font-medium">Vehicle</span>
-          </motion.button>
-
           {/* Search Button */}
           <motion.button
             onClick={handleSearch}
@@ -473,95 +351,25 @@ export const Header = () => {
             <FaSearch />
           </motion.button>
 
-          {/* Vehicle Picker Dropdown */}
-          <AnimatePresence>
-            {showVehiclePicker && (
-              <motion.div
-                variants={dropdownVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 w-96"
-              >
-                <div className="p-4">
-                  <div className="flex items-center space-x-2 text-sm text-gray-600 mb-4">
-                    <IoSparkles className="text-yellow-500" />
-                    <span>Select a vehicle to find exact fit parts</span>
                   </div>
-                  <div className="space-y-2 max-h-60 overflow-y-auto">
-                    {vehicles.map((vehicle) => (
-                      <motion.label
-                        key={vehicle.id}
-                        className="flex items-center space-x-3 p-3 hover:bg-gradient-to-r hover:from-red-50 hover:to-purple-50 rounded-xl cursor-pointer transition-all duration-200"
+
+        {/* 360 Degree Upload Button */}
+        <motion.button
+          onClick={() => setShow360UploadModal(true)}
+          className="relative px-4 py-2.5 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 transition-all duration-200 flex items-center gap-2 text-gray-700"
                         whileHover={{ scale: 1.02 }}
-                      >
-                        <input
-                          type="radio"
-                          name="vehicle"
-                          value={vehicle.id}
-                          checked={currentVehicle === vehicle.id}
-                          onChange={(e) => setCurrentVehicle(e.target.value)}
-                          className="text-red-600 focus:ring-red-500"
-                        />
-                        <div className="flex-1">
-                          <div className="font-medium text-gray-800">{vehicle.name}</div>
-                          {vehicle.details && (
-                            <div className="text-sm text-gray-500">{vehicle.details}</div>
-                          )}
+          whileTap={{ scale: 0.98 }}
+          title="Upload  Image/Video"
+        >
+          <div className="relative">
+            <FaCamera className="text-lg text-gray-700" />
+            <span className="absolute -top-1 -right-1 text-xs font-bold text-gray-700">+</span>
                         </div>
-                        {vehicle.id && (
-                          <motion.button
-                            className="text-gray-400 hover:text-red-500 p-1"
-                            whileHover={{ scale: 1.2 }}
-                            whileTap={{ scale: 0.9 }}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M2 4V2h3V1h6v1h3v2H2zm11 9c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5h10v8z" />
-                            </svg>
-                          </motion.button>
-                        )}
-                      </motion.label>
-                    ))}
-                  </div>
-                  <div className="mt-4 flex justify-between items-center">
-                    <button className="text-red-600 text-sm hover:underline font-medium">
-                      Back to list
-                    </button>
-                    <motion.button
-                      className="bg-gradient-to-r from-red-600 to-purple-600 text-white px-6 py-2 rounded-xl hover:from-red-700 hover:to-purple-700 transition-all duration-300 shadow-lg"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Add Vehicle
+          <span className="text-sm font-medium">Upload Image/Video</span>
                     </motion.button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
 
         {/* User Actions */}
         <div className="flex items-center gap-4">
-          {/* Compare (for larger screens) */}
-          <motion.button
-            onClick={goToCompare}
-            className="hidden lg:flex items-center space-x-1 hover:text-red-500 transition-colors relative"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <MdCompare className="text-2xl text-red-900" />
-            <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
-              0
-            </span>
-          </motion.button>
-
           {/* Wishlist */}
           <motion.button
             onClick={goToWishlist}
@@ -594,73 +402,73 @@ export const Header = () => {
               {showAccountMenu && (
                 <motion.div
                   variants={dropdownVariants}
-                  initial="hidden"
+                  initial="hidden" 
                   animate="visible"
                   exit="exit"
                   className="absolute top-full right-0 mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 min-w-64"
                 >
                   <div className="p-4">
-                  <div className="space-y-4">
-                        <div className="flex items-center space-x-3 pb-3 border-b">
-                          <img
-                            src={mockUser.avatar}
-                            alt={mockUser.name}
-                            className="w-10 h-10 rounded-full"
-                          />
-                          <div>
-                            <div className="font-semibold text-gray-800">{mockUser.name}</div>
-                            <div className="text-sm text-gray-500">{mockUser.email}</div>
-                          </div>
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3 pb-3 border-b">
+                        <img
+                          src={mockUser.avatar}
+                          alt={mockUser.name}
+                          className="w-10 h-10 rounded-full"
+                        />
+                        <div>
+                          <div className="font-semibold text-gray-800">{mockUser.name}</div>
+                          <div className="text-sm text-gray-500">{mockUser.email}</div>
                         </div>
-                        
-                        <div className="space-y-2">
-                          <Link
-                            to="/myprofile"
-                            className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
-                          >
-                            <FaUser className="text-sm" />
-                            <span>My Profile</span>
-                          </Link>
-                          
-                          <Link
-                            to="/myorders"
-                            className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
-                          >
-                            <MdOutlineInventory className="text-sm" />
-                            <span>My Orders</span>
-                          </Link>
-                          
-                          <Link
-                            to="/mywishlist"
-                            className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
-                          >
-                            <FaHeart className="text-sm" />
-                            <span>My Wishlist</span>
-                          </Link>
-                          
-                          <Link
-                            to="/garage"
-                            className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
-                          >
-                            <FaCar className="text-sm" />
-                            <span>My Garage</span>
-                          </Link>
-                        </div>
-                        
-                        <motion.button
-                          onClick={() => {
-                            setIsLoggedIn(false);
-                            setShowAccountMenu(false);
-                          }}
-                          className="w-full flex items-center justify-center space-x-2 bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <FaSignOutAlt className="text-sm" />
-                          <span>Sign Out</span>
-                        </motion.button>
                       </div>
-                  
+
+                      <div className="space-y-2">
+                        <Link
+                          to="/myprofile"
+                          className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
+                        >
+                          <FaUser className="text-sm" />
+                          <span>My Profile</span>
+                        </Link>
+
+                        <Link
+                          to="/myorder"
+                          className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
+                        >
+                          <MdOutlineInventory className="text-sm" />
+                          <span>My Orders</span>
+                        </Link>
+
+                        <Link
+                          to="/mywishlist"
+                          className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
+                        >
+                          <FaHeart className="text-sm" />
+                          <span>My Wishlist</span>
+                        </Link>
+
+                        <Link
+                          to="/garage"
+                          className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
+                        >
+                          <FaCar className="text-sm" />
+                          <span>My Garage</span>
+                        </Link>
+                      </div>
+
+                      <motion.button
+                        onClick={() => {
+                          setIsLoggedIn(false);
+                          setShowAccountMenu(false);
+                        }}
+                        className="w-full flex items-center justify-center space-x-2 bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <FaSignOutAlt className="text-sm" />
+                        <span>Sign Out</span>
+                      </motion.button>
+                    </div>
+
                   </div>
                 </motion.div>
               )}
@@ -668,80 +476,20 @@ export const Header = () => {
           </div>
 
           {/* Cart */}
-          <div className="relative group">
             <motion.button
               onClick={goToCart}
-              className="relative"
+            className="relative cursor-pointer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <FaShoppingCart className="text-2xl text-red-900" />
-              <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
-                2
-              </span>
+              {getTotalItems() > 0 && (
+                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+                  {getTotalItems()}
+                </span>
+              )}
             </motion.button>
 
-            {/* Cart dropdown */}
-            <div className="absolute right-0 mt-3 bg-white rounded-2xl shadow-2xl w-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border z-50 transform group-hover:scale-100 scale-95">
-              <div className="p-4">
-                <div className="space-y-3">
-                  {[
-                    {
-                      name: "Brandix Spark Plug",
-                      price: "$19.00",
-                      qty: 1,
-                      image: "https://via.placeholder.com/60",
-                    },
-                    {
-                      name: "Brake Kit",
-                      price: "$224.00",
-                      qty: 1,
-                      image: "https://via.placeholder.com/60",
-                    },
-                  ].map((item, index) => (
-                    <motion.div
-                      key={index}
-                      className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded-lg transition-colors"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-12 h-12 rounded-lg object-cover"
-                      />
-                      <div className="flex-1">
-                        <div className="font-medium text-gray-800">{item.name}</div>
-                        <div className="text-sm text-gray-500">Qty: {item.qty}</div>
-                      </div>
-                      <div className="font-semibold text-gray-800">{item.price}</div>
-                    </motion.div>
-                  ))}
-                </div>
-                <div className="mt-4 border-t pt-3">
-                  <div className="flex justify-between text-sm text-gray-600 mb-3">
-                    <span>Total:</span>
-                    <span className="font-semibold text-gray-800">$243.00</span>
-                  </div>
-                  <div className="flex justify-between gap-2">
-                    <Link
-                      to="/cart"
-                      className="flex-1 bg-gray-200 text-sm px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors text-center font-medium"
-                    >
-                      View Cart
-                    </Link>
-                    <Link
-                      to="/checkout"
-                      className="flex-1 bg-gradient-to-r from-red-500 to-orange-500 text-white text-sm px-3 py-2 rounded-lg hover:from-red-600 hover:to-orange-600 transition-all duration-300 text-center font-medium shadow-lg"
-                    >
-                      Checkout
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           {/* Sidebar button */}
           <button
             onClick={() => setIsSidebarOpen(true)}
@@ -753,63 +501,159 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Main Navigation */}
-      <div
-        className={`hidden lg:flex items-center justify-center space-x-8 py-3 border-t
-           bg-gradient-to-r from-gray-50 to-red-50 transition-all duration-300
-            ${isScrolled ? "opacity-0 h-0 py-0 -mt-3 overflow-hidden" : "opacity-100 h-auto"
-          }`}
-      >
-        {mainMenu.map((item, index) => (
-          <div key={index} className="relative group">
-            <motion.button
-              className="flex items-center space-x-1 py-2 font-semibold text-gray-800 hover:text-red-600 transition-colors"
-              whileHover={{ y: -2 }}
-            >
-              <span>{item.name}</span>
-              <FaChevronDown className="text-xs" />
-
-            </motion.button>
-
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl z-40 min-w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <div className="py-2">
-                {item.submenu.map((subItem, subIndex) => (
-                  <div key={subIndex} className="relative group/sub">
-                    <Link
-                      to={subItem.href || "#"}
-                      className="flex items-center justify-between px-4 py-3 hover:bg-gradient-to-r hover:from-red-50 hover:to-purple-50 transition-all duration-200"
-                    >
-                      <span className="font-medium">{subItem.name}</span>
-                      {subItem.submenu && (
-                        <FaChevronRight className="text-xs text-gray-400 group-hover/sub:text-red-600" />
-                      )}
-                    </Link>
-
-                    {subItem.submenu && (
-                      <div className="absolute top-0 left-full ml-1 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 min-w-48 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300">
-                        <div className="py-2">
-                          {subItem.submenu.map((nestedItem, nestedIndex) => (
-                            <Link
-                              key={nestedIndex}
-                              to={nestedItem.href}
-                              className="block px-4 py-3 hover:bg-gradient-to-r hover:from-red-50 hover:to-purple-50 transition-all duration-200 font-medium"
-                            >
-                              {nestedItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
 
       {/* Sidebar */}
-      <Sider isOpen={isSidebarOpen} onClose={( ) => setIsSidebarOpen(false)} />
+      <Sider isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+      {/* 360 Degree Upload Modal */}
+      <AnimatePresence>
+        {show360UploadModal && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+              onClick={() => setShow360UploadModal(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="p-6">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-bold text-gray-900">Upload 360° Content</h2>
+                    <button
+                      onClick={() => setShow360UploadModal(false)}
+                      className="text-gray-400 hover:text-gray-600 transition-colors"
+            >
+                      <FaTimes className="text-xl" />
+                    </button>
+                  </div>
+
+                  {/* Type Selection */}
+                  <div className="flex gap-4 mb-6">
+                    <button
+                      onClick={() => setUploadType('photo')}
+                      className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+                        uploadType === 'photo'
+                          ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      <FaCamera className="inline-block mr-2" />
+                       Image
+                    </button>
+                    <button
+                      onClick={() => setUploadType('video')}
+                      className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+                        uploadType === 'video'
+                          ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      <FaVideo className="inline-block mr-2" />
+                      360° Video
+                    </button>
+                  </div>
+
+                  {/* Upload Area */}
+                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-purple-500 transition-colors mb-6">
+                    <div className="flex flex-col items-center">
+                      {uploadType === 'photo' ? (
+                        <FaCamera className="text-5xl text-gray-400 mb-4" />
+                      ) : (
+                        <FaVideo className="text-5xl text-gray-400 mb-4" />
+                      )}
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                        Upload {uploadType === 'photo' ? ' Image' : '360° Video'}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-4">
+                        Drag and drop your {uploadType === 'photo' ? 'photo' : 'video'} here, or click to browse
+                      </p>
+                      <input
+                        type="file"
+                        accept={uploadType === 'photo' ? 'image/*' : 'video/*'}
+                        className="hidden"
+                        id="360-upload-input"
+                        multiple
+                      />
+                      <label
+                        htmlFor="360-upload-input"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all cursor-pointer"
+                            >
+                        <FaUpload />
+                        <span>Choose File</span>
+                      </label>
+                      <p className="text-xs text-gray-500 mt-3">
+                        Supported formats: {uploadType === 'photo' ? 'JPG, PNG, HEIC' : 'MP4, MOV, AVI'} (Max 100MB)
+                      </p>
+                        </div>
+                      </div>
+
+                  {/* Additional Options */}
+                  <div className="space-y-4 mb-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Title
+                      </label>
+                      <input
+                        type="text"
+                        placeholder={`Enter ${uploadType === 'photo' ? 'photo' : 'video'} title...`}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Description (Optional)
+                      </label>
+                      <textarea
+                        rows="3"
+                        placeholder="Add a description..."
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Tags (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g., car, parts, review"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-4">
+                    <button
+                      onClick={() => setShow360UploadModal(false)}
+                      className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={() => {
+                        // Handle upload logic here
+                        alert(`${uploadType === 'photo' ? 'Photo' : 'Video'} upload functionality will be implemented`);
+                        setShow360UploadModal(false);
+                      }}
+                      className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all font-medium shadow-lg"
+                    >
+                      Upload {uploadType === 'photo' ? 'Photo' : 'Video'}
+                    </button>
+              </div>
+            </div>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 };

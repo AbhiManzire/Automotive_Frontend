@@ -1,19 +1,29 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import './App.css';
+import { CartProvider } from './contexts/CartContext';
+import { VehicleProvider } from './contexts/VehicleContext';
+import { JobProvider } from './contexts/JobContext';
+import { EscrowProvider } from './contexts/EscrowContext';
 
 import Header from './component/Header';
 import Footer from "./component/Footer";
-import { AuthProvider } from './auth/AuthContext';
-import { CartProvider } from './features/cart/CartContext';
+import BottomNavigation from './component/BottomNavigation';
+import { AuthProvider, USER_ROLES } from './auth/AuthContext';
 import ProtectedRoute from './auth/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import EnhancedLogin from './auth/EnhancedLogin';
+import SuperAdminDashboard from './component/dashboards/admin/SuperAdminDashboard';
+import VendorDashboard from './component/dashboards/vendor/VendorDashboard';
+import MechanicsDashboard from './component/dashboards/mechanics/MechanicsDashboard';
+import GarageDashboard from './component/dashboards/garage/GarageDashboard';
+import ShippingDashboard from './component/dashboards/shipping/ShippingDashboard';
 import DiagnosticForm from './features/diagnostics/DiagnosticForm';
 import ChatbotSupport from './features/support/ChatbotSupport';
 
-import { Navbar } from './component/Navbar';
 import Cart from './component/Cart';
+import ShippingAddress from './component/checkout/ShippingAddress';
+import Review from './component/checkout/Review';
+import Payment from './component/checkout/Payment';
 import { BoodmoUi } from './component/BoodmoUi';
 import CurrentOffers from './component/CurrentOffers';
 import SearchSection from "./component/SearchSection";
@@ -35,7 +45,11 @@ import SearchByCategory from "./component/SearchByCategory";
 import WhyChooseAftermarket from "./component/WhyChooseAftermarket";
 import PartSearchResults from "./component/PartSearchResults";
 import VehicleSearchResults from "./component/VehicleSearchResults";
+import ProductDetail from "./component/ProductDetail";
 import OEMCatalogue from "./component/catalogue/OEMCatalogue";
+import ServiceBooking from "./component/service/ServiceBooking";
+import JobDetails from "./component/service/JobDetails";
+import VehicleJobCard from "./component/service/VehicleJobCard";
 import SpareloPage from "./component/SpareloPage";
 import CatalogPage from "./component/catalogue/CataloguePage";
 import VehicleMaker from "./component/Vehicles/VehicleMaker";
@@ -99,13 +113,26 @@ import ReturnPolicy from "./features/support/ReturnPolicy";
 // Component to conditionally render Header/Footer
 const Layout = ({ children }) => {
   const location = useLocation();
-  const hideHeaderFooter = ["/login", "/signup", "/forgot-password"].includes(location.pathname);
+  const hideHeaderFooter = [
+    "/login", 
+    "/signup", 
+    "/forgot-password",
+    "/admin/dashboard",
+    "/vendor/dashboard",
+    "/mechanics/dashboard",
+    "/garage/dashboard",
+    "/shipping/dashboard"
+  ].includes(location.pathname) || location.pathname.startsWith("/admin/") || 
+    location.pathname.startsWith("/vendor/") || location.pathname.startsWith("/mechanics/") ||
+    location.pathname.startsWith("/garage/") || location.pathname.startsWith("/shipping/");
+  const hideFooter = hideHeaderFooter || location.pathname.startsWith("/checkout") || location.pathname === "/cart";
   return (
     <>
       {!hideHeaderFooter && <Header />}
       {children}
       <ToastContainer />
-      {!hideHeaderFooter && <Footer />}
+      {!hideHeaderFooter && <BottomNavigation />}
+      {!hideFooter && <Footer />}
       {!hideHeaderFooter && <ChatbotSupport />}
     </>
   );
@@ -114,8 +141,11 @@ const Layout = ({ children }) => {
 function App() {
   return (
     <AuthProvider>
-      <CartProvider>
-        <Router>
+      <VehicleProvider>
+        <JobProvider>
+          <EscrowProvider>
+            <CartProvider>
+              <Router>
           <Layout>
             <Routes>
           {/* Home Page */}
@@ -139,15 +169,60 @@ function App() {
           />
 
           {/* Authentication Pages */}
-          <Route path="/login" element={<EnhancedLogin />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/signup" element={<Signup />} />
+
+          {/* Dashboard Routes - Protected */}
+          <Route 
+            path="/admin/dashboard/*" 
+            element={
+              <ProtectedRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
+                <SuperAdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/vendor/dashboard/*" 
+            element={
+              <ProtectedRoute allowedRoles={[USER_ROLES.VENDOR]}>
+                <VendorDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/mechanics/dashboard/*" 
+            element={
+              <ProtectedRoute allowedRoles={[USER_ROLES.MECHANICS]}>
+                <MechanicsDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/garage/dashboard/*" 
+            element={
+              <ProtectedRoute allowedRoles={[USER_ROLES.GARAGE]}>
+                <GarageDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/shipping/dashboard/*" 
+            element={
+              <ProtectedRoute allowedRoles={[USER_ROLES.SHIPPING]}>
+                <ShippingDashboard />
+              </ProtectedRoute>
+            } 
+          />
 
           {/* Other Pages */}
           <Route path="/contact" element={<Contact />} />
           <Route path="/vendor" element={<VendorPage />} />
           <Route path="/brands" element={<Brands />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout/address" element={<ShippingAddress />} />
+          <Route path="/checkout/review" element={<Review />} />
+          <Route path="/checkout/payment" element={<Payment />} />
           <Route path="/category" element={<SearchByCategory />} />
           <Route path="/garage" element={<Garage />} />
           <Route path="/document" element={<Document />} />
@@ -218,14 +293,26 @@ function App() {
           {/* Redirect landing after Oriparts back_url_pn */}
           <Route path="/search/:pn" element={<PartSearchResults />} />
 
+          {/* Product detail page for back_url_id */}
+          <Route path="/catalog/part-p-:itemId" element={<ProductDetail />} />
+          <Route path="/catalog/part-p-:itemId/" element={<ProductDetail />} />
+
           {/* Vehicle-based search landing */}
           <Route path="/vehicle-search" element={<VehicleSearchResults />} />
           <Route path="/oem-catalogue" element={<OEMCatalogue />} />
           <Route path="/vehicles" element={<VehicleMaker />} />
+
+          {/* Service Booking */}
+          <Route path="/service/booking" element={<ServiceBooking />} />
+          <Route path="/service/job/:jobId" element={<JobDetails />} />
+          <Route path="/service/job/:jobId/jobcard" element={<VehicleJobCard />} />
         </Routes>
       </Layout>
-        </Router>
+      </Router>
       </CartProvider>
+          </EscrowProvider>
+        </JobProvider>
+      </VehicleProvider>
     </AuthProvider>
   );
 }

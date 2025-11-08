@@ -3,10 +3,10 @@ import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
 import mahindra1logo from "../../assets/img/vehicle-img/mahindra1-logo.png";
 import mahiBanner from "../../assets/img/vehicle-img/mahibanner.jpg";
 import Article_Review from "../Article_Review";
+import { getOriPartsLink } from "../../utils/oripartsBackUrl";
 
 export const Mahindra = () => {
-  const link =
-    "https://oriparts.com/4?back_url_id=https%3A%2F%2Fboodmo.com%2Fcatalog%2Fpart-p-%7Bitem_id%7D%2F&back_url_pn=https%3A%2F%2Fboodmo.com%2Fsearch%2F%7Bpn%7D%2F";
+  const link = getOriPartsLink(4, "MAHINDRA");
 
   const [filter, setFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
