@@ -1,27 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   FaCar,
   FaHeart,
   FaShoppingCart,
   FaSearch,
   FaChevronDown,
-  FaChevronRight,
-  FaBars,
-  FaUser,
-  FaEnvelope,
-  FaPhone,
-  FaTruck,
-  FaShieldAlt,
-  FaStore,
-  FaSignOutAlt,
   FaCamera,
   FaVideo,
   FaTimes,
   FaUpload,
 } from "react-icons/fa";
-import { MdAccountCircle, MdCompare, MdLanguage, MdOutlineInventory } from "react-icons/md";
-import { IoReorderThreeOutline, IoSparkles } from "react-icons/io5";
+import { IoReorderThreeOutline } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import logo3 from "./logo3.png";
 import { Sider } from "./Sider";
@@ -29,28 +19,14 @@ import { useCart } from '../contexts/CartContext';
 
 export const Header = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [headerPN, setHeaderPN] = useState("");
-  const { getTotalItems, cartItems, getTotalPrice } = useCart();
+  const { getTotalItems } = useCart();
   const [selectedCategory, setSelectedCategory] = useState("0");
-  const [showCurrencyMenu, setShowCurrencyMenu] = useState(false);
-  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
-  const [showDepartmentsMenu, setShowDepartmentsMenu] = useState(false);
-  const [showAccountMenu, setShowAccountMenu] = useState(false);
-  const [showCartMenu, setShowCartMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [show360UploadModal, setShow360UploadModal] = useState(false);
   const [uploadType, setUploadType] = useState('photo'); // 'photo' or 'video'
 
-  // Mock user state - replace with your actual auth context
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const mockUser = {
-    name: "John Doe",
-    email: "john@example.com",
-    avatar: "https://via.placeholder.com/40",
-    role: "Customer"
-  };
 
   // Scroll effect for header
   useEffect(() => {
@@ -60,19 +36,6 @@ export const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const departments = [
-    { name: 'Categories', hasSubmenu: true, href: '/category', icon: '📁' },
-    { name: 'OEM Catalog', hasSubmenu: true, href: '/catalog', icon: '🔧' },
-    { name: 'Car Makers', hasSubmenu: true, href: '/vehicles', icon: '🚗' },
-    { name: 'Brands', hasSubmenu: true, href: '/brands', icon: '🏷️' },
-    { name: 'Cart', href: '/cart', icon: '🛒' },
-    { name: 'Checkout', href: '/checkout', icon: '💳' },
-    { name: 'Order Success', href: '/order-success', icon: '✅' },
-    { name: 'Wishlist', href: '/mywishlist', icon: '❤️' },
-    { name: 'Compare', href: '/compare', icon: '⚖️' },
-    { name: 'Track Order', href: '/track-order', icon: '📦' }
-  ];
 
   const categories = [
     { value: "0", label: "All Categories", href: "/category" },
@@ -130,22 +93,6 @@ export const Header = () => {
   const goToWishlist = () => navigate("/mywishlist");
   const goToCart = () => navigate("/cart");
   const goToHomePage = () => navigate("/");
-  const goToLoginPage = () => navigate("/login");
-  const goToCreateAcc = () => navigate("/signup");
-  
-  
-  // Animation variants
-  const dropdownVariants = {
-    hidden: { opacity: 0, y: -10, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.2, ease: "easeOut" } },
-    exit: { opacity: 0, y: -10, scale: 0.95, transition: { duration: 0.15 } }
-  };
-
-  const slideInVariants = {
-    hidden: { x: "100%" },
-    visible: { x: 0, transition: { duration: 0.3, ease: "easeOut" } },
-    exit: { x: "100%", transition: { duration: 0.3, ease: "easeIn" } }
-  };
 
   return (
     <motion.header
@@ -169,8 +116,6 @@ export const Header = () => {
             />
           </motion.div>
 
-          {/* Departments Menu - Commented out as per original */}
-         
         </div>
 
         {/* Search Bar with Category & Vehicle Selector */}
@@ -246,97 +191,6 @@ export const Header = () => {
             </span>
           </motion.button>
 
-          {/* Account */}
-          <div className="relative">
-            <motion.button
-              className="flex items-center space-x-2 hover:text-red-600 transition-colors"
-              onClick={() => setShowAccountMenu(!showAccountMenu)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <MdAccountCircle className="text-2xl text-red-900" />
-              <div className="hidden sm:block text-left">
-                <div className="text-xs text-gray-500"> Hello </div>
-                <div className="text-sm font-semibold"> My Account</div>
-              </div>
-            </motion.button>
-
-            <AnimatePresence>
-              {showAccountMenu && (
-                <motion.div
-                  variants={dropdownVariants}
-                  initial="hidden" 
-                  animate="visible"
-                  exit="exit"
-                  className="absolute top-full right-0 mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 min-w-64"
-                >
-                  <div className="p-4">
-                    <div className="space-y-4">
-                      <div className="flex items-center space-x-3 pb-3 border-b">
-                        <img
-                          src={mockUser.avatar}
-                          alt={mockUser.name}
-                          className="w-10 h-10 rounded-full"
-                        />
-                        <div>
-                          <div className="font-semibold text-gray-800">{mockUser.name}</div>
-                          <div className="text-sm text-gray-500">{mockUser.email}</div>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Link
-                          to="/myprofile"
-                          className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
-                        >
-                          <FaUser className="text-sm text-red-900" />
-                          <span>My Profile</span>
-                        </Link>
-
-                        <Link
-                          to="/myorder"
-                          className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
-                        >
-                          <MdOutlineInventory className="text-sm text-blue-900" />
-                          <span>My Orders</span>
-                        </Link>
-
-                        <Link
-                          to="/mywishlist"
-                          className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
-                        >
-                          <FaHeart className="text-sm text-blue-900" />
-                          <span>My Wishlist</span>
-                        </Link>
-
-                        <Link
-                          to="/garage"
-                          className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
-                        >
-                          <FaCar className="text-sm text-blue-900" />
-                          <span>My Garage</span>  
-                        </Link>
-                      </div>
-
-                      <motion.button
-                        onClick={() => {
-                          setIsLoggedIn(false);
-                          setShowAccountMenu(false);
-                        }}
-                        className="w-full flex items-center justify-center space-x-2 bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <FaSignOutAlt className="text-sm" />
-                        <span>Sign Out</span>
-                      </motion.button>
-                    </div>
-
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
 
           {/* Cart */}
             <motion.button

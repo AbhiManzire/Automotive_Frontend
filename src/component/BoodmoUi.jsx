@@ -365,7 +365,7 @@ export const BoodmoUi = () => {
         <div className="relative z-10 w-full max-w-6xl px-6 md:px-8 text-center text-white">
           {/* Main Heading */}
           <h1 className="text-2xl md:text-4xl mb-4 text-white font-semibold">
-            Find Genuine Find Genuine  <span className="text-red-400">OEM</span> & <br />
+            Find Genuine <span className="text-red-400">OEM</span> & <br />
             <span className="text-blue-400">Aftermarket</span> Auto Parts
           </h1>
           

@@ -10,12 +10,29 @@ import {
   FaBlog,
   FaUser,
   FaFileAlt,
+  FaSignOutAlt,
 } from 'react-icons/fa';
 
 const BottomNavigation = () => {
   const location = useLocation();
   const [activeMenu, setActiveMenu] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  
+  // Mock user state - replace with your actual auth context
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const mockUser = {
+    name: "John Doe",
+    email: "john@example.com",
+    avatar: "https://via.placeholder.com/40",
+    role: "Customer"
+  };
+
+  // Animation variants for account dropdown (moved from Header.jsx)
+  const dropdownVariants = {
+    hidden: { opacity: 0, y: 10, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.2, ease: "easeOut" } },
+    exit: { opacity: 0, y: 10, scale: 0.95, transition: { duration: 0.15 } }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -158,7 +175,8 @@ const BottomNavigation = () => {
         { name: 'Order Details', href: '/cart' },
         { name: 'Address Book', href: '/addresses' },
         { name: 'Edit Address', href: '/myaddresses' },
-      ]
+      ],
+      showUserInfo: true, // Flag to show user profile section
     },
     {
       name: 'Pages',
@@ -210,14 +228,32 @@ const BottomNavigation = () => {
                   <AnimatePresence>
                     {activeMenu === index && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
+                        variants={item.showUserInfo ? dropdownVariants : undefined}
+                        initial={item.showUserInfo ? "hidden" : { opacity: 0, y: 10 }}
+                        animate={item.showUserInfo ? "visible" : { opacity: 1, y: 0 }}
+                        exit={item.showUserInfo ? "exit" : { opacity: 0, y: 10 }}
+                        transition={item.showUserInfo ? undefined : { duration: 0.2 }}
                         className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 bg-white border border-gray-200 rounded-2xl shadow-2xl z-40 min-w-56 max-h-96 overflow-y-auto"
                         onClick={(e) => e.stopPropagation()}
                       >
                         <div className="py-2">
+                          {/* User Profile Section for Account Menu */}
+                          {item.showUserInfo && (
+                            <>
+                              <div className="flex items-center space-x-3 px-4 py-3 pb-3 mb-2 border-b border-gray-200">
+                                <img
+                                  src={mockUser.avatar}
+                                  alt={mockUser.name}
+                                  className="w-10 h-10 rounded-full"
+                                />
+                                <div>
+                                  <div className="font-semibold text-gray-800 text-sm">{mockUser.name}</div>
+                                  <div className="text-xs text-gray-500">{mockUser.email}</div>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                          
                           {item.submenu.map((subItem, subIndex) => (
                             <div key={subIndex} className="relative group/sub">
                               <Link
@@ -249,6 +285,24 @@ const BottomNavigation = () => {
                               )}
                             </div>
                           ))}
+                          
+                          {/* Sign Out Button for Account Menu */}
+                          {item.showUserInfo && (
+                            <div className="pt-2 mt-2 border-t border-gray-200">
+                              <motion.button
+                                onClick={() => {
+                                  setIsLoggedIn(false);
+                                  setActiveMenu(null);
+                                }}
+                                className="w-full flex items-center justify-center space-x-2 bg-gray-100 text-gray-700 py-2.5 mx-4 rounded-lg hover:bg-gray-200 transition-colors"
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                              >
+                                <FaSignOutAlt className="text-sm" />
+                                <span className="font-medium text-sm">Sign Out</span>
+                              </motion.button>
+                            </div>
+                          )}
                         </div>
                       </motion.div>
                     )}
@@ -311,6 +365,21 @@ const BottomNavigation = () => {
                               <FaChevronUp />
                             </button>
                           </div>
+                          {/* User Profile Section for Account Menu (Mobile) */}
+                          {item.showUserInfo && (
+                            <div className="flex items-center space-x-3 px-4 py-3 mb-3 bg-gray-50 rounded-lg">
+                              <img
+                                src={mockUser.avatar}
+                                alt={mockUser.name}
+                                className="w-12 h-12 rounded-full"
+                              />
+                              <div>
+                                <div className="font-semibold text-gray-800">{mockUser.name}</div>
+                                <div className="text-sm text-gray-500">{mockUser.email}</div>
+                              </div>
+                            </div>
+                          )}
+                          
                           <div className="space-y-1">
                             {item.submenu.map((subItem, subIndex) => (
                               <div key={subIndex}>
@@ -344,6 +413,24 @@ const BottomNavigation = () => {
                               </div>
                             ))}
                           </div>
+                          
+                          {/* Sign Out Button for Account Menu (Mobile) */}
+                          {item.showUserInfo && (
+                            <div className="pt-3 mt-3 border-t border-gray-200">
+                              <motion.button
+                                onClick={() => {
+                                  setIsLoggedIn(false);
+                                  setActiveMenu(null);
+                                }}
+                                className="w-full flex items-center justify-center space-x-2 bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 transition-colors"
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                              >
+                                <FaSignOutAlt className="text-sm" />
+                                <span className="font-medium">Sign Out</span>
+                              </motion.button>
+                            </div>
+                          )}
                         </div>
                       </motion.div>
                     </>
