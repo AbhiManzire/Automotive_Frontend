@@ -4,6 +4,7 @@ import { useVehicle } from '../contexts/VehicleContext'
 import { FaEdit, FaTrash, FaPlus, FaTimes } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { getVehicleImageUrl } from '../data/vehicleData'
+import { SearchSection } from './BoodmoUi'
 
 export const Garage = () => {
   const { vehicles, removeVehicle } = useVehicle();
@@ -162,7 +163,7 @@ export const Garage = () => {
                 </div>
                 <button 
                   onClick={() => handleOpenServiceKit(vehicle)}
-                  className="w-full border-2 border-blue-400 text-blue-600 py-1.5 rounded-lg text-xs font-semibold hover:bg-blue-50 transition-colors uppercase"
+                  className="w-full border-2 border-gray-400 text-gray-600 py-1.5 rounded-md text-xs font-semibold hover:bg-blue-50 transition-colors uppercase"
                 >
                   OPEN SERVICE KIT
                 </button>
@@ -183,7 +184,7 @@ export const Garage = () => {
         </div>
       )}
 
-      {/* Add Car Modal */}
+      {/* Add/Edit Car Modal */}
       {showAddModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-blur-sm">
           <div className="bg-white rounded-lg p-6 w-[90%] md:w-[50%] lg:w-[30%] shadow-2xl relative max-h-[90vh] overflow-y-auto">
@@ -196,19 +197,13 @@ export const Garage = () => {
             >
               ✖
             </button>
-            {/* You can integrate the SearchSection component here or create a separate add vehicle form */}
-            <div className="text-center py-8">
-              <p className="text-gray-600 mb-4">Click "ADD CAR TO MY GARAGE" button on homepage to add vehicles</p>
-              <button
-                onClick={() => {
-                  setShowAddModal(false);
-                  window.location.href = '/';
-                }}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg"
-              >
-                Go to Homepage
-              </button>
-            </div>
+            <SearchSection 
+              onClose={() => {
+                setShowAddModal(false);
+                setEditingVehicle(null);
+              }}
+              initialVehicle={editingVehicle}
+            />
           </div>
         </div>
       )}
@@ -220,7 +215,7 @@ export const Garage = () => {
             {/* Close Button */}
             <button
               onClick={() => setSelectedVehicleForServiceKit(null)}
-              className="absolute top-4 right-4 text-blue-800 hover:text-blue-600 text-xl font-bold transition-colors"
+              className="absolute top-4 right-4 text-gray-800 hover:text-red-600 text-xl font-bold transition-colors"
             >
               <FaTimes className="text-2xl" />
             </button>
@@ -240,14 +235,14 @@ export const Garage = () => {
             <div className="space-y-4">
               <button
                 onClick={handleOemServiceKit}
-                className="w-full bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 px-6 rounded-lg text-lg transition-all shadow-md hover:shadow-lg transform hover:scale-[1.02]"
+                className="w-full bg-red-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 px-6 rounded-lg text-lg transition-all shadow-md hover:shadow-lg transform hover:scale-[1.02]"
               >
                 OEM SERVICE KIT
               </button>
               
               <button
                 onClick={handleAftermarketServiceKit}
-                className="w-full bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 px-6 rounded-lg text-lg transition-all shadow-md hover:shadow-lg transform hover:scale-[1.02]"
+                className="w-full bg-red-100 hover:bg-blue-200 text-blue-700 font-semibold py-4 px-6 rounded-lg text-lg transition-all shadow-md hover:shadow-lg transform hover:scale-[1.02]"
               >
                 AFTERMARKET SERVICE KIT
               </button>

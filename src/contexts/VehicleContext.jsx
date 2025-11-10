@@ -89,6 +89,14 @@ export const VehicleProvider = ({ children }) => {
     setVehicles(prev => prev.filter(v => v.id !== vehicleId));
   }, []);
 
+  const updateVehicle = useCallback((vehicleId, vehicleData) => {
+    setVehicles(prev => prev.map(v => 
+      v.id === vehicleId 
+        ? { ...v, ...vehicleData, updatedAt: new Date().toISOString() }
+        : v
+    ));
+  }, []);
+
   const lookupByRegistration = useCallback((regNumber) => {
     return vehicles.find(v => 
       v.registrationNumber?.toUpperCase() === regNumber.toUpperCase()
@@ -153,6 +161,7 @@ export const VehicleProvider = ({ children }) => {
     partsDatabase,
     addVehicle,
     removeVehicle,
+    updateVehicle,
     lookupByRegistration,
     lookupByVIN,
     searchByFilters,

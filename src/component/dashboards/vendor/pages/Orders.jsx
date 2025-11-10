@@ -4,8 +4,8 @@ import { FaEye, FaFilter, FaDownload } from 'react-icons/fa';
 const Orders = ({ recentOrders }) => {
   return (
     <div>
-       {/* Orders Summary */}
-       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      {/* Orders Summary */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg p-4 border border-gray-200">
           <p className="text-sm text-gray-600 mb-1">Pending</p>
           <p className="text-2xl font-bold text-orange-600">
@@ -63,19 +63,17 @@ const Orders = ({ recentOrders }) => {
                 <td className="px-4 py-3 text-sm font-semibold text-gray-900">₹{order.amount.toLocaleString()}</td>
                 <td className="px-4 py-3 text-sm text-gray-600">{order.items}</td>
                 <td className="px-4 py-3">
-                  <span className={`px-2 py-1 text-xs rounded-full ${
-                    order.status === 'Delivered' ? 'bg-green-100 text-green-800' :
-                    order.status === 'Shipped' ? 'bg-blue-100 text-blue-800' :
-                    order.status === 'Processing' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-gray-100 text-gray-800'
-                  }`}>
+                  <span className={`px-2 py-1 text-xs rounded-full ${order.status === 'Delivered' ? 'bg-green-100 text-green-800' :
+                      order.status === 'Shipped' ? 'bg-blue-100 text-blue-800' :
+                        order.status === 'Processing' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-gray-100 text-gray-800'
+                    }`}>
                     {order.status}
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className={`px-2 py-1 text-xs rounded-full ${
-                    order.payment === 'Paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                  }`}>
+                  <span className={`px-2 py-1 text-xs rounded-full ${order.payment === 'Paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                    }`}>
                     {order.payment}
                   </span>
                 </td>

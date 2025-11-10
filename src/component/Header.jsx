@@ -107,140 +107,6 @@ export const Header = () => {
     { value: "29", label: "Windscreen Cleaning System", href: "/catalog/windscreen_cleaning_system/" }
   ];
 
-  const mainMenu = [
-    {
-      name: 'Home',
-      submenu: [
-        { name: 'Home One', href: '/' },
-        { name: 'Home Two', href: '/home-two' },
-        {
-          name: 'Header Spaceship',
-          submenu: [
-            { name: 'Variant One', href: '/header-spaceship-one' },
-            { name: 'Variant Two', href: '/header-spaceship-two' },
-            { name: 'Variant Three', href: '/header-spaceship-three' }
-          ]
-        },
-        {
-          name: 'Header Classic',
-          submenu: [
-            { name: 'Variant One', href: '/header-classic-one' },
-            { name: 'Variant Two', href: '/header-classic-two' },
-            { name: 'Variant Three', href: '/header-classic-three' },
-           
-          ]
-        },
-        {
-          name: 'Mobile Header',
-          submenu: [
-            { name: 'Variant One', href: '/mobile-header-one' },
-            { name: 'Variant Two', href: '/mobile-header-two' }
-          ]
-        }
-      ]
-    },
-    {
-      name: 'Shop',
-      submenu: [
-        {
-          name: 'Category',
-          submenu: [
-            { name: "Air Conditioning", href: "/catalog/air_conditioning/" },
-            { name: "Bearings", href: "/catalog/bearings/" },
-            { name: "Belts Chains And Rollers", href: "/catalog/drive_belts/" },
-            { name: "Body", href: "/catalog/body/" },
-            { name: "Brake System", href: "/catalog/brakes/" },
-            { name: "Car Accessories", href: "/catalog/car_accessories/" },
-          
-          ]
-        },
-        {
-          name: 'Shop Grid',
-          submenu: [
-            { name: '6 Columns Full', href: '/shop-grid-6-full' },
-            { name: '5 Columns Full', href: '/shop-grid-5-full' },
-            { name: '4 Columns Full', href: '/shop-grid-4-full' },
-         
-          ]
-        },
-        { name: 'Shop List', href: '/shop-list' },
-        { name: 'Shop Table', href: '/shop-table' },
-        { name: 'Shop Right Sidebar', href: '/shop-right-sidebar' },
-        {
-          name: 'Shop Navigation',
-          submenu: [
-            { name: 'Cursor-Based', href: '/shop-cursor-navigation' },
-            { name: 'Page-Based', href: '/shop-page-navigation' }
-          ]
-        },
-        {
-          name: 'Product',
-          submenu: [
-            { name: 'Full Width', href: '/product-full' },
-            { name: 'Left Sidebar', href: '/product-sidebar' }
-          ]
-        },
-      ]
-    },
-    {
-      name: 'Blog',
-      submenu: [
-        {
-          name: 'Blog Classic',
-          submenu: [
-            { name: 'Left Sidebar', href: '/blog-classic-left' },
-            { name: 'Right Sidebar', href: '/blog-classic-right' }
-          ]
-        },
-        {
-          name: 'Blog List',
-          submenu: [
-            { name: 'Left Sidebar', href: '/blog-list-left' },
-            { name: 'Right Sidebar', href: '/blog-list-right' }
-          ]
-        },
-        {
-          name: 'Blog Grid',
-          submenu: [
-            { name: 'Left Sidebar', href: '/blog-grid-left' },
-            { name: 'Right Sidebar', href: '/blog-grid-right' }
-          ]
-        },
-        {
-          name: 'Post Page',
-          submenu: [
-            { name: 'Full Width', href: '/post-full-width' },
-            { name: 'Left Sidebar', href: '/post-left-sidebar' },
-            { name: 'Right Sidebar', href: '/post-right-sidebar' }
-          ]
-        },
-        { name: 'Post Without Image', href: '/post-without-image' }
-      ]
-    },
-    {
-      name: 'Account',
-      submenu: [
-        { name: 'Edit Profile', href: '/myprofile' },
-        { name: 'Dashboard', href: '/account/dashboard' },
-        { name: 'Garage', href: '/garage' },
-        { name: 'Order Details', href: '/cart' },
-        { name: 'Address Book', href: '/addresses' },
-        { name: 'Edit Address', href: '/myaddresses' },
-        
-      ]
-    },
-    {
-      name: 'Pages',
-      submenu: [
-        { name: 'About Us', href: '/about-us' },
-        { name: 'Contact Us ', href: '/contact' },
-        { name: 'Terms And Conditions', href: '/terms' },
-        { name: 'FAQ', href: '/faq' },
-        { name: 'Components', href: '/components' },
-      ]
-    }
-  ];
-
   // Navigation handlers
   const handleSelectChange = (e) => {
     const href = e.target.selectedOptions[0].getAttribute("data-href");
@@ -266,11 +132,8 @@ export const Header = () => {
   const goToHomePage = () => navigate("/");
   const goToLoginPage = () => navigate("/login");
   const goToCreateAcc = () => navigate("/signup");
-  const goToCompare = () => navigate("/compare");
-  const goToStores = () => navigate("/shop");
-  const goToDelivery = () => navigate("/cart");
-  const goToGuarantee = () => navigate("/privacy-policy");
-
+  
+  
   // Animation variants
   const dropdownVariants = {
     hidden: { opacity: 0, y: -10, scale: 0.95 },
@@ -341,7 +204,7 @@ export const Header = () => {
           {/* Search Button */}
           <motion.button
             onClick={handleSearch}
-            className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-4 hover:from-red-600 hover:to-orange-600 transition-all duration-300 flex items-center justify-center shadow-lg"
+            className="bg-gradient-to-r from-red-500 to-orange-500 text-gray-700 px-6 py-4 hover:from-red-600 hover:to-orange-600 transition-all duration-300 flex items-center justify-center shadow-lg"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 10px 25px -5px rgba(239, 68, 68, 0.4)",
@@ -362,7 +225,7 @@ export const Header = () => {
           title="Upload  Image/Video"
         >
           <div className="relative">
-            <FaCamera className="text-lg text-gray-700" />
+            <FaCamera className="text-lg text-red-700" />
             <span className="absolute -top-1 -right-1 text-xs font-bold text-gray-700">+</span>
                         </div>
           <span className="text-sm font-medium">Upload Image/Video</span>
@@ -378,7 +241,7 @@ export const Header = () => {
             whileTap={{ scale: 0.9 }}
           >
             <FaHeart className="text-2xl text-red-900" />
-            <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+            <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-gray-700 text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
               0
             </span>
           </motion.button>
@@ -426,7 +289,7 @@ export const Header = () => {
                           to="/myprofile"
                           className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
                         >
-                          <FaUser className="text-sm" />
+                          <FaUser className="text-sm text-red-900" />
                           <span>My Profile</span>
                         </Link>
 
@@ -434,7 +297,7 @@ export const Header = () => {
                           to="/myorder"
                           className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
                         >
-                          <MdOutlineInventory className="text-sm" />
+                          <MdOutlineInventory className="text-sm text-blue-900" />
                           <span>My Orders</span>
                         </Link>
 
@@ -442,7 +305,7 @@ export const Header = () => {
                           to="/mywishlist"
                           className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
                         >
-                          <FaHeart className="text-sm" />
+                          <FaHeart className="text-sm text-blue-900" />
                           <span>My Wishlist</span>
                         </Link>
 
@@ -450,8 +313,8 @@ export const Header = () => {
                           to="/garage"
                           className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors py-2"
                         >
-                          <FaCar className="text-sm" />
-                          <span>My Garage</span>
+                          <FaCar className="text-sm text-blue-900" />
+                          <span>My Garage</span>  
                         </Link>
                       </div>
 
@@ -484,7 +347,7 @@ export const Header = () => {
             >
               <FaShoppingCart className="text-2xl text-red-900" />
               {getTotalItems() > 0 && (
-                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-gray-700 text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
                   {getTotalItems()}
                 </span>
               )}
@@ -520,60 +383,60 @@ export const Header = () => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[85vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="p-6">
+                <div className="p-4 md:p-5">
                   {/* Header */}
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-gray-900">Upload 360° Content</h2>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-lg md:text-xl font-bold text-gray-900">Upload 360° Content</h2>
                     <button
                       onClick={() => setShow360UploadModal(false)}
-                      className="text-gray-400 hover:text-gray-600 transition-colors"
-            >
-                      <FaTimes className="text-xl" />
+                      className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+                    >
+                      <FaTimes className="text-lg" />
                     </button>
                   </div>
 
                   {/* Type Selection */}
-                  <div className="flex gap-4 mb-6">
+                  <div className="flex gap-2 mb-4">
                     <button
                       onClick={() => setUploadType('photo')}
-                      className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                         uploadType === 'photo'
-                          ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                          ? 'bg-blue-500 text-white shadow-md'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
-                      <FaCamera className="inline-block mr-2" />
-                       Image
+                      <FaCamera className="inline-block mr-1.5 text-xs" />
+                      Image
                     </button>
                     <button
                       onClick={() => setUploadType('video')}
-                      className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all ${
+                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                         uploadType === 'video'
-                          ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                          ? 'bg-cyan-500 text-white shadow-md'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
-                      <FaVideo className="inline-block mr-2" />
-                      360° Video
+                      <FaVideo className="inline-block mr-1.5 text-xs" />
+                      Video
                     </button>
                   </div>
 
                   {/* Upload Area */}
-                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-purple-500 transition-colors mb-6">
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 md:p-5 text-center hover:border-blue-400 transition-colors mb-4 bg-gray-50">
                     <div className="flex flex-col items-center">
                       {uploadType === 'photo' ? (
-                        <FaCamera className="text-5xl text-gray-400 mb-4" />
+                        <FaCamera className="text-3xl md:text-4xl text-gray-400 mb-2" />
                       ) : (
-                        <FaVideo className="text-5xl text-gray-400 mb-4" />
+                        <FaVideo className="text-3xl md:text-4xl text-gray-400 mb-2" />
                       )}
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        Upload {uploadType === 'photo' ? ' Image' : '360° Video'}
+                      <h3 className="text-sm md:text-base font-semibold text-gray-900 mb-1">
+                        Upload {uploadType === 'photo' ? 'Image' : '360° Video'}
                       </h3>
-                      <p className="text-sm text-gray-600 mb-4">
-                        Drag and drop your {uploadType === 'photo' ? 'photo' : 'video'} here, or click to browse
+                      <p className="text-xs text-gray-600 mb-3">
+                        Drag and drop or click to browse
                       </p>
                       <input
                         type="file"
@@ -584,56 +447,56 @@ export const Header = () => {
                       />
                       <label
                         htmlFor="360-upload-input"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all cursor-pointer"
-                            >
-                        <FaUpload />
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all cursor-pointer text-sm shadow-sm"
+                      >
+                        <FaUpload className="text-xs" />
                         <span>Choose File</span>
                       </label>
-                      <p className="text-xs text-gray-500 mt-3">
-                        Supported formats: {uploadType === 'photo' ? 'JPG, PNG, HEIC' : 'MP4, MOV, AVI'} (Max 100MB)
+                      <p className="text-xs text-gray-500 mt-2">
+                        {uploadType === 'photo' ? 'JPG, PNG, HEIC' : 'MP4, MOV, AVI'} (Max 100MB)
                       </p>
-                        </div>
-                      </div>
+                    </div>
+                  </div>
 
                   {/* Additional Options */}
-                  <div className="space-y-4 mb-6">
+                  <div className="space-y-3 mb-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Title
                       </label>
                       <input
                         type="text"
                         placeholder={`Enter ${uploadType === 'photo' ? 'photo' : 'video'} title...`}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Description (Optional)
                       </label>
                       <textarea
-                        rows="3"
+                        rows="2"
                         placeholder="Add a description..."
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs font-medium text-gray-700 mb-1">
                         Tags (Optional)
                       </label>
                       <input
                         type="text"
                         placeholder="e.g., car, parts, review"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                       />
                     </div>
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-4">
+                  <div className="flex gap-2">
                     <button
                       onClick={() => setShow360UploadModal(false)}
-                      className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                      className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm"
                     >
                       Cancel
                     </button>
@@ -643,12 +506,12 @@ export const Header = () => {
                         alert(`${uploadType === 'photo' ? 'Photo' : 'Video'} upload functionality will be implemented`);
                         setShow360UploadModal(false);
                       }}
-                      className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all font-medium shadow-lg"
+                      className="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-lg transition-all font-medium text-sm shadow-md"
                     >
                       Upload {uploadType === 'photo' ? 'Photo' : 'Video'}
                     </button>
-              </div>
-            </div>
+                  </div>
+                </div>
               </motion.div>
             </motion.div>
           </>

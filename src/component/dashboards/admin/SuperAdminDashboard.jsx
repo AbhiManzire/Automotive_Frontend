@@ -331,10 +331,10 @@ const SuperAdminDashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col lg:ml-0">
-        {/* Header */}
+      {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
           <div className="px-4 md:px-6 py-4">
-            <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -342,26 +342,26 @@ const SuperAdminDashboard = () => {
                 >
                   <FaBars className="text-xl" />
                 </button>
-                <div>
+            <div>
                   <h1 className="text-xl md:text-2xl font-bold text-gray-900">Super Admin Dashboard</h1>
-                  <p className="text-sm text-gray-600">Welcome back, {user?.name || 'Admin'}</p>
-                </div>
+              <p className="text-sm text-gray-600">Welcome back, {user?.name || 'Admin'}</p>
+            </div>
               </div>
               <div className="flex items-center gap-2 md:gap-4">
                 <div className="hidden md:flex items-center gap-2">
-                  <select
-                    value={dateRange}
-                    onChange={(e) => setDateRange(e.target.value)}
-                    className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="7d">Last 7 days</option>
-                    <option value="30d">Last 30 days</option>
-                    <option value="90d">Last 90 days</option>
-                  </select>
-                </div>
-                <button className="relative p-2 text-gray-600 hover:text-primary-600 hover:bg-gray-100 rounded-lg transition">
-                  <FaBell className="text-xl" />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                <select
+                  value={dateRange}
+                  onChange={(e) => setDateRange(e.target.value)}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="7d">Last 7 days</option>
+                  <option value="30d">Last 30 days</option>
+                  <option value="90d">Last 90 days</option>
+                </select>
+              </div>
+              <button className="relative p-2 text-gray-600 hover:text-primary-600 hover:bg-gray-100 rounded-lg transition">
+                <FaBell className="text-xl" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                 </button>
                 
                 {/* Profile Dropdown */}
@@ -404,8 +404,8 @@ const SuperAdminDashboard = () => {
                         >
                           <FaUser className="text-sm" />
                           <span>My Profile</span>
-                        </button>
-                        <button
+              </button>
+              <button
                           onClick={() => {
                             navigate('/login');
                             setShowProfileMenu(false);
@@ -414,61 +414,61 @@ const SuperAdminDashboard = () => {
                         >
                           <FaSignInAlt className="text-sm" />
                           <span>Login</span>
-                        </button>
-                        <button
-                          onClick={handleLogout}
+              </button>
+              <button
+                onClick={handleLogout}
                           className="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-red-600 hover:bg-red-50 transition-colors text-sm mt-1"
-                        >
+              >
                           <FaSignOutAlt className="text-sm" />
                           <span>Logout</span>
-                        </button>
+              </button>
                       </div>
                     </div>
                   )}
                 </div>
-              </div>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
         {/* Content Area */}
         <main className="flex-1 overflow-y-auto">
           <div className="p-4 md:p-6 lg:p-8">
             {/* Stats Grid - Only visible on Overview page */}
             {currentPage === 'overview' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                {stats.map((stat, index) => {
-                  const Icon = stat.icon;
-                  const TrendIcon = stat.trend === 'up' ? FaArrowUp : stat.trend === 'down' ? FaArrowDown : null;
-                  return (
-                    <div key={index} className="card-hover bg-white rounded-xl shadow-md p-6 border border-gray-100">
-                      <div className="flex items-center justify-between">
-                        <div className="flex-1">
-                          <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                          <p className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</p>
-                          <div className="flex items-center gap-2">
-                            {TrendIcon && (
-                              <TrendIcon className={`text-sm ${
-                                stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
-                              }`} />
-                            )}
-                            <p className={`text-sm font-semibold ${
-                              stat.trend === 'up' ? 'text-green-600' : stat.trend === 'down' ? 'text-red-600' : 'text-gray-600'
-                            }`}>
-                              {stat.change}
-                            </p>
-                            <span className="text-xs text-gray-500">from last month</span>
-                          </div>
-                        </div>
-                        <div className={`${stat.color} p-4 rounded-xl text-white shadow-lg`}>
-                          <Icon className="text-3xl" />
-                        </div>
-                      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {stats.map((stat, index) => {
+            const Icon = stat.icon;
+            const TrendIcon = stat.trend === 'up' ? FaArrowUp : stat.trend === 'down' ? FaArrowDown : null;
+            return (
+              <div key={index} className="card-hover bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
+                    <p className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</p>
+                    <div className="flex items-center gap-2">
+                      {TrendIcon && (
+                        <TrendIcon className={`text-sm ${
+                          stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                        }`} />
+                      )}
+                      <p className={`text-sm font-semibold ${
+                        stat.trend === 'up' ? 'text-green-600' : stat.trend === 'down' ? 'text-red-600' : 'text-gray-600'
+                      }`}>
+                        {stat.change}
+                      </p>
+                      <span className="text-xs text-gray-500">from last month</span>
                     </div>
-                  );
-                })}
+                  </div>
+                  <div className={`${stat.color} p-4 rounded-xl text-white shadow-lg`}>
+                    <Icon className="text-3xl" />
+                  </div>
+                </div>
               </div>
-            )}
+            );
+          })}
+                  </div>
+                )}
 
             <div className={`grid grid-cols-1 ${currentPage === 'overview' ? 'lg:grid-cols-3' : ''} gap-6`}>
               {/* Main Content */}
@@ -522,12 +522,12 @@ const SuperAdminDashboard = () => {
                   {currentPage === 'profile' && (
                     <Profile />
                   )}
-                </div>
-              </div>
+            </div>
+          </div>
 
               {/* Right Sidebar - Only visible on Overview page */}
               {currentPage === 'overview' && (
-              <div className="space-y-6">
+          <div className="space-y-6">
             {/* Recent Activities */}
             <div className="card bg-white rounded-xl shadow-md border border-gray-100">
               <div className="flex items-center justify-between mb-4">
@@ -610,9 +610,9 @@ const SuperAdminDashboard = () => {
                 </div>
               </div>
             </div>
-              </div>
+          </div>
               )}
-            </div>
+        </div>
           </div>
         </main>
       </div>

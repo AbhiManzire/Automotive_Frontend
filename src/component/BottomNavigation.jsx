@@ -178,7 +178,7 @@ const BottomNavigation = () => {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t-2 border-gray-200 shadow-2xl backdrop-blur-sm bg-white/95">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t-2 border-gray-200 shadow-2xl backdrop-blur-sm bg-transparent">
       {/* Desktop Navigation */}
       <div className="hidden lg:block">
         <div className="max-w-7xl mx-auto px-4">

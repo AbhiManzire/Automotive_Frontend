@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { FaSearch, FaCar } from "react-icons/fa";
 import { useVehicle } from "../contexts/VehicleContext";
+import { useNavigate } from "react-router-dom";
 import { 
   getVehicleData, 
   getVehicleMakers, 
@@ -16,8 +17,8 @@ import engine2 from "../assets/img/engine2.jpg";
 import engine3 from "../assets/img/engine3.jpg";
 import bannerui from "../assets/img/bannerui.jpg";
 
-const SearchSection = ({ onClose }) => {
-  const { addVehicle } = useVehicle();
+export const SearchSection = ({ onClose, initialVehicle = null }) => {
+  const { addVehicle, updateVehicle } = useVehicle();
   const [selectedMaker, setSelectedMaker] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
@@ -31,6 +32,48 @@ const SearchSection = ({ onClose }) => {
   // ✅ Get vehicle data from Vehicles folder
   const vehicleData = useMemo(() => getVehicleData(), []);
   const availableMakers = useMemo(() => getVehicleMakers(), []);
+
+  // Pre-fill form when editing
+  useEffect(() => {
+    if (initialVehicle) {
+      setSelectedMaker(initialVehicle.make || "");
+      setNumberPlate(initialVehicle.registrationNumber || "");
+      setVin(initialVehicle.vin || "");
+      setSelectedYear(initialVehicle.year || "");
+      setSelectedModification(initialVehicle.variant || "");
+      
+      if (initialVehicle.make) {
+        const makerModels = getModelsForMaker(initialVehicle.make);
+        setModels(makerModels);
+        setSelectedModel(initialVehicle.model || "");
+        
+        if (initialVehicle.model) {
+          const modelYears = getYearsForModel(initialVehicle.make, initialVehicle.model);
+          setYears(modelYears);
+          
+          if (initialVehicle.year) {
+            const yearModifications = getModificationsForYear(
+              initialVehicle.make, 
+              initialVehicle.model, 
+              parseInt(initialVehicle.year)
+            );
+            setModifications(yearModifications);
+          }
+        }
+      }
+    } else {
+      // Reset form if not editing
+      setSelectedMaker("");
+      setSelectedModel("");
+      setSelectedYear("");
+      setSelectedModification("");
+      setNumberPlate("");
+      setVin("");
+      setModels([]);
+      setYears([]);
+      setModifications([]);
+    }
+  }, [initialVehicle]);
 
   const handleMakerChange = (e) => {
     const maker = e.target.value;
@@ -83,11 +126,14 @@ const SearchSection = ({ onClose }) => {
       vin: vin.trim() || undefined,
     };
 
-    // Save vehicle using VehicleContext
-    addVehicle(vehicleData);
-
-    // Show success message
-    alert(`Vehicle saved successfully!\n${selectedMaker} ${selectedModel} ${selectedModification} (${selectedYear})`);
+    // Update or add vehicle
+    if (initialVehicle) {
+      updateVehicle(initialVehicle.id, vehicleData);
+      alert(`Vehicle updated successfully!\n${selectedMaker} ${selectedModel} ${selectedModification} (${selectedYear})`);
+    } else {
+      addVehicle(vehicleData);
+      alert(`Vehicle saved successfully!\n${selectedMaker} ${selectedModel} ${selectedModification} (${selectedYear})`);
+    }
 
     // Reset form
     setSelectedMaker("");
@@ -109,7 +155,11 @@ const SearchSection = ({ onClose }) => {
   return (
     <div className="text-left">
       <h2 className="text-2xl font-bold text-gray-800 mb-2">
-        Add new <span className="text-red-500">Car</span>
+        {initialVehicle ? (
+          <>Edit <span className="text-red-500">Car</span></>
+        ) : (
+          <>Add new <span className="text-red-500">Car</span></>
+        )}
       </h2>
       <h2 className="text-lg mb-4">Find your car by Number Plate:</h2>
 
@@ -198,7 +248,7 @@ const SearchSection = ({ onClose }) => {
         onClick={handleSave}
         className="bg-sky-500 font-bold hover:bg-sky-600 text-white px-8 py-3 shadow rounded w-full transition-colors"
       >
-        Save
+        {initialVehicle ? 'Update' : 'Save'}
       </button>
     </div>
   );
@@ -206,8 +256,11 @@ const SearchSection = ({ onClose }) => {
 
 // 🔹 Main Component
 export const BoodmoUi = () => {
+  const { vehicles } = useVehicle();
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [openDropdownId, setOpenDropdownId] = useState(null);
   const images = [engine1, engine2, engine3];
 
   useEffect(() => {
@@ -216,6 +269,82 @@ export const BoodmoUi = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, [images.length]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.vehicle-dropdown-container')) {
+        setOpenDropdownId(null);
+      }
+    };
+
+    if (openDropdownId !== null) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openDropdownId]);
+
+  // Get latest 3 vehicles sorted by creation date (most recent first)
+  const latestVehicles = useMemo(() => {
+    return [...vehicles]
+      .sort((a, b) => {
+        const dateA = new Date(a.createdAt || a.updatedAt || 0);
+        const dateB = new Date(b.createdAt || b.updatedAt || 0);
+        return dateB - dateA;
+      })
+      .slice(0, 3);
+  }, [vehicles]);
+
+  // Get vehicle image
+  const getVehicleImage = (make, model) => {
+    const imageUrl = getVehicleImageUrl(make, model);
+    return imageUrl || 'https://via.placeholder.com/100x60?text=Car';
+  };
+
+  // Handle dropdown toggle
+  const handleDropdownToggle = (vehicleId, e) => {
+    e.stopPropagation();
+    setOpenDropdownId(openDropdownId === vehicleId ? null : vehicleId);
+  };
+
+  // Handle OEM Service Kit
+  const handleOemServiceKit = (vehicle) => {
+    const params = new URLSearchParams({
+      maker: vehicle.make,
+      model: vehicle.model,
+      year: vehicle.year,
+      mod: vehicle.variant || '',
+    });
+    navigate(`/oem-service-kit?${params.toString()}`);
+    setOpenDropdownId(null);
+  };
+
+  // Handle Aftermarket Service Kit
+  const handleAftermarketServiceKit = (vehicle) => {
+    const params = new URLSearchParams({
+      maker: vehicle.make,
+      model: vehicle.model,
+      year: vehicle.year,
+      mod: vehicle.variant || '',
+    });
+    navigate(`/aftermarket-service-kit?${params.toString()}`);
+    setOpenDropdownId(null);
+  };
+
+  // Handle View OEM Catalog
+  const handleViewOemCatalog = (vehicle) => {
+    const params = new URLSearchParams({
+      maker: vehicle.make,
+      model: vehicle.model,
+      year: vehicle.year,
+      mod: vehicle.variant || '',
+    });
+    navigate(`/oem-catalog?${params.toString()}`);
+    setOpenDropdownId(null);
+  };
 
   return (
     <section className="bg-red-50">
@@ -235,7 +364,7 @@ export const BoodmoUi = () => {
         {/* 🔹 Centered Content - No Background */}
         <div className="relative z-10 w-full max-w-6xl px-6 md:px-8 text-center text-white">
           {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl mb-6 text-white font-semibold">
+          <h1 className="text-2xl md:text-4xl mb-4 text-white font-semibold">
             Find Genuine <span className="text-red-400">OEM</span> & <br />
             <span className="text-blue-400">Aftermarket</span> Auto Parts
           </h1>
@@ -246,27 +375,87 @@ export const BoodmoUi = () => {
           </p>
 
           {/* Search Section */}
-          <div className="max-w-2xl mx-auto mb-8">
-            {/* Search input and button */}
-            <div className="flex bg-white rounded-xl overflow-hidden shadow-2xl text-lg mb-4 transform hover:scale-105 transition-transform duration-300">
-              <input
-                type="text"
-                placeholder='Search: "Maruti Alto Oil Filter"'
-                className="flex-1 px-6 py-4 text-base outline-none text-gray-800 placeholder-gray-500"
-              />
-              <button className="bg-red-500 text-white px-8 flex items-center justify-center hover:bg-red-600 transition-all duration-300">
-                <FaSearch className="text-xl" />
-              </button>
-            </div>
-
-            {/* Add Car button */}
+          <div className="max-w-2xl mx-auto mb-4 sm:mb-6 md:mb-8 w-full px-4 sm:px-6">
+    
+         {/* Add Car button */}
             <button
-              className=" text-lg font-semibold text-white flex items-center justify-center gap-3 px-8 py-4 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl mx-auto"
+              className="text-sm sm:text-base md:text-lg font-semibold text-white flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 md:px-8 
+              py-2 sm:py-3 md:py-4 rounded-lg sm:rounded-xl shadow-xl sm:shadow-2xl transition-all duration-300 transform hover:scale-105
+               hover:shadow-2xl mx-auto w-full sm:w-auto"
               onClick={() => setIsModalOpen(true)}
             >
-              <FaCar className="text-2xl" />
-              ADD CAR TO MY GARAGE
+              <FaCar className="text-lg sm:text-xl md:text-2xl" />
+              <span className="hidden sm:inline">ADD CAR TO MY GARAGE</span>
+              <span className="sm:hidden">ADD CAR</span>
             </button>
+
+            {/* Your Vehicles Section - Latest 3 */}
+            {latestVehicles.length > 0 && (
+              <div className="mt-2 sm:mt-2 md:mt-2 w-full">
+              
+                <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 md:gap-3 px-2 sm:px-0">
+                  {latestVehicles.map((vehicle) => (
+                    <div
+                      key={vehicle.id}
+                      className="vehicle-dropdown-container relative bg-white rounded-md shadow-sm overflow-visible flex items-center gap-1 sm:gap-1.5 md:gap-2 px-1.5 sm:px-2 md:px-2.5 py-1 sm:py-1.5 md:py-2 hover:shadow-md transition-shadow cursor-pointer min-w-[100px] sm:min-w-[120px] md:min-w-[140px] max-w-[120px] sm:max-w-[150px] md:max-w-[180px]"
+                      onClick={(e) => handleDropdownToggle(vehicle.id, e)}
+                    >
+                      <div className="w-10 h-6 sm:w-12 sm:h-8 md:w-14 md:h-10 flex-shrink-0 bg-gray-50 rounded flex items-center justify-center overflow-hidden">
+                        <img
+                          src={getVehicleImage(vehicle.make, vehicle.model)}
+                          alt={`${vehicle.make} ${vehicle.model}`}
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            e.target.src = 'https://via.placeholder.com/100x60?text=Car';
+                          }}
+                        />
+                      </div>
+                      <div className="flex items-center gap-0.5 sm:gap-1 flex-1 min-w-0">
+                        <p className="text-[10px] sm:text-xs md:text-sm font-semibold text-blue-900 truncate">
+                          {vehicle.model?.toUpperCase() || 'N/A'}
+                        </p>
+                        <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 text-blue-900 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      
+                      {/* Dropdown Menu */}
+                      {openDropdownId === vehicle.id && (
+                        <div className="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-xl border border-gray-200 z-50 min-w-[200px] sm:min-w-[220px] py-1">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOemServiceKit(vehicle);
+                            }}
+                            className="w-full text-left px-4 py-2.5 text-sm text-blue-900 hover:bg-blue-50 transition-colors"
+                          >
+                            Open OEM Service Kit
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleAftermarketServiceKit(vehicle);
+                            }}
+                            className="w-full text-left px-4 py-2.5 text-sm text-blue-900 hover:bg-blue-50 transition-colors"
+                          >
+                            Open Aftermarket Service Kit
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleViewOemCatalog(vehicle);
+                            }}
+                            className="w-full text-left px-4 py-2.5 text-sm text-blue-900 hover:bg-blue-50 transition-colors"
+                          >
+                            View OEM Catalog
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
          
         </div>
