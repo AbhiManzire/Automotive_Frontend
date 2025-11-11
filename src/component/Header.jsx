@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
-import logo3 from "./logo3.png";
+import logo3 from "./logo3.png"; 
 import { Sider } from "./Sider";
 import { useCart } from '../contexts/CartContext';
 
@@ -26,16 +26,37 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [show360UploadModal, setShow360UploadModal] = useState(false);
   const [uploadType, setUploadType] = useState('photo'); // 'photo' or 'video'
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
-
-  // Scroll effect for header
+  // Scroll effect for header - hide on scroll down, show on scroll up
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      // Always show header at the top of the page
+      if (currentScrollY < 10) {
+        setIsHeaderVisible(true);
+        setIsScrolled(false);
+      } else {
+        setIsScrolled(true);
+        
+        // Hide header when scrolling down, show when scrolling up
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          // Scrolling down
+          setIsHeaderVisible(false);
+        } else if (currentScrollY < lastScrollY) {
+          // Scrolling up
+          setIsHeaderVisible(true);
+        }
+      }
+      
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const categories = [
     { value: "0", label: "All Categories", href: "/category" },
@@ -96,12 +117,18 @@ export const Header = () => {
 
   return (
     <motion.header
-      className={`w-full bg-white shadow-sm sticky top-0 z-50 transition-all duration-300
+      className={`w-full bg-white shadow-sm fixed top-0 left-0 right-0 z-50
          ${isScrolled ? "shadow-xl bg-white/95 backdrop-blur-sm" : "shadow-sm"
         }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ y: 0 }}
+      animate={{ 
+        y: isHeaderVisible ? 0 : -100,
+        opacity: isHeaderVisible ? 1 : 0
+      }}
+      transition={{ 
+        duration: 0.3,
+        ease: "easeInOut"
+      }}
     >
       {/* ===== MAIN HEADER ===== */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
