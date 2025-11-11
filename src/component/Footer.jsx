@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { 
   FaFacebookF, 
@@ -6,12 +6,22 @@ import {
   FaLinkedinIn, 
   FaTwitter, 
   FaYoutube, 
-  FaPinterest 
+  FaPinterest,
+  FaPinterestP
 } from "react-icons/fa";
 import logo2 from "./logo2.png";
 
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    // Handle newsletter subscription
+    console.log("Newsletter subscription:", email);
+    setEmail("");
+  };
+
   return (
     <footer className="bg-gradient-to-b from-gray-50 to-white border-t-2 border-gray-200 text-sm text-gray-700">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,7 +82,7 @@ const Footer = () => {
               India's leading online hub for automotive spare parts, where quality meets convenience in the world of vehicle maintenance.
             </p>
 
-            <div className="flex justify-center md:justify-start gap-3 text-xl mt-8 flex-wrap">
+            {/* <div className="flex justify-center md:justify-start gap-3 text-xl mt-8 flex-wrap">
               <a 
                 href="https://facebook.com" 
                 target="_blank" 
@@ -127,7 +137,7 @@ const Footer = () => {
               >
                 <FaPinterest />
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* About */}
@@ -175,10 +185,155 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t-2 border-gray-200 bg-gray-50 py-6">
-          <div className="section-container text-center text-sm text-gray-600">
-            © 2015-2025 Smart Parts Online Pvt. Ltd. (v7.3.7 build 250715.1409)
+        {/* Newsletter & Social Media Section */}
+        <div className="bg-gray-800 border-t border-gray-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              {/* Social Media Icons */}
+              <div className="flex items-center gap-2 md:gap-3">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white rounded flex items-center justify-center text-gray-800 hover:bg-gray-100 transition-colors"
+                  title="Facebook"
+                >
+                  <FaFacebookF className="text-lg" />
+                </a>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white rounded flex items-center justify-center text-gray-800 hover:bg-gray-100 transition-colors"
+                  title="Twitter"
+                >
+                  <FaTwitter className="text-lg" />
+                </a>
+                <a
+                  href="https://plus.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white rounded flex items-center justify-center text-gray-800 hover:bg-gray-100 transition-colors"
+                  title="Google+"
+                >
+                  <span className="text-lg font-bold">G+</span>
+                </a>
+                <a
+                  href="https://pinterest.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white rounded flex items-center justify-center text-gray-800 hover:bg-gray-100 transition-colors"
+                  title="Pinterest"
+                >
+                  <FaPinterestP className="text-lg" />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white rounded flex items-center justify-center text-gray-800 hover:bg-gray-100 transition-colors"
+                  title="Instagram"
+                >
+                  <FaInstagram className="text-lg" />
+                </a>
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white rounded flex items-center justify-center text-gray-800 hover:bg-gray-100 transition-colors"
+                  title="YouTube"
+                >
+                  <FaYoutube className="text-lg" />
+                </a>
+              </div>
+
+              {/* Newsletter Section */}
+              <div className="flex flex-col md:flex-row items-center gap-4 flex-1 justify-center md:justify-end">
+                <span className="text-white font-bold text-sm md:text-base whitespace-nowrap">
+                  SIGN UP FOR NEWSLETTER
+                </span>
+                <form onSubmit={handleNewsletterSubmit} className="flex gap-2 w-full md:w-auto">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your email address..."
+                    className="px-4 py-2 rounded text-sm text-gray-800 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 flex-1 md:flex-none md:w-64"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded text-sm whitespace-nowrap transition-colors"
+                  >
+                    SUBSCRIBE
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright & Payment Methods Section */}
+        <div className="bg-white border-t border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              {/* Copyright */}
+              <div className="text-gray-600 text-xs md:text-sm text-center md:text-left">
+                Autoparts © {new Date().getFullYear()} Demo Store. All Rights Reserved. Designed by OpenCartWorks.Com
+              </div>
+
+              {/* Payment Methods */}
+              <div className="flex items-center gap-3 flex-wrap justify-center">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Maestro_logo.svg/200px-Maestro_logo.svg.png"
+                  alt="Maestro"
+                  className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+                <img
+                  src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg"
+                  alt="PayPal"
+                  className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Western_Union_logo.svg/200px-Western_Union_logo.svg.png"
+                  alt="Western Union"
+                  className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png"
+                  alt="Visa"
+                  className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png"
+                  alt="Mastercard"
+                  className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/200px-EBay_logo.svg.png"
+                  alt="eBay"
+                  className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

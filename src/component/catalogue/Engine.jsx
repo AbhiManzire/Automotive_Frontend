@@ -112,7 +112,7 @@ const Engine = () => {
         <Breadcrumbs />
 
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          <h1 className="text-xl font-bold text-gray-800 mb-2">
             Engine Parts
           </h1>
           <p className="text-gray-600">
@@ -140,21 +140,21 @@ const Engine = () => {
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">{product.name}</span>
+                  <span className="text-gray-800 font-medium text-xs">{product.name}</span>
                 </Link>
               ))}
             </div>
 
             {/* SEO Content Section */}
-             <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-6 md:p-10 rounded-2xl shadow-md transition-all duration-300">
-      <div className="space-y-6">
+             <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:p-6 rounded-2xl shadow-md transition-all duration-300">
+      <div className="space-y-4">
         {/* Intro */}
         <p>
          

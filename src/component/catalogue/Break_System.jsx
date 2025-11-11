@@ -262,12 +262,12 @@ export const Break_System = () => {
                 <Link
                   key={index}
                   to={product.link}
-                  className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white dark:bg-gray-800 p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
                   <span className="text-gray-800 dark:text-gray-100 font-medium">
                     {product.name}
@@ -280,7 +280,7 @@ export const Break_System = () => {
              <section className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 px-6 py-10 rounded-2xl shadow-md">
       <div className="max-w-4xl mx-auto">
         <div className={`transition-all duration-500 ${expanded ? "max-h-full" : "max-h-[450px] overflow-hidden"}`}>
-          <h2 className="text-2xl font-bold mb-4 text-red-700">The brake system keeps everyone safe and sound</h2>
+          <h2 className="text-lg font-bold mb-4 text-red-700">The brake system keeps everyone safe and sound</h2>
           <p className="mb-4">
             The car braking system is a classification of mechanical, electronic, and hydraulic components that works
             together with friction for the cleaner stopping of the vehicle. Moreover, it comforts you during bumpy rides.
@@ -295,7 +295,7 @@ export const Break_System = () => {
             Other components connected with the braking system includes parking brakes, a power booster, and an anti-lock system.
           </p>
 
-          <h2 className="text-2xl font-bold mb-4 text-red-700">Types of Car Brakes</h2>
+          <h2 className="text-lg font-bold mb-4 text-red-700">Types of Car Brakes</h2>
           <p className="mb-4">The automotive vehicles usually come equipped with two types of braking systems.</p>
 
           <p className="mb-4">
@@ -311,7 +311,7 @@ export const Break_System = () => {
             invented by Maybach in 1900 and patented by Louis Renault in 1902.
           </p>
 
-          <h2 className="text-2xl font-bold mb-4 text-red-700">Where to buy braking components in India?</h2>
+          <h2 className="text-lg font-bold mb-4 text-red-700">Where to buy braking components in India?</h2>
           <p className="mb-4">
             The rise of the internet has made it easy for buyers and sellers to come together to get the best deal. In order
             to fulfill that demand, <strong className="text-red-700">sparelo</strong> was incorporated. The company was formed with an aim to bridge

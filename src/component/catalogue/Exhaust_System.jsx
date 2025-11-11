@@ -168,14 +168,14 @@ const Exhaust_System = () => {
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -183,8 +183,8 @@ const Exhaust_System = () => {
             </div>
 
             {/* ✅ SEO Section */}
-           <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-6 md:p-10 rounded-2xl shadow-md transition-all duration-300">
-  <div className="space-y-6">
+           <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:p-6 rounded-2xl shadow-md transition-all duration-300">
+  <div className="space-y-4">
     {/* Intro Paragraph */}
     <p>
       Automobile exhaust system includes an exhaust manifold, car exhaust silencer and a catalytic converter. 
@@ -195,7 +195,7 @@ const Exhaust_System = () => {
     </p>
 
     {/* How it Works */}
-    <h2 className="text-2xl font-semibold text-red-600">How does an exhaust system work?</h2>
+    <h2 className="text-lg font-semibold text-red-600">How does an exhaust system work?</h2>
     <p>
       After the fuel-air mixture gets burnt all the poisonous gases left or produced get gathered in the collector. 
       The system transports all the elements left after burning to this part of the construction under high pressure. 
@@ -211,7 +211,7 @@ const Exhaust_System = () => {
     </p>
 
     {/* Fault Detection */}
-    <h2 className="text-2xl font-semibold text-red-600">How to notice foul-ups in the exhaust system?</h2>
+    <h2 className="text-lg font-semibold text-red-600">How to notice foul-ups in the exhaust system?</h2>
     <p>The following symptoms can help you find out that your car has some problems with its exhaust system:</p>
     <ul className="list-disc list-inside space-y-1">
       <li>The movement of gases out of the silencer for car comes with unusually loud noise.</li>
@@ -230,7 +230,7 @@ const Exhaust_System = () => {
     </p>
 
     {/* Where to Buy */}
-    <h2 className="text-2xl font-semibold text-red-600">Where to buy spare parts for exhaust system?</h2>
+    <h2 className="text-lg font-semibold text-red-600">Where to buy spare parts for exhaust system?</h2>
     <p>
       There is a great list of original and aftermarket car spare parts from all over the world available at reasonable prices in our online shop. 
       We cooperate with a great number of car manufacturers and can easily pick up the necessary spares for any automobile make.

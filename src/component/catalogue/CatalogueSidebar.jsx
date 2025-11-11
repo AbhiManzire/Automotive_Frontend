@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useVehicle } from "../../contexts/VehicleContext";
+import { getVehicleImageUrl } from "../../data/vehicleData";
 
 const CatalogueSidebar = () => {
+  const { vehicles } = useVehicle();
   const [selectedMaker, setSelectedMaker] = useState("");
   const [isOpen, setIsOpen] = useState(true);
+  const [expandedCategories, setExpandedCategories] = useState({});
   const location = useLocation();
+
+  // Get car image from vehicle data
+  const getCarImage = (make, model) => {
+    const imageUrl = getVehicleImageUrl(make, model);
+    return imageUrl || 'https://via.placeholder.com/100x60?text=Car';
+  };
 
   const popularCarmakers = [
     "CHEVROLET", "FIAT", "FORD", "HONDA", "HYUNDAI", "KIA",
@@ -20,7 +30,10 @@ const CatalogueSidebar = () => {
     "TATA", "TATA COMMERCIAL", "TOYOTA", "VOLVO", "VW",
   ];
 
+  // Categories with sub-categories structure
   const categories = [
+    { name: "Maintenance Service Parts", link: "/catalog/maintenance_service_parts/" },
+    { name: "Brake", link: "/catalog/brakes/" },
     { name: "Air Conditioning", link: "/catalog/air_conditioning/" },
     { name: "Body", link: "/catalog/body/" },
     { name: "Bearings", link: "/catalog/bearings/" },
@@ -39,7 +52,6 @@ const CatalogueSidebar = () => {
     { name: "Ignition & Glowplug System", link: "/catalog/ignition_glowplug/" },
     { name: "Interior Comfort", link: "/catalog/interior_comfort/" },
     { name: "Lighting", link: "/catalog/lighting/" },
-    { name: "Maintenance Service Parts", link: "/catalog/maintenance_service_parts/" },
     { name: "Oils & Fluids", link: "/catalog/oilsfluids/" },
     { name: "Pipes & Hoses", link: "/catalog/pipes_hoses/" },
     { name: "Repair Kits", link: "/catalog/repair_kits/" },
@@ -55,6 +67,18 @@ const CatalogueSidebar = () => {
     { name: "Windscreen Cleaning System", link: "/catalog/windscreen_cleaning_system/" },
   ];
 
+  const toggleCategory = (categoryName) => {
+    setExpandedCategories(prev => ({
+      ...prev,
+      [categoryName]: !prev[categoryName]
+    }));
+  };
+
+  const handleReset = () => {
+    setSelectedMaker("");
+    setExpandedCategories({});
+  };
+
   const brands = [
     { name: "Bosch", link: "/catalog/brands/bosch/" },
     { name: "Fram", link: "/catalog/brands/fram/" },
@@ -67,15 +91,18 @@ const CatalogueSidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="hidden md:block w-full md:w-64 flex-shrink-0">
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-sm">
+    <div className="w-full lg:w-64 flex-shrink-0 mb-6 lg:mb-0">
+      <div className="bg-white dark:bg-gray-900 p-4 sm:p-5 rounded-lg sm:rounded-xl shadow-sm border border-gray-100 sticky top-20">
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100">Filters</h3>
-          {/* <button className="text-sm text-red-600 hover:text-red-700 dark:text-red-400">
-            Clear All
-          </button> */}
+        <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
+          <h3 className="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-100">Filters</h3>
+          <button 
+            onClick={handleReset}
+            className="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium"
+          >
+            RESET
+          </button>
         </div>
 
         {/* Garage Section */}
@@ -97,27 +124,41 @@ const CatalogueSidebar = () => {
           </div>
 
           {isOpen && (
-            <div className="p-4 space-y-4">
-              <div className="flex items-center space-x-3 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-                <a
-                  href="/catalog/4389-belt_chain_and_roller/74268-maruti_eeco-1_2l/"
-                  className="flex items-center space-x-3"
-                >
-                  <img
-                    src="https://boodmo.com/media/images/model/83d0afb.webp"
-                    alt="MARUTI EECO 1.2L 5S STD MT"
-                    className="w-6 h-6 object-cover rounded-md " 
-                  />
-                  <span className="text-gray-700 dark:text-gray-200 font-medium text-sm">
-                    EECO
-                  </span>
-                </a>
-              </div>
+            <div className="p-3 space-y-3">
+              {/* Vehicles from Garage */}
+              {vehicles.length > 0 ? (
+                <div className="grid grid-cols-3 gap-2 mb-3">
+                  {vehicles.slice(0, 6).map((vehicle) => (
+                    <Link
+                      key={vehicle.id}
+                      to={`/catalog?maker=${encodeURIComponent(vehicle.make)}&model=${encodeURIComponent(vehicle.model)}&year=${vehicle.year}`}
+                      className="flex flex-col items-center p-2 bg-white rounded-md hover:bg-gray-50 transition-colors border border-gray-200"
+                      title={`${vehicle.make} ${vehicle.model} ${vehicle.year}`}
+                    >
+                      <img
+                        src={getCarImage(vehicle.make, vehicle.model)}
+                        alt={`${vehicle.make} ${vehicle.model}`}
+                        className="w-full h-auto object-contain mb-1"
+                        onError={(e) => {
+                          e.target.src = 'https://via.placeholder.com/100x60?text=Car';
+                        }}
+                      />
+                      <span className="text-[10px] text-gray-700 font-medium text-center line-clamp-1">
+                        {vehicle.model}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-2 mb-3">
+                  <p className="text-[10px] text-gray-500">No vehicles in garage</p>
+                </div>
+              )}
 
-              <form className="space-y-2">
+              <form className="space-y-1.5">
                 <label
                   htmlFor="carMaker"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  className="block text-xs font-medium text-gray-700 dark:text-gray-300"
                 >
                   Choose car maker
                 </label>
@@ -125,7 +166,7 @@ const CatalogueSidebar = () => {
                   id="carMaker"
                   value={selectedMaker}
                   onChange={(e) => setSelectedMaker(e.target.value)}
-                  className="form-select w-full p-2 border rounded-md text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                  className="form-select w-full p-1.5 border rounded-md text-xs dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                 >
                   <option value="">Choose car maker</option>
                   <optgroup label="Popular carmakers">
@@ -149,39 +190,93 @@ const CatalogueSidebar = () => {
         </div>
 
         {/* Category Section */}
-        <div className="mb-6 bg-blue-50 dark:bg-gray-800 p-3 rounded">
-          <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-3">
+        <div className="mb-6 bg-white dark:bg-gray-800 p-3 rounded-lg border border-gray-200">
+          <h4 className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-300 mb-3">
             Category
           </h4>
-          <div className="space-y-2">
+          <div className="space-y-1 max-h-96 overflow-y-auto custom-scrollbar">
             {categories.map((category) => (
-              <Link
-                key={category.name}
-                to={category.link}
-                className={`block text-sm px-2 py-1 rounded transition-all duration-200 ${
-                  isActive(category.link)
-                    ? "font-semibold text-blue-500"
-                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-100 dark:hover:bg-gray-700"
-                }`}
-              >
-                {category.name}
-              </Link>
+              <div key={category.name}>
+                <div className="flex items-center justify-between">
+                  <Link
+                    to={category.link}
+                    className={`flex-1 block text-xs px-2 py-1.5 rounded transition-all duration-200 ${
+                      isActive(category.link)
+                        ? "font-semibold text-white bg-blue-600"
+                        : "text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-50"
+                    }`}
+                  >
+                    {category.name}
+                  </Link>
+                  {category.subCategories && (
+                    <button
+                      onClick={() => toggleCategory(category.name)}
+                      className="text-gray-500 hover:text-gray-700 px-1 text-xs"
+                    >
+                      {expandedCategories[category.name] ? "−" : "+"}
+                    </button>
+                  )}
+                </div>
+                {category.subCategories && expandedCategories[category.name] && (
+                  <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-3">
+                    {category.subCategories.map((subCat) => (
+                      <div key={subCat.name || subCat.link}>
+                        {subCat.subItems ? (
+                          // Nested sub-category (e.g., Belt with sub-items)
+                          <div>
+                            <div className="text-[10px] font-medium text-gray-700 px-2 py-1 mb-0.5">
+                              {subCat.name}
+                            </div>
+                            <div className="ml-2 space-y-0.5">
+                              {subCat.subItems.map((item) => (
+                                <Link
+                                  key={item.name}
+                                  to={item.link}
+                                  className={`block text-[10px] px-2 py-0.5 rounded transition-all duration-200 ${
+                                    isActive(item.link)
+                                      ? "font-medium text-blue-600 bg-blue-50"
+                                      : "text-gray-600 hover:text-blue-600 hover:bg-gray-50"
+                                  }`}
+                                >
+                                  {item.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ) : (
+                          // Regular sub-category
+                          <Link
+                            to={subCat.link}
+                            className={`block text-[10px] px-2 py-1 rounded transition-all duration-200 ${
+                              isActive(subCat.link)
+                                ? "font-medium text-blue-600 bg-blue-50"
+                                : "text-gray-600 hover:text-blue-600 hover:bg-gray-50"
+                            }`}
+                          >
+                            {subCat.name}
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
 
         {/* Brand Section */}
         <div className="mb-6">
-          <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-3">Brand</h4>
-          <div className="space-y-2">
+          <h4 className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-gray-300 mb-3">Brand</h4>
+          <div className="space-y-1">
             {brands.map((brand) => (
               <Link
                 key={brand.name}
                 to={brand.link}
-                className={`block text-sm px-2 py-1 rounded transition-all duration-200 ${
+                className={`block text-xs px-2 py-1.5 rounded transition-all duration-200 ${
                   isActive(brand.link)
                     ? "font-semibold text-white bg-blue-600"
-                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-100 dark:hover:bg-gray-700"
+                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700"
                 }`}
               >
                 {brand.name}

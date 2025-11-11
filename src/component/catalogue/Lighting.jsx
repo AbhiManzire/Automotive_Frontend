@@ -165,14 +165,14 @@ const Lighting = () => {
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -181,7 +181,7 @@ const Lighting = () => {
 
             {/* SEO Content Section */}
             <section className="bg-white text-gray-800 py-10 px-6 max-w-5xl mx-auto">
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <h2 className="text-2xl md:text-3xl font-bold text-red-700 border-b-2 border-red-300 inline-block pb-2">
                   Lighting Parts
                 </h2>

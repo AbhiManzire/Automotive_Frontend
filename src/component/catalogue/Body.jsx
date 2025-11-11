@@ -123,14 +123,14 @@ const bodyPartsCategories = [
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -138,16 +138,16 @@ const bodyPartsCategories = [
             </div>
 
             {/* ✅ SEO Section */}
-            <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-6 md:p-10 rounded-2xl shadow-md transition-all duration-300 my-10">
+            <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:p-6 rounded-2xl shadow-md transition-all duration-300 my-10">
               <div
-                className={`space-y-6 overflow-hidden transition-all duration-500 ${expanded ? "max-h-full" : "max-h-[400px]"
+                className={`space-y-4 overflow-hidden transition-all duration-500 ${expanded ? "max-h-full" : "max-h-[400px]"
                   }`}
               >
-                <h2 className="text-2xl font-bold text-red-600">
+                <h2 className="text-lg font-bold text-red-600">
                   A Meaning of a Car Body and Body Parts of Car
                 </h2>
 
-                <p>
+                <p className="text-sm">
                   A car enthusiast can be sure that the motor, transmission or brakes are the most essential
                   components of an automobile. But the car body – the component where all the other
                   components and systems are installed and fixed – still remains the main framework of a
@@ -155,18 +155,18 @@ const bodyPartsCategories = [
                   from external impacts.
                 </p>
 
-                <p>
+                <p className="text-sm">
                   Exterior is not the least thing to care about. A new automobile attracts attention with
                   flawless lines, curves, and a shiny body surface. A well-maintained car looks elegant and
                   creates a positive impression about its owner.
                 </p>
 
-                <p>
+                <p className="text-sm">
                   Yet, dents, scratches, or misaligned doors signal neglect or poor maintenance — sometimes
                   even danger. That’s why maintaining and updating your car body is essential.
                 </p>
 
-                <p>The main auto body parts include:</p>
+                <p className="text-sm">The main auto body parts include:</p>
 
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>A boot lid and a hood</li>
@@ -181,16 +181,16 @@ const bodyPartsCategories = [
                   elements for the gearbox and motor.
                 </p>
 
-                <h2 className="text-2xl font-bold text-red-600">Why Do You Need Car Body Parts?</h2>
+                <h2 className="text-lg font-bold text-red-600">Why Do You Need Car Body Parts?</h2>
 
-                <p>Drivers usually buy body parts for two main purposes:</p>
+                <p className="text-sm">Drivers usually buy body parts for two main purposes:</p>
 
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>To repair or replace damaged parts</li>
                   <li>To perform car tuning or modification</li>
                 </ul>
 
-                <p>The most common reasons for replacement include:</p>
+                <p className="text-sm">The most common reasons for replacement include:</p>
 
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Damage from accidents or vandalism</li>
@@ -211,7 +211,7 @@ const bodyPartsCategories = [
                   materials like fiberglass or carbon fiber for spoilers, arches, and ground effects.
                 </p>
 
-                <h2 className="text-2xl font-bold text-red-600">
+                <h2 className="text-lg font-bold text-red-600">
                   Where to Buy Car Body Parts and Accessories Online?
                 </h2>
 

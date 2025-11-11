@@ -98,9 +98,9 @@ const Car_Accessories = () => {
                     <img
                       src={item.img}
                       alt={item.name}
-                      className="w-20 h-20 object-cover rounded-md mb-3" // reduced image height
+                      className="w-14 h-14 object-cover rounded-md mb-2" // reduced image height
                     />
-                    <span className="text-sm font-medium text-gray-700 hover:text-red-600 text-center">
+                    <span className="text-xs font-medium text-gray-700 hover:text-red-600 text-center">
                       {item.name}
                     </span>
                   </Link>
@@ -109,13 +109,13 @@ const Car_Accessories = () => {
             </div>
 
             {/* Info Section */}
-            <section className="bg-white text-gray-800 py-10 px-6 rounded-2xl shadow-sm mt-10">
+            <section className="bg-white text-gray-800 py-6 px-4 rounded-2xl shadow-sm mt-10">
               <div
                 className={`transition-all duration-500 ease-in-out ${
                   showMore ? "max-h-full" : "max-h-[600px] overflow-hidden"
                 }`}
               >
-                <p className="mb-4 leading-relaxed">
+                <p className="mb-4 leading-relaxed text-sm">
                   Do you need car accessories of any kind? Go to the unmatched
                   catalogue with the widest range of car spare parts and
                   accessories and find the items you need. Depending on the
@@ -125,7 +125,7 @@ const Car_Accessories = () => {
                   and marketed by the reputable suppliers.
                 </p>
 
-                <h2 className="text-2xl font-bold text-red-700 mt-6 mb-3">
+                <h2 className="text-lg font-bold text-red-700 mt-6 mb-2">
                   About Car Accessories
                 </h2>
                 <p className="leading-relaxed mb-4">
@@ -142,7 +142,7 @@ const Car_Accessories = () => {
                   onboard music, and so on.
                 </p>
 
-                <h2 className="text-2xl font-bold text-red-700 mt-6 mb-3">
+                <h2 className="text-lg font-bold text-red-700 mt-6 mb-2">
                   Why You May Need Car Accessories
                 </h2>
                 <p className="leading-relaxed mb-2">
@@ -168,10 +168,10 @@ const Car_Accessories = () => {
                   </li>
                 </ul>
 
-                <h3 className="text-xl font-semibold text-red-700 mt-8 mb-2">
+                <h3 className="text-base font-semibold text-red-700 mt-8 mb-2">
                   Our Advantages
                 </h3>
-                <p className="leading-relaxed mb-3">
+                <p className="leading-relaxed mb-2">
                   The{" "}
                   <span className="text-red-600 font-semibold">Sparelo</span> –
                   India’s largest online marketplace for car spare parts – was

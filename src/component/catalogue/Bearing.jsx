@@ -120,14 +120,14 @@ export const Bearing = () => {
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -135,10 +135,10 @@ export const Bearing = () => {
             </div>
 
             {/* SEO Content Section */}
-            <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-6 md:p-10 rounded-2xl shadow-md transition-all duration-300">
-              <div className="space-y-6">
+            <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:p-6 rounded-2xl shadow-md transition-all duration-300">
+              <div className="space-y-4">
                 {/* Intro Paragraph */}
-                <p>
+                <p className="text-sm">
                   Bearings play a crucial role in automotive systems, enabling smooth
                   motion and reducing friction between moving parts. There are various
                   types of bearings used in vehicles, each with its specific function.
@@ -148,12 +148,12 @@ export const Bearing = () => {
                 </p>
 
                 {/* Expandable Content */}
-                <div className={`${expanded ? "block" : "hidden"} space-y-6`}>
+                <div className={`${expanded ? "block" : "hidden"} space-y-4`}>
                   <div>
-                    <h2 className="text-2xl font-semibold text-red-600 mb-2">
+                    <h2 className="text-lg font-semibold text-red-600 mb-2">
                       Clutch Release Bearing
                     </h2>
-                    <p>
+                    <p className="text-sm">
                       The clutch release bearing, also known as a throw-out bearing, is
                       a critical component in manual transmission systems. Positioned
                       between the clutch fork and the pressure plate, the clutch release
@@ -169,10 +169,10 @@ export const Bearing = () => {
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold text-red-600 mb-2">
+                    <h2 className="text-lg font-semibold text-red-600 mb-2">
                       Crankshaft Bearing
                     </h2>
-                    <p>
+                    <p className="text-sm">
                       The crankshaft bearing is a vital component in an internal
                       combustion engine. Located in the engine block, it supports the
                       crankshaft, which converts linear motion from the pistons into
@@ -187,10 +187,10 @@ export const Bearing = () => {
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold text-red-600 mb-2">
+                    <h2 className="text-lg font-semibold text-red-600 mb-2">
                       Wheel Bearing
                     </h2>
-                    <p>
+                    <p className="text-sm">
                       Wheel bearings are used in the wheel hubs of a vehicle and are
                       responsible for supporting the weight of the vehicle and enabling
                       smooth rotation of the wheels. They are subjected to various
@@ -206,10 +206,10 @@ export const Bearing = () => {
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold text-red-600 mb-2">
+                    <h2 className="text-lg font-semibold text-red-600 mb-2">
                       Shock Absorber Bearing
                     </h2>
-                    <p>
+                    <p className="text-sm">
                       Shock absorber bearings, also known as strut bearings or mount
                       bearings, are used in the suspension system of a vehicle.
                       Positioned between the shock absorber or strut and the vehicle
@@ -224,10 +224,10 @@ export const Bearing = () => {
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold text-red-600 mb-2">
+                    <h2 className="text-lg font-semibold text-red-600 mb-2">
                       Transmission Bearing
                     </h2>
-                    <p>
+                    <p className="text-sm">
                       Transmission bearings are used in the transmission system of a
                       vehicle and are responsible for supporting the various gears and
                       shafts in the transmission. They are designed to withstand high
@@ -243,7 +243,7 @@ export const Bearing = () => {
                     </p>
                   </div>
 
-                  <p>
+                  <p className="text-sm">
                     In conclusion, bearings are vital components in various automotive
                     systems, ensuring smooth motion and reducing friction between moving
                     parts. Clutch release bearings, crankshaft bearings, wheel bearings,

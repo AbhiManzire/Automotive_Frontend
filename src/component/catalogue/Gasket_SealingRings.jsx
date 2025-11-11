@@ -214,14 +214,14 @@ const Gasket_SealingRings = () => {
                 <Link
                   key={index}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -235,7 +235,7 @@ const Gasket_SealingRings = () => {
                   expanded ? "max-h-full" : "max-h-[500px]"
                 }`}
               >
-                <div className="space-y-6 text-gray-800 dark:text-gray-200">
+                <div className="space-y-4 text-gray-800 dark:text-gray-200">
                   <h1 className="text-3xl font-bold mb-4">
                     Gaskets and Sealing Rings
                   </h1>

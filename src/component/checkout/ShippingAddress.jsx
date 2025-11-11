@@ -150,7 +150,7 @@ const ShippingAddress = () => {
       <div className="min-h-screen bg-white py-8">
         <div className="max-w-6xl mx-auto px-4">
           {/* Progress Bar */}
-          <div className="mb-8">
+          <div className="mt-12 md:mt-16 mb-8">
             <div className="flex items-center justify-center space-x-4 md:space-x-8">
               <button
                 onClick={() => navigate('/cart')}
@@ -202,7 +202,7 @@ const ShippingAddress = () => {
           </div>
 
           {/* Page Title */}
-          <h1 className="text-3xl md:text-4xl font-bold mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold mb-8">
             <span className="text-blue-900">Shipping</span>{" "}
             <span className="text-blue-500">Address</span>
           </h1>
@@ -230,19 +230,19 @@ const ShippingAddress = () => {
                     <FaMapMarkerAlt />
                   </button>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-800 mb-2">
+                    <h3 className="text-sm font-semibold text-gray-800 mb-2">
                       {address.title}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-1">
+                    <p className="text-xs text-gray-600 mb-1">
                       {address.name} - {address.mobile}
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs text-gray-600">
                       {address.address}, {address.cityState}, {address.postalCode}
                     </p>
                   </div>
                 </div>
                 {selectedAddressId === address.id && (
-                  <button className="w-full py-2 bg-blue-100 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-200 transition-colors">
+                  <button className="w-full py-2 bg-blue-100 text-blue-600 rounded-lg text-xs font-medium hover:bg-blue-200 transition-colors">
                     SELECTED ADDRESS
                   </button>
                 )}
@@ -257,7 +257,7 @@ const ShippingAddress = () => {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <FaPlus className="text-blue-600 text-2xl" />
               </div>
-              <p className="text-blue-600 font-medium">Add New Address</p>
+              <p className="text-sm text-blue-600 font-medium">Add New Address</p>
             </div>
 
             {/* Register as Business Card */}
@@ -265,7 +265,7 @@ const ShippingAddress = () => {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <FaFileInvoice className="text-blue-600 text-2xl" />
               </div>
-              <p className="text-blue-600 font-medium text-center">
+              <p className="text-sm text-blue-600 font-medium text-center">
                 Register as Business with <span className="font-semibold">Sparelo.com</span>
               </p>
             </div>
@@ -275,7 +275,7 @@ const ShippingAddress = () => {
           <div className="flex justify-between items-center pt-6 border-t border-gray-200">
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-semibold bg-white"
+              className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold bg-white"
             >
               <FaArrowLeft />
               Back
@@ -283,7 +283,7 @@ const ShippingAddress = () => {
             <button
               onClick={handleFinalProceed}
               disabled={!selectedAddress}
-              className={`px-8 py-3 rounded-lg font-semibold transition-colors ${
+              className={`px-8 py-3 rounded-lg text-sm font-semibold transition-colors ${
                 selectedAddress
                   ? 'bg-blue-500 text-white hover:bg-blue-600'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
@@ -309,7 +309,7 @@ const ShippingAddress = () => {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-6xl mx-auto px-4">
         {/* Progress Bar */}
-        <div className="bg-blue-50 py-6 mb-8 rounded-lg">
+        <div className="mt-12 md:mt-16 bg-blue-50 py-6 mb-8 rounded-lg">
           <div className="flex items-center justify-center space-x-4 md:space-x-8">
             <button
               onClick={() => navigate('/cart')}
@@ -361,7 +361,7 @@ const ShippingAddress = () => {
         </div>
 
         {/* Page Title */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-8">
           <span className="text-blue-900">Shipping</span>{" "}
           <span className="text-blue-500">Address</span>
         </h1>
@@ -372,7 +372,7 @@ const ShippingAddress = () => {
             <form onSubmit={handleFormSubmit}>
               {/* Contact Details Section */}
               <div className="mb-8">
-                <h2 className="text-xl font-semibold text-blue-900 mb-4">
+                <h2 className="text-lg font-semibold text-blue-900 mb-4">
                   Contact Details
                 </h2>
                 
@@ -429,7 +429,7 @@ const ShippingAddress = () => {
 
               {/* Address Section */}
               <div className="mb-8">
-                <h2 className="text-xl font-semibold text-blue-900 mb-4">
+                <h2 className="text-lg font-semibold text-blue-900 mb-4">
                   Address
                 </h2>
                 
@@ -445,7 +445,7 @@ const ShippingAddress = () => {
                     maxLength="110"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y"
                   />
-                  <div className="text-right text-sm text-gray-500 mt-1">
+                  <div className="text-right text-xs text-gray-500 mt-1">
                     {formData.address.length}/110
                   </div>
                 </div>
@@ -494,14 +494,14 @@ const ShippingAddress = () => {
                 <button
                   type="button"
                   onClick={handleBack}
-                  className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-semibold"
+                  className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold"
                 >
                   <FaArrowLeft />
                   Back
                 </button>
                 <button
                   type="submit"
-                  className="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold"
+                  className="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-semibold"
                 >
                   Proceed
                 </button>
@@ -516,14 +516,14 @@ const ShippingAddress = () => {
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                   <FaFileInvoice className="text-blue-600 text-2xl" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                <h3 className="text-base font-semibold text-gray-800 mb-2">
                   Register as Business with{" "}
                   <span className="text-blue-600">Sparelo.com</span>
                 </h3>
-                <p className="text-sm text-gray-600 mb-4">
+                <p className="text-xs text-gray-600 mb-4">
                   Get exclusive business benefits and bulk pricing
                 </p>
-                <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs font-medium">
                   Register Now
                 </button>
               </div>

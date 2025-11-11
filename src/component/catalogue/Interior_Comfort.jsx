@@ -309,14 +309,14 @@ const Interior_Comfort = () => {
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -325,7 +325,7 @@ const Interior_Comfort = () => {
 
             {/* ✅ SEO Section */}
             <section className="bg-white text-gray-800 py-10 px-6 max-w-5xl mx-auto rounded-2xl shadow-md">
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <h2 className="text-2xl md:text-3xl font-bold text-red-700 border-b-2 border-red-300 inline-block pb-2">
                   {/* About Section Heading */}
                 </h2>
@@ -342,9 +342,9 @@ const Interior_Comfort = () => {
                   </button>
                 </div>
               </div>
-            </section><section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-6 md:p-10 rounded-2xl shadow-md transition-all duration-300 my-10">
+            </section><section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:p-6 rounded-2xl shadow-md transition-all duration-300 my-10">
               <div
-                className={`space-y-6 overflow-hidden transition-all duration-500 ${expanded ? "max-h-full" : "max-h-[400px]"
+                className={`space-y-4 overflow-hidden transition-all duration-500 ${expanded ? "max-h-full" : "max-h-[400px]"
                   }`}
               >
                 <p>The following accessories can refresh the compartment inside an automobile:</p>

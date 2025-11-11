@@ -16,23 +16,23 @@ const Breadcrumbs = () => {
     : "Catalog";
 
   return (
-    <nav className="mb-6">
-      <ol className="flex items-center space-x-2 text-md font-semibold text-gray-600">
+    <nav className="mb-4 sm:mb-6">
+      <ol className="flex items-center space-x-1.5 sm:space-x-2 text-xs sm:text-sm font-medium text-gray-600 flex-wrap">
         <li>
-          <Link to="/" className="hover:text-red-600">
+          <Link to="/" className="hover:text-red-600 transition-colors">
             Home
           </Link>
         </li>
-        <li><span>/</span></li>
+        <li><span className="text-gray-400">/</span></li>
         <li>
-          <Link to="/catalog" className="hover:text-red-600">
+          <Link to="/catalog" className="hover:text-red-600 transition-colors">
             Catalog
           </Link>
         </li>
         {categorySlug && (
           <>
-            <li><span>/</span></li>
-            <li className="text-gray-800">{categoryName}</li>
+            <li><span className="text-gray-400">/</span></li>
+            <li className="text-gray-800 font-semibold">{categoryName}</li>
           </>
         )}
       </ol>

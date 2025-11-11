@@ -39,23 +39,19 @@ export default function SearchByCategory() {
   const visibleCategories = showAll ? categories : categories.slice(0, 10);
 
   return (
-    <section className="py-10 px-6 bg-gradient-to-br from-sky-50 via-white to-sky-100 rounded-3xl shadow-inner relative overflow-hidden">
-      {/* Decorative Blobs */}
-      <div className="absolute top-0 left-0 w-60 h-60 bg-sky-200 opacity-30 rounded-full blur-3xl -translate-x-20 -translate-y-10"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-pink-200 opacity-30 rounded-full blur-3xl translate-x-10 translate-y-10"></div>
-
+    <section className="py-6 px-4">
       {/* Header */}
-      <div className="flex flex-col items-center mb-14 relative z-10">
-        <h3 className="text-4xl font-bold text-gray-800 text-center tracking-tight">
+      <div className="flex flex-col items-center mb-8">
+        <h3 className="text-2xl font-bold text-gray-800 text-center tracking-tight">
           Search by <span className="bg-red-600 text-transparent bg-clip-text">Category</span>
         </h3>
-        <p className="text-gray-600 text-center max-w-2xl mt-3 text-lg">
+        <p className="text-gray-600 text-center max-w-2xl mt-2 text-sm">
           Discover high-quality car parts and accessories organized into convenient categories for your vehicle.
         </p>
       </div>
 
       {/* Category Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 relative z-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {visibleCategories.map((cat, index) => (
           <motion.a
             key={cat.title}
@@ -63,12 +59,12 @@ export default function SearchByCategory() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className="group flex flex-col items-center p-6 bg-white/70 backdrop-blur-xl border border-gray-200 rounded-3xl shadow-md hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 hover:bg-white"
+            className="group flex flex-col items-center border-0 outline-none"
           >
-            <div className="w-20 h-20 mb-4 flex items-center justify-center bg-gradient-to-br from-sky-100 to-pink-100 rounded-2xl group-hover:scale-110 transition-transform duration-300 shadow-inner">
-              <img src={cat.img} alt={cat.title} className="w-12 h-12 object-contain" />
+            <div className="w-16 h-16 mb-2 flex items-center justify-center border-0">
+              <img src={cat.img} alt={cat.title} className="w-10 h-10 object-contain border-0" />
             </div>
-            <span className="text-center font-semibold text-gray-700 group-hover:text-sky-600 transition text-sm">
+            <span className="text-center font-semibold text-gray-700 text-xs border-0">
               {cat.title}
             </span>
           </motion.a>
@@ -76,10 +72,10 @@ export default function SearchByCategory() {
       </div>
 
       {/* View More Button */}
-      <div className="flex justify-center mt-14 relative z-10">
+      <div className="flex justify-center mt-8">
         <button
           onClick={() => setShowAll(!showAll)}
-          className="px-8 py-3 bg-gradient-to-r from-sky-500 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105"
+          className="px-6 py-2 bg-gradient-to-r from-sky-500 to-pink-500 text-white text-sm font-medium rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105"
         >
           {showAll ? "View Less" : "View More"}
         </button>
@@ -87,3 +83,341 @@ export default function SearchByCategory() {
     </section>
   );
 }
+
+
+
+// "use client";
+// import React, { useRef, useEffect, useState } from "react";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Autoplay, Navigation, Pagination } from "swiper/modules";
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
+// import { Link } from "react-router-dom";
+
+// // Category data with real product images from boodmo.com
+// const categories = [
+//   { 
+//     title: "AIR CONDITIONING", 
+//     href: "/catalog/air_conditioning/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/db9dad4.jpg" // Receiver Drier
+//   },
+//   { 
+//     title: "BEARINGS", 
+//     href: "/catalog/bearings/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/40e95ca.jpg" // Big End Bearing
+//   },
+//   { 
+//     title: "BELTS CHAINS ROLLERS", 
+//     href: "/catalog/drive_belts/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/ddbeb81.jpg" // Belt
+//   },
+//   { 
+//     title: "BODY PARTS", 
+//     href: "/catalog/body/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/40e6a4c.jpg" // Bumper
+//   },
+//   { 
+//     title: "BRAKE SYSTEM", 
+//     href: "/catalog/brakes/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/5301830.jpg" // Brake Pads
+//   },
+//   { 
+//     title: "CAR ACCESSORIES", 
+//     href: "/catalog/car_accessories/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/ab143a7.webp" // Body Accessories
+//   },
+//   { 
+//     title: "CLUTCH SYSTEM", 
+//     href: "/catalog/clutch/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/e8cb288.jpg" // Clutch
+//   },
+//   { 
+//     title: "CONTROL CABLES", 
+//     href: "/catalog/control_cables/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/7455b44.jpg" // Cable Strap
+//   },
+//   { 
+//     title: "ELECTRICAL COMPONENTS", 
+//     href: "/catalog/electric_components/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/d5b3ac7.jpg" // Horn
+//   },
+//   { 
+//     title: "ENGINE", 
+//     href: "/catalog/engine/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/8fea232.jpg" // Air Supply
+//   },
+//   { 
+//     title: "ENGINE COOLING", 
+//     href: "/catalog/cooling_system/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/e215fcc.jpg" // Radiator Mounting
+//   },
+//   { 
+//     title: "EXHAUST SYSTEM", 
+//     href: "/catalog/exhaust/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/d1e33d6.jpg" // Cooler EGR
+//   },
+//   { 
+//     title: "FILTERS", 
+//     href: "/catalog/filters/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/a16bbf6.jpg" // Air Filter
+//   },
+//   { 
+//     title: "FUEL SUPPLY SYSTEM", 
+//     href: "/catalog/fuelsystem/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/49ed220.jpg" // Fuel Tank
+//   },
+//   { 
+//     title: "GASKETS & SEALS", 
+//     href: "/catalog/Gasket_SealingRings/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/14b8753.jpg" // O-Ring
+//   },
+//   { 
+//     title: "INTERIOR & COMFORT", 
+//     href: "/catalog/interior_comfort/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/05a2b84.jpg" // Interior Mirror
+//   },
+//   { 
+//     title: "LIGHTING", 
+//     href: "/catalog/lighting/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/53380d3.webp" // Light
+//   },
+//   { 
+//     title: "MAINTENANCE PARTS", 
+//     href: "/catalog/maintenance_service_parts/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/4614ecf.webp" // Engine Oil
+//   },
+//   { 
+//     title: "OILS & FLUIDS", 
+//     href: "/catalog/oilsfluids/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/4614ecf.webp" // Engine Oil
+//   },
+//   { 
+//     title: "PIPES & HOSES", 
+//     href: "/catalog/pipes_hoses/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/e0b2a63.jpg" // Sunroof Drain Hose
+//   },
+//   { 
+//     title: "SENSORS & CONTROL", 
+//     href: "/catalog/sensors_control_units/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/2676bd2.jpg" // Control Unit
+//   },
+//   { 
+//     title: "STEERING", 
+//     href: "/catalog/steering/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/15cfbae.svg" // Steering (keeping SVG as fallback)
+//   },
+//   { 
+//     title: "SUSPENSION & ARMS", 
+//     href: "/catalog/suspension/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/f26073e.jpg" // Shock Absorber
+//   },
+//   { 
+//     title: "TOWBAR PARTS", 
+//     href: "/catalog/towbar/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/98b48d2.jpg" // Towhook Cover
+//   },
+//   { 
+//     title: "TRANSMISSION", 
+//     href: "/catalog/transmission/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/21ce121.jpg" // Automatic Transmission Filter
+//   },
+//   { 
+//     title: "TRIMS", 
+//     href: "/catalog/trims/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/beccd06.jpg" // Bumper Trim
+//   },
+//   { 
+//     title: "UNIVERSAL", 
+//     href: "/catalog/universal/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/af8d099.jpg" // Bolt
+//   },
+//   { 
+//     title: "WHEELS", 
+//     href: "/catalog/wheels/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/430177a.jpg" // Spare Wheel Carrier
+//   },
+//   { 
+//     title: "WINDScreen CLEANING", 
+//     href: "/catalog/windscreen_cleaning_system/", 
+//     bgImg: "https://boodmo.com/media/cache/catalog_image/images/categories/1053d82.jpg" // Wiper Blade
+//   },
+// ];
+
+// export default function SearchByCategory() {
+//   const swiperRef = useRef(null);
+//   const [activeDot, setActiveDot] = useState(0);
+
+//   useEffect(() => {
+//     // Initialize first dot as active
+//     const dots = document.querySelectorAll('.category-dot');
+//     if (dots.length > 0) {
+//       dots[0].classList.add('bg-red-600');
+//       dots[0].classList.remove('bg-gray-300');
+//     }
+//   }, []);
+
+//   const updateDots = (realIndex) => {
+//     const visibleSlides = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
+//     const dotsToShow = Math.min(visibleSlides, 3);
+//     const activeIndex = realIndex % dotsToShow;
+//     setActiveDot(activeIndex);
+    
+//     const dots = document.querySelectorAll('.category-dot');
+//     dots.forEach((dot, index) => {
+//       if (index < dotsToShow) {
+//         dot.style.display = 'block';
+//         if (index === activeIndex) {
+//           dot.classList.add('bg-red-600');
+//           dot.classList.remove('bg-gray-300');
+//         } else {
+//           dot.classList.remove('bg-red-600');
+//           dot.classList.add('bg-gray-300');
+//         }
+//       } else {
+//         dot.style.display = 'none';
+//       }
+//     });
+//   };
+
+//   return (
+//     <section className="relative bg-white py-8 md:py-12 lg:py-16 overflow-hidden">
+//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+//           {/* Left Content Area */}
+//           <div className="w-full lg:w-2/5 relative">
+//             {/* Vertical CATEGORY Label */}
+//             {/* <div className="hidden lg:flex absolute -left-8 top-0 bottom-0 items-center">
+//               <span className="text-gray-300 text-6xl font-bold uppercase tracking-wider writing-vertical-rl transform rotate-180">
+//                 CATEGORY
+//               </span>
+//             </div> */}
+
+//             {/* Welcome Content */}
+//             <div className="pl-0 lg:pl-12">
+//               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 uppercase mb-4 md:mb-6 leading-tight">
+//                 WELCOME TO <span className="text-red-600">AUTOPARTS</span>
+//               </h2>
+//               <p className="text-gray-600 text-base md:text-lg mb-6 md:mb-8 leading-relaxed">
+//                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+//               </p>
+
+//               {/* Carousel Indicators & Navigation */}
+//               <div className="flex items-center gap-4">
+//                 {/* Custom Pagination Dots */}
+//                 <div className="flex gap-2">
+//                   {[0, 1, 2].map((index) => (
+//                     <div
+//                       key={index}
+//                       className="w-2 h-2 rounded-full bg-gray-300 category-dot"
+//                       data-index={index}
+//                     />
+//                   ))}
+//                 </div>
+
+//                 {/* Navigation Arrows */}
+//                 <div className="flex gap-2 ml-auto">
+//                   <button
+//                     onClick={() => swiperRef.current?.slidePrev()}
+//                     className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white flex items-center justify-center hover:border-red-600 hover:text-red-600 transition-all duration-300"
+//                     aria-label="Previous slide"
+//                   >
+//                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+//                     </svg>
+//                   </button>
+//                   <button
+//                     onClick={() => swiperRef.current?.slideNext()}
+//                     className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white flex items-center justify-center hover:border-red-600 hover:text-red-600 transition-all duration-300"
+//                     aria-label="Next slide"
+//                   >
+//                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+//                     </svg>
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Right Content Area - Swiper Carousel */}
+//           <div className="w-full lg:w-3/5">
+//             <Swiper
+//               modules={[Autoplay, Navigation, Pagination]}
+//               spaceBetween={20}
+//               slidesPerView={1}
+//               loop={true}
+//               autoplay={{
+//                 delay: 4000,
+//                 disableOnInteraction: false,
+//                 pauseOnMouseEnter: true
+//               }}
+//               onSwiper={(swiper) => {
+//                 swiperRef.current = swiper;
+//               }}
+//               onSlideChange={(swiper) => {
+//                 updateDots(swiper.realIndex);
+//               }}
+//               breakpoints={{
+//                 640: {
+//                   slidesPerView: 2,
+//                   spaceBetween: 20
+//                 },
+//                 1024: {
+//                   slidesPerView: 3,
+//                   spaceBetween: 20
+//                 }
+//               }}
+//               className="category-swiper"
+//             >
+//               {categories.map((category, index) => (
+//                 <SwiperSlide key={index}>
+//                   <Link
+//                     to={category.href}
+//                     className="group block relative h-56 md:h-64 lg:h-72 rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-200 hover:border-red-500"
+//                   >
+//                     {/* Product Image */}
+//                     <div className="absolute inset-0 flex items-center justify-center p-4 bg-transparent group-hover:bg-gray-50 transition-colors duration-300">
+//                       <img
+//                         src={category.bgImg}
+//                         alt={category.title}
+//                         className="w-full h-full object-contain transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
+//                         loading="lazy"
+//                       />
+//                     </div>
+
+//                     {/* Overlay Gradient - Only at bottom */}
+//                     <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+//                     {/* Category Title Overlay */}
+//                     <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+//                       <h3 className="text-gray-800 group-hover:text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide drop-shadow-lg transition-colors duration-300">
+//                         {category.title}
+//                       </h3>
+//                     </div>
+//                   </Link>
+//                 </SwiperSlide>
+//               ))}
+//             </Swiper>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Custom Styles */}
+//       <style>{`
+//         .writing-vertical-rl {
+//           writing-mode: vertical-rl;
+//         }
+//         .category-swiper .swiper-slide {
+//           height: auto;
+//         }
+//         .category-dot {
+//           transition: all 0.3s ease;
+//         }
+//       `}</style>
+//     </section>
+//   );
+// }
+
+
+

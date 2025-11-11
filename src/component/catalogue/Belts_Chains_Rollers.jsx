@@ -110,14 +110,14 @@ const Belts_Chains_Rollers = () => {
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -125,23 +125,23 @@ const Belts_Chains_Rollers = () => {
             </div>
 
             {/* ✅ SEO Section */}
-            <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-6 md:p-10 rounded-2xl shadow-md transition-all duration-300">
+            <section className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:p-6 rounded-2xl shadow-md transition-all duration-300">
               <div
                 className={`transition-all duration-500 overflow-hidden ${expanded ? "max-h-full" : "max-h-[500px]"
                   }`}
               >
-                <div className="space-y-6">
-                  <h2 className="text-2xl font-semibold">
+                <div className="space-y-4">
+                  <h2 className="text-lg font-semibold">
                     Buy online belts chains and rollers parts in India
                   </h2>
-                  <p>
+                  <p className="text-sm">
                     On cars with internal combustion engines, the crankshaft works in one
                     connection with the camshaft. This is necessary for the timely opening
                     of the intake and exhaust valves with the simultaneous injection of a
                     portion of the fuel mixture into the combustion chambers, the emission
                     of exhaust gases into the exhaust manifold.
                   </p>
-                  <p>
+                  <p className="text-sm">
                     Both shafts are connected by a belt or chain. All elements wear out
                     over time, which causes frictional forces and mechanical loads. To
                     understand when you need to change the timing belt, you need to
@@ -149,32 +149,32 @@ const Belts_Chains_Rollers = () => {
                     inspections. And with significant runs, it is better to do them more
                     often.
                   </p>
-                  <p>
+                  <p className="text-sm">
                     New belts, rollers, chains and tensioners (drive belt, timing belt)
                     must be completely identical to the parts to be replaced.
                   </p>
-                  <p>
+                  <p className="text-sm">
                     Current new tendencies contribute to the transition of all industries
                     to the Internet. This transition also applies to auto parts stores. If
                     you are looking for a place to buy the necessary parts for your auto,
                     welcome to Boodmo.
                   </p>
-                  <p>
+                  <p className="text-sm">
                     Before buying the necessary part, you should make sure that it is
                     exactly what is needed to eliminate the problem and find out how it
                     works and what its work consists of.
                   </p>
-                  <p>
+                  <p className="text-sm">
                     For those who are looking for belts, chains and rollers parts, it is
                     necessary to go to the appropriate section on the website and choose
                     the desired option. Among almost 151,500 offers in availability, you
                     will definitely find the necessary modification for your car model.
                   </p>
 
-                  <h2 className="text-2xl font-semibold">
+                  <h2 className="text-lg font-semibold">
                     Belts Chains and Rollers Parts
                   </h2>
-                  <p>The most popular are:</p>
+                  <p className="text-sm">The most popular are:</p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Polyclinic belt</li>
                     <li>Tensioner</li>
@@ -182,7 +182,7 @@ const Belts_Chains_Rollers = () => {
                     <li>Tension roller</li>
                     <li>Toothed belt and others</li>
                   </ul>
-                  <p>
+                  <p className="text-sm">
                     You will be delighted with the high level of service, and the catalog
                     of offers will pleasantly surprise you with its assortment.
                   </p>
@@ -190,7 +190,7 @@ const Belts_Chains_Rollers = () => {
                   <h3 className="text-xl font-semibold">
                     Only original spare parts for your car in the Boodmo
                   </h3>
-                  <p>
+                  <p className="text-sm">
                     The performance of your car directly depends on the quality of the
                     replaced parts. As for the goods purchased on Boodmo, you can rest
                     assured. The online store guarantees the quality of all presented
@@ -200,12 +200,12 @@ const Belts_Chains_Rollers = () => {
                     little by installing analog parts, then their shelf life does not
                     differ from the original ones.
                   </p>
-                  <p>
+                  <p className="text-sm">
                     Be sure that it is from us that you can buy a timing chain, timing
                     belt tensioner and other elements that will optimally fit your car in
                     terms of shape and size.
                   </p>
-                  <p>
+                  <p className="text-sm">
                     Thanks to the constant quality control of the goods supplied by us,
                     you will be able to quickly restore your vehicle. In addition to the
                     fact that we have a wide range of belts, rollers, chains and
@@ -216,7 +216,7 @@ const Belts_Chains_Rollers = () => {
                   <h3 className="text-xl font-semibold">
                     Price for belts chains and rollers parts: how much does it cost?
                   </h3>
-                  <p>
+                  <p className="text-sm">
                     A huge assortment of products provides the maximum possible price
                     range for spare parts and their components. In addition, the store is
                     famous for its democratic prices and loyalty to customers. Price for

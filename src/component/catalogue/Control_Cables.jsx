@@ -122,14 +122,14 @@ export const Control_Cables = () => {
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">{product.name}</span>
+                  <span className="text-gray-800 font-medium text-xs">{product.name}</span>
                 </Link>
               ))}
             </div>
@@ -140,7 +140,7 @@ export const Control_Cables = () => {
                 className={`seo-text__body transition-all duration-500 overflow-hidden ${expanded ? "max-h-full" : "max-h-[500px]"
                   }`}
               >
-                <div className="space-y-6 text-gray-800 dark:text-gray-200">
+                <div className="space-y-4 text-gray-800 dark:text-gray-200">
                   <p>
                     Cables are an essential part of the complex network of components that make up an automotive system. They are used to transmit mechanical force or motion from one point to another, enabling various functions and operations within a vehicle. In this article, we will take a closer look at some common types of automotive cables, including seat cables, temperature control cables, accelerator cables, bonnet release cables, brake cables, clutch cables, door lock links, fuel lid cables, and gear shift cables.
                   </p>

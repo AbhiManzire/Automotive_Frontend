@@ -67,14 +67,14 @@ const ReplacementParts = () => {
           <a
             key={index}
             href={part.link}
-            className="flex flex-col items-center bg-white shadow hover:shadow-lg rounded-xl p-4 transition-transform transform hover:scale-105"
+            className="flex flex-col items-center bg-white shadow hover:shadow-lg rounded-xl p-2 transition-transform transform hover:scale-105"
           >
             <img
               src={part.img}
               alt={part.name}
-              className="w-16 h-16 object-contain mb-3"
+              className="w-14 h-14 object-contain mb-2"
             />
-            <span className="text-sm text-gray-700 text-center font-medium">
+            <span className="text-xs text-gray-700 text-center font-medium">
               {part.name}
             </span>
           </a>

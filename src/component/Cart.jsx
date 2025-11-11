@@ -37,8 +37,8 @@ const Cart = () => {
                 <FaShoppingCart className="text-primary-500 text-5xl" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
-            <p className="text-gray-600 mb-8 text-lg">Looks like you haven't added any items to your cart yet.</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
+            <p className="text-gray-600 mb-8 text-base">Looks like you haven't added any items to your cart yet.</p>
             <Link
               to="/catalog"
               className="btn-primary inline-flex items-center gap-2"
@@ -56,15 +56,20 @@ const Cart = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 py-8">
       <div className="section-container">
         {/* Progress Bar */}
-        <div className="mb-8 bg-white rounded-xl shadow-soft p-6">
-          <div className="flex items-center justify-center space-x-2 sm:space-x-4 md:space-x-8 overflow-x-auto pb-2">
-            <div className="flex flex-col items-center min-w-[80px]">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-full flex items-center justify-center mb-2 shadow-lg ring-4 ring-primary-100">
-                <FaShoppingCart className="text-white text-lg" />
+        <div className="mt-8 md:mt-12 mb-8 bg-white rounded-xl shadow-soft p-4 sm:p-5 md:p-6">
+          <div className="flex items-center justify-between sm:justify-center gap-1 sm:gap-2 md:gap-4 lg:gap-6 xl:gap-8 overflow-x-auto pb-2 scrollbar-hide">
+            {/* Cart Step - Active */}
+            <div className="flex flex-col items-center flex-shrink-0 min-w-[60px] sm:min-w-[70px] md:min-w-[80px]">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-full flex items-center justify-center mb-1 sm:mb-2 shadow-lg ring-2 sm:ring-4 ring-primary-100">
+                <FaShoppingCart className="text-white text-sm sm:text-base md:text-lg" />
               </div>
-              <span className="text-sm text-primary-600 font-semibold">Cart</span>
+              <span className="text-xs sm:text-sm text-primary-600 font-semibold whitespace-nowrap">Cart</span>
             </div>
-            <div className="h-1 w-12 sm:w-16 md:w-24 bg-gradient-to-r from-primary-600 to-primary-400 rounded-full"></div>
+            
+            {/* Connector Line */}
+            <div className="h-1 flex-1 sm:flex-none sm:w-8 md:w-12 lg:w-16 xl:w-24 bg-gradient-to-r from-primary-600 to-primary-400 rounded-full"></div>
+            
+            {/* Address Step */}
             <button
               onClick={() => {
                 const savedAddress = localStorage.getItem('shippingAddress');
@@ -72,14 +77,18 @@ const Cart = () => {
                   navigate('/checkout/address');
                 }
               }}
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-all transform hover:scale-105 min-w-[80px]"
+              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-all transform hover:scale-105 flex-shrink-0 min-w-[60px] sm:min-w-[70px] md:min-w-[80px]"
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full flex items-center justify-center mb-2 shadow-md hover:shadow-lg transition-all">
-                <FaMapMarkerAlt className="text-gray-600 text-lg" />
+              <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full flex items-center justify-center mb-1 sm:mb-2 shadow-md hover:shadow-lg transition-all">
+                <FaMapMarkerAlt className="text-gray-600 text-sm sm:text-base md:text-lg" />
               </div>
-              <span className="text-sm text-gray-500 font-medium">Address</span>
+              <span className="text-xs sm:text-sm text-gray-500 font-medium whitespace-nowrap">Address</span>
             </button>
-            <div className="h-1 w-12 sm:w-16 md:w-24 bg-gradient-to-r from-gray-300 to-gray-200 rounded-full"></div>
+            
+            {/* Connector Line */}
+            <div className="h-1 flex-1 sm:flex-none sm:w-8 md:w-12 lg:w-16 xl:w-24 bg-gradient-to-r from-gray-300 to-gray-200 rounded-full"></div>
+            
+            {/* Review Step */}
             <button
               onClick={() => {
                 const savedAddress = localStorage.getItem('shippingAddress');
@@ -87,14 +96,18 @@ const Cart = () => {
                   navigate('/checkout/review');
                 }
               }}
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-all transform hover:scale-105 min-w-[80px]"
+              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-all transform hover:scale-105 flex-shrink-0 min-w-[60px] sm:min-w-[70px] md:min-w-[80px]"
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full flex items-center justify-center mb-2 shadow-md hover:shadow-lg transition-all">
-                <FaFileAlt className="text-gray-600 text-lg" />
+              <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full flex items-center justify-center mb-1 sm:mb-2 shadow-md hover:shadow-lg transition-all">
+                <FaFileAlt className="text-gray-600 text-sm sm:text-base md:text-lg" />
               </div>
-              <span className="text-sm text-gray-500 font-medium">Review</span>
+              <span className="text-xs sm:text-sm text-gray-500 font-medium whitespace-nowrap">Review</span>
             </button>
-            <div className="h-1 w-12 sm:w-16 md:w-24 bg-gradient-to-r from-gray-300 to-gray-200 rounded-full"></div>
+            
+            {/* Connector Line */}
+            <div className="h-1 flex-1 sm:flex-none sm:w-8 md:w-12 lg:w-16 xl:w-24 bg-gradient-to-r from-gray-300 to-gray-200 rounded-full"></div>
+            
+            {/* Pay Step */}
             <button
               onClick={() => {
                 const savedAddress = localStorage.getItem('shippingAddress');
@@ -102,20 +115,20 @@ const Cart = () => {
                   navigate('/checkout/payment');
                 }
               }}
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-all transform hover:scale-105 min-w-[80px]"
+              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-all transform hover:scale-105 flex-shrink-0 min-w-[60px] sm:min-w-[70px] md:min-w-[80px]"
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full flex items-center justify-center mb-2 shadow-md hover:shadow-lg transition-all">
-                <FaCreditCard className="text-gray-600 text-lg" />
+              <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full flex items-center justify-center mb-1 sm:mb-2 shadow-md hover:shadow-lg transition-all">
+                <FaCreditCard className="text-gray-600 text-sm sm:text-base md:text-lg" />
               </div>
-              <span className="text-sm text-gray-500 font-medium">Pay</span>
+              <span className="text-xs sm:text-sm text-gray-500 font-medium whitespace-nowrap">Pay</span>
             </button>
           </div>
         </div>
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Shopping Cart</h1>
-          <p className="text-gray-600 text-lg">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Shopping Cart</h1>
+          <p className="text-gray-600 text-base">
             {getTotalItems()} {getTotalItems() === 1 ? 'item' : 'items'} in your cart
           </p>
         </div>
@@ -126,10 +139,10 @@ const Cart = () => {
             <div className="card">
               <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-bold text-gray-900">Cart Items</h2>
+                  <h2 className="text-lg font-bold text-gray-900">Cart Items</h2>
                   <button
                     onClick={clearCart}
-                    className="text-primary-600 hover:text-primary-700 text-sm font-semibold flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-primary-50 transition-all"
+                    className="text-primary-600 hover:text-primary-700 text-xs font-semibold flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-primary-50 transition-all"
                   >
                     <FaTrash /> Clear Cart
                   </button>
@@ -155,17 +168,17 @@ const Cart = () => {
 
                         {/* Product Details */}
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-1">{item.name}</h3>
-                          <p className="text-sm text-gray-600 mb-3">{item.brand}</p>
+                          <h3 className="text-base font-semibold text-gray-900 mb-1">{item.name}</h3>
+                          <p className="text-xs text-gray-600 mb-3">{item.brand}</p>
                           
                           {/* Price */}
                           <div className="flex items-center gap-3 mb-4 flex-wrap">
-                            <span className="text-xl font-bold text-primary-600">
+                            <span className="text-lg font-bold text-primary-600">
                               ₹{item.discountPrice ? item.discountPrice.toFixed(2) : item.price.toFixed(2)}
                             </span>
                             {item.discountPrice && (
                               <>
-                                <span className="text-sm line-through text-gray-500">
+                                <span className="text-xs line-through text-gray-500">
                                   ₹{item.price.toFixed(2)}
                                 </span>
                                 <span className="text-xs bg-accent-100 text-accent-700 px-2 py-1 rounded-full font-semibold">
@@ -177,7 +190,7 @@ const Cart = () => {
 
                           {/* Quantity Controls */}
                           <div className="flex items-center gap-4">
-                            <span className="text-sm text-gray-600 font-medium">Quantity:</span>
+                            <span className="text-xs text-gray-600 font-medium">Quantity:</span>
                             <div className="flex items-center bg-gray-100 rounded-lg p-1">
                               <button
                                 onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
@@ -200,8 +213,8 @@ const Cart = () => {
 
                           {/* Item Total */}
                           <div className="mt-4 pt-3 border-t border-gray-100">
-                            <span className="text-sm text-gray-600">Item Total: </span>
-                            <span className="text-lg font-bold text-gray-900">
+                            <span className="text-xs text-gray-600">Item Total: </span>
+                            <span className="text-base font-bold text-gray-900">
                               ₹{itemTotal.toFixed(2)}
                             </span>
                           </div>
@@ -228,39 +241,39 @@ const Cart = () => {
           {/* Order Summary */}
           <div className="lg:w-96">
             <div className="card sticky top-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Order Summary</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
               
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-600">Subtotal ({getTotalItems()} items)</span>
-                  <span className="font-semibold text-gray-900">₹{getSubtotal().toFixed(2)}</span>
+                  <span className="text-sm text-gray-600">Subtotal ({getTotalItems()} items)</span>
+                  <span className="text-sm font-semibold text-gray-900">₹{getSubtotal().toFixed(2)}</span>
                 </div>
                 
                 {getTotalDiscount() > 0 && (
                   <div className="flex justify-between items-center py-2 bg-accent-50 rounded-lg px-3">
-                    <span className="text-gray-600">Discount</span>
-                    <span className="text-accent-600 font-bold">- ₹{getTotalDiscount().toFixed(2)}</span>
+                    <span className="text-sm text-gray-600">Discount</span>
+                    <span className="text-sm text-accent-600 font-bold">- ₹{getTotalDiscount().toFixed(2)}</span>
                   </div>
                 )}
                 
                 <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className={`font-semibold ${shippingCharges === 0 ? 'text-accent-600' : 'text-gray-900'}`}>
+                  <span className="text-sm text-gray-600">Shipping</span>
+                  <span className={`text-sm font-semibold ${shippingCharges === 0 ? 'text-accent-600' : 'text-gray-900'}`}>
                     {shippingCharges === 0 ? 'FREE' : `₹${shippingCharges.toFixed(2)}`}
                   </span>
                 </div>
                 
                 <div className="border-t-2 border-gray-200 pt-4 mt-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-xl font-bold text-gray-900">Total</span>
-                    <span className="text-2xl font-bold text-primary-600">₹{finalTotal.toFixed(2)}</span>
+                    <span className="text-lg font-bold text-gray-900">Total</span>
+                    <span className="text-xl font-bold text-primary-600">₹{finalTotal.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
 
               {getTotalPrice() < 500 && (
                 <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-4 mb-6">
-                  <p className="text-sm text-yellow-800 font-medium">
+                  <p className="text-xs text-yellow-800 font-medium">
                     💡 Add ₹{(500 - getTotalPrice()).toFixed(2)} more for <span className="font-bold">FREE shipping!</span>
                   </p>
                 </div>
@@ -269,7 +282,7 @@ const Cart = () => {
               <div className="space-y-3">
                 <button
                   onClick={() => navigate('/checkout/address')}
-                  className="btn-primary w-full flex items-center justify-center gap-2 text-lg"
+                  className="btn-primary w-full flex items-center justify-center gap-2 text-base"
                 >
                   <FaShoppingCart />
                   Proceed to Checkout

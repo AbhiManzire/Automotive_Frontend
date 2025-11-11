@@ -178,19 +178,19 @@ const AirConditioning = () => {
 
           <div className="flex-1">
             {/* ✅ Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 my-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 my-6">
               {filteredProducts.map((product) => (
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -198,10 +198,10 @@ const AirConditioning = () => {
             </div>
 
             {/* ✅ SEO Section */}
-            <section className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-6 md:p-10 rounded-2xl shadow-md transition-all duration-300">
-              <div className="space-y-6">
+            <section className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:p-6 rounded-2xl shadow-md transition-all duration-300">
+              <div className="space-y-4">
                 {/* Intro Paragraph */}
-                <p>
+                <p className="text-sm">
                   Basic necessities have been food, clothing, and shelter right from the beginning of the human race.
                   However, if you live in the scorching heat of northern India, where temperatures sometimes even touch the 50°C mark during summer,
                   you will agree that an air conditioner (AC) is the lone saviour in such conditions.
@@ -210,12 +210,12 @@ const AirConditioning = () => {
                 </p>
 
                 {/* Compressor */}
-                <h2 className="text-2xl font-semibold text-red-600">
+                <h2 className="text-lg font-semibold text-red-600">
                   <a href="https://boodmo.com/catalog/3555-compressor/" target="_blank" rel="noopener noreferrer">
                     Compressor
                   </a>
                 </h2>
-                <p>
+                <p className="text-sm">
                   The most important and significant part of the air conditioning system is the <strong>Compressor</strong>,
                   as the quality of cool air depends upon it. It carries out several key tasks in the functioning of an AC unit.
                   The compressor pressurises the refrigerant to generate cool air and manages temperature changes inside and outside the car.
@@ -224,12 +224,12 @@ const AirConditioning = () => {
                 </p>
 
                 {/* Condenser */}
-                <h2 className="text-2xl font-semibold text-red-600">
+                <h2 className="text-lg font-semibold text-red-600">
                   <a href="https://boodmo.com/catalog/3524-condenser/" target="_blank" rel="noopener noreferrer">
                     Condenser
                   </a>
                 </h2>
-                <p>
+                <p className="text-sm">
                   Generally, the AC condenser in any passenger vehicle is positioned in front of the radiator — earning it the nickname “mini radiator.”
                   The condenser is another crucial component after the compressor. When the compressor pressurises the refrigerant to produce cool air,
                   the condenser lowers the temperature and pressure of the hot gases generated from the refrigerant.
@@ -237,7 +237,7 @@ const AirConditioning = () => {
                 </p>
 
                 {/* Tube */}
-                <h2 className="text-2xl font-semibold text-red-600">Tube</h2>
+                <h2 className="text-lg font-semibold text-red-600">Tube</h2>
                 <p>
                   The <strong>Orifice Tube</strong> is found in cars equipped with an accumulator, while those with a thermal expansion valve use a receiver/dryer.
                   The tube sits between the condenser and evaporator, monitoring the pressure and temperature of the car’s AC system.
@@ -245,24 +245,24 @@ const AirConditioning = () => {
                 </p>
 
                 {/* Evaporator */}
-                <h2 className="text-2xl font-semibold text-red-600">
+                <h2 className="text-lg font-semibold text-red-600">
                   <a href="https://boodmo.com/catalog/4163-evaporator/" target="_blank" rel="noopener noreferrer">
                     Evaporator
                   </a>
                 </h2>
-                <p>
+                <p className="text-sm">
                   The <strong>Evaporator</strong> plays a substantial role in generating cold air from the air conditioner.
                   Located behind the dashboard, it cools the air with refrigerant before it exits the vents and enters your car’s cabin,
                   providing the refreshing cool air you enjoy.
                 </p>
 
                 {/* Air Filter */}
-                <h2 className="text-2xl font-semibold text-red-600">
+                <h2 className="text-lg font-semibold text-red-600">
                   <a href="https://boodmo.com/catalog/3330-cabin_filter/" target="_blank" rel="noopener noreferrer">
                     Air Filter
                   </a>
                 </h2>
-                <p>
+                <p className="text-sm">
                   Everyone prefers colder and cleaner air from the air conditioner, whether at home or in a car.
                   The <strong>Air Filter</strong> plays a key role in maintaining air quality by preventing dust, dirt, pollen, bacteria, and exhaust gases
                   from entering your car’s AC system. It also stops bugs, leaves, and other debris from clogging the system.

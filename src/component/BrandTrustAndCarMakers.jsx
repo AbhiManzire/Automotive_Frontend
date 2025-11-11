@@ -3,7 +3,71 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import { getVehicleImageUrl } from "../data/vehicleData";
+import { marutiModels } from "./Vehicles/Maruti";
+import { hyundaiModels } from "./Vehicles/Hyundai";
+import { tataModels } from "./Vehicles/Tata";
+import { mahindraModels } from "./Vehicles/Mahindra";
+import { chevroletModels } from "./Vehicles/Chevrolet";
+
+// Map of vehicle models by maker for direct access
+const vehicleModelsMap = {
+  MARUTI: marutiModels,
+  HYUNDAI: hyundaiModels,
+  TATA: tataModels,
+  MAHINDRA: mahindraModels,
+  CHEVROLET: chevroletModels,
+};
+
+// Helper function to get a representative car image for each maker
+const getMakerImage = (makerName) => {
+  // Try to get image from first popular model of each maker
+  const makerModelMap = {
+    "MARUTI": ["SWIFT", "ALTO", "800"],
+    "HYUNDAI": ["I20", "I10", "CRETA"],
+    "MAHINDRA": ["XUV 500", "XUV500", "BOLERO", "SCORPIO"],
+    "TATA": ["NEXON", "TIAGO", "HARRIER"],
+    "CHEVROLET": ["CRUZE", "BEAT", "AVEO"],
+    "HONDA": ["CITY", "AMAZE", "CIVIC"],
+    "SKODA": ["OCTAVIA", "RAPID", "SUPERB"],
+    "VW": ["POLO", "VENTO", "JETTA"],
+    "TOYOTA": ["INNOVA", "FORTUNER", "ETIOS"],
+    "NISSAN": ["MAGNITE", "MICRA", "SUNNY"],
+    "RENAULT": ["KWID", "DUSTER", "TRIBER"],
+    "FORD": ["ECOSPORT", "FIGO", "ENDEAVOUR"],
+    "FIAT": ["PUNTO", "LINEA", "PALIO"],
+    "KIA": ["SELTOS", "SONET", "CARNIVAL"],
+    "ASHOK LEYLAND": ["DOST", "PARTNER"],
+  };
   
+  // Try mapped models first
+  const modelNames = makerModelMap[makerName];
+  if (modelNames) {
+    for (const modelName of modelNames) {
+      // Try with full name first (e.g., "MARUTI SWIFT")
+      const fullModelName = `${makerName} ${modelName}`;
+      let imageUrl = getVehicleImageUrl(makerName, fullModelName);
+      if (!imageUrl) {
+        // Try with just model name
+        imageUrl = getVehicleImageUrl(makerName, modelName);
+      }
+      if (imageUrl) return imageUrl;
+    }
+  }
+  
+  // Fallback: Get first available model from the maker's models array
+  const models = vehicleModelsMap[makerName];
+  if (models && Array.isArray(models) && models.length > 0) {
+    const firstModel = models[0];
+    if (firstModel && firstModel.image) {
+      return firstModel.image;
+    }
+  }
+  
+  // Final fallback placeholder
+  return 'https://via.placeholder.com/200x120?text=' + makerName;
+};
+
 const brands = [
   { name: "PHC", logo: "https://boodmo.com/media/images/brand/4f106b0.webp", link: "/brands/3529-phc/" },
   { name: "DKMAX", logo: "https://boodmo.com/media/images/brand/ff1cc61.webp", link: "/brands/6341-dkmax/" },
@@ -37,6 +101,8 @@ const carMakers = [
   { name: "FORD", link: "/vehicles/ford/" },
   { name: "FIAT", link: "/vehicles/fiat/" },
   { name: "KIA", link: "/vehicles/kia/" },
+  { name: "ASHOK LEYLAND", link: "/vehicles/ashok-layland/" },
+  
 ];
 
 export default function BrandTrustAndCarMakers() {
@@ -108,18 +174,43 @@ export default function BrandTrustAndCarMakers() {
           </button>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {carMakers.map((maker) => (
-            <button
-              key={maker.name}
-              onClick={() => navigate(maker.link)}
-              className="bg-white border border-gray-200 rounded-xl py-4 px-3 text-base font-medium text-gray-700
-                         shadow-sm hover:shadow-md hover:border-sky-300 hover:bg-sky-50 hover:scale-105 transition-all duration-300"
-            >
-              {maker.name}
-            </button>
+        {/* Swiper for Car Makers */}
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={2}
+          slidesPerView={6}
+          loop
+          autoplay={{ delay: 0, disableOnInteraction: false }}
+          speed={4000}
+          className="w-full"
+          breakpoints={{
+            320: { slidesPerView: 2, spaceBetween: 8 },
+            640: { slidesPerView: 3, spaceBetween: 10 },
+            1024: { slidesPerView: 6, spaceBetween: 16 },
+          }}
+        >
+          {carMakers.map((maker, idx) => (
+            <SwiperSlide key={idx}>
+              <button
+                onClick={() => navigate(maker.link)}
+                className="rounded-xl p-3 flex flex-col items-center justify-center
+                           hover:scale-105 transition-all duration-300 group w-full"
+              >
+                <img
+                  src={getMakerImage(maker.name)}
+                  alt={maker.name}
+                  className="w-full h-16 object-contain mb-2"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/200x120?text=' + maker.name;
+                  }}
+                />
+                <span className="text-base font-medium text-gray-700 text-center">
+                  {maker.name}
+                </span>
+              </button>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </section>
     </div>
   );

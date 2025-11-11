@@ -275,7 +275,7 @@ const Payment = () => {
         return (
           <div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs font-medium text-gray-700 mb-2">
                 UPI ID <span className="text-red-500">*</span>
               </label>
               <input
@@ -284,7 +284,7 @@ const Payment = () => {
                 value={paymentData.upiId}
                 onChange={handleInputChange}
                 placeholder="yourname@paytm or yourname@ybl"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                 required
               />
               <p className="text-xs text-gray-500 mt-2">
@@ -298,7 +298,7 @@ const Payment = () => {
         return (
           <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs font-medium text-gray-700 mb-2">
                   Card Number <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -308,12 +308,12 @@ const Payment = () => {
                   onChange={handleCardNumberChange}
                   placeholder="1234 5678 9012 3456"
                   maxLength="19"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs font-medium text-gray-700 mb-2">
                   Name on Card <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -322,13 +322,13 @@ const Payment = () => {
                   value={paymentData.cardName}
                   onChange={handleInputChange}
                   placeholder="John Doe"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   required
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs font-medium text-gray-700 mb-2">
                     Expiry Date <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -338,12 +338,12 @@ const Payment = () => {
                     onChange={handleExpiryChange}
                     placeholder="MM/YY"
                     maxLength="5"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs font-medium text-gray-700 mb-2">
                     CVV <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -353,12 +353,12 @@ const Payment = () => {
                     onChange={handleInputChange}
                     placeholder="123"
                     maxLength="4"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                     required
                   />
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
+              <div className="flex items-center gap-2 text-xs text-gray-600">
                 <FaLock className="text-gray-400" />
                 <span>Your payment information is secure and encrypted</span>
               </div>
@@ -368,14 +368,14 @@ const Payment = () => {
       case 'netbanking':
         return (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Bank Name <span className="text-red-500">*</span>
             </label>
             <select
               name="bankName"
               value={paymentData.bankName}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
               required
             >
               <option value="">Select your bank</option>
@@ -391,7 +391,7 @@ const Payment = () => {
       case 'paytm':
         return (
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-xs font-medium text-gray-700 mb-2">
               Paytm Phone Number <span className="text-red-500">*</span>
             </label>
             <div className="flex gap-2">
@@ -412,7 +412,7 @@ const Payment = () => {
                   placeholder="Enter 10-digit mobile number"
                   maxLength="10"
                   pattern="[0-9]{10}"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   required
                 />
               </div>
@@ -426,11 +426,11 @@ const Payment = () => {
       case 'razorpay':
         return (
           <div>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-xs text-gray-600 mb-4">
               You will be redirected to Razorpay's secure payment gateway to complete your transaction.
             </p>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <p className="text-sm text-blue-800">
+              <p className="text-xs text-blue-800">
                 <strong>Secure Payment:</strong> Your payment will be processed securely by Razorpay. 
                 We do not store your payment information.
               </p>
@@ -441,11 +441,11 @@ const Payment = () => {
       case 'cod':
         return (
           <div>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-xs text-gray-600 mb-4">
               You will pay the order amount (₹{grandTotal.toFixed(2)}) when you receive your order.
             </p>
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <p className="text-sm text-yellow-800">
+              <p className="text-xs text-yellow-800">
                 <strong>Note:</strong> Please keep exact change ready for delivery.
               </p>
             </div>
@@ -465,7 +465,7 @@ const Payment = () => {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-6xl mx-auto px-4">
         {/* Progress Bar */}
-        <div className="mb-8">
+        <div className="mt-12 md:mt-16 mb-8">
           <div className="flex items-center justify-center space-x-4 md:space-x-8">
             <button
               onClick={() => navigate('/cart')}
@@ -507,7 +507,7 @@ const Payment = () => {
         </div>
 
         {/* Page Title */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-8">
           <span className="text-blue-900">Payment</span>{" "}
           <span className="text-blue-500">Method</span>
         </h1>
@@ -516,7 +516,7 @@ const Payment = () => {
           {/* Payment Options */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-6">Select Payment Method</h2>
+              <h2 className="text-lg font-semibold text-gray-800 mb-6">Select Payment Method</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {paymentOptions.map((option) => (
@@ -538,10 +538,10 @@ const Payment = () => {
                       </div>
                     )}
                     <div className="flex items-center gap-3">
-                      <span className="text-2xl">{option.icon}</span>
+                      <span className="text-xl">{option.icon}</span>
                       <div>
-                        <h3 className="font-semibold text-gray-800">{option.name}</h3>
-                        <p className="text-sm text-gray-600">{option.description}</p>
+                        <h3 className="text-sm font-semibold text-gray-800">{option.name}</h3>
+                        <p className="text-xs text-gray-600">{option.description}</p>
                       </div>
                     </div>
                   </button>
@@ -553,18 +553,18 @@ const Payment = () => {
           {/* Payment Summary Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-6">Payment Summary</h2>
+              <h2 className="text-lg font-semibold text-gray-800 mb-6">Payment Summary</h2>
               
               <div className="space-y-4 mb-6">
-                <div className="flex justify-between text-gray-700">
+                <div className="flex justify-between text-sm text-gray-700">
                   <span>{getTotalItems()} items</span>
                   <span>₹{getTotalPrice().toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-gray-700">
+                <div className="flex justify-between text-sm text-gray-700">
                   <span>Delivery Charge</span>
                   <span>₹{deliveryCharge.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-gray-700">
+                <div className="flex justify-between text-sm text-gray-700">
                   <span>Platform Fee</span>
                   <span>₹{platformFee.toFixed(2)}</span>
                 </div>
@@ -572,8 +572,8 @@ const Payment = () => {
 
               <div className="border-t border-gray-200 pt-4 mb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold text-gray-800">Grand Total</span>
-                  <span className="text-2xl font-bold text-gray-800">₹{grandTotal.toFixed(2)}</span>
+                  <span className="text-base font-semibold text-gray-800">Grand Total</span>
+                  <span className="text-xl font-bold text-gray-800">₹{grandTotal.toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -584,7 +584,7 @@ const Payment = () => {
         <div className="mt-8 flex items-center justify-between bg-white rounded-lg shadow-sm p-6">
           <button
             onClick={() => navigate('/checkout/review')}
-            className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-semibold"
+            className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold"
           >
             <FaArrowLeft />
             Back
@@ -592,13 +592,13 @@ const Payment = () => {
           
           <div className="flex items-center gap-6">
             <div className="text-right">
-              <p className="text-sm text-gray-600">Payment Amount</p>
-              <p className="text-2xl font-bold text-blue-900">₹{grandTotal.toFixed(2)}</p>
+              <p className="text-xs text-gray-600">Payment Amount</p>
+              <p className="text-xl font-bold text-blue-900">₹{grandTotal.toFixed(2)}</p>
             </div>
             <button
               onClick={handlePlaceOrder}
               disabled={!selectedPayment}
-              className={`px-8 py-3 rounded-lg font-semibold transition-colors ${
+              className={`px-8 py-3 rounded-lg text-sm font-semibold transition-colors ${
                 selectedPayment
                   ? 'bg-blue-500 text-white hover:bg-blue-600'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
@@ -616,7 +616,7 @@ const Payment = () => {
           <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white">
-              <h2 className="text-2xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-gray-800">
                 {paymentOptions.find(p => p.id === selectedPayment)?.name} Payment Details
               </h2>
               <button
@@ -663,7 +663,7 @@ const Payment = () => {
                     });
                   }
                 }}
-                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
               >
                 Cancel
               </button>
@@ -679,7 +679,7 @@ const Payment = () => {
                     setShowPaymentModal(false);
                   }
                 }}
-                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
               >
                 Confirm
               </button>

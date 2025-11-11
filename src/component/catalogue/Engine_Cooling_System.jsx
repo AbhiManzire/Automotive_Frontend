@@ -164,14 +164,14 @@ const Engine_Cooling_System = () => {
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -192,7 +192,7 @@ const Engine_Cooling_System = () => {
                   find suitable options among nearly 210,000 listings.
                 </p>
 
-                <h2 className="text-2xl font-bold text-red-700 mt-6 mb-3">
+                <h2 className="text-2xl font-bold text-red-700 mt-6 mb-2">
                   About Engine Cooling System Parts
                 </h2>
                 <p className="leading-relaxed mb-4">
@@ -204,7 +204,7 @@ const Engine_Cooling_System = () => {
                   may wear out prematurely.
                 </p>
 
-                <h2 className="text-2xl font-bold text-red-700 mt-6 mb-3">
+                <h2 className="text-2xl font-bold text-red-700 mt-6 mb-2">
                   Common Cooling System Parts
                 </h2>
                 <ul className="list-disc list-inside space-y-2 ml-4 text-gray-700">
@@ -224,7 +224,7 @@ const Engine_Cooling_System = () => {
                   temperature throughout.
                 </p>
 
-                <h2 className="text-2xl font-bold text-red-700 mt-6 mb-3">
+                <h2 className="text-2xl font-bold text-red-700 mt-6 mb-2">
                   Price and Quality Guarantee
                 </h2>
                 <p className="leading-relaxed mb-4">

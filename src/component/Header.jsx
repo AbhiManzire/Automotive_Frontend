@@ -131,26 +131,26 @@ export const Header = () => {
       }}
     >
       {/* ===== MAIN HEADER ===== */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2">
         {/* Logo & Departments */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <img
               onClick={goToHomePage}
               src={logo3}
               alt="Logo"
-              className="h-14 w-auto cursor-pointer drop-shadow-lg"
+              className="h-10 w-auto cursor-pointer drop-shadow-lg"
             />
           </motion.div>
 
         </div>
 
         {/* Search Bar with Category & Vehicle Selector */}
-        <div className="flex items-center bg-white rounded-2xl shadow-lg overflow-hidden flex-1 max-w-2xl border border-gray-200">
+        <div className="flex items-center bg-white rounded-xl shadow-lg overflow-hidden flex-1 max-w-2xl border border-gray-200">
           {/* Category Selector */}
           <div className="relative">
             <select
-              className="px-4 py-3 bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 text-sm outline-none border-r border-gray-300 cursor-pointer appearance-none pr-8"
+              className="px-3 py-2 bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 text-xs outline-none border-r border-gray-300 cursor-pointer appearance-none pr-6"
               value={selectedCategory}
               onChange={handleSelectChange}
             >
@@ -160,14 +160,14 @@ export const Header = () => {
                 </option>
               ))}
             </select>
-            <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none" />
+            <FaChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none text-xs" />
           </div>
 
           {/* Search Input */}
           <input
             type="text"
             placeholder="Search by number plate or part number..."
-            className="flex-1 px-4 py-3 bg-transparent text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className="flex-1 px-3 py-2 bg-transparent text-gray-700 text-xs focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
             value={headerPN}
             onChange={(e) => setHeaderPN(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
@@ -176,14 +176,14 @@ export const Header = () => {
           {/* Search Button */}
           <motion.button
             onClick={handleSearch}
-            className="bg-gradient-to-r from-red-500 to-orange-500 text-gray-700 px-6 py-4 hover:from-red-600 hover:to-orange-600 transition-all duration-300 flex items-center justify-center shadow-lg"
+            className="bg-gradient-to-r from-red-500 to-orange-500 text-gray-700 px-4 py-2 hover:from-red-600 hover:to-orange-600 transition-all duration-300 flex items-center justify-center shadow-lg"
             whileHover={{
               scale: 1.05,
               boxShadow: "0 10px 25px -5px rgba(239, 68, 68, 0.4)",
             }}
             whileTap={{ scale: 0.95 }}
           >
-            <FaSearch />
+            <FaSearch className="text-sm" />
           </motion.button>
 
                   </div>
@@ -191,20 +191,20 @@ export const Header = () => {
         {/* 360 Degree Upload Button */}
         <motion.button
           onClick={() => setShow360UploadModal(true)}
-          className="relative px-4 py-2.5 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 transition-all duration-200 flex items-center gap-2 text-gray-700"
+          className="relative px-3 py-1.5 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 transition-all duration-200 flex items-center gap-1.5 text-gray-700"
                         whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           title="Upload  Image/Video"
         >
           <div className="relative">
-            <FaCamera className="text-lg text-red-700" />
+            <FaCamera className="text-sm text-red-700" />
             <span className="absolute -top-1 -right-1 text-xs font-bold text-gray-700">+</span>
                         </div>
-          <span className="text-sm font-medium">Upload Image/Video</span>
+          <span className="text-xs font-medium">Upload Image/Video</span>
                     </motion.button>
 
         {/* User Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           {/* Wishlist */}
           <motion.button
             onClick={goToWishlist}
@@ -212,8 +212,8 @@ export const Header = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <FaHeart className="text-2xl text-red-900" />
-            <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-gray-700 text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+            <FaHeart className="text-xl text-red-900" />
+            <span className="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-orange-500 text-gray-700 text-xs rounded-full w-4 h-4 flex items-center justify-center shadow-lg text-[10px]">
               0
             </span>
           </motion.button>
@@ -226,9 +226,9 @@ export const Header = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <FaShoppingCart className="text-2xl text-red-900" />
+              <FaShoppingCart className="text-xl text-red-900" />
               {getTotalItems() > 0 && (
-                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-gray-700 text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-orange-500 text-gray-700 text-xs rounded-full w-4 h-4 flex items-center justify-center shadow-lg text-[10px]">
                   {getTotalItems()}
                 </span>
               )}
@@ -237,7 +237,7 @@ export const Header = () => {
           {/* Sidebar button */}
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="text-3xl text-blue-900 hover:scale-110 transition-transform"
+            className="text-2xl text-blue-900 hover:scale-110 transition-transform"
           >
             <IoReorderThreeOutline />
           </button>

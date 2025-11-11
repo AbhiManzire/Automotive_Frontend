@@ -138,14 +138,14 @@ const Fuelsupply_System = () => {
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-gray-800 font-medium text-xs">
                     {product.name}
                   </span>
                 </Link>
@@ -153,8 +153,8 @@ const Fuelsupply_System = () => {
             </div>
 
             {/* ✅ SEO Section */}
-            <section className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-6 md:p-10 rounded-2xl shadow-md transition-all duration-300">
-              <div className="space-y-6">
+            <section className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:p-6 rounded-2xl shadow-md transition-all duration-300">
+              <div className="space-y-4">
                 {/* Title */}
                 <h2 className="text-3xl font-bold text-red-600">
                   Buy Online Fuel Supply System Parts in India
@@ -179,7 +179,7 @@ const Fuelsupply_System = () => {
                 </p>
 
                 {/* Fuel Supply System Parts */}
-                <h2 className="text-2xl font-semibold text-red-600">Fuel Supply System Parts</h2>
+                <h2 className="text-lg font-semibold text-red-600">Fuel Supply System Parts</h2>
                 <p>
                   If you’re looking for high-quality spare parts for your vehicle,
                   the <strong>Boodmo</strong> online store offers:

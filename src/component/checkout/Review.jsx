@@ -98,7 +98,7 @@ const Review = () => {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-6xl mx-auto px-4">
         {/* Progress Bar */}
-        <div className="mb-8">
+        <div className="mt-12 md:mt-16 mb-8">
           <div className="flex items-center justify-center space-x-4 md:space-x-8">
             <button
               onClick={() => navigate('/cart')}
@@ -141,7 +141,7 @@ const Review = () => {
 
         {/* Header with Review title and columns */}
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Review</h1>
+          <h1 className="text-2xl font-bold text-gray-800">Review</h1>
          
         </div>
 
@@ -156,7 +156,7 @@ const Review = () => {
 
             return (
               <div key={pkg.packageNumber} className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-lg font-semibold text-gray-800 mb-4">
                   Order Package #{pkg.packageNumber}
                 </h2>
 
@@ -174,15 +174,15 @@ const Review = () => {
                         className="w-24 h-24 object-cover rounded-lg"
                       />
                       <div className="flex-1">
-                        <h3 className="font-semibold text-gray-800 mb-1">{item.name}</h3>
-                        <p className="text-sm text-gray-600 mb-1">
+                        <h3 className="text-base font-semibold text-gray-800 mb-1">{item.name}</h3>
+                        <p className="text-xs text-gray-600 mb-1">
                           {item.partNumber || item.id}
                         </p>
-                        <p className="text-sm text-gray-600 mb-2">
+                        <p className="text-xs text-gray-600 mb-2">
                           Brand: {item.brand || "N/A"} | Sold by: {item.seller || pkg.seller}
                         </p>
                         <div className="mt-2">
-                          <p className="text-sm text-gray-700">
+                          <p className="text-xs text-gray-700">
                             {item.quantity} × ₹{unitPrice.toFixed(2)}
                           </p>
                           {hasDiscount && (
@@ -190,7 +190,7 @@ const Review = () => {
                               MRP: ₹{mrp.toFixed(2)}
                             </p>
                           )}
-                          <p className="text-lg font-semibold text-gray-800 mt-1">
+                          <p className="text-base font-semibold text-gray-800 mt-1">
                             ₹{itemTotal.toFixed(2)}
                           </p>
                         </div>
@@ -203,14 +203,14 @@ const Review = () => {
                 <div className="mt-6 pt-6 border-t border-gray-200">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">DELIVERY METHOD</h3>
-                      <p className="text-sm text-gray-600">Standard Delivery</p>
-                      <p className="text-sm text-blue-600 mt-1">
+                      <h3 className="text-xs font-semibold text-gray-800 mb-1">DELIVERY METHOD</h3>
+                      <p className="text-xs text-gray-600">Standard Delivery</p>
+                      <p className="text-xs text-blue-600 mt-1">
                         Estimated delivery by {deliveryDate}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className={`text-lg font-semibold ${deliveryCharge === 0 ? 'text-green-600' : 'text-gray-800'
+                      <p className={`text-base font-semibold ${deliveryCharge === 0 ? 'text-green-600' : 'text-gray-800'
                         }`}>
                         {deliveryCharge === 0 ? "FREE" : `₹${deliveryCharge.toFixed(2)}`}
                       </p>
@@ -221,8 +221,8 @@ const Review = () => {
                 {/* Package Total */}
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-gray-800">Package Total</span>
-                    <span className="text-xl font-bold text-gray-800">
+                    <span className="text-sm font-semibold text-gray-800">Package Total</span>
+                    <span className="text-lg font-bold text-gray-800">
                       ₹{(packageTotal + deliveryCharge).toFixed(2)}
                     </span>
                   </div>
@@ -235,22 +235,22 @@ const Review = () => {
         {/* Shipping Address Section */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-800">Shipping Address</h2>
+            <h2 className="text-lg font-semibold text-gray-800">Shipping Address</h2>
             <button
               onClick={() => handleOpenMap(shippingAddress)}
               className="flex items-center gap-2 hover:opacity-80 transition-colors cursor-pointer"
               title="Open in Google Maps"
               style={{ color: '#EA4335' }}
             >
-              <FaMapMarkerAlt className="text-xl" />
-              <span className="text-sm font-medium">View on Map</span>
+              <FaMapMarkerAlt className="text-lg" />
+              <span className="text-xs font-medium">View on Map</span>
             </button>
           </div>
           <div className="text-gray-700">
-            <p className="font-medium">
+            <p className="text-sm font-medium">
               {shippingAddress.name} - {shippingAddress.mobile}
             </p>
-            <p className="mt-1">
+            <p className="text-xs mt-1">
               {shippingAddress.address}, {shippingAddress.cityState}, {shippingAddress.postalCode}
             </p>
           </div>
@@ -261,7 +261,7 @@ const Review = () => {
             id="disableReplacements"
             className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
           />
-          <label htmlFor="disableReplacements" className="text-sm text-gray-700 flex items-center gap-1">
+          <label htmlFor="disableReplacements" className="text-xs text-gray-700 flex items-center gap-1">
             Disable part replacements
             <FaQuestionCircle className="text-gray-400 text-xs" />
           </label>
@@ -277,7 +277,7 @@ const Review = () => {
 
             {/* Right Side - Order Summary */}
             <div className="text-right">
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-xs">
                 <div className="flex justify-between gap-8 mb-2">
                   <span className="text-gray-600">{getTotalItems()} items</span>
                   <span className="text-gray-800 font-medium">₹{getSubtotal().toFixed(2)}</span>
@@ -302,14 +302,14 @@ const Review = () => {
                   <span className="text-gray-600">boodmo Points to be earned:</span>
                   <span className="text-blue-600 font-medium flex items-center gap-1">
                     {boodmoPoints}
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   </span>
                 </div>
                 <div className="flex justify-between gap-8 pt-2 border-t border-gray-200">
-                  <span className="text-lg font-semibold text-gray-800">Grand Total:</span>
-                  <span className="text-2xl font-bold text-gray-800">₹{grandTotal.toFixed(2)}</span>
+                  <span className="text-base font-semibold text-gray-800">Grand Total:</span>
+                  <span className="text-xl font-bold text-gray-800">₹{grandTotal.toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -319,7 +319,7 @@ const Review = () => {
           <div className="flex items-center justify-between pt-6 border-t border-gray-200">
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-semibold"
+              className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold"
             >
               <FaArrowLeft />
               Back
@@ -327,7 +327,7 @@ const Review = () => {
 
             <button
               onClick={handleContinue}
-              className="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-semibold"
+              className="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-semibold"
             >
               Continue
             </button>

@@ -50,7 +50,7 @@ const MaintenanceServiceParts = () => {
 
         {/* Header */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-extrabold text-gray-800 mb-3 tracking-tight">
+          <h1 className="text-4xl font-extrabold text-gray-800 mb-2 tracking-tight">
             Maintenance Service Parts
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -83,11 +83,11 @@ const MaintenanceServiceParts = () => {
                   <img
                     src={category.img}
                     alt={category.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
 
                   <div className="p-3">
-                    <span className="text-gray-800 font-semibold text-sm md:text-base">
+                    <span className="text-gray-800 font-semibold text-xs md:text-sm">
                       {category.name}
                     </span>
                   </div>
@@ -109,28 +109,28 @@ const MaintenanceServiceParts = () => {
             )}
 
             {/* Content Section */}
-            <section className="bg-white text-gray-800 py-10 px-6 rounded-2xl shadow-sm mt-6">
+            <section className="bg-white text-gray-800 py-6 px-4 rounded-2xl shadow-sm mt-6">
               <div className={`transition-all duration-500 ease-in-out ${showMore ? "max-h-full" : "max-h-[600px] overflow-hidden"}`}>
-                <h2 className="text-2xl md:text-3xl font-bold text-red-700 border-b-2 border-red-300 inline-block pb-2 mb-4">
+                <h2 className="text-lg md:text-xl font-bold text-red-700 border-b-2 border-red-300 inline-block pb-2 mb-4">
                   About Car Maintenance Parts
                 </h2>
 
-                <p className="font-medium leading-relaxed mb-4">
+                <p className="font-medium leading-relaxed text-sm mb-4">
                   There are regular maintenance parts like oil and air filters, headlights, drive belts, brake pads,
                   wheel speed, humidity and temperature sensors, joints, and others. They may last longer, though the
                   result depends on driving habits and environment conditions.
                 </p>
 
-                <p className="font-medium leading-relaxed mb-4">
+                <p className="font-medium leading-relaxed text-sm mb-4">
                   It is vital to take preventative measures with maintenance to avoid paying to the mechanics. Inspecting
                   your car regularly ensures it runs smoothly and safely for longer. Always refer to your owner’s manual
                   for recommended service intervals.
                 </p>
 
-                <h3 className="text-xl font-semibold text-red-700 mt-8 mb-2">
+                <h3 className="text-base font-semibold text-red-700 mt-8 mb-2">
                   When should car maintenance parts be replaced?
                 </h3>
-                <p className="font-medium leading-relaxed mb-4">
+                <p className="font-medium leading-relaxed text-sm mb-4">
                   Car makers usually determine the time when maintenance should be performed. Some parts need replacement
                   after 30,000 miles, others can last up to 90,000 miles. Always check:
                 </p>
@@ -143,8 +143,8 @@ const MaintenanceServiceParts = () => {
                   <li>Belts — replace if cracked, loose, or frayed.</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold text-red-700 mt-8 mb-2">Our Advantages</h3>
-                <p className="font-medium leading-relaxed mb-4">
+                <h3 className="text-base font-semibold text-red-700 mt-8 mb-2">Our Advantages</h3>
+                <p className="font-medium leading-relaxed text-sm mb-4">
                   When you choose <span className="text-red-600 font-semibold">Sparelo</span> — India's largest online marketplace
                   for car parts, you get access to:
                 </p>
@@ -156,7 +156,7 @@ const MaintenanceServiceParts = () => {
                   <li>Secure online payment options, supporting international cards.</li>
                 </ol>
 
-                <p className="font-medium leading-relaxed mt-4">
+                <p className="font-medium leading-relaxed text-sm mt-4">
                   Fix your car issues today by exploring
                   <span className="text-red-600 font-semibold"> Sparelo’s</span> unmatched catalogue of spare parts — even
                   without registration. You’re sure to find what you need!

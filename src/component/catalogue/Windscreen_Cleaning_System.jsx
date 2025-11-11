@@ -177,12 +177,12 @@ const Windscreen_Cleaning_System = () => {
           <div className="flex-1">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 my-8">
               {filteredProducts.map((product) => (
-                <div key={product.id} className="bg-white p-3 rounded-lg shadow-sm text-center">
+                <div key={product.id} className="bg-white p-2 rounded-lg shadow-sm text-center">
                   <a href={product.link} target="_blank" rel="noopener noreferrer">
                      <img
                     src={product.img}
                     alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md mb-3 mx-auto"
+                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
                   />
                     <h3 className="text-gray-800 font-semibold text-sm mb-1">{product.name}</h3>
                   </a>
@@ -194,7 +194,7 @@ const Windscreen_Cleaning_System = () => {
 
             {/* Content Section */}
             <section className="bg-white text-gray-800 py-10 px-6 max-w-5xl mx-auto">
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <h2 className="text-2xl md:text-3xl font-bold text-red-700 border-b-2 border-red-300 inline-block pb-2">
                   About Windscreen Cleaning System
                 </h2>

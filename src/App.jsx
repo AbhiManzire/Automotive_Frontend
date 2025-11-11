@@ -42,6 +42,7 @@ import ForgotPassword from "./component/Forgot_Password";
 import Signup from "./component/Signup";
 import VendorPage from "./component/VendorPage";
 import SearchByCategory from "./component/SearchByCategory";
+import ChooseWorkshop from "./component/ChooseWorkshop";
 import WhyChooseAftermarket from "./component/WhyChooseAftermarket";
 import PartSearchResults from "./component/PartSearchResults";
 import VehicleSearchResults from "./component/VehicleSearchResults";
@@ -129,7 +130,9 @@ const Layout = ({ children }) => {
   return (
     <>
       {!hideHeaderFooter && <Header />}
-      {children}
+      <div className={!hideHeaderFooter ? "mt-12 sm:mt-14" : ""}>
+        {children}
+      </div>
       <ToastContainer />
       {!hideHeaderFooter && <BottomNavigation />}
       {!hideFooter && <Footer />}
@@ -156,8 +159,9 @@ function App() {
 
                 <BoodmoUi />
                 <CurrentOffers />
-                <SearchSection />
+                {/* <SearchSection /> */}
                 <SearchByCategory />
+                <ChooseWorkshop />
                 <WhyChooseAftermarket />
                 <BrandTrustAndCarMakers />
                 <Article_review
