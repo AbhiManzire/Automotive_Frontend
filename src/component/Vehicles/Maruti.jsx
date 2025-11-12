@@ -1663,10 +1663,10 @@ export const Maruti = () => {
   return (
     <section className="min-h-screen py-6 bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Breadcrumbs */}
-      <div className="w-full mb-8 px-4">
+      <div className="max-w-7xl mx-auto mb-6 sm:mb-8 px-4 sm:px-6 lg:px-8">
         <VehicleBreadcrumbs />
 
-        <h1 className="text-4xl px-2 font-bold text-gray-800 dark:text-white uppercase mb-6">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl px-2 font-bold text-gray-800 dark:text-white uppercase mb-4 sm:mb-6">
           MARUTI
         </h1>
 
@@ -1675,60 +1675,60 @@ export const Maruti = () => {
           href={link}
           target="_blank"
           rel="nofollow noopener noreferrer"
-          className="border border-gray-600 mb-2 inline-block text-black dark:text-white text-sm rounded-md p-2 transition-all duration-300 hover:bg-red-500 hover:text-white"
+          className="border border-gray-600 mb-2 inline-block text-black dark:text-white text-xs sm:text-sm rounded-md px-3 py-2 sm:px-4 sm:py-2 transition-all duration-300 hover:bg-red-500 hover:text-white"
         >
           View OEM Catalogue
         </a>
       </div>
 
       {/* Brand Info Section */}
-      <div className="heading-filters flex flex-col sm:flex-row justify-between items-center gap-4 pb-3 px-4 mb-6">
-        <div className=" text-4xl font-bold text-gray-800 dark:text-white">
+      <div className="max-w-7xl mx-auto heading-filters flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 border-b border-gray-200 pb-3 px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
+        <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white">
           Choose Your{" "}
           <span className="h2-section__name text-red-500 font-bold">Model</span>
         </div>
 
-        <div className="heading-filters__action">
+        <div className="heading-filters__action w-full sm:w-auto">
           <input
             type="search"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             placeholder="Filter Model"
-            className="w-64 sm:w-72 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-red-400 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 transition duration-200"
+            className="w-full sm:w-64 md:w-72 px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-red-400 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 transition duration-200"
           />
         </div>
       </div>
 
       {/* Vehicle Model Grid */}
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+      <ul className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8">
         {filteredModels.map((model) => (
           <li
             key={model.id}
             className="bg-white dark:bg-gray-800 rounded-md shadow-md hover:shadow-red-500/30 transform hover:-translate-y-1 transition duration-110 overflow-hidden"
           >
             {/* Image */}
-            <div className="bg-white dark:bg-gray-700 flex items-center justify-center h-40">
+            <div className="bg-white dark:bg-gray-700 flex items-center justify-center h-32 sm:h-40">
               <img
                 src={model.image}
                 alt={model.name}
-                className="object-contain h-full w-full p-6"
+                className="object-contain h-full w-full p-4 sm:p-6"
               />
             </div>
 
             {/* Content */}
-            <div className="p-4 space-y-2">
+            <div className="p-3 sm:p-4 space-y-2">
               <a
                 href={model.link}
-                className="text-lg font-semibold text-gray-900 dark:text-white transition"
+                className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white transition block"
               >
                 {model.name}
               </a>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                 {model.years}
               </p>
 
               {/* Dropdown */}
-              <select className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 text-sm rounded-md px-3 py-2 outline-none transition">
+              <select className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 text-xs sm:text-sm rounded-md px-2 sm:px-3 py-1.5 sm:py-2 outline-none transition">
                 <option className="font-semibold" value="">
                   SELECT YOUR CAR
                 </option>

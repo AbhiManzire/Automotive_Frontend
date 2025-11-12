@@ -249,9 +249,7 @@ const Footer = () => {
 
               {/* Newsletter Section */}
               <div className="flex flex-col md:flex-row items-center gap-4 flex-1 justify-center md:justify-end">
-                <span className="text-white font-bold text-sm md:text-base whitespace-nowrap">
-                  SIGN UP FOR NEWSLETTER
-                </span>
+               
                 <form onSubmit={handleNewsletterSubmit} className="flex gap-2 w-full md:w-auto">
                   <input
                     type="email"
@@ -279,7 +277,7 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               {/* Copyright */}
               <div className="text-gray-600 text-xs md:text-sm text-center md:text-left">
-                Autoparts © {new Date().getFullYear()} Demo Store. All Rights Reserved. Designed by OpenCartWorks.Com
+                Autoparts © {new Date().getFullYear()} Demo Store. All Rights Reserved. Designed by Vaishnavi
               </div>
 
               {/* Payment Methods */}

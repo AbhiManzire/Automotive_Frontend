@@ -7,6 +7,17 @@ import { hyundaiModels } from '../component/Vehicles/Hyundai';
 import { tataModels } from '../component/Vehicles/Tata';
 import { mahindraModels } from '../component/Vehicles/Mahindra';
 import { chevroletModels } from '../component/Vehicles/Chevrolet';
+import { hondaModels } from '../component/Vehicles/Honda';
+import { fiatModels } from '../component/Vehicles/Fiat';
+import { kiaModels } from '../component/Vehicles/Kia';
+import { nissanModels } from '../component/Vehicles/Nissan';
+import { audiModels } from '../component/Vehicles/Audi';
+import { fordModels } from '../component/Vehicles/Ford';
+import { toyotaModels } from '../component/Vehicles/Toyota';
+import { skodaModels } from '../component/Vehicles/Skoda';
+import { renaultModels } from '../component/Vehicles/Renault';
+import { vwModels } from '../component/Vehicles/Vw';
+import { ashokLaylandModels } from '../component/Vehicles/AshokLayland';
 import { transformVehicleData, getVehicleImage } from '../utils/vehicleDataAggregator';
 
 // Map of all vehicle models by maker
@@ -16,10 +27,17 @@ const vehicleModelsMap = {
   TATA: tataModels,
   MAHINDRA: mahindraModels,
   CHEVROLET: chevroletModels,
-  // Add more makers as we export their models
-  // HONDA: hondaModels,
-  // FORD: fordModels,
-  // etc.
+  HONDA: hondaModels,
+  FIAT: fiatModels,
+  KIA: kiaModels,
+  NISSAN: nissanModels,
+  AUDI: audiModels,
+  FORD: fordModels,
+  TOYOTA: toyotaModels,
+  SKODA: skodaModels,
+  RENAULT: renaultModels,
+  VW: vwModels,
+  'ASHOK LAYLAND': ashokLaylandModels,
 };
 
 // Transform all vehicle data to the format needed by BoodmoUi

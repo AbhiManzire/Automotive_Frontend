@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaShoppingCart, FaMapMarkerAlt, FaFileAlt, FaCreditCard, FaArrowLeft, FaQuestionCircle } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaShoppingCart, FaMapMarkerAlt, FaFileAlt, FaCreditCard, FaArrowLeft, FaQuestionCircle, FaCheckCircle } from "react-icons/fa";
 import { useCart } from "../../contexts/CartContext";
 
 const Review = () => {
@@ -95,59 +96,122 @@ const Review = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-8">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Progress Bar */}
-        <div className="mt-12 md:mt-16 mb-8">
+        {/* Enhanced Progress Bar */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mt-12 md:mt-16 mb-8 bg-white rounded-2xl shadow-2xl p-4 sm:p-5 md:p-6 border border-gray-200"
+        >
           <div className="flex items-center justify-center space-x-4 md:space-x-8">
-            <button
+            <motion.button
               onClick={() => navigate('/cart')}
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity"
+              className="flex flex-col items-center cursor-pointer group"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2">
+              <motion.div 
+                className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+              >
                 <FaShoppingCart className="text-blue-600 text-lg" />
-              </div>
+              </motion.div>
               <span className="text-sm text-blue-600 font-medium">Cart</span>
-            </button>
-            <div className="h-1 w-16 md:w-24 bg-blue-600"></div>
-            <button
+            </motion.button>
+            <motion.div 
+              className="h-1 w-16 md:w-24 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
+            <motion.button
               onClick={() => navigate('/checkout/address')}
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity"
+              className="flex flex-col items-center cursor-pointer group"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2">
+              <motion.div 
+                className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+              >
                 <FaMapMarkerAlt className="text-blue-600 text-lg" />
-              </div>
+              </motion.div>
               <span className="text-sm text-blue-600 font-medium">Address</span>
-            </button>
-            <div className="h-1 w-16 md:w-24 bg-blue-600"></div>
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mb-2 shadow-lg">
-                <FaFileAlt className="text-white text-lg" />
-              </div>
-              <span className="text-sm text-blue-600 font-semibold">Review</span>
-            </div>
-            <div className="h-1 w-16 md:w-24 bg-blue-200"></div>
-            <button
-              onClick={() => navigate('/checkout/payment')}
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity"
+            </motion.button>
+            <motion.div 
+              className="h-1 w-16 md:w-24 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            />
+            <motion.div 
+              className="flex flex-col items-center"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.5, type: "spring" }}
             >
-              <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2">
+              <motion.div 
+                className="w-12 h-12 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-2 shadow-xl ring-4 ring-blue-100 relative overflow-hidden"
+                animate={{ 
+                  boxShadow: [
+                    "0 0 0 0px rgba(37, 99, 235, 0.4)",
+                    "0 0 0 8px rgba(37, 99, 235, 0)",
+                    "0 0 0 0px rgba(37, 99, 235, 0.4)"
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+                <FaFileAlt className="text-white text-lg relative z-10" />
+              </motion.div>
+              <span className="text-sm text-blue-600 font-bold">Review</span>
+            </motion.div>
+            <div className="h-1 w-16 md:w-24 bg-gradient-to-r from-blue-200 to-blue-100 rounded-full"></div>
+            <motion.button
+              onClick={() => navigate('/checkout/payment')}
+              className="flex flex-col items-center cursor-pointer group"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div 
+                className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+              >
                 <FaCreditCard className="text-blue-600 text-lg" />
-              </div>
-              <span className="text-sm text-gray-500">Pay</span>
-            </button>
+              </motion.div>
+              <span className="text-sm text-gray-500 group-hover:text-blue-600 transition-colors">Pay</span>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Header with Review title and columns */}
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Review</h1>
-         
-        </div>
+        {/* Enhanced Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-8"
+        >
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <span className="text-blue-900">Order</span>{" "}
+            <span className="text-blue-600">Review</span>
+          </h1>
+          <p className="text-gray-600">Review your order details before proceeding</p>
+        </motion.div>
 
         {/* Order Packages */}
-        <div className="space-y-6 mb-8">
-          {packages.map((pkg) => {
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="space-y-6 mb-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {packages.map((pkg, pkgIndex) => {
             const packageTotal = pkg.items.reduce((sum, item) => {
               return sum + ((item.discountPrice || item.price) * item.quantity);
             }, 0);
@@ -155,24 +219,51 @@ const Review = () => {
             const deliveryDate = getDeliveryDate(pkg.packageNumber);
 
             return (
-              <div key={pkg.packageNumber} className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-lg font-semibold text-gray-800 mb-4">
-                  Order Package #{pkg.packageNumber}
-                </h2>
+              <motion.div 
+                key={pkg.packageNumber}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9, x: -100 }}
+                transition={{ delay: pkgIndex * 0.1, type: "spring", stiffness: 100 }}
+                whileHover={{ y: -4 }}
+                className="bg-white rounded-2xl shadow-xl p-6 border border-gray-200 overflow-hidden relative"
+              >
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400"></div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+                    {pkg.packageNumber}
+                  </div>
+                  <h2 className="text-xl font-bold text-gray-800">
+                    Order Package #{pkg.packageNumber}
+                  </h2>
+                </div>
 
-                {pkg.items.map((item) => {
+                {pkg.items.map((item, itemIndex) => {
                   const unitPrice = item.discountPrice || item.price;
                   const itemTotal = unitPrice * item.quantity;
                   const mrp = item.price; // Original price as MRP
                   const hasDiscount = item.discountPrice && item.discountPrice < item.price;
 
                   return (
-                    <div key={item.id} className="flex gap-4 mb-6 pb-6 border-b border-gray-200 last:border-b-0">
-                      <img
-                        src={item.imageUrl || "https://via.placeholder.com/100"}
-                        alt={item.name}
-                        className="w-24 h-24 object-cover rounded-lg"
-                      />
+                    <motion.div 
+                      key={item.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: (pkgIndex * 0.1) + (itemIndex * 0.05) }}
+                      className="flex gap-4 mb-6 pb-6 border-b border-gray-200 last:border-b-0"
+                    >
+                      <motion.div className="relative group">
+                        <motion.img
+                          whileHover={{ scale: 1.1, rotate: 2 }}
+                          src={item.imageUrl || "https://via.placeholder.com/100"}
+                          alt={item.name}
+                          className="w-24 h-24 object-cover rounded-xl shadow-lg group-hover:shadow-2xl transition-shadow"
+                          onError={(e) => {
+                            e.target.src = 'https://via.placeholder.com/100?text=Product';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      </motion.div>
                       <div className="flex-1">
                         <h3 className="text-base font-semibold text-gray-800 mb-1">{item.name}</h3>
                         <p className="text-xs text-gray-600 mb-1">
@@ -195,12 +286,17 @@ const Review = () => {
                           </p>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
 
                 {/* Delivery Method */}
-                <div className="mt-6 pt-6 border-t border-gray-200">
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: (pkgIndex * 0.1) + 0.3 }}
+                  className="mt-6 pt-6 border-t border-gray-200"
+                >
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-xs font-semibold text-gray-800 mb-1">DELIVERY METHOD</h3>
@@ -210,33 +306,58 @@ const Review = () => {
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className={`text-base font-semibold ${deliveryCharge === 0 ? 'text-green-600' : 'text-gray-800'
+                      <p className={`text-base font-semibold flex items-center gap-1 ${deliveryCharge === 0 ? 'text-green-600' : 'text-gray-800'
                         }`}>
-                        {deliveryCharge === 0 ? "FREE" : `₹${deliveryCharge.toFixed(2)}`}
+                        {deliveryCharge === 0 ? (
+                          <>
+                            <FaCheckCircle />
+                            FREE
+                          </>
+                        ) : (
+                          `₹${deliveryCharge.toFixed(2)}`
+                        )}
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Package Total */}
-                <div className="mt-4 pt-4 border-t border-gray-200">
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: (pkgIndex * 0.1) + 0.4 }}
+                  className="mt-4 pt-4 border-t border-gray-200"
+                >
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-semibold text-gray-800">Package Total</span>
-                    <span className="text-lg font-bold text-gray-800">
+                    <motion.span 
+                      key={packageTotal + deliveryCharge}
+                      initial={{ scale: 1.2 }}
+                      animate={{ scale: 1 }}
+                      className="text-lg font-bold text-gray-800"
+                    >
                       ₹{(packageTotal + deliveryCharge).toFixed(2)}
-                    </span>
+                    </motion.span>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             );
           })}
-        </div>
+          </AnimatePresence>
+        </motion.div>
 
         {/* Shipping Address Section */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-100"
+        >
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-800">Shipping Address</h2>
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => handleOpenMap(shippingAddress)}
               className="flex items-center gap-2 hover:opacity-80 transition-colors cursor-pointer"
               title="Open in Google Maps"
@@ -244,7 +365,7 @@ const Review = () => {
             >
               <FaMapMarkerAlt className="text-lg" />
               <span className="text-xs font-medium">View on Map</span>
-            </button>
+            </motion.button>
           </div>
           <div className="text-gray-700">
             <p className="text-sm font-medium">
@@ -254,7 +375,7 @@ const Review = () => {
               {shippingAddress.address}, {shippingAddress.cityState}, {shippingAddress.postalCode}
             </p>
           </div>
-        </div>
+        </motion.div>
         <div>
           <input
             type="checkbox"
@@ -267,7 +388,12 @@ const Review = () => {
           </label>
         </div>
         {/* Footer with Checkbox, Summary, and Buttons */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="bg-white rounded-xl shadow-lg p-6 border border-gray-100"
+        >
           {/* Top Section - Checkbox and Order Summary */}
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-6">
             {/* Left Side - Checkbox */}
@@ -316,23 +442,37 @@ const Review = () => {
           </div>
 
           {/* Bottom Section - Navigation Buttons */}
-          <div className="flex items-center justify-between pt-6 border-t border-gray-200">
-            <button
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex items-center justify-between pt-6 border-t border-gray-200"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleBack}
-              className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold"
+              className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold shadow-md"
             >
               <FaArrowLeft />
               Back
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
-              className="px-8 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-semibold"
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-700 hover:via-blue-600 hover:to-blue-700 transition-all text-sm font-bold shadow-xl relative overflow-hidden"
             >
-              Continue
-            </button>
-          </div>
-        </div>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                animate={{ x: ["-100%", "100%"] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              />
+              <span className="relative z-10">Continue</span>
+            </motion.button>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );

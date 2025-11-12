@@ -1,6 +1,9 @@
-"use client";
-import React, { useState } from "react";
-import { motion } from "framer-motion"; // 🌀 for smooth animations
+import React, { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+import { motion } from "framer-motion";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const categories = [
   { title: "Air Conditioning", href: "/catalog/air_conditioning/", img: "https://boodmo.com/media/images/categories/10f1952.svg" },
@@ -35,51 +38,129 @@ const categories = [
 ];
 
 export default function SearchByCategory() {
-  const [showAll, setShowAll] = useState(false);
-  const visibleCategories = showAll ? categories : categories.slice(0, 10);
+  const swiperRef = useRef(null);
 
   return (
-    <section className="py-6 px-4">
-      {/* Header */}
-      <div className="flex flex-col items-center mb-8">
-        <h3 className="text-2xl font-bold text-gray-800 text-center tracking-tight">
-          Search by <span className="bg-red-600 text-transparent bg-clip-text">Category</span>
-        </h3>
-        <p className="text-gray-600 text-center max-w-2xl mt-2 text-sm">
-          Discover high-quality car parts and accessories organized into convenient categories for your vehicle.
-        </p>
-      </div>
+    <section className="relative bg-white py-4 sm:py-6 md:py-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 md:px-6 lg:px-8">
+        {/* Red Accent Line */}
+        <div className="w-16 h-0.5 bg-red-600 mb-4 md:mb-5"></div>
 
-      {/* Category Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        {visibleCategories.map((cat, index) => (
-          <motion.a
-            key={cat.title}
-            href={cat.href}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-            className="group flex flex-col items-center border-0 outline-none"
+        {/* Header Section */}
+        <div className="mb-5 md:mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 md:mb-3">
+            Search by <span className="text-red-600">Category</span>
+          </h2>
+          <p className="text-sm sm:text-base md:text-lg text-gray-700 font-medium">
+            Discover high-quality car parts and accessories organized into convenient categories
+          </p>
+        </div>
+
+        {/* Swiper Container */}
+        <div className="relative">
+          <Swiper
+            modules={[Autoplay, Navigation]}
+            spaceBetween={12}
+            slidesPerView={2}
+            loop={true}
+            speed={800}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true
+            }}
+            navigation={{
+              prevEl: '.category-prev',
+              nextEl: '.category-next',
+            }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              if (swiper.autoplay) {
+                swiper.autoplay.start();
+              }
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 3,
+                spaceBetween: 12
+              },
+              768: {
+                slidesPerView: 4,
+                spaceBetween: 14
+              },
+              1024: {
+                slidesPerView: 5,
+                spaceBetween: 14
+              },
+              1280: {
+                slidesPerView: 6,
+                spaceBetween: 16
+              }
+            }}
+            className="category-swiper"
           >
-            <div className="w-16 h-16 mb-2 flex items-center justify-center border-0">
-              <img src={cat.img} alt={cat.title} className="w-10 h-10 object-contain border-0" />
-            </div>
-            <span className="text-center font-semibold text-gray-700 text-xs border-0">
-              {cat.title}
-            </span>
-          </motion.a>
-        ))}
+            {categories.map((cat, index) => (
+              <SwiperSlide key={cat.title}>
+                <motion.a
+                  href={cat.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  className="group flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300"
+                >
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 mb-3 flex items-center justify-center">
+                    <img 
+                      src={cat.img} 
+                      alt={cat.title} 
+                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" 
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/80x80?text=' + cat.title.substring(0, 2);
+                      }}
+                    />
+                  </div>
+                  <span className="text-center font-semibold text-gray-700 text-xs sm:text-sm group-hover:text-red-600 transition-colors duration-300">
+                    {cat.title}
+                  </span>
+                </motion.a>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Navigation Arrows */}
+          <button
+            className="category-prev absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 hover:bg-white border border-gray-200 hover:border-gray-300 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md"
+            aria-label="Previous slide"
+          >
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            className="category-next absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 hover:bg-white border border-gray-200 hover:border-gray-300 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md"
+            aria-label="Next slide"
+          >
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      {/* View More Button */}
-      <div className="flex justify-center mt-8">
-        <button
-          onClick={() => setShowAll(!showAll)}
-          className="px-6 py-2 bg-gradient-to-r from-sky-500 to-pink-500 text-white text-sm font-medium rounded-full shadow-lg hover:shadow-xl transition transform hover:scale-105"
-        >
-          {showAll ? "View Less" : "View More"}
-        </button>
-      </div>
+      {/* Custom Styles */}
+      <style>{`
+        .category-swiper .swiper-slide {
+          height: auto;
+        }
+        .category-prev,
+        .category-next {
+          display: flex;
+        }
+        .category-prev.swiper-button-disabled,
+        .category-next.swiper-button-disabled {
+          opacity: 0.35;
+          cursor: not-allowed;
+        }
+      `}</style>
     </section>
   );
 }

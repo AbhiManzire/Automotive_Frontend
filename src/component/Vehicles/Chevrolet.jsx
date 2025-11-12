@@ -5,38 +5,110 @@ import { getOriPartsLink } from "../../utils/oripartsBackUrl";
 
 // 🔹 Models Data - Exported for use in other components
 export const chevroletModels = [
-    {
-      id: 1,
-      name: "MAHINDRA ALFA",
-      image: "https://boodmo.com/media/cache/vehicle_model/images/model/db55347.webp",
-      years: "03.2017 - now",
-      link: "/vehicles/mahindra-278/alfa-11951/",
-      modifications: [
-        {
-          generation: "ALFA LOAD 03.2017 - now",
-          options: [
-            "0.4L ALFA LOAD/Diesel/BS4",
-            "0.4L ALFA LOAD/Petrol/CNG/BS6",
-            "0.6L ALFA LOAD/Diesel/BS6",
-          ],
-        },
-        {
-          generation: "ALFA PASSENGER 03.2017 - now",
-          options: [
-            "0.4L/Diesel/BS4",
-            "0.4L ALFA PASSANGER/Petrol/CNG/BS6",
-            "0.6L ALFA PASSANGER /Diesel/BS6",
-          ],
-        },
-        {
-          generation: "ALFA E MINI 09.2017 - now",
-          options: [
-            "5.67 kWh CARGO/Electric",
-            "5.67 kWh MINI/Electric",
-          ],
-        },
-      ],
-    },
+  {
+    id: 1,
+    name: "CHEVROLET AVEO",
+    image: "https://boodmo.com/media/cache/vehicle_model/images/model/CHEVROLET-AVEO-Saloon-(T250,-T255)_WEB_556c16d7f1844.webp",
+    years: "12.2006 - 07.2012",
+    link: "/vehicles/chevrolet-91/aveo-11188/",
+    modifications: [
+      {
+        generation: "AVEO U-VA 12.2006 - 05.2012",
+        options: [
+          "1.2L/Petrol/BS3"
+        ]
+      },
+      {
+        generation: "AVEO 09.2009 - 07.2012",
+        options: [
+          "1.4L/Petrol/BS3",
+          "1.4L/Petrol/CNG/BS4",
+          "1.6L/Petrol/BS3"
+        ]
+      }
+    ]
+  },
+  {
+    id: 2,
+    name: "CHEVROLET BEAT",
+    image: "https://boodmo.com/media/cache/vehicle_model/images/model/0bb6d71.webp",
+    years: "01.2010 - 12.2017",
+    link: "/vehicles/chevrolet-91/beat-11189/",
+    modifications: [
+      {
+        generation: "BEAT 1ST GEN 01.2010 - 02.2014",
+        options: [
+          "1.0L MT/Diesel/BS4",
+          "1.2L MT/Petrol/BS4",
+          "1.2L MT/Petrol/LPG/BS4"
+        ]
+      },
+      {
+        generation: "BEAT 1ST GEN F/L 02.2014 - 12.2017",
+        options: [
+          "1.0L MT/Diesel/BS4",
+          "1.2L MT/Petrol/BS4"
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
+    name: "CHEVROLET CAPTIVA",
+    image: "https://boodmo.com/media/cache/vehicle_model/images/model/85d4200.webp",
+    years: "01.2008 - 12.2017",
+    link: "/vehicles/chevrolet-91/captiva-11190/",
+    modifications: [
+      {
+        generation: "CAPTIVA 1ST GEN 01.2008 - 01.2011",
+        options: [
+          "2.0L/Diesel/BS3"
+        ]
+      },
+      {
+        generation: "CAPTIVA 1ST GEN F/L 01.2011 - 12.2017",
+        options: [
+          "2.2L AT/MT/Diesel/184h.p./BS4",
+          "2.2L AT/MT/Diesel/184h.p./BS4"
+        ]
+      }
+    ]
+  },
+  {
+    id: 4,
+    name: "CHEVROLET CRUZE",
+    image: "https://boodmo.com/media/cache/vehicle_model/images/model/CHEVROLET-CRUZE-(J300)_WEB_556c1e664d879.webp",
+    years: "10.2009 - 12.2017",
+    link: "/vehicles/chevrolet-91/cruze-11191/",
+    modifications: [
+      {
+        generation: "CRUZE 10.2009 - 12.2017",
+        options: [
+          "2.0L/Diesel/150h.p./BS3",
+          "2.0L/Diesel/164h.p./BS4"
+        ]
+      }
+    ]
+  },
+  {
+    id: 5,
+    name: "CHEVROLET ENJOY",
+    image: "https://boodmo.com/media/cache/vehicle_model/images/model/CHEVROLET-ENJOY_web_556d564e9d40f.webp",
+    years: "03.2012 - 12.2017",
+    link: "/vehicles/chevrolet-91/enjoy-11192/",
+    modifications: [
+      {
+        generation: "ENJOY 03.2012 - 12.2017",
+        options: [
+          "1.3L/Diesel/BS4",
+          "1.4L/Petrol/BS4"
+        ]
+      }
+    ]
+  }
+  
+  
+  
 
 
 ];
@@ -98,10 +170,10 @@ export const Chevrolet = () => {
   return (
     <section className="min-h-screen py-6">
       {/* Breadcrumbs */}
-      <div className="w-full mb-8 px-4">
+      <div className="max-w-7xl mx-auto mb-6 sm:mb-8 px-4 sm:px-6 lg:px-8">
         <VehicleBreadcrumbs />
 
-        <h1 className="text-3xl px-2 font-bold text-gray-800 uppercase mb-6">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl px-2 font-bold text-gray-800 uppercase mb-4 sm:mb-6">
           CHEVROLET
         </h1>
 
@@ -110,15 +182,15 @@ export const Chevrolet = () => {
           href={link}
           target="_blank"
           rel="nofollow noopener noreferrer"
-          className="border border-1 border-gray-600 mb-2 text-black text-sm rounded-md p-2 transition-all duration-300 hover:bg-red-400"
+          className="inline-block border border-1 border-gray-600 mb-2 text-black text-xs sm:text-sm rounded-md px-3 py-2 sm:px-4 sm:py-2 transition-all duration-300 hover:bg-red-400"
         >
           View OEM Catalogue
         </a>
       </div>
 
       {/* Brand Info Section */}
-           <section className="brand-info__desc mb-6 px-6">
-             <div className="space-y-1 text-sm text-gray-800 dark:text-gray-200">
+           <section className="max-w-7xl mx-auto brand-info__desc mb-6 sm:mb-8 px-4 sm:px-6 lg:px-8">
+             <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-gray-800 dark:text-gray-200">
                <p>
                  Mahindra is a leading automobile manufacturer known for its
                  reliability and innovation. Established in YEAR, it continues to
@@ -144,8 +216,8 @@ export const Chevrolet = () => {
            </section>
      
            {/* Model Filter Section */}
-           <div className="heading-filters flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-gray-200 pb-3 px-4 mb-6">
-             <div className="h2-section text-2xl sm:text-3xl font-semibold text-gray-800">
+           <div className="max-w-7xl mx-auto heading-filters flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 border-b border-gray-200 pb-3 px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
+             <div className="h2-section text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800">
                Choose Your{" "}
                <span className="h2-section__name text-red-500 font-bold">
                  Model
@@ -153,47 +225,47 @@ export const Chevrolet = () => {
              </div>
      
              {/* Search Input */}
-             <div className="heading-filters__action">
+             <div className="heading-filters__action w-full sm:w-auto">
                <input
                  type="search"
                  value={filter}
                  onChange={(e) => setFilter(e.target.value)}
                  placeholder="Filter Model"
-                 className="form-control form-control--search w-64 sm:w-72 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-red-400 transition duration-200"
+                 className="form-control form-control--search w-full sm:w-64 md:w-72 px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-400 focus:border-red-400 transition duration-200"
                />
              </div>
            </div>
      
            {/* Models Grid */}
-           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+           <ul className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-6 lg:px-8">
              {filteredModels.map((model) => (
                <li
                  key={model.id}
                  className="bg-white dark:bg-gray-800 rounded-md shadow-md hover:shadow-red-500/30 transform hover:-translate-y-1 transition duration-110 overflow-hidden"
                >
                  {/* Image */}
-                 <div className="bg-white dark:bg-gray-700 flex items-center justify-center h-40">
+                 <div className="bg-white dark:bg-gray-700 flex items-center justify-center h-32 sm:h-40">
                    <img
                      src={model.image}
                      alt={model.name}
-                     className="object-contain h-full w-full p-6"
+                     className="object-contain h-full w-full p-4 sm:p-6"
                    />
                  </div>
      
                  {/* Content */}
-                 <div className="p-4 space-y-2">
+                 <div className="p-3 sm:p-4 space-y-2">
                    <a
                      href={model.link}
-                     className="text-lg font-semibold text-gray-900 dark:text-white transition"
+                     className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white transition block"
                    >
                      {model.name}
                    </a>
-                   <p className="text-sm text-gray-500 dark:text-gray-400">
+                   <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                      {model.years}
                    </p>
      
                    {/* Dropdown */}
-                   <select className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 text-sm rounded-md px-3 py-2 outline-none transition">
+                   <select className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 text-xs sm:text-sm rounded-md px-2 sm:px-3 py-1.5 sm:py-2 outline-none transition">
                      <option className="font-semibold" value="">
                        SELECT YOUR CAR
                      </option>
@@ -225,12 +297,12 @@ export const Chevrolet = () => {
            </ul>
      
      
-           {/* ---------maruti parts and accssories------------- */}
-           <section className="mt-12 px-4">
-             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 mt-6">
-               {/* Heading (Desktop) */}
-               <h2 className="text-4xl font-semibold text-gray-800 dark:text-gray-200 hidden md:block">
-                 MAHINDRA Parts and{" "}
+           {/* ---------chevrolet parts and accssories------------- */}
+           <section className="max-w-7xl mx-auto mt-8 sm:mt-12 px-4 sm:px-6 lg:px-8">
+             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 sm:mb-6 mt-4 sm:mt-6">
+               {/* Heading */}
+               <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-800 dark:text-gray-200">
+                 CHEVROLET Parts and{" "}
                  <span className="text-red-600 dark:text-pink-400">Accessories</span>
                </h2>
      
@@ -242,14 +314,14 @@ export const Chevrolet = () => {
                    value={categoryFilter}
                    onChange={(e) => setCategoryFilter(e.target.value)}
                    className="w-full rounded-md border border-gray-300 dark:border-gray-600 
-                               bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 
-                               px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                               transition duration-200"
+                          bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 
+                          px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 
+                          transition duration-200"
                  />
                </div>
              </div>
      
-             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
                {filteredParts.map((part, index) => {
                  const displayName = part.title || part.name || "Category";
                  const href = part.href || part.link || "#";
@@ -260,9 +332,9 @@ export const Chevrolet = () => {
                      href={href}
                      title={displayName}
                      aria-label={displayName}
-                     className="flex flex-col items-center bg-white shadow hover:shadow-lg rounded-xl p-10  transition-transform transform hover:scale-105"
+                     className="flex flex-col items-center bg-white shadow hover:shadow-lg rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 lg:p-10 transition-transform transform hover:scale-105"
                    >
-                     <div className="w-24 h-24 flex items-center justify-center mb-3">
+                     <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center mb-2 sm:mb-3">
                        {part.img ? (
                          <img
                            src={part.img}
@@ -272,12 +344,12 @@ export const Chevrolet = () => {
                          />
                        ) : (
                          <div
-                           className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-lg"
+                           className="w-full h-full bg-gray-100 dark:bg-gray-800 rounded-lg"
                            aria-hidden
                          />
                        )}
                      </div>
-                     <span className="mt-1 text-sm text-gray-700 dark:text-gray-200 text-center font-medium break-words">
+                     <span className="mt-1 text-xs sm:text-sm text-gray-700 dark:text-gray-200 text-center font-medium break-words">
                        {displayName}
                      </span>
                    </a>

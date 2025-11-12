@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaShoppingCart, FaMapMarkerAlt, FaFileAlt, FaCreditCard, FaArrowLeft, FaCheck, FaLock, FaTimes } from "react-icons/fa";
 import { useCart } from "../../contexts/CartContext";
 
@@ -462,55 +463,117 @@ const Payment = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-8">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Progress Bar */}
-        <div className="mt-12 md:mt-16 mb-8">
+        {/* Enhanced Progress Bar */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mt-12 md:mt-16 mb-8 bg-white rounded-2xl shadow-2xl p-4 sm:p-5 md:p-6 border border-gray-200"
+        >
           <div className="flex items-center justify-center space-x-4 md:space-x-8">
-            <button
+            <motion.button
               onClick={() => navigate('/cart')}
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity"
+              className="flex flex-col items-center cursor-pointer group"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2">
+              <motion.div 
+                className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+              >
                 <FaShoppingCart className="text-blue-600 text-lg" />
-              </div>
+              </motion.div>
               <span className="text-sm text-blue-600 font-medium">Cart</span>
-            </button>
-            <div className="h-1 w-16 md:w-24 bg-blue-600"></div>
-            <button
+            </motion.button>
+            <motion.div 
+              className="h-1 w-16 md:w-24 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
+            <motion.button
               onClick={() => navigate('/checkout/address')}
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity"
+              className="flex flex-col items-center cursor-pointer group"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2">
+              <motion.div 
+                className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+              >
                 <FaMapMarkerAlt className="text-blue-600 text-lg" />
-              </div>
+              </motion.div>
               <span className="text-sm text-blue-600 font-medium">Address</span>
-            </button>
-            <div className="h-1 w-16 md:w-24 bg-blue-600"></div>
-            <button
+            </motion.button>
+            <motion.div 
+              className="h-1 w-16 md:w-24 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            />
+            <motion.button
               onClick={() => navigate('/checkout/review')}
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity"
+              className="flex flex-col items-center cursor-pointer group"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2">
+              <motion.div 
+                className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.6 }}
+              >
                 <FaFileAlt className="text-blue-600 text-lg" />
-              </div>
+              </motion.div>
               <span className="text-sm text-blue-600 font-medium">Review</span>
-            </button>
-            <div className="h-1 w-16 md:w-24 bg-blue-600"></div>
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mb-2 shadow-lg">
-                <FaCreditCard className="text-white text-lg" />
-              </div>
-              <span className="text-sm text-blue-600 font-semibold">Pay</span>
-            </div>
+            </motion.button>
+            <motion.div 
+              className="h-1 w-16 md:w-24 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            />
+            <motion.div 
+              className="flex flex-col items-center"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.7, type: "spring" }}
+            >
+              <motion.div 
+                className="w-12 h-12 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-2 shadow-xl ring-4 ring-blue-100 relative overflow-hidden"
+                animate={{ 
+                  boxShadow: [
+                    "0 0 0 0px rgba(37, 99, 235, 0.4)",
+                    "0 0 0 8px rgba(37, 99, 235, 0)",
+                    "0 0 0 0px rgba(37, 99, 235, 0.4)"
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+                <FaCreditCard className="text-white text-lg relative z-10" />
+              </motion.div>
+              <span className="text-sm text-blue-600 font-bold">Pay</span>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Page Title */}
-        <h1 className="text-2xl md:text-3xl font-bold mb-8">
-          <span className="text-blue-900">Payment</span>{" "}
-          <span className="text-blue-500">Method</span>
-        </h1>
+        {/* Enhanced Page Title */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-8"
+        >
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <span className="text-blue-900">Payment</span>{" "}
+            <span className="text-blue-600">Method</span>
+          </h1>
+          <p className="text-gray-600">Choose your preferred payment option</p>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Payment Options */}
@@ -519,32 +582,50 @@ const Payment = () => {
               <h2 className="text-lg font-semibold text-gray-800 mb-6">Select Payment Method</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {paymentOptions.map((option) => (
-                  <button
+                {paymentOptions.map((option, index) => (
+                  <motion.button
                     key={option.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
                     onClick={() => {
                       setSelectedPayment(option.id);
                       setShowPaymentModal(true);
                     }}
-                    className={`relative p-4 border-2 rounded-lg text-left transition-all ${
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`relative p-5 border-2 rounded-xl text-left transition-all shadow-md hover:shadow-xl ${
                       selectedPayment === option.id
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50'
+                        ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-blue-100 ring-4 ring-blue-100'
+                        : 'border-gray-200 hover:border-blue-400 hover:bg-blue-50/50 bg-white'
                     }`}
                   >
                     {selectedPayment === option.id && (
-                      <div className="absolute top-2 right-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                      <motion.div 
+                        className="absolute top-3 right-3 w-7 h-7 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
                         <FaCheck className="text-white text-xs" />
-                      </div>
+                      </motion.div>
                     )}
                     <div className="flex items-center gap-3">
-                      <span className="text-xl">{option.icon}</span>
+                      <motion.span 
+                        className="text-3xl"
+                        animate={selectedPayment === option.id ? { scale: [1, 1.2, 1] } : {}}
+                        transition={{ duration: 0.5 }}
+                      >
+                        {option.icon}
+                      </motion.span>
                       <div>
-                        <h3 className="text-sm font-semibold text-gray-800">{option.name}</h3>
-                        <p className="text-xs text-gray-600">{option.description}</p>
+                        <h3 className={`text-sm font-bold ${selectedPayment === option.id ? 'text-blue-700' : 'text-gray-800'}`}>
+                          {option.name}
+                        </h3>
+                        <p className="text-xs text-gray-600 mt-1">{option.description}</p>
                       </div>
                     </div>
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -595,17 +676,26 @@ const Payment = () => {
               <p className="text-xs text-gray-600">Payment Amount</p>
               <p className="text-xl font-bold text-blue-900">₹{grandTotal.toFixed(2)}</p>
             </div>
-            <button
+            <motion.button
               onClick={handlePlaceOrder}
               disabled={!selectedPayment}
-              className={`px-8 py-3 rounded-lg text-sm font-semibold transition-colors ${
+              whileHover={selectedPayment ? { scale: 1.05, y: -2 } : {}}
+              whileTap={selectedPayment ? { scale: 0.95 } : {}}
+              className={`px-8 py-3 rounded-xl text-sm font-bold transition-all shadow-xl relative overflow-hidden ${
                 selectedPayment
-                  ? 'bg-blue-500 text-white hover:bg-blue-600'
+                  ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white hover:from-blue-700 hover:via-blue-600 hover:to-blue-700'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >
-              Place order
-            </button>
+              {selectedPayment && (
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                  animate={{ x: ["-100%", "100%"] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
+              )}
+              <span className="relative z-10">Place Order</span>
+            </motion.button>
           </div>
         </div>
       </div>

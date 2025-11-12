@@ -2,6 +2,9 @@ import React, { useState, useEffect, useMemo } from "react";
 import { FaSearch, FaCar } from "react-icons/fa";
 import { useVehicle } from "../contexts/VehicleContext";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 import { 
   getVehicleData, 
   getVehicleMakers, 
@@ -12,9 +15,6 @@ import {
 } from "../data/vehicleData";
 
 // ✅ Local images (inside src/assets/img/)
-import engine1 from "../assets/img/engine1.png";
-import engine2 from "../assets/img/engine2.jpg";
-import engine3 from "../assets/img/engine3.jpg";
 import bannerui from "../assets/img/bannerui.jpg";
 
 export const SearchSection = ({ onClose, initialVehicle = null }) => {
@@ -259,16 +259,15 @@ export const BoodmoUi = () => {
   const { vehicles } = useVehicle();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
   const [openDropdownId, setOpenDropdownId] = useState(null);
-  const images = [engine1, engine2, engine3];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [images.length]);
+  
+  // Banner images for scrolling carousel
+  const bannerImages = [
+    bannerui,
+    "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&q=80",
+    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80",
+   
+  ];
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -348,17 +347,40 @@ export const BoodmoUi = () => {
 
   return (
     <section className="bg-red-50">
-      {/* 🔹 Banner Section */}
+      {/* 🔹 Banner Section with Scrolling Images */}
       <div className="relative w-full h-[70vh] md:h-[80vh] flex items-center justify-center">
-        {/* 🔹 Background Image */}
+        {/* 🔹 Scrolling Banner Carousel */}
         <div className="absolute inset-0 w-full h-full">
-          <img
-            src={bannerui}
-            alt="Sparelo Banner"
-            className="w-full h-full object-cover opacity-70"
-          />
-          {/* 🔹 Dark overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/40" />
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={0}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            speed={800}
+            className="w-full h-full"
+          >
+            {bannerImages.map((image, index) => (
+              <SwiperSlide key={index}>
+                <div className="relative w-full h-full">
+                  <img
+                    src={image}
+                    alt={`Banner ${index + 1}`}
+                    className="w-full h-full object-cover opacity-70"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/1200x600?text=Banner';
+                    }}
+                  />
+                  {/* 🔹 Dark overlay for better text readability */}
+                  <div className="absolute inset-0 bg-black/40" />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
         {/* 🔹 Centered Content - No Background */}

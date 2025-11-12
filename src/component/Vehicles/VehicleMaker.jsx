@@ -77,33 +77,33 @@ const VehicleMaker = () => {
   };
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-8">
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
       {/* Heading & Search */}
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
           Search Parts by{" "}
           <span className="text-red-500">VEHICLE MAKERS</span>
         </h1>
         <input
           type="search"
           placeholder="Filter Car Maker"
-          className="border border-gray-300 rounded-lg px-4 py-2 w-full md:w-1/3 focus:outline-none focus:ring-2 transition"
+          className="border border-gray-300 rounded-lg px-3 sm:px-4 py-2 text-sm sm:text-base w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
       {/* Popular Makers */}
-      <div className="mb-8">
-        <h3 className="text-xl md:text-2xl font-semibold mb-3">Popular Vehicle Makers</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div className="mb-6 sm:mb-8">
+        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3">Popular Vehicle Makers</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {vehicleMakers
             .filter((maker) => maker.popular)
             .map((maker, idx) => (
               <a
                 key={idx}
                 href={maker.link}
-                className="flex justify-center items-center bg-white text-red-500 font-semibold px-3 py-4 rounded-lg hover:bg-gray-50 transition transform hover:scale-110 shadow-sm"
+                className="flex justify-center items-center bg-white text-red-500 font-semibold px-2 sm:px-3 py-3 sm:py-4 rounded-lg hover:bg-gray-50 transition transform hover:scale-110 shadow-sm text-xs sm:text-sm"
               >
                 {maker.name}
               </a>
@@ -112,12 +112,12 @@ const VehicleMaker = () => {
       </div>
 
       {/* Alphabet Navigation */}
-      <ul className="flex flex-wrap gap-4 mb-6 text-sm font-medium justify-center md:justify-start">
+      <ul className="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-6 text-xs sm:text-sm font-medium justify-center md:justify-start">
         {alphabet.map((letter) => (
           <li
             key={letter}
             onClick={() => handleLetterClick(letter)}
-            className="cursor-pointer px-4 py-3 bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 transition transform hover:scale-110"
+            className="cursor-pointer px-3 sm:px-4 py-2 sm:py-3 bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 transition transform hover:scale-110 rounded"
           >
             {letter}
           </li>
@@ -125,20 +125,20 @@ const VehicleMaker = () => {
       </ul>
 
       {/* Makers List */}
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         {alphabet.map(
           (letter) =>
             groupedMakers[letter] && (
               <div key={letter} id={letter}>
-                <p className="text-2xl font-bold text-gray-800 mb-3 border-b-2 border-red-200 inline-block pb-1">
+                <p className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 border-b-2 border-red-200 inline-block pb-1">
                   {letter}
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3">
                   {groupedMakers[letter].map((maker, idx) => (
                     <a
                       key={idx}
                       href={maker.link}
-                      className="flex justify-center items-center bg-gray-100 text-gray-800 px-3 py-4 rounded-lg hover:bg-gray-200 hover:text-red-600 transition transform hover:scale-105 shadow-sm"
+                      className="flex justify-center items-center bg-gray-100 text-gray-800 px-2 sm:px-3 py-3 sm:py-4 rounded-lg hover:bg-gray-200 hover:text-red-600 transition transform hover:scale-105 shadow-sm text-xs sm:text-sm"
                     >
                       {maker.name}
                     </a>

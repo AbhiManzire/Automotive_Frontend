@@ -24,23 +24,23 @@ const VehiclePage = ({ brand }) => {
   const link = brandLinks[brand?.toUpperCase()] || "https://oriparts.com/";
 
   return (
-    <section className="p-6 md:p-10 bg-gray-50 min-h-screen">
+    <section className="p-4 sm:p-6 md:p-10 bg-gray-50 min-h-screen">
       {/* Breadcrumbs */}
       <VehicleBreadcrumbs />
 
       {/* Vehicle Info */}
-      <div className="bg-white shadow-md rounded-2xl p-6 text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4 uppercase">
+      <div className="bg-white shadow-md rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 uppercase">
           {brand}
         </h1>
-        <p className="text-gray-600 mb-6">
+        <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
           Explore genuine OEM parts for your {brand?.toUpperCase()} vehicle.
         </p>
 
         {/* Button to open OEM Catalogue */}
         <button
           onClick={() => OpenOemCatalogue(link)}
-          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 mt-4 rounded-full shadow transition"
+          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 mt-3 sm:mt-4 rounded-full shadow transition text-sm sm:text-base"
         >
           View OEM Catalogue
         </button>
