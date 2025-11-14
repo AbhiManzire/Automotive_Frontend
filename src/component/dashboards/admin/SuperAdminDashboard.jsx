@@ -17,6 +17,9 @@ import Fines from './pages/Fines';
 import Reports from './pages/Reports';
 import Garages from './pages/Garages';
 import Profile from './pages/Profile';
+import Payments from './pages/Payments';
+import Marketing from './pages/Marketing';
+import Support from './pages/Support';
 import {
   FaUsers,
   FaStore,
@@ -274,6 +277,9 @@ const SuperAdminDashboard = () => {
     if (path.includes('/analytics')) return 'analytics';
     if (path.includes('/reports')) return 'reports';
     if (path.includes('/settings')) return 'settings';
+    if (path.includes('/payments')) return 'payments';
+    if (path.includes('/marketing')) return 'marketing';
+    if (path.includes('/support')) return 'support';
     return 'overview';
   };
 
@@ -521,6 +527,15 @@ const SuperAdminDashboard = () => {
                   )}
                   {currentPage === 'profile' && (
                     <Profile />
+                  )}
+                  {currentPage === 'payments' && (
+                    <Payments />
+                  )}
+                  {currentPage === 'marketing' && (
+                    <Marketing />
+                  )}
+                  {currentPage === 'support' && (
+                    <Support />
                   )}
             </div>
           </div>

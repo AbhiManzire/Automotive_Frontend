@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
 import Article_Review from "../Article_Review";
 import { getOriPartsLink } from "../../utils/oripartsBackUrl";
@@ -1717,12 +1718,12 @@ export const Maruti = () => {
 
             {/* Content */}
             <div className="p-3 sm:p-4 space-y-2">
-              <a
-                href={model.link}
-                className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white transition block"
+              <Link
+                to={`/vehicles/maruti/${model.id}`}
+                className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white transition block hover:text-red-500"
               >
                 {model.name}
-              </a>
+              </Link>
               <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                 {model.years}
               </p>
@@ -1769,7 +1770,7 @@ export const Maruti = () => {
 
 
       {/* ---------maruti parts and accssories------------- */}
-      <section className="mt-12 px-4">
+      <section className="max-w-7xl mx-auto mt-12 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 mt-6">
           {/* Heading (Desktop) */}
           <h2 className="text-4xl font-semibold text-gray-800 dark:text-gray-200 hidden md:block">

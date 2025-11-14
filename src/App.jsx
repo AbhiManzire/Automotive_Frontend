@@ -105,6 +105,7 @@ import { Fiat } from "./component/Vehicles/Fiat";
 import { Kia } from "./component/Vehicles/Kia";
 import { AshokLayland } from "./component/Vehicles/AshokLayland";
 import { Audi } from "./component/Vehicles/Audi";
+import ModelDetail from "./component/Vehicles/ModelDetail";
 import FAQ from "./features/support/FAQ";
 import ReturnPolicy from "./features/support/ReturnPolicy";
 
@@ -131,7 +132,7 @@ const Layout = ({ children }) => {
   return (
     <>
       {!hideHeaderFooter && <Header />}
-      <div className={!hideHeaderFooter ? "mt-2 sm:mt-4" : ""}>
+      <div className={!hideHeaderFooter ? "mt-4 sm:mt-4" : ""}>
         {children}
       </div>
       <ToastContainer />
@@ -162,9 +163,9 @@ function App() {
                 <SearchByCategory />            
                 <ChooseWorkshop />
                 <ChooseMechanics />
-                <CurrentOffers />
                 {/* <SearchSection /> */}
-               
+
+                <CurrentOffers />             
                 <WhyChooseAftermarket />
                 <BrandTrustAndCarMakers />
                 <Article_review
@@ -296,6 +297,7 @@ function App() {
               <Route path="/vehicles/kia" element={<Kia/>} />
               <Route path="/vehicles/ashok-layland" element={<AshokLayland/>} />
               <Route path="/vehicles/audi" element={<Audi/>} />
+              <Route path="/vehicles/:maker/:modelId" element={<ModelDetail/>} />
 
           {/* Redirect landing after Oriparts back_url_pn */}
           <Route path="/search/:pn" element={<PartSearchResults />} />

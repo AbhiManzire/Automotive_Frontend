@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 
-const categories = [
+export const categories = [
   { title: "Air Conditioning", href: "/catalog/air_conditioning/", img: "https://boodmo.com/media/images/categories/10f1952.svg" },
   { title: "Bearings", href: "/catalog/bearings/", img: "https://boodmo.com/media/images/categories/d5dd6ce.svg" },
   { title: "Belts Chains And Rollers", href: "/catalog/drive_belts/", img: "https://boodmo.com/media/images/categories/ebba234.svg" },
@@ -35,7 +35,7 @@ const categories = [
   { title: "Universal", href: "/catalog/universal/", img: "https://boodmo.com/media/images/categories/8c5ddeb.svg" },
   { title: "Wheels", href: "/catalog/wheels/", img: "https://boodmo.com/media/images/categories/1bb7d48.svg" },
   { title: "Windscreen Cleaning System", href: "/catalog/windscreen_cleaning_system/", img: "https://boodmo.com/media/images/categories/d36974e.svg" },
-];
+ ];
 
 export default function SearchByCategory() {
   const swiperRef = useRef(null);

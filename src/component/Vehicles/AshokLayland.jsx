@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
 import Article_Review from "../Article_Review";
 import { getOriPartsLink } from "../../utils/oripartsBackUrl";
@@ -167,12 +168,12 @@ export const AshokLayland = () => {
 
             {/* Content */}
             <div className="p-3 sm:p-4 space-y-2">
-              <a
-                href={model.link}
-                className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white transition block"
+              <Link
+                to={`/vehicles/ashok-layland/${model.id}`}
+                className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white transition block hover:text-red-500"
               >
                 {model.name}
-              </a>
+              </Link>
               <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                 {model.years}
               </p>
@@ -229,7 +230,7 @@ export const AshokLayland = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6">
           {filteredParts.map((part, index) => {
             const displayName = part.title || part.name || "Category";
             const href = part.href || part.link || "#";

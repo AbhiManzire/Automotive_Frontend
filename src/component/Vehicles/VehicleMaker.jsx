@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import VehicleBreadcrumbs from "./VehicleBreadcrumbs";
 
 // Vehicle makers data
 const vehicleMakers = [
@@ -78,6 +79,11 @@ const VehicleMaker = () => {
 
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      {/* Breadcrumbs */}
+      <div className="mb-4 sm:mb-6">
+        <VehicleBreadcrumbs />
+      </div>
+      
       {/* Heading & Search */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">

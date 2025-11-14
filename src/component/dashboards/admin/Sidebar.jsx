@@ -18,7 +18,10 @@ import {
   FaCog as FaSettings,
   FaSignOutAlt,
   FaBars,
-  FaTimes
+  FaTimes,
+  FaCreditCard,
+  FaTag,
+  FaComments
 } from 'react-icons/fa';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -34,6 +37,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { id: 'garages', label: 'Garages', icon: FaTools, path: '/admin/dashboard/garages' },
     { id: 'products', label: 'Products', icon: FaBox, path: '/admin/dashboard/products' },
     { id: 'categories', label: 'Categories', icon: FaDatabase, path: '/admin/dashboard/categories' },
+    { id: 'payments', label: 'Payments', icon: FaCreditCard, path: '/admin/dashboard/payments' },
+    { id: 'marketing', label: 'Marketing', icon: FaTag, path: '/admin/dashboard/marketing' },
+    { id: 'support', label: 'Support', icon: FaComments, path: '/admin/dashboard/support' },
     { id: 'lucky-draw', label: 'Lucky Draw', icon: FaChartPie, path: '/admin/dashboard/lucky-draw' },
     { id: 'kyc', label: 'KYC Management', icon: FaUserShield, path: '/admin/dashboard/kyc' },
     { id: 'fines', label: 'Fines & Penalties', icon: FaFileInvoice, path: '/admin/dashboard/fines' },

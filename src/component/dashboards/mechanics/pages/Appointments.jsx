@@ -25,9 +25,7 @@ const Appointments = ({ upcomingAppointments }) => {
                   <span className="text-xs text-gray-500 flex items-center gap-1">
                     <FaClock /> {appointment.date} at {appointment.time}
                   </span>
-                  <span className="text-xs text-gray-500 flex items-center gap-1">
-                    <FaPhone /> {appointment.phone}
-                  </span>
+                 
                 </div>
               </div>
               <button className="btn-outline text-sm">

@@ -101,7 +101,7 @@ const carMakers = [
   { name: "FORD", link: "/vehicles/ford/" },
   { name: "FIAT", link: "/vehicles/fiat/" },
   { name: "KIA", link: "/vehicles/kia/" },
-  { name: "ASHOK LEYLAND", link: "/vehicles/ashok-layland/" },
+  // { name: "ASHOK LEYLAND", link: "/vehicles/ashok-layland/" },
   
 ];
 
@@ -112,20 +112,21 @@ export default function BrandTrustAndCarMakers() {
   const handleCarMakerViewAll = () => navigate("/vehicles");
 
   return (
-    <div className="px-6 md:px-12 lg:px-20 py-16 bg-gray-50 text-gray-800">
-      {/* ===================== BRANDS SECTION ===================== */}
-      <section className="mb-20">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
-            Brands we <span className="text-red-500">Trust</span>
-          </h2>
-          <button
-            onClick={handleBrandViewAll}
-            className="mt-4 md:mt-0 text-sm text-blue-600 hover:underline font-semibold transition-colors"
-          >
-            VIEW ALL
-          </button>
-        </div>
+    <div className="py-16 bg-gray-50 text-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* ===================== BRANDS SECTION ===================== */}
+        <section className="mb-20">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
+              Brands we <span className="text-red-500">Trust</span>
+            </h2>
+            <button
+              onClick={handleBrandViewAll}
+              className="mt-4 md:mt-0 text-sm text-blue-600 hover:underline font-semibold transition-colors"
+            >
+              VIEW ALL
+            </button>
+          </div>
 
         {/* Swiper for Brands */}
         <Swiper
@@ -160,58 +161,59 @@ export default function BrandTrustAndCarMakers() {
         </Swiper>
       </section>
 
-      {/* ===================== CAR MAKERS SECTION ===================== */}
-      <section>
-        <div className="flex flex-col md:flex-row justify-between items-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
-            Popular <span className="text-red-500">Car Makers</span>
-          </h2>
-          <button
-            onClick={handleCarMakerViewAll}
-            className="mt-4 md:mt-0 text-sm text-blue-600 hover:underline font-semibold transition-colors"
-          >
-            VIEW ALL
-          </button>
-        </div>
+        {/* ===================== CAR MAKERS SECTION ===================== */}
+        <section>
+          <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
+              Popular <span className="text-red-500">Car Makers</span>
+            </h2>
+            <button
+              onClick={handleCarMakerViewAll}
+              className="mt-4 md:mt-0 text-sm text-blue-600 hover:underline font-semibold transition-colors"
+            >
+              VIEW ALL
+            </button>
+          </div>
 
-        {/* Swiper for Car Makers */}
-        <Swiper
-          modules={[Autoplay]}
-          spaceBetween={2}
-          slidesPerView={6}
-          loop
-          autoplay={{ delay: 0, disableOnInteraction: false }}
-          speed={4000}
-          className="w-full"
-          breakpoints={{
-            320: { slidesPerView: 2, spaceBetween: 8 },
-            640: { slidesPerView: 3, spaceBetween: 10 },
-            1024: { slidesPerView: 6, spaceBetween: 16 },
-          }}
-        >
-          {carMakers.map((maker, idx) => (
-            <SwiperSlide key={idx}>
-              <button
-                onClick={() => navigate(maker.link)}
-                className="rounded-xl p-3 flex flex-col items-center justify-center
-                           hover:scale-105 transition-all duration-300 group w-full"
-              >
-                <img
-                  src={getMakerImage(maker.name)}
-                  alt={maker.name}
-                  className="w-full h-16 object-contain mb-2"
-                  onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/200x120?text=' + maker.name;
-                  }}
-                />
-                <span className="text-base font-medium text-gray-700 text-center">
-                  {maker.name}
-                </span>
-              </button>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </section>
+          {/* Swiper for Car Makers */}
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={2}
+            slidesPerView={6}
+            loop
+            autoplay={{ delay: 0, disableOnInteraction: false }}
+            speed={4000}
+            className="w-full"
+            breakpoints={{
+              320: { slidesPerView: 2, spaceBetween: 8 },
+              640: { slidesPerView: 3, spaceBetween: 10 },
+              1024: { slidesPerView: 6, spaceBetween: 16 },
+            }}
+          >
+            {carMakers.map((maker, idx) => (
+              <SwiperSlide key={idx}>
+                <button
+                  onClick={() => navigate(maker.link)}
+                  className="rounded-xl p-3 flex flex-col items-center justify-center
+                             hover:scale-105 transition-all duration-300 group w-full"
+                >
+                  <img
+                    src={getMakerImage(maker.name)}
+                    alt={maker.name}
+                    className="w-full h-16 object-contain mb-2"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/200x120?text=' + maker.name;
+                    }}
+                  />
+                  <span className="text-base font-medium text-gray-700 text-center">
+                    {maker.name}
+                  </span>
+                </button>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </section>
+      </div>
     </div>
   );
 }

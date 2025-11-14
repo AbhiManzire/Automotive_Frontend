@@ -24,11 +24,9 @@ const Footer = () => {
 
   return (
     <footer className="bg-gradient-to-b from-gray-50 to-white border-t-2 border-gray-200 text-sm text-gray-700">
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* 🔹 App Download Section */}
-        <div className="gradient-primary text-white py-12 md:py-16">
-          <div className="section-container flex flex-col md:flex-row items-center justify-between gap-8">
+      {/* 🔹 App Download Section */}
+      <div className="gradient-primary text-white py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
               <h2 className="text-3xl md:text-4xl font-bold mb-2">Download</h2>
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">Our Mobile App</h3>
@@ -63,11 +61,11 @@ const Footer = () => {
                 />
               </a>
             </div>
-          </div>
         </div>
+      </div>
 
-        {/* 🔹 Main Footer Links */}
-        <div className="section-container grid py-12 md:py-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+      {/* 🔹 Main Footer Links */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid py-12 md:py-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
 
           {/* Logo and Social */}
           <div>
@@ -183,10 +181,10 @@ const Footer = () => {
               <li><Link to="/sitemap2" className="text-gray-600 hover:text-gray-800 transition-colors">Sitemap2</Link></li>
             </ul>
           </div>
-        </div>
+      </div>
 
-        {/* Newsletter & Social Media Section */}
-        <div className="bg-gray-800 border-t border-gray-700">
+      {/* Newsletter & Social Media Section */}
+      <div className="bg-gray-800 border-t border-gray-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               {/* Social Media Icons */}
@@ -269,10 +267,10 @@ const Footer = () => {
               </div>
             </div>
           </div>
-        </div>
+      </div>
 
-        {/* Copyright & Payment Methods Section */}
-        <div className="bg-white border-t border-gray-200">
+      {/* Copyright & Payment Methods Section */}
+      <div className="bg-white border-t border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               {/* Copyright */}
@@ -333,7 +331,6 @@ const Footer = () => {
               </div>
             </div>
           </div>
-        </div>
       </div>
     </footer>
   );
