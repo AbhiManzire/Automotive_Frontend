@@ -24,6 +24,7 @@ import Cart from './component/Cart';
 import ShippingAddress from './component/checkout/ShippingAddress';
 import Review from './component/checkout/Review';
 import Payment from './component/checkout/Payment';
+import OrderConfirmation from './component/checkout/OrderConfirmation';
 import { BoodmoUi } from './component/BoodmoUi';
 import CurrentOffers from './component/CurrentOffers';
 import SearchSection from "./component/SearchSection";
@@ -231,6 +232,7 @@ function App() {
           <Route path="/checkout/address" element={<ShippingAddress />} />
           <Route path="/checkout/review" element={<Review />} />
           <Route path="/checkout/payment" element={<Payment />} />
+          <Route path="/checkout/confirmation" element={<OrderConfirmation />} />
           <Route path="/category" element={<SearchByCategory />} />
           <Route path="/garage" element={<Garage />} />
           <Route path="/document" element={<Document />} />

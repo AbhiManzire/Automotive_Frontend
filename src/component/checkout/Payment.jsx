@@ -10,6 +10,7 @@ const Payment = () => {
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [shippingAddress, setShippingAddress] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   
   // Payment form data
   const [paymentData, setPaymentData] = useState({
@@ -164,7 +165,7 @@ const Payment = () => {
     return true;
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (!selectedPayment) {
       alert('Please select a payment method');
       return;
@@ -177,6 +178,22 @@ const Payment = () => {
       }
     }
 
+    setIsProcessing(true);
+
+    // For Razorpay, simulate redirect (in production, integrate actual Razorpay SDK)
+    if (selectedPayment === 'razorpay') {
+      // Simulate payment processing
+      setTimeout(() => {
+        processOrder();
+      }, 2000);
+      return;
+    }
+
+    // For other payment methods, process order directly
+    processOrder();
+  };
+
+  const processOrder = () => {
     // Create order object
     const orderId = `ORD-${Date.now()}`;
     const orderDate = new Date().toISOString();
@@ -213,7 +230,7 @@ const Payment = () => {
     const order = {
       id: orderId,
       date: orderDate,
-      status: 'In-Progress', // Default status
+      status: selectedPayment === 'cod' ? 'Pending Payment' : 'Confirmed', // Status based on payment method
       items: cartItems.map(item => ({
         id: item.id,
         name: item.name,
@@ -228,6 +245,7 @@ const Payment = () => {
       packages: packages,
       shippingAddress: shippingAddress,
       paymentMethod: paymentOptions.find(p => p.id === selectedPayment)?.name || selectedPayment,
+      paymentStatus: selectedPayment === 'cod' ? 'Pending' : 'Paid',
       paymentDetails: selectedPayment === 'cod' || selectedPayment === 'razorpay' 
         ? null 
         : { ...paymentData, method: selectedPayment },
@@ -246,12 +264,12 @@ const Payment = () => {
     // Clear cart
     clearCart();
 
-    // Clear shipping address (optional - you might want to keep it)
-    // localStorage.removeItem('shippingAddress');
+    setIsProcessing(false);
 
-    // Show success message and navigate
-    alert(`Order placed successfully! Order ID: ${orderId}`);
-    navigate('/myorder');
+    // Navigate to order confirmation page
+    navigate(`/checkout/confirmation?orderId=${orderId}`, { 
+      state: { orderId } 
+    });
   };
 
   const banks = [
@@ -430,10 +448,16 @@ const Payment = () => {
             <p className="text-xs text-gray-600 mb-4">
               You will be redirected to Razorpay's secure payment gateway to complete your transaction.
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
               <p className="text-xs text-blue-800">
                 <strong>Secure Payment:</strong> Your payment will be processed securely by Razorpay. 
                 We do not store your payment information.
+              </p>
+            </div>
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+              <p className="text-xs text-yellow-800">
+                <strong>Note:</strong> After clicking "Pay & Place Order", you will be redirected to Razorpay's payment page. 
+                Complete the payment there to confirm your order.
               </p>
             </div>
           </div>
@@ -678,23 +702,39 @@ const Payment = () => {
             </div>
             <motion.button
               onClick={handlePlaceOrder}
-              disabled={!selectedPayment}
-              whileHover={selectedPayment ? { scale: 1.05, y: -2 } : {}}
-              whileTap={selectedPayment ? { scale: 0.95 } : {}}
+              disabled={!selectedPayment || isProcessing}
+              whileHover={selectedPayment && !isProcessing ? { scale: 1.05, y: -2 } : {}}
+              whileTap={selectedPayment && !isProcessing ? { scale: 0.95 } : {}}
               className={`px-8 py-3 rounded-xl text-sm font-bold transition-all shadow-xl relative overflow-hidden ${
-                selectedPayment
+                selectedPayment && !isProcessing
                   ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white hover:from-blue-700 hover:via-blue-600 hover:to-blue-700'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >
-              {selectedPayment && (
+              {selectedPayment && !isProcessing && (
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
                   animate={{ x: ["-100%", "100%"] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                 />
               )}
-              <span className="relative z-10">Place Order</span>
+              <span className="relative z-10 flex items-center gap-2">
+                {isProcessing ? (
+                  <>
+                    <motion.div
+                      className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <FaLock className="text-sm" />
+                    Pay & Place Order
+                  </>
+                )}
+              </span>
             </motion.button>
           </div>
         </div>
@@ -769,9 +809,10 @@ const Payment = () => {
                     setShowPaymentModal(false);
                   }
                 }}
-                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
+                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium flex items-center gap-2"
               >
-                Confirm
+                <FaCheck className="text-xs" />
+                Confirm Payment Details
               </button>
             </div>
           </div>
