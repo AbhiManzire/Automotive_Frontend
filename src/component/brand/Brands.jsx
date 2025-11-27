@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Brands = () => {
   const alphabets = [
@@ -493,14 +494,13 @@ export const Brands = () => {
       {/* Brand Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {filteredBrands.map((brand) => (
-          <div
+          <Link
             key={brand.href}
-            className="p-4 rounded text-center hover:shadow-lg cursor-pointer"
+            to={brand.href}
+            className="p-4 rounded text-center hover:shadow-lg cursor-pointer block text-inherit hover:text-blue-600 transition-colors"
           >
-            <a href={brand.href} className="block text-inherit hover:text-sky-500">
-              {brand.name} ({brand.count})
-            </a>
-          </div>
+            {brand.name} ({brand.count})
+          </Link>
         ))}
       </div>
     </div>

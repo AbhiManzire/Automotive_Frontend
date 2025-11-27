@@ -1,7 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaShoppingCart, FaMapMarkerAlt, FaFileAlt, FaCreditCard, FaArrowLeft, FaCheck, FaLock, FaTimes } from "react-icons/fa";
+import { 
+  FaShoppingCart, 
+  FaMapMarkerAlt, 
+  FaFileAlt, 
+  FaCreditCard, 
+  FaArrowLeft, 
+  FaCheck, 
+  FaLock, 
+  FaTimes,
+  FaMobileAlt,
+  FaUniversity,
+  FaWallet,
+  FaShieldAlt,
+  FaCheckCircle
+} from "react-icons/fa";
+import { 
+  SiPaytm,
+  SiRazorpay
+} from "react-icons/si";
 import { useCart } from "../../contexts/CartContext";
 
 const Payment = () => {
@@ -33,58 +51,75 @@ const Payment = () => {
   }, [navigate]);
 
   // Calculate totals
-  const deliveryCharge = getSubtotal() >= 500 ? 0 : 84;
-  const platformFee = 120;
-  const grandTotal = getTotalPrice() + deliveryCharge + platformFee;
+  const deliveryCharge = useMemo(() => {
+    return getSubtotal() >= 500 ? 0 : 84;
+  }, [getSubtotal]);
 
-  const paymentOptions = [
+  const platformFee = 120;
+  const grandTotal = useMemo(() => {
+    return getTotalPrice() + deliveryCharge + platformFee;
+  }, [getTotalPrice, deliveryCharge]);
+
+  const paymentOptions = useMemo(() => [
     {
       id: 'paytm',
       name: 'Paytm',
-      icon: '💳',
+      icon: SiPaytm,
+      color: '#00BAF2',
       description: 'Pay using Paytm Wallet or UPI',
+      popular: true,
     },
     {
       id: 'razorpay',
       name: 'Razorpay',
-      icon: '💳',
-      description: 'Pay using Razorpay Gateway',
+      icon: SiRazorpay,
+      color: '#0C2451',
+      description: 'Secure payment gateway',
+      popular: true,
     },
     {
       id: 'upi',
       name: 'UPI',
-      icon: '📱',
-      description: 'Pay using UPI (Google Pay, PhonePe, etc.)',
+      icon: FaMobileAlt,
+      color: '#5F259F',
+      description: 'Google Pay, PhonePe, BHIM & more',
+      popular: true,
     },
     {
       id: 'card',
       name: 'Credit/Debit Card',
-      icon: '💳',
-      description: 'Pay using Credit or Debit Card',
+      icon: FaCreditCard,
+      color: '#1A1F71',
+      description: 'Visa, Mastercard, RuPay & more',
+      popular: false,
     },
     {
       id: 'netbanking',
       name: 'Net Banking',
-      icon: '🏦',
-      description: 'Pay using Net Banking',
+      icon: FaUniversity,
+      color: '#0066CC',
+      description: 'All major banks supported',
+      popular: false,
     },
     {
       id: 'cod',
       name: 'Cash on Delivery',
-      icon: '💰',
+      icon: FaWallet,
+      color: '#FF6B35',
       description: 'Pay when you receive the order',
+      popular: false,
     },
-  ];
+  ], []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setPaymentData(prev => ({
       ...prev,
       [name]: value
     }));
-  };
+  }, []);
 
-  const formatCardNumber = (value) => {
+  const formatCardNumber = useCallback((value) => {
     const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
     const matches = v.match(/\d{4,16}/g);
     const match = matches && matches[0] || '';
@@ -97,27 +132,27 @@ const Payment = () => {
     } else {
       return v;
     }
-  };
+  }, []);
 
-  const formatExpiryDate = (value) => {
+  const formatExpiryDate = useCallback((value) => {
     const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
     if (v.length >= 2) {
       return v.substring(0, 2) + '/' + v.substring(2, 4);
     }
     return v;
-  };
+  }, []);
 
-  const handleCardNumberChange = (e) => {
+  const handleCardNumberChange = useCallback((e) => {
     const formatted = formatCardNumber(e.target.value);
     setPaymentData(prev => ({ ...prev, cardNumber: formatted }));
-  };
+  }, [formatCardNumber]);
 
-  const handleExpiryChange = (e) => {
+  const handleExpiryChange = useCallback((e) => {
     const formatted = formatExpiryDate(e.target.value);
     setPaymentData(prev => ({ ...prev, expiryDate: formatted }));
-  };
+  }, [formatExpiryDate]);
 
-  const validatePaymentData = () => {
+  const validatePaymentData = useCallback(() => {
     switch (selectedPayment) {
       case 'upi':
         if (!paymentData.upiId || !paymentData.upiId.includes('@')) {
@@ -156,45 +191,16 @@ const Payment = () => {
         }
         break;
       case 'cod':
-        return true; // No validation needed for COD
+        return true;
       case 'razorpay':
-        return true; // Will redirect to Razorpay gateway
+        return true;
       default:
         return false;
     }
     return true;
-  };
+  }, [selectedPayment, paymentData]);
 
-  const handlePlaceOrder = async () => {
-    if (!selectedPayment) {
-      alert('Please select a payment method');
-      return;
-    }
-    
-    // Skip validation for COD and Razorpay
-    if (selectedPayment !== 'cod' && selectedPayment !== 'razorpay') {
-      if (!validatePaymentData()) {
-        return;
-      }
-    }
-
-    setIsProcessing(true);
-
-    // For Razorpay, simulate redirect (in production, integrate actual Razorpay SDK)
-    if (selectedPayment === 'razorpay') {
-      // Simulate payment processing
-      setTimeout(() => {
-        processOrder();
-      }, 2000);
-      return;
-    }
-
-    // For other payment methods, process order directly
-    processOrder();
-  };
-
-  const processOrder = () => {
-    // Create order object
+  const processOrder = useCallback(() => {
     const orderId = `ORD-${Date.now()}`;
     const orderDate = new Date().toISOString();
     
@@ -230,7 +236,7 @@ const Payment = () => {
     const order = {
       id: orderId,
       date: orderDate,
-      status: selectedPayment === 'cod' ? 'Pending Payment' : 'Confirmed', // Status based on payment method
+      status: selectedPayment === 'cod' ? 'Pending Payment' : 'Confirmed',
       items: cartItems.map(item => ({
         id: item.id,
         name: item.name,
@@ -258,7 +264,7 @@ const Payment = () => {
 
     // Save order to localStorage
     const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
-    existingOrders.unshift(order); // Add new order at the beginning
+    existingOrders.unshift(order);
     localStorage.setItem('orders', JSON.stringify(existingOrders));
 
     // Clear cart
@@ -270,9 +276,33 @@ const Payment = () => {
     navigate(`/checkout/confirmation?orderId=${orderId}`, { 
       state: { orderId } 
     });
-  };
+  }, [cartItems, selectedPayment, shippingAddress, paymentData, paymentOptions, getSubtotal, grandTotal, getTotalItems, clearCart, navigate]);
 
-  const banks = [
+  const handlePlaceOrder = useCallback(async () => {
+    if (!selectedPayment) {
+      alert('Please select a payment method');
+      return;
+    }
+    
+    if (selectedPayment !== 'cod' && selectedPayment !== 'razorpay') {
+      if (!validatePaymentData()) {
+        return;
+      }
+    }
+
+    setIsProcessing(true);
+
+    if (selectedPayment === 'razorpay') {
+      setTimeout(() => {
+        processOrder();
+      }, 2000);
+      return;
+    }
+
+    processOrder();
+  }, [selectedPayment, validatePaymentData, processOrder]);
+
+  const banks = useMemo(() => [
     'State Bank of India',
     'HDFC Bank',
     'ICICI Bank',
@@ -283,10 +313,10 @@ const Payment = () => {
     'Canara Bank',
     'Union Bank of India',
     'Indian Bank',
-  ];
+  ], []);
 
   // Render payment form based on selected method
-  const renderPaymentForm = () => {
+  const renderPaymentForm = useCallback(() => {
     if (!selectedPayment) return null;
 
     switch (selectedPayment) {
@@ -295,7 +325,7 @@ const Payment = () => {
           <div>
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-2">
-                UPI ID <span className="text-red-500">*</span>
+                UPI ID <span className="text-blue-500">*</span>
               </label>
               <input
                 type="text"
@@ -316,71 +346,71 @@ const Payment = () => {
       case 'card':
         return (
           <div className="space-y-4">
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-2">
+                Card Number <span className="text-blue-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="cardNumber"
+                value={paymentData.cardNumber}
+                onChange={handleCardNumberChange}
+                placeholder="1234 5678 9012 3456"
+                maxLength="19"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-2">
+                Name on Card <span className="text-blue-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="cardName"
+                value={paymentData.cardName}
+                onChange={handleInputChange}
+                placeholder="John Doe"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                required
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-medium text-gray-700 mb-2">
-                  Card Number <span className="text-red-500">*</span>
+                  Expiry Date <span className="text-blue-500">*</span>
                 </label>
                 <input
                   type="text"
-                  name="cardNumber"
-                  value={paymentData.cardNumber}
-                  onChange={handleCardNumberChange}
-                  placeholder="1234 5678 9012 3456"
-                  maxLength="19"
+                  name="expiryDate"
+                  value={paymentData.expiryDate}
+                  onChange={handleExpiryChange}
+                  placeholder="MM/YY"
+                  maxLength="5"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   required
                 />
               </div>
               <div>
                 <label className="block text-xs font-medium text-gray-700 mb-2">
-                  Name on Card <span className="text-red-500">*</span>
+                  CVV <span className="text-blue-500">*</span>
                 </label>
                 <input
-                  type="text"
-                  name="cardName"
-                  value={paymentData.cardName}
+                  type="password"
+                  name="cvv"
+                  value={paymentData.cvv}
                   onChange={handleInputChange}
-                  placeholder="John Doe"
+                  placeholder="123"
+                  maxLength="4"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   required
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-2">
-                    Expiry Date <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="expiryDate"
-                    value={paymentData.expiryDate}
-                    onChange={handleExpiryChange}
-                    placeholder="MM/YY"
-                    maxLength="5"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-2">
-                    CVV <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="password"
-                    name="cvv"
-                    value={paymentData.cvv}
-                    onChange={handleInputChange}
-                    placeholder="123"
-                    maxLength="4"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-gray-600">
-                <FaLock className="text-gray-400" />
-                <span>Your payment information is secure and encrypted</span>
-              </div>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-gray-600">
+              <FaLock className="text-gray-400" />
+              <span>Your payment information is secure and encrypted</span>
+            </div>
           </div>
         );
 
@@ -388,7 +418,7 @@ const Payment = () => {
         return (
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-2">
-              Bank Name <span className="text-red-500">*</span>
+              Bank Name <span className="text-blue-500">*</span>
             </label>
             <select
               name="bankName"
@@ -411,7 +441,7 @@ const Payment = () => {
         return (
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-2">
-              Paytm Phone Number <span className="text-red-500">*</span>
+              Paytm Phone Number <span className="text-blue-500">*</span>
             </label>
             <div className="flex gap-2">
               <div className="w-20">
@@ -480,232 +510,378 @@ const Payment = () => {
       default:
         return null;
     }
-  };
+  }, [selectedPayment, paymentData, handleInputChange, handleCardNumberChange, handleExpiryChange, banks, grandTotal]);
+
+  // Progress Bar Component
+  const ProgressBar = React.memo(() => (
+    <motion.div 
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="mt-2 md:mt-4 mb-2 bg-white rounded-xl shadow-xl p-2 sm:p-3 md:p-4 border border-gray-200"
+    >
+      <div className="flex items-center justify-center space-x-0.5 sm:space-x-1 md:space-x-2">
+        <motion.button
+          onClick={() => navigate('/cart')}
+          className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.div 
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 0.6 }}
+          >
+            <FaShoppingCart className="text-blue-600 text-xs sm:text-sm md:text-base" />
+          </motion.div>
+          <span className="text-[10px] sm:text-xs text-blue-600 font-medium">Cart</span>
+        </motion.button>
+        <motion.div 
+          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        />
+        <motion.button
+          onClick={() => navigate('/checkout/address')}
+          className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.div 
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 0.6 }}
+          >
+            <FaMapMarkerAlt className="text-blue-600 text-xs sm:text-sm md:text-base" />
+          </motion.div>
+          <span className="text-[10px] sm:text-xs text-blue-600 font-medium">Address</span>
+        </motion.button>
+        <motion.div 
+          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        />
+        <motion.button
+          onClick={() => navigate('/checkout/review')}
+          className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.div 
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 0.6 }}
+          >
+            <FaFileAlt className="text-blue-600 text-xs sm:text-sm md:text-base" />
+          </motion.div>
+          <span className="text-[10px] sm:text-xs text-blue-600 font-medium">Review</span>
+        </motion.button>
+        <motion.div 
+          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        />
+        <motion.div 
+          className="flex flex-col items-center flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.7, type: "spring" }}
+        >
+          <motion.div 
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 shadow-xl ring-2 ring-blue-100 relative overflow-hidden"
+            animate={{ 
+              boxShadow: [
+                "0 0 0 0px rgba(37, 99, 235, 0.4)",
+                "0 0 0 6px rgba(37, 99, 235, 0)",
+                "0 0 0 0px rgba(37, 99, 235, 0.4)"
+              ]
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+            <FaCreditCard className="text-white text-xs sm:text-sm md:text-base relative z-10" />
+          </motion.div>
+          <span className="text-[10px] sm:text-xs text-blue-600 font-bold">Pay</span>
+        </motion.div>
+      </div>
+    </motion.div>
+  ));
+
+  // Payment Option Card Component
+  const PaymentOptionCard = React.memo(({ option, index, isSelected, onSelect }) => {
+    const IconComponent = option.icon;
+    const iconBgStyle = isSelected 
+      ? { background: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(10px)' }
+      : { background: `linear-gradient(135deg, ${option.color}, ${option.color}dd)` };
+    
+    return (
+      <motion.button
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.1 }}
+        onClick={() => {
+          onSelect(option.id);
+          setShowPaymentModal(true);
+        }}
+        whileHover={isSelected ? undefined : { scale: 1.03, y: -4 }}
+        whileTap={isSelected ? undefined : { scale: 0.97 }}
+        className={`relative p-4 sm:p-5 border-2 rounded-2xl text-left shadow-lg overflow-hidden ${
+          isSelected
+            ? 'text-white cursor-default'
+            : 'border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50 hover:shadow-2xl group transition-all'
+        }`}
+        style={isSelected ? {
+          borderColor: option.color,
+          background: `linear-gradient(135deg, ${option.color}15, ${option.color}25)`
+        } : {}}
+      >
+        {/* Background gradient overlay when selected */}
+        {isSelected && (
+          <motion.div
+            className="absolute inset-0 opacity-10"
+            style={{ background: `linear-gradient(135deg, ${option.color}, ${option.color}dd)` }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.1 }}
+          />
+        )}
+        
+        {/* Popular badge */}
+        {option.popular && (
+          <motion.div
+            className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md z-20"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: index * 0.1 + 0.2 }}
+          >
+            POPULAR
+          </motion.div>
+        )}
+
+        {/* Selected checkmark */}
+        {isSelected && (
+          <motion.div 
+            className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-xl z-10"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <FaCheckCircle className="text-green-500 text-lg" />
+          </motion.div>
+        )}
+
+        <div className="flex items-center gap-4 relative z-10">
+          {/* Icon Container */}
+          <motion.div
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center shadow-lg"
+            style={iconBgStyle}
+          >
+            <IconComponent 
+              className="text-2xl sm:text-3xl text-white"
+            />
+          </motion.div>
+          
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className={`text-base sm:text-lg font-bold ${
+                isSelected ? 'text-white' : 'text-gray-800'
+              }`}>
+                {option.name}
+              </h3>
+            </div>
+            <p className={`text-xs sm:text-sm ${
+              isSelected ? 'text-white/90' : 'text-gray-600'
+            }`}>
+              {option.description}
+            </p>
+          </div>
+        </div>
+
+      </motion.button>
+    );
+  });
 
   if (!shippingAddress) {
     return null;
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-4">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Enhanced Progress Bar */}
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mt-12 md:mt-16 mb-8 bg-white rounded-2xl shadow-2xl p-4 sm:p-5 md:p-6 border border-gray-200"
-        >
-          <div className="flex items-center justify-center space-x-4 md:space-x-8">
-            <motion.button
-              onClick={() => navigate('/cart')}
-              className="flex flex-col items-center cursor-pointer group"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div 
-                className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-              >
-                <FaShoppingCart className="text-blue-600 text-lg" />
-              </motion.div>
-              <span className="text-sm text-blue-600 font-medium">Cart</span>
-            </motion.button>
-            <motion.div 
-              className="h-1 w-16 md:w-24 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            />
-            <motion.button
-              onClick={() => navigate('/checkout/address')}
-              className="flex flex-col items-center cursor-pointer group"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div 
-                className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-              >
-                <FaMapMarkerAlt className="text-blue-600 text-lg" />
-              </motion.div>
-              <span className="text-sm text-blue-600 font-medium">Address</span>
-            </motion.button>
-            <motion.div 
-              className="h-1 w-16 md:w-24 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            />
-            <motion.button
-              onClick={() => navigate('/checkout/review')}
-              className="flex flex-col items-center cursor-pointer group"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div 
-                className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-              >
-                <FaFileAlt className="text-blue-600 text-lg" />
-              </motion.div>
-              <span className="text-sm text-blue-600 font-medium">Review</span>
-            </motion.button>
-            <motion.div 
-              className="h-1 w-16 md:w-24 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            />
-            <motion.div 
-              className="flex flex-col items-center"
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.7, type: "spring" }}
-            >
-              <motion.div 
-                className="w-12 h-12 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-2 shadow-xl ring-4 ring-blue-100 relative overflow-hidden"
-                animate={{ 
-                  boxShadow: [
-                    "0 0 0 0px rgba(37, 99, 235, 0.4)",
-                    "0 0 0 8px rgba(37, 99, 235, 0)",
-                    "0 0 0 0px rgba(37, 99, 235, 0.4)"
-                  ]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
-                <FaCreditCard className="text-white text-lg relative z-10" />
-              </motion.div>
-              <span className="text-sm text-blue-600 font-bold">Pay</span>
-            </motion.div>
-          </div>
-        </motion.div>
+        <ProgressBar />
 
-        {/* Enhanced Page Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-8"
+          className="mb-4"
         >
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">
+          <h1 className="text-xl md:text-2xl font-bold mb-1">
             <span className="text-blue-900">Payment</span>{" "}
             <span className="text-blue-600">Method</span>
           </h1>
-          <p className="text-gray-600">Choose your preferred payment option</p>
+          <p className="text-gray-600 text-sm">Choose your preferred payment option</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Payment Options */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-800 mb-6">Select Payment Method</h2>
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 border border-gray-100 overflow-hidden"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                    Select Payment Method
+                  </h2>
+                  <p className="text-xs sm:text-sm text-gray-600">
+                    Choose a secure payment option
+                  </p>
+                </div>
+                <div className="hidden sm:flex items-center gap-2 bg-green-50 px-3 py-1.5 rounded-full">
+                  <FaShieldAlt className="text-green-600 text-sm" />
+                  <span className="text-xs font-semibold text-green-700">Secure</span>
+                </div>
+              </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 {paymentOptions.map((option, index) => (
-                  <motion.button
+                  <PaymentOptionCard
                     key={option.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    onClick={() => {
-                      setSelectedPayment(option.id);
-                      setShowPaymentModal(true);
-                    }}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`relative p-5 border-2 rounded-xl text-left transition-all shadow-md hover:shadow-xl ${
-                      selectedPayment === option.id
-                        ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-blue-100 ring-4 ring-blue-100'
-                        : 'border-gray-200 hover:border-blue-400 hover:bg-blue-50/50 bg-white'
-                    }`}
-                  >
-                    {selectedPayment === option.id && (
-                      <motion.div 
-                        className="absolute top-3 right-3 w-7 h-7 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <FaCheck className="text-white text-xs" />
-                      </motion.div>
-                    )}
-                    <div className="flex items-center gap-3">
-                      <motion.span 
-                        className="text-3xl"
-                        animate={selectedPayment === option.id ? { scale: [1, 1.2, 1] } : {}}
-                        transition={{ duration: 0.5 }}
-                      >
-                        {option.icon}
-                      </motion.span>
-                      <div>
-                        <h3 className={`text-sm font-bold ${selectedPayment === option.id ? 'text-blue-700' : 'text-gray-800'}`}>
-                          {option.name}
-                        </h3>
-                        <p className="text-xs text-gray-600 mt-1">{option.description}</p>
-                      </div>
-                    </div>
-                  </motion.button>
+                    option={option}
+                    index={index}
+                    isSelected={selectedPayment === option.id}
+                    onSelect={setSelectedPayment}
+                  />
                 ))}
               </div>
-            </div>
+
+              {/* Security Badge */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="mt-6 pt-6 border-t border-gray-200 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-600"
+              >
+                <div className="flex items-center gap-2">
+                  <FaLock className="text-gray-400" />
+                  <span>256-bit SSL Encryption</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaShieldAlt className="text-gray-400" />
+                  <span>PCI DSS Compliant</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCheckCircle className="text-green-500" />
+                  <span>100% Secure</span>
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
 
           {/* Payment Summary Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
-              <h2 className="text-lg font-semibold text-gray-800 mb-6">Payment Summary</h2>
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-2xl shadow-xl p-4 sm:p-6 border border-blue-100 sticky top-4"
+            >
+              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-200">
+                <FaShoppingCart className="text-blue-600" />
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900">Order Summary</h2>
+              </div>
               
-              <div className="space-y-4 mb-6">
+              <div className="space-y-3 mb-4">
                 <div className="flex justify-between text-sm text-gray-700">
-                  <span>{getTotalItems()} items</span>
-                  <span>₹{getTotalPrice().toFixed(2)}</span>
+                  <span className="flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                    {getTotalItems()} {getTotalItems() === 1 ? 'item' : 'items'}
+                  </span>
+                  <span className="font-medium">₹{getTotalPrice().toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm text-gray-700">
                   <span>Delivery Charge</span>
-                  <span>₹{deliveryCharge.toFixed(2)}</span>
+                  <span className={deliveryCharge === 0 ? 'text-green-600 font-semibold' : 'font-medium'}>
+                    {deliveryCharge === 0 ? 'FREE' : `₹${deliveryCharge.toFixed(2)}`}
+                  </span>
                 </div>
                 <div className="flex justify-between text-sm text-gray-700">
                   <span>Platform Fee</span>
-                  <span>₹{platformFee.toFixed(2)}</span>
+                  <span className="font-medium">₹{platformFee.toFixed(2)}</span>
                 </div>
               </div>
 
-              <div className="border-t border-gray-200 pt-4 mb-6">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="border-t-2 border-gray-300 pt-4 mb-4 bg-gradient-to-r from-gray-50 to-white rounded-lg p-3"
+              >
                 <div className="flex justify-between items-center">
-                  <span className="text-base font-semibold text-gray-800">Grand Total</span>
-                  <span className="text-xl font-bold text-gray-800">₹{grandTotal.toFixed(2)}</span>
+                  <span className="text-base sm:text-lg font-bold text-gray-900">Grand Total</span>
+                  <motion.span 
+                    key={grandTotal}
+                    initial={{ scale: 1.2, color: "#2563eb" }}
+                    animate={{ scale: 1, color: "#1e40af" }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="text-xl sm:text-2xl font-extrabold text-blue-700"
+                  >
+                    ₹{grandTotal.toFixed(2)}
+                  </motion.span>
+                </div>
+              </motion.div>
+
+              {/* Trust Indicators */}
+              <div className="pt-4 border-t border-gray-200">
+                <div className="flex items-center gap-2 text-xs text-gray-600 mb-2">
+                  <FaShieldAlt className="text-green-500" />
+                  <span className="font-medium">Your payment is secure</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-gray-600">
+                  <FaCheckCircle className="text-blue-500" />
+                  <span>Protected by industry standards</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* Footer Navigation */}
-        <div className="mt-8 flex items-center justify-between bg-white rounded-lg shadow-sm p-6">
-          <button
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white rounded-2xl shadow-xl p-4 sm:p-6 border border-gray-100"
+        >
+          <motion.button
             onClick={() => navigate('/checkout/review')}
-            className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold"
+            whileHover={{ scale: 1.05, x: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 border-2 border-blue-500 text-blue-600 rounded-xl hover:bg-blue-50 transition-all text-sm font-semibold shadow-md hover:shadow-lg w-full sm:w-auto justify-center"
           >
             <FaArrowLeft />
             Back
-          </button>
+          </motion.button>
           
-          <div className="flex items-center gap-6">
-            <div className="text-right">
-              <p className="text-xs text-gray-600">Payment Amount</p>
-              <p className="text-xl font-bold text-blue-900">₹{grandTotal.toFixed(2)}</p>
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+            <div className="text-center sm:text-right order-2 sm:order-1">
+              <p className="text-xs text-gray-600 mb-0.5">Total Payment</p>
+              <p className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                ₹{grandTotal.toFixed(2)}
+              </p>
             </div>
             <motion.button
               onClick={handlePlaceOrder}
               disabled={!selectedPayment || isProcessing}
               whileHover={selectedPayment && !isProcessing ? { scale: 1.05, y: -2 } : {}}
               whileTap={selectedPayment && !isProcessing ? { scale: 0.95 } : {}}
-              className={`px-8 py-3 rounded-xl text-sm font-bold transition-all shadow-xl relative overflow-hidden ${
+              className={`px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl text-sm sm:text-base font-bold transition-all shadow-xl relative overflow-hidden w-full sm:w-auto flex items-center justify-center gap-2 ${
                 selectedPayment && !isProcessing
                   ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white hover:from-blue-700 hover:via-blue-600 hover:to-blue-700'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
@@ -730,94 +906,122 @@ const Payment = () => {
                   </>
                 ) : (
                   <>
-                    <FaLock className="text-sm" />
-                    Pay & Place Order
+                    <FaLock className="text-base" />
+                    <span>Pay & Place Order</span>
                   </>
                 )}
               </span>
             </motion.button>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Payment Details Modal */}
-      {showPaymentModal && selectedPayment && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white">
-              <h2 className="text-xl font-semibold text-gray-800">
-                {paymentOptions.find(p => p.id === selectedPayment)?.name} Payment Details
-              </h2>
-              <button
-                onClick={() => {
-                  setShowPaymentModal(false);
-                  // Reset form data if user cancels
-                  if (selectedPayment !== 'cod' && selectedPayment !== 'razorpay') {
-                    setPaymentData({
-                      upiId: '',
-                      cardNumber: '',
-                      cardName: '',
-                      expiryDate: '',
-                      cvv: '',
-                      bankName: '',
-                      paytmPhone: '',
-                    });
-                  }
-                }}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                <FaTimes className="text-xl" />
-              </button>
-            </div>
-
-            {/* Modal Body - Payment Form */}
-            <div className="p-6">
-              {renderPaymentForm()}
-            </div>
-
-            {/* Modal Footer */}
-            <div className="flex items-center justify-end gap-4 p-6 border-t border-gray-200 sticky bottom-0 bg-white">
-              <button
-                onClick={() => {
-                  setShowPaymentModal(false);
-                  if (selectedPayment !== 'cod' && selectedPayment !== 'razorpay') {
-                    setPaymentData({
-                      upiId: '',
-                      cardNumber: '',
-                      cardName: '',
-                      expiryDate: '',
-                      cvv: '',
-                      bankName: '',
-                      paytmPhone: '',
-                    });
-                  }
-                }}
-                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  // For COD and Razorpay, no validation needed
-                  if (selectedPayment === 'cod' || selectedPayment === 'razorpay') {
+      <AnimatePresence>
+        {showPaymentModal && selectedPayment && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            onClick={() => setShowPaymentModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 sticky top-0 bg-gradient-to-r from-blue-50 to-white">
+                <div className="flex items-center gap-3">
+                  {selectedPayment && (() => {
+                    const option = paymentOptions.find(p => p.id === selectedPayment);
+                    const IconComponent = option?.icon;
+                    return IconComponent ? (
+                      <div 
+                        className="w-10 h-10 rounded-lg flex items-center justify-center shadow-md"
+                        style={{ background: `linear-gradient(135deg, ${option.color}, ${option.color}dd)` }}
+                      >
+                        <IconComponent className="text-white text-lg" />
+                      </div>
+                    ) : null;
+                  })()}
+                  <div>
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-900">
+                      {paymentOptions.find(p => p.id === selectedPayment)?.name} Payment
+                    </h2>
+                    <p className="text-xs text-gray-600">Enter your payment details</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
                     setShowPaymentModal(false);
-                    return;
-                  }
-                  // For other methods, validate before closing
-                  if (validatePaymentData()) {
+                    if (selectedPayment !== 'cod' && selectedPayment !== 'razorpay') {
+                      setPaymentData({
+                        upiId: '',
+                        cardNumber: '',
+                        cardName: '',
+                        expiryDate: '',
+                        cvv: '',
+                        bankName: '',
+                        paytmPhone: '',
+                      });
+                    }
+                  }}
+                  className="text-gray-400 hover:text-gray-600 transition-colors p-2 hover:bg-gray-100 rounded-full"
+                >
+                  <FaTimes className="text-xl" />
+                </button>
+              </div>
+
+              {/* Modal Body - Payment Form */}
+              <div className="p-6">
+                {renderPaymentForm()}
+              </div>
+
+              {/* Modal Footer */}
+              <div className="flex items-center justify-end gap-4 p-6 border-t border-gray-200 sticky bottom-0 bg-white">
+                <button
+                  onClick={() => {
                     setShowPaymentModal(false);
-                  }
-                }}
-                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium flex items-center gap-2"
-              >
-                <FaCheck className="text-xs" />
-                Confirm Payment Details
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+                    if (selectedPayment !== 'cod' && selectedPayment !== 'razorpay') {
+                      setPaymentData({
+                        upiId: '',
+                        cardNumber: '',
+                        cardName: '',
+                        expiryDate: '',
+                        cvv: '',
+                        bankName: '',
+                        paytmPhone: '',
+                      });
+                    }
+                  }}
+                  className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    if (selectedPayment === 'cod' || selectedPayment === 'razorpay') {
+                      setShowPaymentModal(false);
+                      return;
+                    }
+                    if (validatePaymentData()) {
+                      setShowPaymentModal(false);
+                    }
+                  }}
+                  className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium flex items-center gap-2"
+                >
+                  <FaCheck className="text-xs" />
+                  Confirm Payment Details
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -62,7 +62,7 @@ const Login = () => {
             <h1 className="mb-4 text-2xl sm:text-3xl font-bold text-primary-600">Login</h1>
 
             {displayError && (
-              <div className="mb-3 p-2 bg-red-50 border border-red-200 rounded-lg text-red-600 text-xs">
+              <div className="mb-3 p-2 bg-blue-50 border border-blue-200 rounded-lg text-blue-600 text-xs">
                 {displayError}
               </div>
             )}
@@ -143,7 +143,7 @@ const Login = () => {
                 <button
                   type="button"
                   disabled
-                  className="w-full h-9 flex items-center justify-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-lg transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full h-9 flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
