@@ -2,96 +2,26 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   FaSearch, 
-  FaShippingFast, 
-  FaExchangeAlt,
+  FaPlus,
+  FaMinus,
   FaPhone,
-  FaWhatsapp,
-  FaArrowRight,
-  FaShoppingCart,
-  FaUser,
-  FaHeadset,
-  FaComments,
-  FaBook,
-  FaStar
+  FaWhatsapp
 } from 'react-icons/fa';
 
-const HelpCenter = () => {
+const FAQ = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
+  const [openFaqs, setOpenFaqs] = useState({});
 
-  // Main categories exactly like Sparelo.com
-  const mainCategories = [
-    {
-      id: 'buying',
-      name: 'Buying on Sparelo',
-      icon: <FaShoppingCart className="text-blue-600" />,
-      description: 'Questions about ordering, payments, and account',
-      color: 'from-blue-500 to-blue-600'
-    },
-    {
-      id: 'shipping',
-      name: 'Shipping & Delivery',
-      icon: <FaShippingFast className="text-green-600" />,
-      description: 'Tracking, delivery times, and shipping options',
-      color: 'from-green-500 to-green-600'
-    },
-    {
-      id: 'returns',
-      name: 'Returns & Refunds',
-      icon: <FaExchangeAlt className="text-orange-600" />,
-      description: 'Return policy, refund process, and exchanges',
-      color: 'from-orange-500 to-orange-600'
-    },
-    {
-      id: 'account',
-      name: 'My Account',
-      icon: <FaUser className="text-purple-600" />,
-      description: 'Account management and personal information',
-      color: 'from-purple-500 to-purple-600'
-    }
-  ];
+  // Toggle FAQ accordion
+  const toggleFaq = (faqId) => {
+    setOpenFaqs(prev => ({
+      ...prev,
+      [faqId]: !prev[faqId]
+    }));
+  };
 
-  // Popular questions like Sparelo.com
-  const popularQuestions = [
-    {
-      id: 1,
-      question: 'How to track my order?',
-      category: 'shipping',
-      views: '15,243'
-    },
-    {
-      id: 2,
-      question: 'What is your return policy?',
-      category: 'returns',
-      views: '12,876'
-    },
-    {
-      id: 3,
-      question: 'How do I place an order?',
-      category: 'buying',
-      views: '10,542'
-    },
-    {
-      id: 4,
-      question: 'What payment methods do you accept?',
-      category: 'buying',
-      views: '9,876'
-    },
-    {
-      id: 5,
-      question: 'How to create an account?',
-      category: 'account',
-      views: '8,932'
-    },
-    {
-      id: 6,
-      question: 'Do you ship internationally?',
-      category: 'shipping',
-      views: '7,654'
-    }
-  ];
-
-  // FAQ data organized by categories
+  // FAQ data
   const faqData = {
     buying: [
       {
@@ -203,32 +133,7 @@ const HelpCenter = () => {
     ]
   };
 
-  // Contact support options
-  const supportOptions = [
-    {
-      icon: <FaHeadset className="text-3xl" />,
-      title: 'Help Center',
-      description: 'Browse help articles and FAQs',
-      link: '/help',
-      buttonText: 'Browse Articles'
-    },
-    {
-      icon: <FaComments className="text-3xl" />,
-      title: 'Contact Support',
-      description: 'Get help from our support team',
-      link: '/contact',
-      buttonText: 'Contact Us'
-    },
-    {
-      icon: <FaBook className="text-3xl" />,
-      title: 'Community Forum',
-      description: 'Ask questions to our community',
-      link: '/community',
-      buttonText: 'Visit Forum'
-    }
-  ];
-
-  // Get all FAQs for search
+  // Get all FAQs
   const allFaqs = Object.values(faqData).flat();
 
   // Filter FAQs based on search
@@ -242,224 +147,180 @@ const HelpCenter = () => {
         faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
       ) || [];
 
+  // FAQ Accordion Component
+  const FAQAccordion = ({ faq }) => {
+    const isOpen = openFaqs[faq.id];
+
+    return (
+      <div className="bg-gray-100 rounded-lg overflow-hidden">
+        <button
+          onClick={() => toggleFaq(faq.id)}
+          className="w-full px-5 py-4 flex items-center gap-4 text-left hover:bg-gray-200 transition-colors"
+        >
+          <div className="flex-shrink-0">
+            {isOpen ? (
+              <FaMinus className="text-blue-500 text-lg" />
+            ) : (
+              <FaPlus className="text-blue-500 text-lg" />
+            )}
+          </div>
+          <h3 className="text-base sm:text-lg font-medium text-gray-800 flex-1">
+            {faq.question}
+          </h3>
+        </button>
+        
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="px-5 pb-4 pl-12">
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed pt-2">
+              {faq.answer}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-     
-      {/* Hero Section */}
-      <div className="bg-white border-b">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-          <h1 className="text-5xl md:text-xl font-bold text-gray-900 mb-4">
-            How can we help you?
+    <div className="min-h-screen bg-white">
+      {/* Simple Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 text-center">
+            <span className="text-gray-800">We Have </span>
+            <span className="bg-gradient-to-r from-blue-500 to-teal-500 bg-clip-text text-transparent">
+              Answers
+            </span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Find answers to all your questions about ordering, shipping, returns, and more.
-          </p>
           
           {/* Search Box */}
           <div className="max-w-2xl mx-auto relative">
-            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg" />
+            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Describe your issue..."
+              placeholder="Search for answers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm text-lg"
+              className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Popular Questions */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Popular Questions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {popularQuestions.map((item) => (
-              <div key={item.id} className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-start justify-between mb-3">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                    {mainCategories.find(cat => cat.id === item.category)?.name}
-                  </span>
-                  <span className="text-sm text-gray-500 flex items-center">
-                    <FaStar className="text-yellow-400 mr-1" />
-                    {item.views}
-                  </span>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
-                  {item.question}
-                </h3>
-                <button className="text-blue-600 font-medium flex items-center gap-2 hover:text-blue-700 text-sm">
-                  Read answer <FaArrowRight className="text-xs" />
-                </button>
-              </div>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        {/* Category Filter */}
+        {!searchQuery && (
+          <div className="flex flex-wrap gap-2 mb-8 justify-center">
+            <button
+              onClick={() => setActiveCategory('all')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                activeCategory === 'all'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              All Questions
+            </button>
+            <button
+              onClick={() => setActiveCategory('buying')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                activeCategory === 'buying'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Buying
+            </button>
+            <button
+              onClick={() => setActiveCategory('shipping')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                activeCategory === 'shipping'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Shipping
+            </button>
+            <button
+              onClick={() => setActiveCategory('returns')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                activeCategory === 'returns'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Returns
+            </button>
+            <button
+              onClick={() => setActiveCategory('account')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                activeCategory === 'account'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              Account
+            </button>
+          </div>
+        )}
+
+        {/* FAQ List */}
+        {filteredFaqs.length > 0 ? (
+          <div className="space-y-4">
+            {filteredFaqs.map((faq) => (
+              <FAQAccordion key={faq.id} faq={faq} />
             ))}
           </div>
-        </section>
-
-        {/* Main Categories */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Browse Help Categories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {mainCategories.map((category) => (
-              <div
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`bg-gradient-to-r ${category.color} text-white rounded-lg p-6 cursor-pointer transform hover:scale-105 transition-all duration-200 shadow-lg`}
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg mb-4">No results found</p>
+            {searchQuery && (
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setActiveCategory('all');
+                }}
+                className="text-blue-500 hover:text-blue-600"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="bg-white/20 rounded-lg p-3">
-                    {category.icon}
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold mb-2">{category.name}</h3>
-                <p className="text-white/90 text-sm">{category.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* FAQ Results */}
-        {searchQuery && (
-          <section className="mb-12">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Search Results for "{searchQuery}"
-              </h2>
-              <span className="text-gray-500">
-                {filteredFaqs.length} {filteredFaqs.length === 1 ? 'result' : 'results'} found
-              </span>
-            </div>
-
-            {filteredFaqs.length > 0 ? (
-              <div className="space-y-4">
-                {filteredFaqs.map((faq) => (
-                  <div key={faq.id} className="bg-white rounded-lg border border-gray-200 p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                      {faq.question}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-                <FaSearch className="text-4xl text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">No results found</h3>
-                <p className="text-gray-500 mb-4">Try different keywords or browse the categories above</p>
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Clear Search
-                </button>
-              </div>
+                Clear search
+              </button>
             )}
-          </section>
+          </div>
         )}
 
-        {/* Category-specific FAQs */}
-        {!searchQuery && activeCategory !== 'all' && faqData[activeCategory] && (
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              {mainCategories.find(cat => cat.id === activeCategory)?.name} - Frequently Asked Questions
+        {/* Contact Section */}
+        <div className="mt-16 pt-8 border-t border-gray-200">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Still have questions?
             </h2>
-            <div className="space-y-4">
-              {faqData[activeCategory].map((faq) => (
-                <div key={faq.id} className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                    {faq.question}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* All FAQs when no category selected */}
-        {!searchQuery && activeCategory === 'all' && (
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">All Frequently Asked Questions</h2>
-            <div className="space-y-6">
-              {mainCategories.map((category) => (
-                <div key={category.id} className="bg-white rounded-lg border border-gray-200">
-                  <div 
-                    className="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-50"
-                    onClick={() => setActiveCategory(category.id)}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-lg bg-gradient-to-r ${category.color} text-white`}>
-                        {category.icon}
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900">{category.name}</h3>
-                        <p className="text-gray-600">{category.description}</p>
-                      </div>
-                    </div>
-                    <FaArrowRight className="text-gray-400" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Support Options */}
-        <section className="bg-gray-50 rounded-2xl p-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Still need help?</h2>
-            <p className="text-gray-600 text-lg">We're here to assist you with any questions</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {supportOptions.map((option, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 text-center border border-gray-200 hover:shadow-md transition-shadow">
-                <div className="text-blue-600 mb-4 flex justify-center">
-                  {option.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{option.title}</h3>
-                <p className="text-gray-600 mb-4">{option.description}</p>
-                <Link
-                  to={option.link}
-                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                >
-                  {option.buttonText} <FaArrowRight className="text-sm" />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Quick Contact */}
-        <section className="mt-12 text-center">
-          <div className="bg-white rounded-2xl border border-gray-200 p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Can't find what you're looking for?</h3>
-            <p className="text-gray-600 mb-6">Our support team is available 24/7 to help you</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <p className="text-gray-600 mb-6">
+              Our support team is here to help you 24/7
+            </p>
+            <div className="flex flex-row gap-4 justify-center">
               <a 
                 href="tel:+919876543210"
-                className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium"
+                className="inline-flex items-center justify-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors"
               >
-                <FaPhone className="text-sm" />
-                Call Support: +91 98765 43210
+                <FaPhone />
+                Call 
               </a>
               <a 
                 href="https://wa.me/919876543210"
-                className="inline-flex items-center gap-2 bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-900 transition-colors font-medium"
+                className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors"
               >
-                <FaWhatsapp className="text-sm" />
-                WhatsApp Support
+                <FaWhatsapp />
+                WhatsApp 
               </a>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </div>
   );
 };
 
-export default HelpCenter;
+export default FAQ;

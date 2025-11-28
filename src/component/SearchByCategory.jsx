@@ -79,16 +79,40 @@ export default function SearchByCategory() {
   const swiperRef = useRef(null);
   const [showAll, setShowAll] = useState(false);
 
-  const toggleShowAll = useCallback(() => {
-    setShowAll(prev => !prev);
+  const handleShowAll = useCallback(() => {
+    setShowAll(true);
   }, []);
 
+  // Group categories into chunks of 16 (4 columns x 4 rows) for mobile
+  const mobileCategoriesChunks = useMemo(() => {
+    const chunks = [];
+    for (let i = 0; i < categories.length; i += 16) {
+      chunks.push(categories.slice(i, i + 16));
+    }
+    return chunks;
+  }, []);
+
+  // Mobile Swiper Config (4 columns x 4 rows = 16 items per slide)
+  const mobileSwiperConfig = useMemo(() => ({
+    modules: [Autoplay],
+    spaceBetween: 0,
+    slidesPerView: 1,
+    loop: mobileCategoriesChunks.length > 1,
+    speed: 400,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true
+    }
+  }), [mobileCategoriesChunks.length]);
+
+  // Desktop Swiper Config
   const swiperConfig = useMemo(() => ({
     modules: [Autoplay, Navigation],
     spaceBetween: 12,
     slidesPerView: 3,
     loop: true,
-    speed: 800,
+    speed: 400,
     autoplay: {
       delay: 2000,
       disableOnInteraction: false,
@@ -131,8 +155,8 @@ export default function SearchByCategory() {
         <div className="w-16 h-0.5 bg-red-600 mb-4 md:mb-5"></div>
 
         {/* Header Section */}
-        <div className="mb-5 md:mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div>
+        <div className="mb-5 md:mb-6 flex flex-row items-center justify-between gap-3">
+          <div className="flex-1">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 md:mb-3">
               Search by <span className="">Spares Catalogue</span>
             </h2>
@@ -140,19 +164,21 @@ export default function SearchByCategory() {
               Discover high-quality car parts and accessories organized into convenient categories
             </p>
           </div>
-          <button
-            onClick={toggleShowAll}
-            className="px-4 py-2 sm:px-6 sm:py-2.5 text-blue-500 font-semibold rounded-lg duration-300 text-sm sm:text-base hover:text-blue-600 transition-colors"
-            aria-label={showAll ? "Show Less" : "View All"}
-          >
-            {showAll ? "Show Less" : "View All"}
-          </button>
+          {!showAll && (
+            <button
+              onClick={handleShowAll}
+              className="px-4 py-2 sm:px-6 sm:py-2.5 text-blue-500 font-semibold rounded-lg duration-300 text-sm sm:text-base hover:text-blue-600 transition-colors whitespace-nowrap flex-shrink-0"
+              aria-label="View All"
+            >
+              View All
+            </button>
+          )}
         </div>
 
-        {/* Categories Display - Swiper or Grid */}
+        {/* Categories Display - Grid for Mobile, Swiper for Desktop */}
         {showAll ? (
           /* All Categories Grid */
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
+          <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
             {categories.map((cat, index) => (
               <CategoryCard 
                 key={cat.title} 
@@ -163,46 +189,71 @@ export default function SearchByCategory() {
             ))}
           </div>
         ) : (
-          /* Swiper Container */
-          <div className="relative">
-            <Swiper {...swiperConfig} className="category-swiper">
-              {categories.map((cat, index) => (
-                <SwiperSlide key={cat.title}>
-                  <CategoryCard 
-                    category={cat} 
-                    index={index} 
-                    isGrid={false}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+          <>
+            {/* Mobile View: 4 columns x 4 rows Auto-scrolling Carousel */}
+            <div className="block md:hidden">
+              <Swiper {...mobileSwiperConfig} className="category-swiper-mobile">
+                {mobileCategoriesChunks.map((chunk, chunkIndex) => (
+                  <SwiperSlide key={chunkIndex}>
+                    <div className="grid grid-cols-4 gap-3 px-2">
+                      {chunk.map((cat, index) => (
+                        <CategoryCard 
+                          key={cat.title} 
+                          category={cat} 
+                          index={chunkIndex * 16 + index} 
+                          isGrid={true}
+                        />
+                      ))}
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+            
+            {/* Desktop View: Swiper Container */}
+            <div className="hidden md:block relative">
+              <Swiper {...swiperConfig} className="category-swiper">
+                {categories.map((cat, index) => (
+                  <SwiperSlide key={cat.title}>
+                    <CategoryCard 
+                      category={cat} 
+                      index={index} 
+                      isGrid={false}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
 
-            {/* Navigation Arrows */}
-            <button
-              className="category-prev absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 hover:bg-white border border-gray-200 hover:border-gray-300 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md"
-              aria-label="Previous slide"
-              type="button"
-            >
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              className="category-next absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 hover:bg-white border border-gray-200 hover:border-gray-300 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md"
-              aria-label="Next slide"
-              type="button"
-            >
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+              {/* Navigation Arrows */}
+              <button
+                className="category-prev absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 hover:bg-white border border-gray-200 hover:border-gray-300 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md"
+                aria-label="Previous slide"
+                type="button"
+              >
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                className="category-next absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 hover:bg-white border border-gray-200 hover:border-gray-300 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md"
+                aria-label="Next slide"
+                type="button"
+              >
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </>
         )}
       </div>
 
       {/* Custom Styles */}
       <style>{`
         .category-swiper .swiper-slide {
+          height: auto;
+        }
+        .category-swiper-mobile .swiper-slide {
           height: auto;
         }
         .category-prev,

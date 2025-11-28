@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../../../auth/AuthContext';
-import { useNavigate, useLocation, Routes, Route } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useJob } from '../../../contexts/JobContext';
 import Sidebar from './Sidebar';
 import Overview from './pages/Overview';
@@ -282,12 +282,12 @@ const SuperAdminDashboard = () => {
   const currentPage = getCurrentPage();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 flex">
+    <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col lg:ml-0">
+      <div className="flex-1 flex flex-col lg:ml-64 bg-gray-50">
       {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
           <div className="px-4 md:px-6 py-4">
@@ -300,8 +300,8 @@ const SuperAdminDashboard = () => {
                   <FaBars className="text-xl" />
                 </button>
             <div>
-                  <h1 className="text-xl md:text-2xl font-bold text-gray-900">Super Admin Dashboard</h1>
-              <p className="text-sm text-gray-600">Welcome back, {user?.name || 'Admin'}</p>
+                  <h1 className="text-base md:text-lg font-bold text-gray-900">Super Admin Dashboard</h1>
+              <p className="text-xs text-gray-600">Welcome back, {user?.name || 'Admin'}</p>
             </div>
               </div>
               <div className="flex items-center gap-2 md:gap-4">
@@ -402,7 +402,7 @@ const SuperAdminDashboard = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                    <p className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</p>
+                    <p className="text-2xl font-bold text-gray-900 mb-2">{stat.value}</p>
                     <div className="flex items-center gap-2">
                       {TrendIcon && (
                         <TrendIcon className={`text-sm ${
@@ -418,7 +418,7 @@ const SuperAdminDashboard = () => {
                     </div>
                   </div>
                   <div className={`${stat.color} p-4 rounded-xl text-white shadow-lg`}>
-                    <Icon className="text-3xl" />
+                    <Icon className="text-2xl" />
                   </div>
                 </div>
               </div>
@@ -497,7 +497,7 @@ const SuperAdminDashboard = () => {
             {/* Recent Activities */}
             <div className="card bg-white rounded-xl shadow-md border border-gray-100">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-gray-900">Recent Activities</h3>
+                <h3 className="text-base font-bold text-gray-900">Recent Activities</h3>
                 <button className="text-sm text-primary-600 hover:text-primary-700">View All</button>
               </div>
               <div className="space-y-4">
@@ -528,7 +528,7 @@ const SuperAdminDashboard = () => {
 
             {/* Quick Actions */}
             <div className="card bg-white rounded-xl shadow-md border border-gray-100">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h3>
+              <h3 className="text-base font-bold text-gray-900 mb-4">Quick Actions</h3>
               <div className="space-y-2">
                 <button className="w-full btn-outline text-left justify-start">
                   <FaUserShield className="mr-2" /> Manage Users
@@ -550,7 +550,7 @@ const SuperAdminDashboard = () => {
 
             {/* System Status */}
             <div className="card bg-white rounded-xl shadow-md border border-gray-100">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">System Status</h3>
+              <h3 className="text-base font-bold text-gray-900 mb-4">System Status</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">API Status</span>
@@ -587,3 +587,4 @@ const SuperAdminDashboard = () => {
 };
 
 export default SuperAdminDashboard;
+

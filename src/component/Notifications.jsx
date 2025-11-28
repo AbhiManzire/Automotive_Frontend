@@ -1,11 +1,146 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBell, FaCheckCircle, FaShoppingCart, FaTruck, FaTag, FaCreditCard, FaInfoCircle, FaGift, FaCheck, FaClock } from 'react-icons/fa';
+import { FaBell, FaCheckCircle, FaShoppingCart, FaTruck, FaTag, FaCreditCard, FaInfoCircle, FaGift, FaCheck, FaClock, FaWrench, FaExclamationTriangle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const Notifications = () => {
   const navigate = useNavigate();
+  
+  // Vehicle maintenance data (in a real app, this would come from a database/API)
+  const vehicleData = {
+    lastServiceDate: new Date('2024-10-15'), // Last service date
+    lastServiceMileage: 45000, // Mileage at last service
+    currentMileage: 49900, // Current mileage
+    vehicleModel: 'Honda City',
+    // Track when each component was last changed (in km)
+    componentLastChanged: {
+      brakePads: 0, // Brake pads changed when new - due at 50,000 km (100 km from current)
+      engineOil: 49000, // Engine oil changed at 49,000 km
+      airFilter: 48000, // Air filter changed at 48,000 km
+      transmissionFluid: 42000, // Transmission fluid changed at 42,000 km
+      coolant: 47000, // Coolant changed at 47,000 km
+    }
+  };
+
+  // Maintenance intervals (in km)
+  const maintenanceIntervals = {
+    brakePads: 50000, // Replace every 50,000 km
+    engineOil: 10000, // Change every 10,000 km
+    airFilter: 20000, // Replace every 20,000 km
+    sparkPlugs: 60000, // Replace every 60,000 km
+    timingBelt: 80000, // Replace every 80,000 km
+    transmissionFluid: 40000, // Change every 40,000 km
+    coolant: 30000, // Change every 30,000 km
+  };
+
+  // Calculate predictive maintenance alerts
+  const calculateMaintenanceAlerts = () => {
+    const alerts = [];
+
+    // Brake Pads Check
+    const brakePadsLastChanged = vehicleData.componentLastChanged.brakePads;
+    const brakePadsNextService = brakePadsLastChanged + maintenanceIntervals.brakePads;
+    const brakePadsRemaining = brakePadsNextService - vehicleData.currentMileage;
+    if (brakePadsRemaining <= 1000 && brakePadsRemaining > 0) {
+      alerts.push({
+        id: 'maintenance-brake',
+        type: 'maintenance',
+        title: 'Brake Pads Maintenance',
+        message: `Your **brake pads** may need replacement within **${brakePadsRemaining} km**. Last service: **${vehicleData.lastServiceMileage.toLocaleString()} km**.`,
+        time: 'Just now',
+        read: false,
+        date: 'today',
+        icon: <FaWrench className="text-lg" />,
+        iconBg: 'bg-orange-100',
+        iconColor: 'text-orange-600',
+        priority: 'high'
+      });
+    }
+
+    // Engine Oil Check
+    const engineOilLastChanged = vehicleData.componentLastChanged.engineOil;
+    const engineOilNextService = engineOilLastChanged + maintenanceIntervals.engineOil;
+    const engineOilRemaining = engineOilNextService - vehicleData.currentMileage;
+    if (engineOilRemaining <= 1000 && engineOilRemaining > 0) {
+      alerts.push({
+        id: 'maintenance-oil',
+        type: 'maintenance',
+        title: 'Engine Oil Change',
+        message: `Your **engine oil** should be changed within **${engineOilRemaining} km**. Last change: **${engineOilLastChanged.toLocaleString()} km**.`,
+        time: 'Just now',
+        read: false,
+        date: 'today',
+        icon: <FaWrench className="text-lg" />,
+        iconBg: 'bg-orange-100',
+        priority: 'high'
+      });
+    }
+
+    // Air Filter Check
+    const airFilterLastChanged = vehicleData.componentLastChanged.airFilter;
+    const airFilterNextService = airFilterLastChanged + maintenanceIntervals.airFilter;
+    const airFilterRemaining = airFilterNextService - vehicleData.currentMileage;
+    if (airFilterRemaining <= 2000 && airFilterRemaining > 0) {
+      alerts.push({
+        id: 'maintenance-airfilter',
+        type: 'maintenance',
+        title: 'Air Filter Replacement',
+        message: `Your **air filter** may need replacement within **${airFilterRemaining} km**. Last replacement: **${airFilterLastChanged.toLocaleString()} km**.`,
+        time: 'Just now',
+        read: false,
+        date: 'today',
+        icon: <FaWrench className="text-lg" />,
+        iconBg: 'bg-orange-100',
+        priority: 'medium'
+      });
+    }
+
+    // Transmission Fluid Check
+    const transmissionLastChanged = vehicleData.componentLastChanged.transmissionFluid;
+    const transmissionNextService = transmissionLastChanged + maintenanceIntervals.transmissionFluid;
+    const transmissionRemaining = transmissionNextService - vehicleData.currentMileage;
+    if (transmissionRemaining <= 2000 && transmissionRemaining > 0) {
+      alerts.push({
+        id: 'maintenance-transmission',
+        type: 'maintenance',
+        title: 'Transmission Fluid Service',
+        message: `Your **transmission fluid** should be changed within **${transmissionRemaining} km**. Last service: **${transmissionLastChanged.toLocaleString()} km**.`,
+        time: 'Just now',
+        read: false,
+        date: 'today',
+        icon: <FaWrench className="text-lg" />,
+        iconBg: 'bg-orange-100',
+        priority: 'medium'
+      });
+    }
+
+    // Coolant Check
+    const coolantLastChanged = vehicleData.componentLastChanged.coolant;
+    const coolantNextService = coolantLastChanged + maintenanceIntervals.coolant;
+    const coolantRemaining = coolantNextService - vehicleData.currentMileage;
+    if (coolantRemaining <= 2000 && coolantRemaining > 0) {
+      alerts.push({
+        id: 'maintenance-coolant',
+        type: 'maintenance',
+        title: 'Coolant System Service',
+        message: `Your **coolant** may need replacement within **${coolantRemaining} km**. Last change: **${coolantLastChanged.toLocaleString()} km**.`,
+        time: 'Just now',
+        read: false,
+        date: 'today',
+        icon: <FaWrench className="text-lg" />,
+        iconBg: 'bg-orange-100',
+        priority: 'medium'
+      });
+    }
+
+    return alerts;
+  };
+
+  const maintenanceAlerts = calculateMaintenanceAlerts();
+
   const [notifications, setNotifications] = useState([
+    // Maintenance alerts appear first (high priority)
+    ...maintenanceAlerts,
     {
       id: 1,
       type: 'order',
@@ -97,16 +232,26 @@ const Notifications = () => {
       case 'payment':
         navigate('/wallet');
         break;
+      case 'maintenance':
+        navigate('/category'); // Navigate to parts category for maintenance items
+        break;
       default:
         break;
     }
   };
 
-  const formatMessage = (message) => {
+  const formatMessage = (message, notificationType) => {
     const parts = message.split(/(\*\*.*?\*\*)/g);
     return parts.map((part, index) => {
       if (part.startsWith('**') && part.endsWith('**')) {
         const text = part.slice(2, -2);
+        // Maintenance notifications - highlight in orange
+        if (notificationType === 'maintenance') {
+          if (text.includes('km') || text.includes('replacement') || text.includes('change')) {
+            return <span key={index} className="font-bold text-orange-600">{text}</span>;
+          }
+          return <span key={index} className="font-bold text-orange-700">{text}</span>;
+        }
         // Check if it's a date or urgent info (red color)
         if (text.includes('expire') || text.includes('January') || text.includes('December')) {
           return <span key={index} className="font-bold text-red-600">{text}</span>;
@@ -171,9 +316,13 @@ const Notifications = () => {
                       transition={{ delay: index * 0.1 }}
                       onClick={() => handleNotificationClick(notification)}
                       className={`flex items-start gap-4 p-4 rounded-xl cursor-pointer transition-all ${
-                        !notification.read 
-                          ? 'bg-green-50 hover:bg-green-100 border border-green-200' 
-                          : 'bg-white hover:bg-gray-50 border border-gray-200'
+                        notification.type === 'maintenance'
+                          ? !notification.read
+                            ? 'bg-orange-50 hover:bg-orange-100 border-2 border-orange-300'
+                            : 'bg-orange-50/50 hover:bg-orange-100/50 border border-orange-200'
+                          : !notification.read 
+                            ? 'bg-green-50 hover:bg-green-100 border border-green-200' 
+                            : 'bg-white hover:bg-gray-50 border border-gray-200'
                       }`}
                     >
                       {/* Icon */}
@@ -186,16 +335,25 @@ const Notifications = () => {
                         <div className="flex items-start justify-between gap-3 mb-1">
                           <div className="flex items-center gap-2 flex-1">
                             {!notification.read && (
-                              <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0 mt-1"></div>
+                              <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1 ${
+                                notification.type === 'maintenance' ? 'bg-orange-500' : 'bg-green-500'
+                              }`}></div>
                             )}
-                            <h3 className="font-bold text-gray-900 text-sm sm:text-base">
+                            {notification.type === 'maintenance' && (
+                              <FaExclamationTriangle className="text-orange-500 text-xs flex-shrink-0" />
+                            )}
+                            <h3 className={`font-bold text-sm sm:text-base ${
+                              notification.type === 'maintenance' ? 'text-orange-700' : 'text-gray-900'
+                            }`}>
                               {notification.title}
                             </h3>
                           </div>
                           <span className="text-xs text-gray-500 whitespace-nowrap">{notification.time}</span>
                         </div>
-                        <p className="text-sm text-gray-600 leading-relaxed">
-                          {formatMessage(notification.message)}
+                        <p className={`text-sm leading-relaxed ${
+                          notification.type === 'maintenance' ? 'text-orange-700' : 'text-gray-600'
+                        }`}>
+                          {formatMessage(notification.message, notification.type)}
                         </p>
                       </div>
                     </motion.div>
@@ -217,9 +375,13 @@ const Notifications = () => {
                       transition={{ delay: index * 0.1 }}
                       onClick={() => handleNotificationClick(notification)}
                       className={`flex items-start gap-4 p-4 rounded-xl cursor-pointer transition-all ${
-                        !notification.read 
-                          ? 'bg-green-50 hover:bg-green-100 border border-green-200' 
-                          : 'bg-white hover:bg-gray-50 border border-gray-200'
+                        notification.type === 'maintenance'
+                          ? !notification.read
+                            ? 'bg-orange-50 hover:bg-orange-100 border-2 border-orange-300'
+                            : 'bg-orange-50/50 hover:bg-orange-100/50 border border-orange-200'
+                          : !notification.read 
+                            ? 'bg-green-50 hover:bg-green-100 border border-green-200' 
+                            : 'bg-white hover:bg-gray-50 border border-gray-200'
                       }`}
                     >
                       {/* Icon */}
@@ -232,16 +394,25 @@ const Notifications = () => {
                         <div className="flex items-start justify-between gap-3 mb-1">
                           <div className="flex items-center gap-2 flex-1">
                             {!notification.read && (
-                              <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0 mt-1"></div>
+                              <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1 ${
+                                notification.type === 'maintenance' ? 'bg-orange-500' : 'bg-green-500'
+                              }`}></div>
                             )}
-                            <h3 className="font-bold text-gray-900 text-sm sm:text-base">
+                            {notification.type === 'maintenance' && (
+                              <FaExclamationTriangle className="text-orange-500 text-xs flex-shrink-0" />
+                            )}
+                            <h3 className={`font-bold text-sm sm:text-base ${
+                              notification.type === 'maintenance' ? 'text-orange-700' : 'text-gray-900'
+                            }`}>
                               {notification.title}
                             </h3>
                           </div>
                           <span className="text-xs text-gray-500 whitespace-nowrap">{notification.time}</span>
                         </div>
-                        <p className="text-sm text-gray-600 leading-relaxed">
-                          {formatMessage(notification.message)}
+                        <p className={`text-sm leading-relaxed ${
+                          notification.type === 'maintenance' ? 'text-orange-700' : 'text-gray-600'
+                        }`}>
+                          {formatMessage(notification.message, notification.type)}
                         </p>
                       </div>
                     </motion.div>

@@ -121,7 +121,6 @@ import ReturnPolicy from "./features/support/ReturnPolicy";
 
 
 
-
 // Component to conditionally render Header/Footer
 const Layout = ({ children }) => {
   const location = useLocation();

@@ -346,9 +346,9 @@ export const BoodmoUi = () => {
   };
 
   return (
-    <section className="bg-red-50">
+    <section className="bg-red-50 relative">
       {/* 🔹 Banner Section with Scrolling Images */}
-      <div className="relative w-full h-[70vh] md:h-[80vh] flex items-center justify-center">
+      <div className="relative w-full h-[35vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
         {/* 🔹 Scrolling Banner Carousel */}
         <div className="absolute inset-0 w-full h-full">
           <Swiper
