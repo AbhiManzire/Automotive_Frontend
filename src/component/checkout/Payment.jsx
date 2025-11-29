@@ -325,7 +325,7 @@ const Payment = () => {
           <div>
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-2">
-                UPI ID <span className="text-blue-500">*</span>
+                UPI ID <span className="text-gray-700">*</span>
               </label>
               <input
                 type="text"
@@ -333,7 +333,7 @@ const Payment = () => {
                 value={paymentData.upiId}
                 onChange={handleInputChange}
                 placeholder="yourname@paytm or yourname@ybl"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                 required
               />
               <p className="text-xs text-gray-500 mt-2">
@@ -348,7 +348,7 @@ const Payment = () => {
           <div className="space-y-4">
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-2">
-                Card Number <span className="text-blue-500">*</span>
+                Card Number <span className="text-gray-700">*</span>
               </label>
               <input
                 type="text"
@@ -357,13 +357,13 @@ const Payment = () => {
                 onChange={handleCardNumberChange}
                 placeholder="1234 5678 9012 3456"
                 maxLength="19"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                 required
               />
             </div>
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-2">
-                Name on Card <span className="text-blue-500">*</span>
+                Name on Card <span className="text-gray-700">*</span>
               </label>
               <input
                 type="text"
@@ -371,14 +371,14 @@ const Payment = () => {
                 value={paymentData.cardName}
                 onChange={handleInputChange}
                 placeholder="John Doe"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                 required
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-medium text-gray-700 mb-2">
-                  Expiry Date <span className="text-blue-500">*</span>
+                  Expiry Date <span className="text-gray-700">*</span>
                 </label>
                 <input
                   type="text"
@@ -387,13 +387,13 @@ const Payment = () => {
                   onChange={handleExpiryChange}
                   placeholder="MM/YY"
                   maxLength="5"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                   required
                 />
               </div>
               <div>
                 <label className="block text-xs font-medium text-gray-700 mb-2">
-                  CVV <span className="text-blue-500">*</span>
+                  CVV <span className="text-gray-700">*</span>
                 </label>
                 <input
                   type="password"
@@ -402,7 +402,7 @@ const Payment = () => {
                   onChange={handleInputChange}
                   placeholder="123"
                   maxLength="4"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                   required
                 />
               </div>
@@ -418,13 +418,13 @@ const Payment = () => {
         return (
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-2">
-              Bank Name <span className="text-blue-500">*</span>
+              Bank Name <span className="text-gray-700">*</span>
             </label>
             <select
               name="bankName"
               value={paymentData.bankName}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
               required
             >
               <option value="">Select your bank</option>
@@ -441,7 +441,7 @@ const Payment = () => {
         return (
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-2">
-              Paytm Phone Number <span className="text-blue-500">*</span>
+              Paytm Phone Number <span className="text-gray-700">*</span>
             </label>
             <div className="flex gap-2">
               <div className="w-20">
@@ -461,7 +461,7 @@ const Payment = () => {
                   placeholder="Enter 10-digit mobile number"
                   maxLength="10"
                   pattern="[0-9]{10}"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                   required
                 />
               </div>
@@ -478,8 +478,8 @@ const Payment = () => {
             <p className="text-xs text-gray-600 mb-4">
               You will be redirected to Razorpay's secure payment gateway to complete your transaction.
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-              <p className="text-xs text-blue-800">
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+              <p className="text-xs text-gray-700">
                 <strong>Secure Payment:</strong> Your payment will be processed securely by Razorpay. 
                 We do not store your payment information.
               </p>
@@ -518,26 +518,24 @@ const Payment = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="mt-2 md:mt-4 mb-2 bg-white rounded-xl shadow-xl p-2 sm:p-3 md:p-4 border border-gray-200"
+      className="mt-2 md:mt-4 mb-2 bg-white border border-gray-200 p-2 sm:p-3 md:p-4"
     >
       <div className="flex items-center justify-center space-x-0.5 sm:space-x-1 md:space-x-2">
         <motion.button
           onClick={() => navigate('/cart')}
           className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
-          whileHover={{ scale: 1.1, y: -2 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-100 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-gray-200 transition-colors"
           >
-            <FaShoppingCart className="text-blue-600 text-xs sm:text-sm md:text-base" />
+            <FaShoppingCart className="text-gray-700 text-xs sm:text-sm md:text-base" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-blue-600 font-medium">Cart</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Cart</span>
         </motion.button>
         <motion.div 
-          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gray-300 rounded-full"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -545,20 +543,18 @@ const Payment = () => {
         <motion.button
           onClick={() => navigate('/checkout/address')}
           className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
-          whileHover={{ scale: 1.1, y: -2 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-100 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-gray-200 transition-colors"
           >
-            <FaMapMarkerAlt className="text-blue-600 text-xs sm:text-sm md:text-base" />
+            <FaMapMarkerAlt className="text-gray-700 text-xs sm:text-sm md:text-base" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-blue-600 font-medium">Address</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Address</span>
         </motion.button>
         <motion.div 
-          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gray-300 rounded-full"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -566,20 +562,18 @@ const Payment = () => {
         <motion.button
           onClick={() => navigate('/checkout/review')}
           className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
-          whileHover={{ scale: 1.1, y: -2 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-100 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-gray-200 transition-colors"
           >
-            <FaFileAlt className="text-blue-600 text-xs sm:text-sm md:text-base" />
+            <FaFileAlt className="text-gray-700 text-xs sm:text-sm md:text-base" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-blue-600 font-medium">Review</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Review</span>
         </motion.button>
         <motion.div 
-          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gray-900 rounded-full"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -591,20 +585,11 @@ const Payment = () => {
           transition={{ delay: 0.7, type: "spring" }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 shadow-xl ring-2 ring-blue-100 relative overflow-hidden"
-            animate={{ 
-              boxShadow: [
-                "0 0 0 0px rgba(37, 99, 235, 0.4)",
-                "0 0 0 6px rgba(37, 99, 235, 0)",
-                "0 0 0 0px rgba(37, 99, 235, 0.4)"
-              ]
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-900 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
             <FaCreditCard className="text-white text-xs sm:text-sm md:text-base relative z-10" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-blue-600 font-bold">Pay</span>
+          <span className="text-[10px] sm:text-xs text-gray-900 font-semibold">Pay</span>
         </motion.div>
       </div>
     </motion.div>
@@ -628,72 +613,41 @@ const Payment = () => {
         }}
         whileHover={isSelected ? undefined : { scale: 1.03, y: -4 }}
         whileTap={isSelected ? undefined : { scale: 0.97 }}
-        className={`relative p-4 sm:p-5 border-2 rounded-2xl text-left shadow-lg overflow-hidden ${
+        className={`relative p-4 sm:p-5 border border-gray-200 text-left overflow-hidden ${
           isSelected
-            ? 'text-white cursor-default'
-            : 'border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50 hover:shadow-2xl group transition-all'
+            ? 'border-gray-900 bg-gray-50 cursor-default'
+            : 'hover:border-gray-400 bg-white hover:bg-gray-50 group transition-all'
         }`}
-        style={isSelected ? {
-          borderColor: option.color,
-          background: `linear-gradient(135deg, ${option.color}15, ${option.color}25)`
-        } : {}}
       >
-        {/* Background gradient overlay when selected */}
-        {isSelected && (
-          <motion.div
-            className="absolute inset-0 opacity-10"
-            style={{ background: `linear-gradient(135deg, ${option.color}, ${option.color}dd)` }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.1 }}
-          />
-        )}
-        
-        {/* Popular badge */}
-        {option.popular && (
-          <motion.div
-            className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md z-20"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: index * 0.1 + 0.2 }}
-          >
-            POPULAR
-          </motion.div>
-        )}
-
         {/* Selected checkmark */}
         {isSelected && (
           <motion.div 
-            className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-xl z-10"
+            className="absolute top-3 right-3 w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center z-10"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <FaCheckCircle className="text-green-500 text-lg" />
+            <FaCheckCircle className="text-white text-xs" />
           </motion.div>
         )}
 
         <div className="flex items-center gap-4 relative z-10">
           {/* Icon Container */}
           <motion.div
-            className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center shadow-lg"
-            style={iconBgStyle}
+            className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center bg-gray-100"
           >
             <IconComponent 
-              className="text-2xl sm:text-3xl text-white"
+              className="text-xl sm:text-2xl text-gray-700"
             />
           </motion.div>
           
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
-              <h3 className={`text-base sm:text-lg font-bold ${
-                isSelected ? 'text-white' : 'text-gray-800'
-              }`}>
+              <h3 className="text-sm sm:text-base font-semibold text-gray-900">
                 {option.name}
               </h3>
             </div>
-            <p className={`text-xs sm:text-sm ${
-              isSelected ? 'text-white/90' : 'text-gray-600'
-            }`}>
+            <p className="text-xs sm:text-sm text-gray-600">
               {option.description}
             </p>
           </div>
@@ -708,7 +662,7 @@ const Payment = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-4">
+    <div className="min-h-screen bg-gray-50 py-4">
       <div className="max-w-6xl mx-auto px-4">
         <ProgressBar />
 
@@ -718,9 +672,8 @@ const Payment = () => {
           transition={{ delay: 0.1 }}
           className="mb-4"
         >
-          <h1 className="text-xl md:text-2xl font-bold mb-1">
-            <span className="text-blue-900">Payment</span>{" "}
-            <span className="text-blue-600">Method</span>
+          <h1 className="text-xl md:text-2xl font-semibold text-gray-900 mb-1">
+            Payment Method
           </h1>
           <p className="text-gray-600 text-sm">Choose your preferred payment option</p>
         </motion.div>
@@ -732,20 +685,20 @@ const Payment = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 border border-gray-100 overflow-hidden"
+              className="bg-white border border-gray-200 p-4 sm:p-6 overflow-hidden"
             >
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1">
                     Select Payment Method
                   </h2>
                   <p className="text-xs sm:text-sm text-gray-600">
                     Choose a secure payment option
                   </p>
                 </div>
-                <div className="hidden sm:flex items-center gap-2 bg-green-50 px-3 py-1.5 rounded-full">
-                  <FaShieldAlt className="text-green-600 text-sm" />
-                  <span className="text-xs font-semibold text-green-700">Secure</span>
+                <div className="hidden sm:flex items-center gap-2 bg-gray-100 px-3 py-1.5 rounded">
+                  <FaShieldAlt className="text-gray-600 text-sm" />
+                  <span className="text-xs font-medium text-gray-700">Secure</span>
                 </div>
               </div>
               
@@ -769,15 +722,15 @@ const Payment = () => {
                 className="mt-6 pt-6 border-t border-gray-200 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-600"
               >
                 <div className="flex items-center gap-2">
-                  <FaLock className="text-gray-400" />
+                  <FaLock className="text-gray-500" />
                   <span>256-bit SSL Encryption</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FaShieldAlt className="text-gray-400" />
+                  <FaShieldAlt className="text-gray-500" />
                   <span>PCI DSS Compliant</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FaCheckCircle className="text-green-500" />
+                  <FaCheckCircle className="text-gray-500" />
                   <span>100% Secure</span>
                 </div>
               </motion.div>
@@ -790,17 +743,17 @@ const Payment = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-2xl shadow-xl p-4 sm:p-6 border border-blue-100 sticky top-4"
+              className="bg-white border border-gray-200 p-4 sm:p-6 sticky top-4"
             >
               <div className="flex items-center gap-2 mb-4 pb-4 border-b border-gray-200">
-                <FaShoppingCart className="text-blue-600" />
-                <h2 className="text-lg sm:text-xl font-bold text-gray-900">Order Summary</h2>
+                <FaShoppingCart className="text-gray-700" />
+                <h2 className="text-base sm:text-lg font-semibold text-gray-900">Order Summary</h2>
               </div>
               
               <div className="space-y-3 mb-4">
                 <div className="flex justify-between text-sm text-gray-700">
                   <span className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                    <span className="w-1.5 h-1.5 bg-gray-500 rounded-full"></span>
                     {getTotalItems()} {getTotalItems() === 1 ? 'item' : 'items'}
                   </span>
                   <span className="font-medium">₹{getTotalPrice().toFixed(2)}</span>
@@ -821,30 +774,24 @@ const Payment = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="border-t-2 border-gray-300 pt-4 mb-4 bg-gradient-to-r from-gray-50 to-white rounded-lg p-3"
+                className="border-t border-gray-200 pt-4 mb-4"
               >
                 <div className="flex justify-between items-center">
-                  <span className="text-base sm:text-lg font-bold text-gray-900">Grand Total</span>
-                  <motion.span 
-                    key={grandTotal}
-                    initial={{ scale: 1.2, color: "#2563eb" }}
-                    animate={{ scale: 1, color: "#1e40af" }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="text-xl sm:text-2xl font-extrabold text-blue-700"
-                  >
+                  <span className="text-base sm:text-lg font-semibold text-gray-900">Grand Total</span>
+                  <span className="text-xl sm:text-2xl font-bold text-gray-900">
                     ₹{grandTotal.toFixed(2)}
-                  </motion.span>
+                  </span>
                 </div>
               </motion.div>
 
               {/* Trust Indicators */}
               <div className="pt-4 border-t border-gray-200">
                 <div className="flex items-center gap-2 text-xs text-gray-600 mb-2">
-                  <FaShieldAlt className="text-green-500" />
+                  <FaShieldAlt className="text-gray-500" />
                   <span className="font-medium">Your payment is secure</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-gray-600">
-                  <FaCheckCircle className="text-blue-500" />
+                  <FaCheckCircle className="text-gray-500" />
                   <span>Protected by industry standards</span>
                 </div>
               </div>
@@ -856,63 +803,16 @@ const Payment = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white rounded-2xl shadow-xl p-4 sm:p-6 border border-gray-100"
+          transition={{ delay: 0.5 }}
+          className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white border border-gray-200 p-4 sm:p-6"
         >
-          <motion.button
+          <button
             onClick={() => navigate('/checkout/review')}
-            whileHover={{ scale: 1.05, x: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 border-2 border-blue-500 text-blue-600 rounded-xl hover:bg-blue-50 transition-all text-sm font-semibold shadow-md hover:shadow-lg w-full sm:w-auto justify-center"
+            className="flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors text-sm font-medium w-full sm:w-auto justify-center"
           >
             <FaArrowLeft />
             Back
-          </motion.button>
-          
-          <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-            <div className="text-center sm:text-right order-2 sm:order-1">
-              <p className="text-xs text-gray-600 mb-0.5">Total Payment</p>
-              <p className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                ₹{grandTotal.toFixed(2)}
-              </p>
-            </div>
-            <motion.button
-              onClick={handlePlaceOrder}
-              disabled={!selectedPayment || isProcessing}
-              whileHover={selectedPayment && !isProcessing ? { scale: 1.05, y: -2 } : {}}
-              whileTap={selectedPayment && !isProcessing ? { scale: 0.95 } : {}}
-              className={`px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl text-sm sm:text-base font-bold transition-all shadow-xl relative overflow-hidden w-full sm:w-auto flex items-center justify-center gap-2 ${
-                selectedPayment && !isProcessing
-                  ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white hover:from-blue-700 hover:via-blue-600 hover:to-blue-700'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              {selectedPayment && !isProcessing && (
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                  animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                {isProcessing ? (
-                  <>
-                    <motion.div
-                      className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <FaLock className="text-base" />
-                    <span>Pay & Place Order</span>
-                  </>
-                )}
-              </span>
-            </motion.button>
-          </div>
+          </button>
         </motion.div>
       </div>
 
@@ -934,7 +834,7 @@ const Payment = () => {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
-              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 sticky top-0 bg-gradient-to-r from-blue-50 to-white">
+              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 sticky top-0 bg-white">
                 <div className="flex items-center gap-3">
                   {selectedPayment && (() => {
                     const option = paymentOptions.find(p => p.id === selectedPayment);
@@ -1012,7 +912,7 @@ const Payment = () => {
                       setShowPaymentModal(false);
                     }
                   }}
-                  className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium flex items-center gap-2"
+                  className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium flex items-center gap-2"
                 >
                   <FaCheck className="text-xs" />
                   Confirm Payment Details

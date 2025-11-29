@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { motion } from "framer-motion";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -84,6 +85,7 @@ export default function ChooseWorkshop() {
   const [selectedWorkshop, setSelectedWorkshop] = useState(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapError, setMapError] = useState(false);
+  const [showMapModal, setShowMapModal] = useState(false);
 
   // Google Maps API Key - Replace with your actual API key or use environment variable
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "";
@@ -144,6 +146,17 @@ export default function ChooseWorkshop() {
         <div className="flex flex-col lg:flex-row gap-4 md:gap-5 lg:gap-6">
           {/* Left Side - Workshop Carousel */}
           <div className="w-full lg:w-2/3 relative">
+            {/* Mobile Map Button - Right Side */}
+            <motion.button
+              onClick={() => setShowMapModal(true)}
+              className="lg:hidden absolute right-2 top-2 z-20 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2 font-semibold"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaMapMarkerAlt className="text-base" />
+              <span className="text-xs sm:text-sm">View Map</span>
+            </motion.button>
+
             <div className="relative">
               <Swiper
                 modules={[Autoplay, Navigation]}
@@ -167,6 +180,10 @@ export default function ChooseWorkshop() {
                   }
                 }}
                 breakpoints={{
+                  0: {
+                    slidesPerView: 2,
+                    spaceBetween: 8
+                  },
                   640: {
                     slidesPerView: 2,
                     spaceBetween: 12
@@ -238,7 +255,7 @@ export default function ChooseWorkshop() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative h-[200px] sm:h-[220px] md:h-[250px] lg:h-[280px] rounded-lg overflow-hidden shadow-md border border-gray-200 bg-gray-50"
+              className="relative h-[200px] sm:h-[220px] md:h-[250px] lg:h-[280px] rounded-lg overflow-hidden shadow-md border border-gray-200 bg-gray-50 hidden lg:block"
             >
               {!mapError && googleMapsApiKey && googleMapsApiKey !== "YOUR_GOOGLE_MAPS_API_KEY" ? (
                 <LoadScript
@@ -361,6 +378,127 @@ export default function ChooseWorkshop() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Map Modal */}
+      {showMapModal && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 lg:hidden"
+          onClick={() => setShowMapModal(false)}
+        >
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl max-h-[85vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-red-600 to-red-700 p-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <FaMapMarkerAlt className="text-white text-xl" />
+                <h3 className="text-white font-bold text-lg">Workshop Locations</h3>
+              </div>
+              <button
+                onClick={() => setShowMapModal(false)}
+                className="text-white hover:bg-white/20 p-2 rounded-lg transition-all"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Map Content */}
+            <div className="h-[70vh] relative">
+              {!mapError && googleMapsApiKey && googleMapsApiKey !== "YOUR_GOOGLE_MAPS_API_KEY" ? (
+                <LoadScript
+                  googleMapsApiKey={googleMapsApiKey}
+                  onLoad={handleMapLoad}
+                  onError={handleLoadScriptError}
+                >
+                  <GoogleMap
+                    mapContainerStyle={{
+                      width: "100%",
+                      height: "100%"
+                    }}
+                    options={mapOptions}
+                    onLoad={handleMapLoad}
+                    onError={handleMapError}
+                    className="rounded-lg"
+                  >
+                    {mapLoaded && workshops.map((workshop) => (
+                      <Marker
+                        key={workshop.id}
+                        position={{ lat: workshop.lat, lng: workshop.lng }}
+                        onClick={() => handleMarkerClick(workshop)}
+                        icon={createMarkerIcon()}
+                      />
+                    ))}
+                    
+                    {selectedWorkshop && (
+                      <InfoWindow
+                        position={{ lat: selectedWorkshop.lat, lng: selectedWorkshop.lng }}
+                        onCloseClick={() => setSelectedWorkshop(null)}
+                      >
+                        <div className="p-3 min-w-[200px]">
+                          <h3 className="font-bold text-sm text-gray-900 mb-1.5">
+                            {selectedWorkshop.name}
+                          </h3>
+                          <p className="text-xs text-gray-600 mb-3">
+                            📍 {selectedWorkshop.location}
+                          </p>
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${selectedWorkshop.lat},${selectedWorkshop.lng}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs text-red-600 hover:text-red-700 font-semibold transition-colors duration-200"
+                          >
+                            View on Google Maps
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                        </div>
+                      </InfoWindow>
+                    )}
+                  </GoogleMap>
+                </LoadScript>
+              ) : (
+                <div className="w-full h-full relative bg-gray-100">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    className="border-0"
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://www.google.com/maps?q=auto+repair+garage+workshop+near+me&output=embed&zoom=5&center=${defaultCenter.lat},${defaultCenter.lng}`}
+                    title="Workshop Locations Map"
+                  />
+                </div>
+              )}
+
+              {/* LOCATE US Button */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10">
+                <button 
+                  onClick={() => {
+                    const url = `https://www.google.com/maps/search/?api=1&query=auto+repair+garage+near+me`;
+                    window.open(url, '_blank');
+                  }}
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold uppercase px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm flex items-center gap-2"
+                >
+                  <FaMapMarkerAlt className="text-lg" />
+                  LOCATE US
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
 
       {/* Custom Styles for Swiper */}
       <style>{`

@@ -146,26 +146,24 @@ const ShippingAddress = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="mt-2 md:mt-4 mb-2 bg-white rounded-xl shadow-xl p-2 sm:p-3 md:p-4 border border-gray-200"
+      className="mt-2 md:mt-4 mb-2 bg-white border border-gray-200 p-2 sm:p-3 md:p-4"
     >
       <div className="flex items-center justify-center space-x-0.5 sm:space-x-1 md:space-x-2">
         <motion.button
           onClick={() => navigate('/cart')}
           className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
-          whileHover={{ scale: 1.1, y: -2 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-100 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-gray-200 transition-colors"
           >
-            <FaShoppingCart className="text-blue-600 text-xs sm:text-sm md:text-base" />
+            <FaShoppingCart className="text-gray-700 text-xs sm:text-sm md:text-base" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-blue-600 font-medium">Cart</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Cart</span>
         </motion.button>
         <motion.div 
-          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gray-300 rounded-full"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -177,22 +175,13 @@ const ShippingAddress = () => {
           transition={{ delay: 0.3, type: "spring" }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 shadow-xl ring-2 ring-blue-100 relative overflow-hidden"
-            animate={{ 
-              boxShadow: [
-                "0 0 0 0px rgba(37, 99, 235, 0.4)",
-                "0 0 0 6px rgba(37, 99, 235, 0)",
-                "0 0 0 0px rgba(37, 99, 235, 0.4)"
-              ]
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-900 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
             <FaMapMarkerAlt className="text-white text-xs sm:text-sm md:text-base relative z-10" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-blue-600 font-bold">Address</span>
+          <span className="text-[10px] sm:text-xs text-gray-900 font-semibold">Address</span>
         </motion.div>
-        <div className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-200 to-blue-100 rounded-full"></div>
+        <div className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gray-300 rounded-full"></div>
         <motion.button
           onClick={() => {
             const savedAddress = localStorage.getItem('shippingAddress');
@@ -201,19 +190,17 @@ const ShippingAddress = () => {
             }
           }}
           className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
-          whileHover={{ scale: 1.1, y: -2 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-100 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-gray-200 transition-colors"
           >
-            <FaFileAlt className="text-blue-600 text-xs sm:text-sm md:text-base" />
+            <FaFileAlt className="text-gray-700 text-xs sm:text-sm md:text-base" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-gray-500 group-hover:text-blue-600 transition-colors">Review</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Review</span>
         </motion.button>
-        <div className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-200 to-blue-100 rounded-full"></div>
+        <div className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gray-300 rounded-full"></div>
         <motion.button
           onClick={() => {
             const savedAddress = localStorage.getItem('shippingAddress');
@@ -222,17 +209,15 @@ const ShippingAddress = () => {
             }
           }}
           className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
-          whileHover={{ scale: 1.1, y: -2 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-100 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-gray-200 transition-colors"
           >
-            <FaCreditCard className="text-blue-600 text-xs sm:text-sm md:text-base" />
+            <FaCreditCard className="text-gray-700 text-xs sm:text-sm md:text-base" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-gray-500 group-hover:text-blue-600 transition-colors">Pay</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Pay</span>
         </motion.button>
       </div>
     </motion.div>
@@ -246,21 +231,21 @@ const ShippingAddress = () => {
       exit={{ opacity: 0, scale: 0.9, x: -100 }}
       transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
       whileHover={{ scale: 1.03, y: -8, rotate: 0.5 }}
-      className={`border-2 rounded-xl p-3 sm:p-4 cursor-pointer transition-all shadow-lg hover:shadow-2xl relative overflow-hidden ${
+      className={`border rounded-lg p-3 sm:p-4 cursor-pointer transition-all relative overflow-hidden ${
         isSelected
-          ? 'border-blue-500 bg-gradient-to-br from-blue-50 via-blue-100 to-blue-50 shadow-blue-200 ring-2 ring-blue-100' 
-          : 'border-gray-200 hover:border-blue-400 bg-white hover:bg-blue-50/30'
+          ? 'border-gray-900 bg-gray-50' 
+          : 'border-gray-200 hover:border-gray-400 bg-white hover:bg-gray-50'
       }`}
       onClick={() => onSelect(address.id)}
     >
       {isSelected && (
         <motion.div
-          className="absolute top-0 right-0 w-20 h-20 bg-blue-500 rounded-bl-full"
+          className="absolute top-2 right-2 w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200 }}
         >
-          <FaCheck className="text-white absolute top-2 right-2 text-lg" />
+          <FaCheck className="text-white text-xs" />
         </motion.div>
       )}
       <div className="flex items-start gap-3 mb-4">
@@ -292,7 +277,7 @@ const ShippingAddress = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="w-full py-2 bg-blue-600 text-white rounded-lg text-xs font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 shadow-md"
+            className="w-full py-2 bg-gray-900 text-white text-xs font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
           >
             <FaCheck />
             SELECTED ADDRESS
@@ -305,7 +290,7 @@ const ShippingAddress = () => {
   // Show Address Selection Page (after map confirmation)
   if (showAddressSelection) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-4">
+      <div className="bg-gray-50 py-3 pb-16">
         <div className="max-w-6xl mx-auto px-4">
           <ProgressBar />
 
@@ -313,11 +298,10 @@ const ShippingAddress = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mb-4"
+            className="mb-3"
           >
-            <h1 className="text-xl md:text-2xl font-bold mb-1">
-              <span className="text-blue-900">Shipping</span>{" "}
-              <span className="text-blue-600">Address</span>
+            <h1 className="text-xl md:text-2xl font-semibold text-gray-900 mb-1">
+              Shipping Address
             </h1>
             <p className="text-gray-600 text-sm">Select or add a delivery address</p>
           </motion.div>
@@ -326,7 +310,7 @@ const ShippingAddress = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"
           >
             <AnimatePresence mode="popLayout">
               {savedAddresses.map((address, index) => (
@@ -346,22 +330,19 @@ const ShippingAddress = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: savedAddresses.length * 0.1 }}
-              whileHover={{ scale: 1.05, y: -8 }}
-              whileTap={{ scale: 0.95 }}
-              className="border-2 border-dashed border-gray-300 rounded-xl p-3 sm:p-4 cursor-pointer hover:border-blue-500 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100 transition-all flex flex-col items-center justify-center min-h-[150px] bg-white shadow-lg hover:shadow-2xl group relative overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="border-2 border-dashed border-gray-300 rounded-lg p-3 sm:p-4 cursor-pointer hover:border-gray-400 hover:bg-gray-50 transition-all flex flex-col items-center justify-center min-h-[150px] bg-white group"
               onClick={() => setShowAddAddressModal(true)}
             >
               <motion.div 
-                className="absolute inset-0 bg-gradient-to-br from-blue-100/0 to-blue-200/0 group-hover:from-blue-100/50 group-hover:to-blue-200/50 transition-all"
-              />
-              <motion.div 
-                whileHover={{ rotate: 90, scale: 1.1 }}
+                whileHover={{ rotate: 90 }}
                 transition={{ type: "spring", stiffness: 200 }}
-                className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mb-4 shadow-lg group-hover:shadow-xl relative z-10"
+                className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 relative z-10"
               >
-                <FaPlus className="text-blue-600 text-3xl font-bold" />
+                <FaPlus className="text-gray-700 text-2xl font-bold" />
               </motion.div>
-              <p className="text-base text-blue-600 font-bold relative z-10 group-hover:text-blue-700">Add New Address</p>
+              <p className="text-sm text-gray-700 font-medium relative z-10">Add New Address</p>
             </motion.div>
 
             {/* Register as Business Card */}
@@ -369,14 +350,14 @@ const ShippingAddress = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: (savedAddresses.length + 1) * 0.1 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.95 }}
-              className="border-2 border-gray-200 rounded-xl p-3 sm:p-4 cursor-pointer hover:border-blue-300 hover:bg-blue-50 transition-all flex flex-col items-center justify-center min-h-[150px] bg-white shadow-md hover:shadow-lg"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="border border-gray-200 rounded-lg p-3 sm:p-4 cursor-pointer hover:border-gray-400 hover:bg-gray-50 transition-all flex flex-col items-center justify-center min-h-[150px] bg-white"
             >
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <FaFileInvoice className="text-blue-600 text-2xl" />
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                <FaFileInvoice className="text-gray-700 text-2xl" />
               </div>
-              <p className="text-sm text-blue-600 font-medium text-center">
+              <p className="text-sm text-gray-700 font-medium text-center">
                 Register as Business with <span className="font-semibold">Sparelo.com</span>
               </p>
             </motion.div>
@@ -386,36 +367,29 @@ const ShippingAddress = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex justify-between items-center pt-6 border-t border-gray-200"
+            className="flex justify-between items-center pt-4 border-t border-gray-200 pb-4"
           >
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={handleBack}
-              className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold bg-white shadow-md"
+              className="flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium bg-white"
             >
               <FaArrowLeft />
               Back
             </motion.button>
             <motion.button
-              whileHover={selectedAddress ? { scale: 1.05, y: -2 } : {}}
-              whileTap={selectedAddress ? { scale: 0.95 } : {}}
+              whileHover={selectedAddress ? { scale: 1.02 } : {}}
+              whileTap={selectedAddress ? { scale: 0.98 } : {}}
               onClick={handleFinalProceed}
               disabled={!selectedAddress}
-              className={`px-8 py-3 rounded-xl text-sm font-bold transition-all shadow-xl relative overflow-hidden ${
+              className={`px-8 py-3 rounded-lg text-sm font-medium transition-colors ${
                 selectedAddress
-                  ? 'bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white hover:from-blue-700 hover:via-blue-600 hover:to-blue-700'
+                  ? 'bg-gray-900 text-white hover:bg-gray-800'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >
-              {selectedAddress && (
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                  animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                />
-              )}
-              <span className="relative z-10">Proceed</span>
+              Proceed
             </motion.button>
           </motion.div>
         </div>
@@ -431,7 +405,7 @@ const ShippingAddress = () => {
 
   // Show Form Entry Page (initial state)
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 py-4">
+    <div className="bg-gray-50 py-3 pb-4">
       <div className="max-w-6xl mx-auto px-4">
         <ProgressBar />
 
@@ -439,30 +413,29 @@ const ShippingAddress = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-lg md:text-xl font-bold mb-4"
+          className="text-lg md:text-xl font-semibold text-gray-900 mb-3"
         >
-          <span className="text-blue-900">Shipping</span>{" "}
-          <span className="text-blue-500">Address</span>
+          Shipping Address
         </motion.h1>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-6">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="flex-1 bg-white rounded-xl shadow-xl p-4 md:p-6 border border-gray-200 overflow-hidden"
+            className="flex-1 bg-white border border-gray-200 p-4 md:p-5 overflow-hidden"
           >
-            <div className="bg-gradient-to-r from-blue-600 to-blue-500 -m-4 md:-m-6 mb-4 md:mb-6 p-4 md:p-6 text-white">
-              <h2 className="text-lg md:text-xl font-bold mb-0.5">Delivery Information</h2>
-              <p className="text-blue-100 text-xs">Enter your shipping details</p>
+            <div className="bg-gray-900 -m-4 md:-m-5 mb-4 md:mb-5 p-4 md:p-5 text-white">
+              <h2 className="text-lg md:text-xl font-semibold mb-0.5">Delivery Information</h2>
+              <p className="text-gray-300 text-xs">Enter your shipping details</p>
             </div>
             <form onSubmit={handleFormSubmit}>
-              <div className="mb-8">
-                <h2 className="text-lg font-semibold text-blue-900 mb-4">
+              <div className="mb-6">
+                <h2 className="text-base font-semibold text-gray-900 mb-3">
                   Contact Details
                 </h2>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                   <motion.div
                     whileFocus={{ scale: 1.02 }}
                     className="relative"
@@ -474,7 +447,7 @@ const ShippingAddress = () => {
                       onChange={handleChange}
                       placeholder="First Name"
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-blue-300 shadow-sm focus:shadow-md"
+                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all bg-white hover:border-gray-400 text-sm"
                     />
                   </motion.div>
                   <motion.div
@@ -488,7 +461,7 @@ const ShippingAddress = () => {
                       onChange={handleChange}
                       placeholder="Last Name"
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white hover:border-blue-300 shadow-sm focus:shadow-md"
+                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all bg-white hover:border-gray-400 text-sm"
                     />
                   </motion.div>
                 </div>
@@ -499,7 +472,7 @@ const ShippingAddress = () => {
                       type="text"
                       value="+91"
                       readOnly
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-center font-medium"
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg bg-gray-100 text-center font-medium text-sm"
                     />
                   </div>
                   <div className="flex-1">
@@ -512,34 +485,34 @@ const ShippingAddress = () => {
                       required
                       pattern="[0-9]{10}"
                       maxLength="10"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="mb-8">
-                <h2 className="text-lg font-semibold text-blue-900 mb-4">
+              <div className="mb-6">
+                <h2 className="text-base font-semibold text-gray-900 mb-3">
                   Address
                 </h2>
                 
-                <div className="mb-4">
+                <div className="mb-3">
                   <textarea
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
                     placeholder="Address"
                     required
-                    rows="4"
+                    rows="3"
                     maxLength="110"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 resize-y text-sm"
                   />
                   <div className="text-right text-xs text-gray-500 mt-1">
                     {formData.address.length}/110
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                   <div>
                     <input
                       type="text"
@@ -548,7 +521,7 @@ const ShippingAddress = () => {
                       onChange={handleChange}
                       placeholder="Postal Code"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                     />
                   </div>
                   <div>
@@ -559,7 +532,7 @@ const ShippingAddress = () => {
                       onChange={handleChange}
                       placeholder="City, State, Country"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                     />
                   </div>
                 </div>
@@ -571,7 +544,7 @@ const ShippingAddress = () => {
                     value={formData.addressTitle}
                     onChange={handleChange}
                     placeholder="Address Title (Optional)"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
                   />
                 </div>
               </div>
@@ -580,23 +553,23 @@ const ShippingAddress = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="flex justify-between items-center pt-6 border-t border-gray-200"
+                className="flex justify-between items-center pt-4 border-t border-gray-200 pb-2"
               >
                 <motion.button
                   type="button"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={handleBack}
-                  className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold shadow-md"
+                  className="flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
                 >
                   <FaArrowLeft />
                   Back
                 </motion.button>
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-semibold shadow-lg"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-8 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
                 >
                   Proceed
                 </motion.button>
@@ -611,24 +584,24 @@ const ShippingAddress = () => {
             className="lg:w-80 flex-shrink-0"
           >
             <motion.div 
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-white rounded-xl border border-blue-200 shadow-lg p-6"
+              whileHover={{ scale: 1.02 }}
+              className="bg-white border border-gray-200 p-6"
             >
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                  <FaFileInvoice className="text-blue-600 text-2xl" />
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                  <FaFileInvoice className="text-gray-700 text-2xl" />
                 </div>
                 <h3 className="text-base font-semibold text-gray-800 mb-2">
                   Register as Business with{" "}
-                  <span className="text-blue-600">Sparelo.com</span>
+                  <span className="text-gray-900">Sparelo.com</span>
                 </h3>
                 <p className="text-xs text-gray-600 mb-4">
                   Get exclusive business benefits and bulk pricing
                 </p>
                 <motion.button 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs font-medium shadow-md"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-xs font-medium"
                 >
                   Register Now
                 </motion.button>

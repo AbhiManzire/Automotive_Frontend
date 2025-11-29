@@ -131,25 +131,25 @@ const LuckyDraw = () => {
   const getColorClasses = (color) => {
     const colors = {
       blue: {
-        bg: 'bg-blue-500',
-        bgLight: 'bg-blue-50',
-        text: 'text-blue-600',
-        border: 'border-blue-200',
-        gradient: 'from-blue-500 to-blue-600'
+        bg: 'bg-gray-700',
+        bgLight: 'bg-gray-50',
+        text: 'text-gray-700',
+        border: 'border-gray-200',
+        gradient: 'from-gray-800 to-gray-900'
       },
       sky: {
-        bg: 'bg-sky-500',
-        bgLight: 'bg-sky-50',
-        text: 'text-sky-600',
-        border: 'border-sky-200',
-        gradient: 'from-sky-500 to-sky-600'
+        bg: 'bg-gray-700',
+        bgLight: 'bg-gray-50',
+        text: 'text-gray-700',
+        border: 'border-gray-200',
+        gradient: 'from-gray-800 to-gray-900'
       },
       cyan: {
-        bg: 'bg-cyan-500',
-        bgLight: 'bg-cyan-50',
-        text: 'text-cyan-600',
-        border: 'border-cyan-200',
-        gradient: 'from-cyan-500 to-cyan-600'
+        bg: 'bg-gray-700',
+        bgLight: 'bg-gray-50',
+        text: 'text-gray-700',
+        border: 'border-gray-200',
+        gradient: 'from-gray-800 to-gray-900'
       }
     };
     return colors[color] || colors.blue;
@@ -169,7 +169,7 @@ const LuckyDraw = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50 pb-16 md:pb-20">
+    <div className="min-h-screen bg-gray-50 pb-16 md:pb-20">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 md:px-5 lg:px-6 py-3 sm:py-4 md:py-5">
         {/* Header */}
         <motion.div
@@ -183,10 +183,10 @@ const LuckyDraw = () => {
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-blue-400 rounded-full blur-xl opacity-50 animate-pulse"></div>
-              <FaGift className="text-2xl sm:text-3xl md:text-4xl text-blue-600 relative z-10" />
+              <div className="absolute inset-0 bg-gray-300 rounded-full blur-xl opacity-50 animate-pulse"></div>
+              <FaGift className="text-2xl sm:text-3xl md:text-4xl text-gray-700 relative z-10" />
             </motion.div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 via-sky-600 to-cyan-600 bg-clip-text text-transparent">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-900">
               Lucky Draw
             </h1>
           </div>
@@ -206,10 +206,10 @@ const LuckyDraw = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-all ${
                 activeTab === tab.id
-                  ? 'bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 text-white shadow-lg shadow-blue-500/50 scale-105'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 shadow-sm hover:shadow-md'
+                  ? 'bg-gray-900 text-white scale-105'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
               }`}
             >
               <tab.icon className="text-xs sm:text-sm" />
@@ -240,23 +240,20 @@ const LuckyDraw = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     whileHover={{ scale: 1.03, y: -8 }}
-                    className={`bg-white rounded-xl shadow-md overflow-hidden border-2 ${colors.border} hover:shadow-2xl transition-all relative group`}
+                    className={`bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-all relative group`}
                   >
-                    {/* Shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                    
                     {/* Header */}
-                    <div className={`bg-gradient-to-r ${colors.gradient} p-3 sm:p-4 text-white relative overflow-hidden`}>
+                    <div className={`bg-gray-900 p-3 sm:p-4 text-white relative overflow-hidden`}>
                       <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
                       <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
                       <div className="flex items-center justify-between mb-2 relative z-10">
-                        <draw.icon className="text-xl sm:text-2xl drop-shadow-lg" />
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold bg-white/20 backdrop-blur-sm ${colors.text} border border-white/30`}>
+                        <draw.icon className="text-xl sm:text-2xl text-white drop-shadow-lg" />
+                        <span className="px-2 py-0.5 rounded text-[10px] sm:text-xs font-medium bg-white/20 backdrop-blur-sm text-white border border-white/30">
                           {draw.category}
                         </span>
                       </div>
-                      <h3 className="text-base sm:text-lg md:text-xl font-bold mb-0.5 relative z-10">{draw.title}</h3>
-                      <p className="text-xs sm:text-sm opacity-95 relative z-10">{draw.prize}</p>
+                      <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-0.5 relative z-10 text-white">{draw.title}</h3>
+                      <p className="text-xs sm:text-sm text-white/90 relative z-10">{draw.prize}</p>
                     </div>
 
                     {/* Content */}
@@ -297,7 +294,7 @@ const LuckyDraw = () => {
                             initial={{ width: 0 }}
                             animate={{ width: `${progress}%` }}
                             transition={{ duration: 1 }}
-                            className={`h-full rounded-full bg-gradient-to-r ${colors.gradient} shadow-sm`}
+                            className="h-full rounded-full bg-gray-900"
                           />
                         </div>
                       </div>
@@ -316,7 +313,7 @@ const LuckyDraw = () => {
                       {/* Action Button */}
                       <button
                         onClick={() => handleParticipate(draw)}
-                        className={`w-full bg-gradient-to-r ${colors.gradient} text-white py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm hover:shadow-lg transition-all flex items-center justify-center gap-1.5 active:scale-95`}
+                        className="w-full bg-gray-900 text-white py-2 sm:py-2.5 rounded-lg font-medium text-xs sm:text-sm hover:bg-gray-800 transition-colors flex items-center justify-center gap-1.5 active:scale-95"
                       >
                         <FaTicketAlt className="text-xs sm:text-sm" />
                         Buy Tickets
@@ -339,14 +336,13 @@ const LuckyDraw = () => {
             >
               {userTickets.length > 0 ? (
                 <>
-                  <div className="bg-gradient-to-r from-blue-600 via-sky-600 to-blue-600 rounded-xl p-3 sm:p-4 text-white mb-3 sm:mb-4 shadow-lg shadow-blue-500/30 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"></div>
+                  <div className="bg-gray-900 border border-gray-200 rounded-lg p-3 sm:p-4 text-white mb-3 sm:mb-4 relative overflow-hidden">
                     <div className="flex items-center justify-between relative z-10">
                       <div>
-                        <p className="text-xs sm:text-sm opacity-90 mb-0.5">Total Tickets</p>
-                        <p className="text-xl sm:text-2xl md:text-3xl font-bold">{userTickets.length}</p>
+                        <p className="text-xs sm:text-sm text-gray-300 mb-0.5">Total Tickets</p>
+                        <p className="text-xl sm:text-2xl md:text-3xl font-semibold">{userTickets.length}</p>
                       </div>
-                      <FaTicketAlt className="text-3xl sm:text-4xl opacity-50" />
+                      <FaTicketAlt className="text-3xl sm:text-4xl text-gray-300" />
                     </div>
                   </div>
 
@@ -360,30 +356,30 @@ const LuckyDraw = () => {
                           key={ticket.id}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
-                          className="bg-white rounded-xl shadow-md p-3 sm:p-4 border-2 border-gray-200 hover:shadow-xl hover:border-blue-300 transition-all group"
+                          className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-lg hover:border-gray-400 transition-all group"
                         >
                           <div className="flex items-start justify-between mb-2.5">
                             <div>
-                              <h4 className="text-sm sm:text-base font-bold text-gray-900 mb-0.5">{ticket.drawTitle}</h4>
+                              <h4 className="text-sm sm:text-base font-semibold text-gray-900 mb-0.5">{ticket.drawTitle}</h4>
                               <p className="text-[10px] sm:text-xs text-gray-600">Ticket #{ticket.ticketNumber}</p>
                             </div>
-                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${colors.bgLight} ${colors.text} border ${colors.border}`}>
+                            <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-700 border border-gray-200">
                               {ticket.status}
                             </span>
                           </div>
                           <div className="space-y-1.5 mb-3">
                             <div className="flex items-center justify-between text-[10px] sm:text-xs">
                               <span className="text-gray-600">Purchase Date:</span>
-                              <span className="font-semibold text-gray-800">{formatDate(ticket.purchaseDate)}</span>
+                              <span className="font-medium text-gray-800">{formatDate(ticket.purchaseDate)}</span>
                             </div>
                             {draw && (
                               <div className="flex items-center justify-between text-[10px] sm:text-xs">
                                 <span className="text-gray-600">Draw Date:</span>
-                                <span className="font-semibold text-gray-800">{formatDate(draw.drawDate)}</span>
+                                <span className="font-medium text-gray-800">{formatDate(draw.drawDate)}</span>
                               </div>
                             )}
                           </div>
-                          <button className="w-full bg-gradient-to-r from-gray-100 to-gray-50 hover:from-blue-50 hover:to-sky-50 text-gray-700 hover:text-blue-700 py-1.5 sm:py-2 rounded-lg font-semibold text-xs transition-all flex items-center justify-center gap-1.5 border border-gray-200 hover:border-blue-300">
+                          <button className="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 py-1.5 sm:py-2 rounded-lg font-medium text-xs transition-colors flex items-center justify-center gap-1.5 border border-gray-200 hover:border-gray-400">
                             <FaShareAlt className="text-xs" />
                             Share Ticket
                           </button>
@@ -404,7 +400,7 @@ const LuckyDraw = () => {
                   <p className="text-xs sm:text-sm text-gray-600 mb-4">Purchase tickets from upcoming draws to participate!</p>
                   <button
                     onClick={() => setActiveTab('upcoming')}
-                    className="bg-gradient-to-r from-blue-600 to-sky-600 text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm hover:shadow-lg hover:shadow-blue-500/50 transition-all"
+                    className="bg-gray-900 text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-lg font-medium text-xs sm:text-sm hover:bg-gray-800 transition-colors"
                   >
                     View Upcoming Draws
                   </button>
@@ -427,28 +423,27 @@ const LuckyDraw = () => {
                   key={draw.id}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="bg-white rounded-xl shadow-md p-3 sm:p-4 border-2 border-yellow-200 hover:shadow-xl hover:border-yellow-300 transition-all group relative overflow-hidden"
+                  className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-lg hover:border-gray-400 transition-all group relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-100/30 rounded-full -mr-16 -mt-16"></div>
                   <div className="flex items-start gap-3 sm:gap-4 relative z-10">
-                    <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full p-2.5 sm:p-3 shadow-lg">
+                    <div className="bg-gray-900 rounded-full p-2.5 sm:p-3">
                       <FaTrophy className="text-xl sm:text-2xl text-white" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900">{draw.title}</h3>
-                        <span className="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
+                        <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900">{draw.title}</h3>
+                        <span className="px-2 py-0.5 rounded text-[10px] sm:text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200">
                           Completed
                         </span>
                       </div>
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-1.5 text-xs sm:text-sm">
-                          <FaGift className="text-yellow-600 text-xs" />
-                          <span className="font-semibold text-gray-800">Prize: {draw.prize}</span>
+                          <FaGift className="text-gray-600 text-xs" />
+                          <span className="font-medium text-gray-800">Prize: {draw.prize}</span>
                         </div>
                         <div className="flex items-center gap-1.5 text-xs sm:text-sm">
-                          <FaTrophy className="text-yellow-600 text-xs" />
-                          <span className="font-semibold text-gray-800">Winner: {draw.winner}</span>
+                          <FaTrophy className="text-gray-600 text-xs" />
+                          <span className="font-medium text-gray-800">Winner: {draw.winner}</span>
                         </div>
                         <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-gray-600">
                           <FaCalendarAlt className="text-[10px]" />
@@ -480,26 +475,26 @@ const LuckyDraw = () => {
                   key={draw.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="bg-white rounded-xl shadow-md p-3 sm:p-4 border-2 border-gray-200 hover:shadow-xl hover:border-blue-300 transition-all group"
+                  className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-lg hover:border-gray-400 transition-all group"
                 >
                   <div className="flex items-center justify-between mb-2.5">
-                    <h3 className="text-base sm:text-lg font-bold text-gray-900">{draw.title}</h3>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold bg-gray-100 text-gray-800 border border-gray-200">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900">{draw.title}</h3>
+                    <span className="px-2 py-0.5 rounded text-[10px] sm:text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200">
                       {formatDate(draw.drawDate)}
                     </span>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 text-xs sm:text-sm">
                     <div>
                       <p className="text-gray-600 text-[10px] sm:text-xs mb-0.5">Prize</p>
-                      <p className="font-semibold text-gray-800">{draw.prize}</p>
+                      <p className="font-medium text-gray-800">{draw.prize}</p>
                     </div>
                     <div>
                       <p className="text-gray-600 text-[10px] sm:text-xs mb-0.5">Participants</p>
-                      <p className="font-semibold text-gray-800">{draw.participants.toLocaleString()}</p>
+                      <p className="font-medium text-gray-800">{draw.participants.toLocaleString()}</p>
                     </div>
                     <div>
                       <p className="text-gray-600 text-[10px] sm:text-xs mb-0.5">Total Tickets</p>
-                      <p className="font-semibold text-gray-800">{draw.totalTickets.toLocaleString()}</p>
+                      <p className="font-medium text-gray-800">{draw.totalTickets.toLocaleString()}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -536,21 +531,20 @@ const LuckyDraw = () => {
                 </div>
 
                 <div className="mb-3">
-                  <div className={`bg-gradient-to-r ${getColorClasses(selectedDraw.color).gradient} rounded-lg p-3 sm:p-4 text-white mb-3 relative overflow-hidden`}>
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
-                    <h4 className="text-base sm:text-lg font-bold mb-1 relative z-10">{selectedDraw.title}</h4>
-                    <p className="text-xs sm:text-sm opacity-95 relative z-10">{selectedDraw.prize}</p>
+                  <div className="bg-gray-900 rounded-lg p-3 sm:p-4 text-white mb-3 relative overflow-hidden">
+                    <h4 className="text-base sm:text-lg font-semibold mb-1 relative z-10">{selectedDraw.title}</h4>
+                    <p className="text-xs sm:text-sm text-gray-300 relative z-10">{selectedDraw.prize}</p>
                   </div>
 
                   <div className="space-y-3">
                     <div>
-                      <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">
                         Number of Tickets
                       </label>
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => setTicketsCount(Math.max(1, ticketsCount - 1))}
-                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-bold text-gray-700 transition-colors"
+                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-semibold text-gray-700 transition-colors"
                         >
                           -
                         </button>
@@ -560,27 +554,27 @@ const LuckyDraw = () => {
                           max="10"
                           value={ticketsCount}
                           onChange={(e) => setTicketsCount(Math.max(1, Math.min(10, parseInt(e.target.value) || 1)))}
-                          className="flex-1 text-center text-base sm:text-lg font-bold border-2 border-gray-300 rounded-lg py-1.5 focus:border-blue-500 focus:outline-none"
+                          className="flex-1 text-center text-base sm:text-lg font-semibold border border-gray-300 rounded-lg py-1.5 focus:border-gray-900 focus:ring-2 focus:ring-gray-500 focus:outline-none"
                         />
                         <button
                           onClick={() => setTicketsCount(Math.min(10, ticketsCount + 1))}
-                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-bold text-gray-700 transition-colors"
+                          className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center font-semibold text-gray-700 transition-colors"
                         >
                           +
                         </button>
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-2.5 sm:p-3 border border-blue-100">
+                    <div className="bg-gray-50 rounded-lg p-2.5 sm:p-3 border border-gray-200">
                       <div className="flex items-center justify-between mb-1.5">
                         <span className="text-xs sm:text-sm text-gray-600">Ticket Price</span>
-                        <span className="text-xs sm:text-sm font-semibold text-gray-800">
+                        <span className="text-xs sm:text-sm font-medium text-gray-800">
                           ₹{selectedDraw.ticketPrice} × {ticketsCount}
                         </span>
                       </div>
-                      <div className="flex items-center justify-between pt-1.5 border-t border-blue-200">
-                        <span className="text-sm sm:text-base font-bold text-gray-900">Total Amount</span>
-                        <span className="text-lg sm:text-xl font-bold text-blue-600 flex items-center gap-0.5">
+                      <div className="flex items-center justify-between pt-1.5 border-t border-gray-200">
+                        <span className="text-sm sm:text-base font-semibold text-gray-900">Total Amount</span>
+                        <span className="text-lg sm:text-xl font-semibold text-gray-900 flex items-center gap-0.5">
                           <FaRupeeSign className="text-sm" />
                           {(selectedDraw.ticketPrice * ticketsCount).toLocaleString('en-IN')}
                         </span>
@@ -591,7 +585,7 @@ const LuckyDraw = () => {
 
                 <button
                   onClick={handlePurchaseTickets}
-                  className={`w-full bg-gradient-to-r ${getColorClasses(selectedDraw.color).gradient} text-white py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:shadow-lg transition-all flex items-center justify-center gap-2 active:scale-95`}
+                  className="w-full bg-gray-900 text-white py-2.5 sm:py-3 rounded-lg font-medium text-sm sm:text-base hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 active:scale-95"
                 >
                   <FaTicketAlt className="text-xs sm:text-sm" />
                   Purchase Tickets
@@ -622,11 +616,11 @@ const LuckyDraw = () => {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                  className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-green-100 to-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg"
+                  className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 border border-gray-200"
                 >
-                  <FaCheckCircle className="text-2xl sm:text-3xl text-green-600" />
+                  <FaCheckCircle className="text-2xl sm:text-3xl text-gray-700" />
                 </motion.div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5">Tickets Purchased!</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1.5">Tickets Purchased!</h3>
                 <p className="text-xs sm:text-sm text-gray-600 mb-4">
                   Your tickets have been successfully purchased. Good luck!
                 </p>
@@ -635,7 +629,7 @@ const LuckyDraw = () => {
                     setShowSuccessModal(false);
                     setActiveTab('mytickets');
                   }}
-                  className="w-full bg-gradient-to-r from-blue-600 to-sky-600 text-white py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:shadow-lg hover:shadow-blue-500/50 transition-all active:scale-95"
+                  className="w-full bg-gray-900 text-white py-2.5 sm:py-3 rounded-lg font-medium text-sm sm:text-base hover:bg-gray-800 transition-colors active:scale-95"
                 >
                   View My Tickets
                 </button>

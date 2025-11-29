@@ -45,6 +45,18 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [inWishlist, setInWishlist] = useState(false);
+  const [spareType, setSpareType] = useState('new'); // 'new' or 'used'
+  const [quantity, setQuantity] = useState(1);
+  
+  // Product attributes based on image design
+  const [productAttributes, setProductAttributes] = useState({
+    manufacturer: 'OEM', // OEM / After Market (High quality) / Unknown / After Market (Standard)
+    compatibility: 'MARUTI: RITZ, SWIFT, DZIRE (2010-2015)', // Show models/year
+    tested: 'on car', // on car / Bench test / Not tested
+    partAge: '1yr / 20,000kms', // 1yr / 20,000kms
+    condition: 'Like New', // Like New / Good / Temporary use
+    warranty: '90 days' // 7 days / 90 days / 30 days
+  });
 
   // Get product from location state (passed from TimingBelt) or fetch it
   useEffect(() => {
@@ -157,9 +169,13 @@ const ProductDetail = () => {
         reviews: product.reviews,
         partNumber: product.partNumber,
         seller: product.seller,
+        quantity: quantity,
       };
-      addToCart(cartProduct);
-      alert(`${product.name} added to cart!`);
+      // Add quantity times
+      for (let i = 0; i < quantity; i++) {
+        addToCart(cartProduct);
+      }
+      alert(`${quantity} x ${product.name} added to cart!`);
     }
   };
 
@@ -215,62 +231,88 @@ const ProductDetail = () => {
     ? `${product.partNumber.substring(0, 4)}...${product.partNumber.substring(product.partNumber.length - 4)}`
     : product.partNumber;
 
+  // Calculate discount percentage
+  const discount = product.mrp && product.mrp > product.price 
+    ? Math.round(((product.mrp - product.price) / product.mrp) * 100)
+    : 0;
+
+  const handleQuantityChange = (change) => {
+    setQuantity(prev => Math.max(1, prev + change));
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6">
         {/* Breadcrumbs */}
         <Breadcrumbs />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
-          {/* Left Column - Product Images */}
-          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
-            {/* Thumbnail Images - Hidden on mobile, shown on desktop */}
-            <div className="hidden lg:flex flex-col gap-2 flex-shrink-0">
-              {product.images.slice(0, 4).map((img, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`border-2 rounded-lg overflow-hidden w-20 h-20 ${
-                    selectedImage === index ? 'border-blue-600' : 'border-gray-200'
-                  }`}
-                >
-                  <img
-                    src={img}
-                    alt={`${product.name} view ${index + 1}`}
-                    className="w-full h-full object-contain bg-white"
-                    onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/100x100?text=Timing+Belt';
-                    }}
-                  />
-                </button>
-              ))}
+        {/* Page Title */}
+        <div className="mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Spares page</h1>
+          {product && (
+            <div>
+              <h2 className="text-lg text-gray-600 mb-1">{product.brand}</h2>
+              <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
             </div>
+          )}
+        </div>
 
+        {/* New Spares / Used Spares Toggle Buttons */}
+        <div className="flex gap-4 mb-6">
+          <button
+            onClick={() => setSpareType('new')}
+            className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
+              spareType === 'new'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            New spares
+          </button>
+          <button
+            onClick={() => setSpareType('used')}
+            className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
+              spareType === 'used'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            Used spares
+          </button>
+        </div>
+        <p className="text-sm text-gray-600 mb-6">Based on selection spares will be shown.</p>
+
+        {/* Main Content Area */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 sm:mb-8">
+          {/* Left Column - Spare Pic Carousel */}
+          <div className="bg-white border border-gray-200 rounded-lg p-4">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">Spare pic {selectedImage + 1}/{product.images.length}</h3>
+            
             {/* Main Image */}
-            <div className="flex-1 bg-white border border-gray-200 rounded-lg p-2 sm:p-4 relative">
+            <div className="relative mb-4 bg-gray-50 rounded-lg overflow-hidden" style={{ minHeight: '300px' }}>
               {product.isOEM && (
-                <div className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded text-[8px] sm:text-xs font-bold z-10">
+                <div className="absolute top-2 left-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold z-10">
                   OEM
                 </div>
               )}
               <img
                 src={product.images[selectedImage]}
                 alt={product.name}
-                className="w-full h-auto rounded-lg object-contain"
-                style={{ minHeight: '250px' }}
+                className="w-full h-full object-contain"
+                style={{ minHeight: '300px' }}
                 onError={(e) => {
-                  e.target.src = 'https://via.placeholder.com/600x400?text=Timing+Belt';
+                  e.target.src = 'https://via.placeholder.com/600x400?text=Product+Image';
                 }}
               />
             </div>
 
-            {/* Thumbnail Images - Horizontal scroll on mobile */}
-            <div className="flex lg:hidden gap-2 overflow-x-auto pb-2 -mx-3 sm:-mx-4 px-3 sm:px-4">
-              {product.images.slice(0, 4).map((img, index) => (
+            {/* Image Thumbnails */}
+            <div className="flex gap-2 justify-center">
+              {product.images.slice(0, 3).map((img, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`border-2 rounded-lg overflow-hidden flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 ${
+                  className={`border-2 rounded-lg overflow-hidden w-20 h-20 flex-shrink-0 ${
                     selectedImage === index ? 'border-blue-600' : 'border-gray-200'
                   }`}
                 >
@@ -279,7 +321,7 @@ const ProductDetail = () => {
                     alt={`${product.name} view ${index + 1}`}
                     className="w-full h-full object-contain bg-white"
                     onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/100x100?text=Timing+Belt';
+                      e.target.src = 'https://via.placeholder.com/100x100?text=Image';
                     }}
                   />
                 </button>
@@ -287,157 +329,136 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* Right Column - Product Info */}
-          <div className="px-0 sm:px-2">
-            {/* Brand */}
-            <h2 className="text-[9px] sm:text-sm text-gray-600 mb-1">{product.brand}</h2>
+          {/* Right Column - Video */}
+          <div className="bg-white border border-gray-200 rounded-lg p-4">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">Video</h3>
+            <div className="bg-gray-100 rounded-lg overflow-hidden" style={{ minHeight: '300px' }}>
+              <div className="w-full h-full flex items-center justify-center">
+                <div className="text-center">
+                  <FaInfoCircle className="text-4xl text-gray-400 mx-auto mb-2" />
+                  <p className="text-gray-500 text-sm">Video will be displayed here</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Product Details Section */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Product Details</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <label className="text-sm font-semibold text-gray-700">OEM Part number</label>
+              <p className="text-base text-gray-900 mt-1">{product.partNumber || 'N/A'}</p>
+            </div>
             
-            {/* Product Name */}
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
-              <h1 className="text-sm sm:text-xl md:text-2xl font-bold text-gray-800">{product.name}</h1>
-              <div className="flex items-center gap-1 text-[9px] sm:text-sm text-blue-600">
-                <FaTruck className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span>Delivery within {product.deliveryDays || 4} days</span>
-              </div>
+            <div>
+              <label className="text-sm font-semibold text-gray-700">Manufacturer</label>
+              <p className="text-base text-gray-900 mt-1">
+                {productAttributes.manufacturer === 'OEM' && 'OEM'}
+                {productAttributes.manufacturer === 'After Market (High quality)' && (
+                  <span>After Market <span className="text-green-600">(High quality)</span></span>
+                )}
+                {productAttributes.manufacturer === 'After Market (Standard)' && (
+                  <span>After Market <span className="text-gray-600">(Standard)</span></span>
+                )}
+                {productAttributes.manufacturer === 'Unknown' && 'Unknown'}
+              </p>
             </div>
+            
+            <div>
+              <label className="text-sm font-semibold text-gray-700">Compatibility</label>
+              <p className="text-base text-gray-900 mt-1">{productAttributes.compatibility}</p>
+            </div>
+            
+            <div>
+              <label className="text-sm font-semibold text-gray-700">Tested</label>
+              <p className="text-base text-gray-900 mt-1 capitalize">{productAttributes.tested}</p>
+            </div>
+            
+            <div>
+              <label className="text-sm font-semibold text-gray-700">Part Age</label>
+              <p className="text-base text-gray-900 mt-1">{productAttributes.partAge}</p>
+            </div>
+            
+            <div>
+              <label className="text-sm font-semibold text-gray-700">Condition</label>
+              <p className="text-base text-gray-900 mt-1">{productAttributes.condition}</p>
+            </div>
+            
+            <div>
+              <label className="text-sm font-semibold text-gray-700">Warranty</label>
+              <p className="text-base text-gray-900 mt-1">{productAttributes.warranty}</p>
+            </div>
+          </div>
+        </div>
 
-            {/* Fulfillment & Choice Badges */}
-            <div className="flex items-center gap-2 mb-3">
-              {product.fulfilledBySparelo && (
-                <div className="flex items-center gap-1 bg-white border border-gray-200 px-2 py-1 rounded">
-                  <FaCheckCircle className="w-3 h-3 text-green-600" />
-                  <span className="text-[9px] text-gray-700">Fulfilled by</span>
-                  <span className="text-blue-600 font-bold text-[10px]">S</span>
+        {/* Pricing and Order Section */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Pricing Box */}
+            <div className="bg-gray-50 border border-gray-300 rounded-lg p-4">
+              <div className="mb-2">
+                <span className="text-sm text-gray-600">New price: </span>
+                <span className="text-lg font-semibold text-gray-900">₹{(product.mrp || product.price).toLocaleString('en-IN')}</span>
+              </div>
+              <div className="mb-2">
+                <span className="text-sm text-gray-600">Our price: </span>
+                <span className="text-xl font-bold text-blue-600">₹{product.price.toLocaleString('en-IN')}</span>
+              </div>
+              {discount > 0 && (
+                <div>
+                  <span className="text-sm font-semibold text-green-600">Discount: {discount}%</span>
                 </div>
               )}
-              {product.spareloChoice && (
-                <div className="bg-purple-600 text-white text-[9px] font-semibold px-2 py-1 rounded">
-                  Sparelo's Choice
+            </div>
+
+            {/* Order Section */}
+            <div>
+              <div className="flex items-center gap-4 mb-4">
+                <button
+                  onClick={handleAddToCart}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                >
+                  Place order
+                </button>
+                
+                {/* Quantity Selector */}
+                <div className="flex items-center gap-2 border border-gray-300 rounded-lg">
+                  <button
+                    onClick={() => handleQuantityChange(-1)}
+                    className="px-3 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    -
+                  </button>
+                  <span className="px-4 py-2 text-gray-900 font-semibold min-w-[3rem] text-center">{quantity}</span>
+                  <button
+                    onClick={() => handleQuantityChange(1)}
+                    className="px-3 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    +
+                  </button>
                 </div>
-              )}
-            </div>
-
-            {/* Seller */}
-            <p className="text-[10px] sm:text-sm text-gray-600 mb-2">
-              Sold by: <span className="font-medium">{product.seller}</span>
-            </p>
-
-            {/* Replacements Link */}
-            {product.replacementsPrice && (
-              <Link to="#" className="text-blue-600 hover:text-blue-800 text-[10px] sm:text-sm mb-4 inline-block">
-                Replacements from ₹{product.replacementsPrice}
-              </Link>
-            )}
-
-            {/* Price */}
-            <div className="mb-3 sm:mb-4">
-              <div className="mb-1">
-                <span className="text-base sm:text-2xl md:text-3xl font-bold text-gray-900">
-                  ₹{product.price.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
               </div>
-              <div className="text-[9px] sm:text-sm text-gray-600">
-                <span>MRP: ₹{(product.mrp || product.price).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                <div className="text-[8px] sm:text-xs text-gray-500 mt-1">Incl. of all taxes</div>
-              </div>
-            </div>
-
-            {/* Stock Status */}
-            <div className="mb-3">
-              <span className="text-[10px] sm:text-sm font-medium text-green-600">
-                {product.stock || 9} in stock
-              </span>
-            </div>
-
-            {/* Compatibility Warning */}
-            {!product.isCompatible && (
+              
+              {/* Estimated Delivery Time */}
               <div className="mb-4">
-                <p className="text-[10px] sm:text-sm font-medium text-blue-600">
-                  {product.compatibility || "Not compatible with your cars"}
+                <p className="text-sm text-gray-600">
+                  Estimated delivery time: <span className="font-semibold text-gray-900">{product.deliveryDays || 4} days</span>
                 </p>
               </div>
-            )}
-
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-4">
-              <button
-                onClick={handleAddToCart}
-                className="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-600 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-[10px] sm:text-sm md:text-base font-semibold transition-colors"
-              >
-                Add to cart
-              </button>
-              <button
-                onClick={handleBuyNow}
-                className="flex-1 bg-white border-2 border-blue-600 text-blue-600 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-[10px] sm:text-sm md:text-base font-semibold hover:bg-blue-50 transition-colors"
-              >
-                Buy now
-              </button>
-            </div>
-
-            {/* Delivery Location */}
-            <div className="mb-4 flex items-center gap-2 text-[10px] sm:text-sm text-gray-600">
-              <FaMapMarkerAlt className="text-gray-400" />
-              <span>Deliver to </span>
-              <button className="text-blue-600 hover:text-blue-800">
-                {getShippingAddress()}
-              </button>
-            </div>
-
-            {/* Wishlist */}
-            <div className="mb-6">
-              <button
-                onClick={handleToggleWishlist}
-                className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-[10px] sm:text-sm font-medium"
-              >
-                <FaHeart className={inWishlist ? "text-blue-500 fill-current" : ""} />
-                <span>ADD TO WISHLIST</span>
-              </button>
-            </div>
-
-            {/* Part Specifications Table */}
-            <div className="border border-gray-200 rounded-lg mb-4 overflow-x-auto">
-              <table className="w-full min-w-[280px]">
-                <tbody>
-                  <tr className="border-b border-gray-200">
-                    <td className="px-3 sm:px-4 py-2 sm:py-3 text-[9px] sm:text-xs md:text-sm font-medium text-gray-700 w-1/3">Part Number</td>
-                    <td className="px-3 sm:px-4 py-2 sm:py-3 text-[9px] sm:text-xs md:text-sm text-gray-600 flex items-center gap-2">
-                      {displayPartNumber}
-                      <button className="text-blue-600 hover:text-blue-800">
-                        <FaEye className="w-3 h-3" />
-                      </button>
-                    </td>
-                  </tr>
-                  <tr className="border-b border-gray-200">
-                    <td className="px-3 sm:px-4 py-2 sm:py-3 text-[9px] sm:text-xs md:text-sm font-medium text-gray-700">Origin</td>
-                    <td className="px-3 sm:px-4 py-2 sm:py-3 text-[9px] sm:text-xs md:text-sm text-gray-600">{product.origin || "OEM"}</td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 sm:px-4 py-2 sm:py-3 text-[9px] sm:text-xs md:text-sm font-medium text-gray-700">Class</td>
-                    <td className="px-3 sm:px-4 py-2 sm:py-3 text-[9px] sm:text-xs md:text-sm text-gray-600">{product.class || "Timing Belt"}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            {/* Action Links */}
-            <div className="mb-6 space-y-2">
-              <Link to="#" className="text-blue-600 hover:text-blue-800 text-[10px] sm:text-sm block">
-                View OEM Catalog
-              </Link>
-              <Link to="#" className="text-blue-600 hover:text-blue-800 text-[10px] sm:text-sm block">
-                View Compatibility
-              </Link>
-              {product.replacementsPrice && (
-                <Link to="#" className="text-blue-600 hover:text-blue-800 text-[10px] sm:text-sm block">
-                  View Replacements from ₹{product.replacementsPrice}
-                </Link>
-              )}
-            </div>
-
-            {/* Description */}
-            <div className="border-t border-gray-200 pt-4">
-              <h3 className="text-[10px] sm:text-sm font-semibold text-gray-800 mb-2">Description</h3>
-              <p className="text-[10px] sm:text-sm text-gray-600">{product.description || `${product.class} for ${product.brand} - ${product.partNumber}`}</p>
+              
+              {/* Navigate to Delivery Address */}
+              <div className="border-t border-gray-200 pt-4">
+                <button
+                  onClick={() => navigate('/checkout/address')}
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center gap-2"
+                >
+                  <FaMapMarkerAlt />
+                  Navigate to Delivery address
+                </button>
+              </div>
             </div>
           </div>
         </div>

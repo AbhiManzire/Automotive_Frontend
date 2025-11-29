@@ -113,26 +113,24 @@ const Review = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="mt-2 md:mt-4 mb-2 bg-white rounded-xl shadow-xl p-2 sm:p-3 md:p-4 border border-gray-200"
+      className="mt-2 md:mt-4 mb-2 bg-white border border-gray-200 p-2 sm:p-3 md:p-4"
     >
       <div className="flex items-center justify-center space-x-0.5 sm:space-x-1 md:space-x-2">
         <motion.button
           onClick={() => navigate('/cart')}
           className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
-          whileHover={{ scale: 1.1, y: -2 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-100 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-gray-200 transition-colors"
           >
-            <FaShoppingCart className="text-blue-600 text-xs sm:text-sm md:text-base" />
+            <FaShoppingCart className="text-gray-700 text-xs sm:text-sm md:text-base" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-blue-600 font-medium">Cart</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Cart</span>
         </motion.button>
         <motion.div 
-          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gray-300 rounded-full"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -140,20 +138,18 @@ const Review = () => {
         <motion.button
           onClick={() => navigate('/checkout/address')}
           className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
-          whileHover={{ scale: 1.1, y: -2 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-100 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-gray-200 transition-colors"
           >
-            <FaMapMarkerAlt className="text-blue-600 text-xs sm:text-sm md:text-base" />
+            <FaMapMarkerAlt className="text-gray-700 text-xs sm:text-sm md:text-base" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-blue-600 font-medium">Address</span>
+          <span className="text-[10px] sm:text-xs text-gray-600 font-medium">Address</span>
         </motion.button>
         <motion.div 
-          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+          className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gray-900 rounded-full"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -165,36 +161,25 @@ const Review = () => {
           transition={{ delay: 0.5, type: "spring" }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 shadow-xl ring-2 ring-blue-100 relative overflow-hidden"
-            animate={{ 
-              boxShadow: [
-                "0 0 0 0px rgba(37, 99, 235, 0.4)",
-                "0 0 0 6px rgba(37, 99, 235, 0)",
-                "0 0 0 0px rgba(37, 99, 235, 0.4)"
-              ]
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-900 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
             <FaFileAlt className="text-white text-xs sm:text-sm md:text-base relative z-10" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-blue-600 font-bold">Review</span>
+          <span className="text-[10px] sm:text-xs text-gray-900 font-semibold">Review</span>
         </motion.div>
-        <div className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gradient-to-r from-blue-200 to-blue-100 rounded-full"></div>
+        <div className="h-0.5 flex-1 sm:flex-none sm:w-6 md:w-8 lg:w-10 xl:w-12 bg-gray-300 rounded-full"></div>
         <motion.button
           onClick={() => navigate('/checkout/payment')}
           className="flex flex-col items-center cursor-pointer group flex-shrink-0 min-w-[45px] sm:min-w-[50px] md:min-w-[55px]"
-          whileHover={{ scale: 1.1, y: -2 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <motion.div 
-            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-blue-200 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-blue-300 transition-colors shadow-md group-hover:shadow-lg"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6 }}
+            className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-gray-100 rounded-full flex items-center justify-center mb-0.5 sm:mb-1 group-hover:bg-gray-200 transition-colors"
           >
-            <FaCreditCard className="text-blue-600 text-xs sm:text-sm md:text-base" />
+            <FaCreditCard className="text-gray-700 text-xs sm:text-sm md:text-base" />
           </motion.div>
-          <span className="text-[10px] sm:text-xs text-gray-500 group-hover:text-blue-600 transition-colors">Pay</span>
+          <span className="text-[10px] sm:text-xs text-gray-500 group-hover:text-gray-700 transition-colors">Pay</span>
         </motion.button>
       </div>
     </motion.div>
@@ -217,15 +202,14 @@ const Review = () => {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9, x: -100 }}
         transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
-        whileHover={{ y: -4 }}
-        className="bg-white rounded-xl shadow-xl p-3 sm:p-4 md:p-5 border border-gray-200 overflow-hidden relative"
+        whileHover={{ y: 0 }}
+        className="bg-white border border-gray-200 p-4 overflow-hidden relative"
       >
-        <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400"></div>
-        <div className="flex items-center gap-2 mb-3 sm:mb-4">
-          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-600 to-blue-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg text-xs sm:text-sm">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-6 h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium">
             {pkg.packageNumber}
           </div>
-          <h2 className="text-base sm:text-lg font-bold text-gray-800">
+          <h2 className="text-sm font-semibold text-gray-900">
             Order Package #{pkg.packageNumber}
           </h2>
         </div>
@@ -286,28 +270,20 @@ const Review = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: (index * 0.1) + 0.3 }}
-          className="mt-6 pt-6 border-t border-gray-200"
+          className="mt-4 pt-4 border-t border-gray-200"
         >
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-xs font-semibold text-gray-800 mb-1">DELIVERY METHOD</h3>
               <p className="text-xs text-gray-600">Standard Delivery</p>
-              <p className="text-xs text-blue-600 mt-1">
+              <p className="text-xs text-gray-700 mt-1">
                 Estimated delivery by {deliveryDate}
               </p>
             </div>
             <div className="text-right">
-              <p className={`text-base font-semibold flex items-center gap-1 ${
-                deliveryCharge === 0 ? 'text-green-600' : 'text-gray-800'
+              <p className={`text-sm font-medium ${
+                deliveryCharge === 0 ? 'text-gray-600' : 'text-gray-800'
               }`}>
-                {deliveryCharge === 0 ? (
-                  <>
-                    <FaCheckCircle />
-                    FREE
-                  </>
-                ) : (
-                  `₹${deliveryCharge.toFixed(2)}`
-                )}
+                {deliveryCharge === 0 ? 'FREE' : `₹${deliveryCharge.toFixed(2)}`}
               </p>
             </div>
           </div>
@@ -320,15 +296,10 @@ const Review = () => {
           className="mt-4 pt-4 border-t border-gray-200"
         >
           <div className="flex items-center justify-between">
-            <span className="text-sm font-semibold text-gray-800">Package Total</span>
-            <motion.span 
-              key={packageTotal + deliveryCharge}
-              initial={{ scale: 1.2 }}
-              animate={{ scale: 1 }}
-              className="text-lg font-bold text-gray-800"
-            >
+            <span className="text-sm font-medium text-gray-800">Package Total</span>
+            <span className="text-base font-semibold text-gray-900">
               ₹{(packageTotal + deliveryCharge).toFixed(2)}
-            </motion.span>
+            </span>
           </div>
         </motion.div>
       </motion.div>
@@ -340,7 +311,7 @@ const Review = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-4">
+    <div className="min-h-screen bg-gray-50 py-4">
       <div className="max-w-6xl mx-auto px-4">
         <ProgressBar />
 
@@ -350,9 +321,8 @@ const Review = () => {
           transition={{ delay: 0.1 }}
           className="mb-4"
         >
-          <h1 className="text-xl md:text-2xl font-bold mb-1">
-            <span className="text-blue-900">Order</span>{" "}
-            <span className="text-blue-600">Review</span>
+          <h1 className="text-xl md:text-2xl font-semibold text-gray-900 mb-1">
+            Order Review
           </h1>
           <p className="text-gray-600 text-sm">Review your order details before proceeding</p>
         </motion.div>
@@ -361,7 +331,7 @@ const Review = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="space-y-6 mb-8"
+          className="space-y-4 mb-6"
         >
           <AnimatePresence mode="popLayout">
             {packages.map((pkg, index) => (
@@ -380,27 +350,24 @@ const Review = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-100"
+          className="bg-white border border-gray-200 p-4 sm:p-6 mb-6"
         >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-800">Shipping Address</h2>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-base font-semibold text-gray-900">Shipping Address</h2>
+            <button
               onClick={() => handleOpenMap(shippingAddress)}
-              className="flex items-center gap-2 hover:opacity-80 transition-colors cursor-pointer"
+              className="text-xs text-gray-600 hover:text-gray-900 underline flex items-center gap-1 transition-colors"
               title="Open in Google Maps"
-              style={{ color: '#EA4335' }}
             >
-              <FaMapMarkerAlt className="text-lg" />
-              <span className="text-xs font-medium">View on Map</span>
-            </motion.button>
+              <FaMapMarkerAlt className="text-xs" />
+              View on Map
+            </button>
           </div>
           <div className="text-gray-700">
             <p className="text-sm font-medium">
               {shippingAddress.name} - {shippingAddress.mobile}
             </p>
-            <p className="text-xs mt-1">
+            <p className="text-xs mt-1 text-gray-600">
               {shippingAddress.address}, {shippingAddress.cityState}, {shippingAddress.postalCode}
             </p>
           </div>
@@ -410,14 +377,14 @@ const Review = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white rounded-xl shadow-lg p-6 border border-gray-100"
+          className="bg-white border border-gray-200 p-4 sm:p-6"
         >
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-6">
             <div className="flex items-center gap-2">
               <input
                 type="checkbox"
                 id="disableReplacements"
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                className="w-4 h-4 text-gray-900 border-gray-300 rounded focus:ring-gray-500"
               />
               <label htmlFor="disableReplacements" className="text-xs text-gray-700 flex items-center gap-1">
                 Disable part replacements
@@ -444,12 +411,12 @@ const Review = () => {
                     <span className="text-gray-600">
                       Total Savings ({itemsWithSavings} {itemsWithSavings === 1 ? 'item' : 'items'}):
                     </span>
-                    <span className="text-green-600 font-medium">₹{totalSavings.toFixed(2)}</span>
+                    <span className="text-gray-600 font-medium">₹{totalSavings.toFixed(2)}</span>
                   </div>
                 )}
                 <div className="flex justify-between gap-8 items-center">
                   <span className="text-gray-600">boodmo Points to be earned:</span>
-                  <span className="text-blue-600 font-medium flex items-center gap-1">
+                  <span className="text-gray-700 font-medium flex items-center gap-1">
                     {boodmoPoints}
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -474,24 +441,19 @@ const Review = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleBack}
-              className="flex items-center gap-2 px-6 py-3 border-2 border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-semibold shadow-md"
+              className="flex items-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium"
             >
               <FaArrowLeft />
               Back
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleContinue}
-              className="px-8 py-3 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-700 hover:via-blue-600 hover:to-blue-700 transition-all text-sm font-bold shadow-xl relative overflow-hidden"
+              className="px-8 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-lg transition-colors text-sm font-medium"
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                animate={{ x: ["-100%", "100%"] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              />
-              <span className="relative z-10">Continue</span>
+              Continue
             </motion.button>
           </motion.div>
         </motion.div>

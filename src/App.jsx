@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import './App.css';
 import { CartProvider } from './contexts/CartContext';
 import { VehicleProvider } from './contexts/VehicleContext';
@@ -118,8 +119,38 @@ import ModelDetail from "./component/Vehicles/ModelDetail";
 import FAQ from "./features/support/FAQ";
 import ReturnPolicy from "./features/support/ReturnPolicy";
 
+// Pages from pages folder
+import About from "./component/pages/About";
+import APISolution from "./component/pages/APISolution";
+import BuyersPolicy from "./component/pages/BuyersPolicy";
+import Careers from "./component/pages/Careers";
+import DamagedParts from "./component/pages/DamagedParts";
+import Disclaimer from "./component/pages/Disclaimer";
+import DiscoveryPoints from "./component/pages/DiscoveryPoints";
+import InvestorRelations from "./component/pages/InvestorRelations";
+import Offers from "./component/pages/Offers";
+import PrivacyPolicy from "./component/pages/PrivacyPolicy";
+import SellersPolicy from "./component/pages/SellersPolicy";
+import Sitemap from "./component/pages/Sitemap";
+import Sitemap2 from "./component/pages/Sitemap2";
+import Suppliers from "./component/pages/Suppliers";
+import TermsOfUse from "./component/pages/TermsOfUse";
+import Support from "./component/pages/Support";
+import Articles from "./component/pages/Articles";
 
 
+
+
+// Component to scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 // Component to conditionally render Header/Footer
 const Layout = ({ children }) => {
@@ -162,6 +193,7 @@ function App() {
           <EscrowProvider>
             <CartProvider>
               <Router>
+                <ScrollToTop />
                 <Layout>
                   <Routes>
                     {/* Home Page */}
@@ -258,10 +290,28 @@ function App() {
                     <Route path="/company_gst" element={<Company_GST />} />
                     <Route path="/addresses" element={<Addresses />} />
                     <Route path="/diagnostic" element={<DiagnosticForm />} />
-                    <Route path="/support" element={<ChatbotSupport />} />
+                    <Route path="/support" element={<Support />} />
                     <Route path="/addresses" element={<Addresses />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/return-policy" element={<ReturnPolicy />} />
+
+                    {/* Pages from pages folder */}
+                    <Route path="/about" element={<About />} />
+                    <Route path="/api-solution" element={<APISolution />} />
+                    <Route path="/articles" element={<Articles />} />
+                    <Route path="/buyers-policy" element={<BuyersPolicy />} />
+                    <Route path="/careers" element={<Careers />} />
+                    <Route path="/damaged-parts" element={<DamagedParts />} />
+                    <Route path="/disclaimer" element={<Disclaimer />} />
+                    <Route path="/discovery-points" element={<DiscoveryPoints />} />
+                    <Route path="/investor-relations" element={<InvestorRelations />} />
+                    <Route path="/offers" element={<Offers />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/sellers-policy" element={<SellersPolicy />} />
+                    <Route path="/sitemap" element={<Sitemap />} />
+                    <Route path="/sitemap2" element={<Sitemap2 />} />
+                    <Route path="/suppliers" element={<Suppliers />} />
+                    <Route path="/terms-of-use" element={<TermsOfUse />} />
 
                     <Route path="/catalog" element={<CatalogPage />} />
                     <Route path="/catalog/maintenance_service_parts/" element={<MaintenanceServiceParts />} />
@@ -325,7 +375,6 @@ function App() {
 
                     {/* Product detail page for back_url_id */}
                     <Route path="/catalog/part-p-:itemId" element={<ProductDetail />} />
-                    <Route path="/catalog/part-p-:itemId/" element={<ProductDetail />} />
 
                     {/* Vehicle-based search landing */}
                     <Route path="/vehicle-search" element={<VehicleSearchResults />} />

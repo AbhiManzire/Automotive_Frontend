@@ -50,20 +50,20 @@ const AddAddressModal = ({ isOpen, onClose, onConfirmLocation }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 pb-4"
           onClick={onClose}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[85vh] overflow-y-auto mb-4"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
-              <h2 className="text-2xl font-semibold text-gray-800">
-                Add New Address
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-lg font-semibold text-gray-900">
+                Address
               </h2>
               <button
                 onClick={onClose}
@@ -74,45 +74,16 @@ const AddAddressModal = ({ isOpen, onClose, onConfirmLocation }) => {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="p-6">
-              {/* Contact Details */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                  Contact Details
-                </h3>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      placeholder="First Name"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      placeholder="Last Name"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                </div>
-
+            <form onSubmit={handleSubmit} className="p-4">
+              {/* Mobile Number */}
+              <div className="mb-4">
                 <div className="flex gap-2">
                   <div className="w-20">
                     <input
                       type="text"
                       value="+91"
                       readOnly
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 text-center font-medium"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-center font-medium text-gray-700 text-sm"
                     />
                   </div>
                   <div className="flex-1">
@@ -125,35 +96,35 @@ const AddAddressModal = ({ isOpen, onClose, onConfirmLocation }) => {
                       required
                       pattern="[0-9]{10}"
                       maxLength="10"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-700 placeholder-gray-400 text-sm"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Address */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              <div className="mb-4">
+                <h3 className="text-base font-semibold text-gray-900 mb-3">
                   Address
                 </h3>
                 
-                <div className="mb-4">
+                <div className="mb-3">
                   <textarea
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
                     placeholder="Address"
                     required
-                    rows="4"
+                    rows="3"
                     maxLength="110"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 resize-y text-gray-700 placeholder-gray-400 text-sm"
                   />
-                  <div className="text-right text-sm text-gray-500 mt-1">
+                  <div className="text-right text-xs text-gray-500 mt-1">
                     {formData.address.length}/110
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                   <div>
                     <input
                       type="text"
@@ -162,7 +133,7 @@ const AddAddressModal = ({ isOpen, onClose, onConfirmLocation }) => {
                       onChange={handleChange}
                       placeholder="Postal Code"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-700 placeholder-gray-400 text-sm"
                     />
                   </div>
                   <div>
@@ -173,7 +144,7 @@ const AddAddressModal = ({ isOpen, onClose, onConfirmLocation }) => {
                       onChange={handleChange}
                       placeholder="City, State, Country"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-700 placeholder-gray-400 text-sm"
                     />
                   </div>
                 </div>
@@ -185,27 +156,27 @@ const AddAddressModal = ({ isOpen, onClose, onConfirmLocation }) => {
                     value={formData.addressTitle}
                     onChange={handleChange}
                     placeholder="Address Title (Optional)"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-700 placeholder-gray-400 text-sm"
                   />
                 </div>
               </div>
 
               {/* Buttons */}
-              <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
+              <div className="flex justify-end gap-3 pt-3 border-t border-gray-200">
                 <motion.button
                   type="button"
                   onClick={onClose}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-5 py-2 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm"
                 >
                   Cancel
                 </motion.button>
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-5 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium text-sm"
                 >
                   Save Address
                 </motion.button>
