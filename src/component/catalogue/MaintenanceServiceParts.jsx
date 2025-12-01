@@ -26,6 +26,7 @@ const MaintenanceServiceParts = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [filteredCategories, setFilteredCategories] = useState(MaintainanceCategories);
   const [showMore, setShowMore] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     const filtered = MaintainanceCategories.filter((item) =>
@@ -70,7 +71,10 @@ const MaintenanceServiceParts = () => {
 
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
           <div className="order-2 lg:order-1">
-            <CatalogueSidebar />
+            <CatalogueSidebar 
+              isMobileOpen={isMobileSidebarOpen} 
+              setIsMobileOpen={setIsMobileSidebarOpen} 
+            />
           </div>
 
           <div className="flex-1 order-1 lg:order-2">

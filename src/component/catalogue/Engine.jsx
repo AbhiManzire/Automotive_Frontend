@@ -89,6 +89,7 @@ const Engine = () => {
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(engineCategories);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     const filtered = engineCategories.filter((item) =>
@@ -132,27 +133,28 @@ const Engine = () => {
         />
 
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
-          <div className="order-2 lg:order-1">
-            <CatalogueSidebar />
-          </div>
+          <CatalogueSidebar 
+            isMobileOpen={isMobileSidebarOpen} 
+            setIsMobileOpen={setIsMobileSidebarOpen} 
+          />
 
-          <div className="flex-1 order-1 lg:order-2">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 my-4 sm:my-6 md:my-8">
+          <div className="flex-1">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5 my-4 sm:my-6 md:my-8">
               {filteredProducts.map((product) => (
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-2 sm:p-3 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-md mb-2 mx-auto"
+                    className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 object-cover rounded-md mb-2 mx-auto"
                     onError={(e) => {
                       e.target.src = 'https://via.placeholder.com/100x100?text=' + product.name;
                     }}
                   />
-                  <span className="text-gray-800 font-medium text-[10px] sm:text-xs line-clamp-2">{product.name}</span>
+                  <span className="text-gray-800 font-medium text-[9px] sm:text-[10px] md:text-xs lg:text-sm line-clamp-2 px-1">{product.name}</span>
                 </Link>
               ))}
             </div>

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useVehicle } from "../../contexts/VehicleContext";
 import { getVehicleImageUrl } from "../../data/vehicleData";
+import { FaTimes, FaFilter } from "react-icons/fa";
 
-const CatalogueSidebar = () => {
+const CatalogueSidebar = ({ isMobileOpen, setIsMobileOpen }) => {
   const { vehicles } = useVehicle();
   const [selectedMaker, setSelectedMaker] = useState("");
   const [isOpen, setIsOpen] = useState(true);
@@ -107,19 +108,18 @@ const CatalogueSidebar = () => {
   };
 
   const brands = [
-    { name: "Bosch", link: "/catalog/brands/bosch/" },
-    { name: "Fram", link: "/catalog/brands/fram/" },
-    { name: "Hengst", link: "/catalog/brands/hengst/" },
-    { name: "Mahle", link: "/catalog/brands/mahle/" },
-    { name: "Mann Filter", link: "/catalog/brands/mann_filter/" },
-    { name: "Wix", link: "/catalog/brands/wix/" },
+    { name: "Bosch", link: "/brands/362-bosch/" }, 
+    { name: "Fram", link: "/brands" },
+    { name: "Hengst", link: "/brands" },
+    { name: "Mahle", link: "/brands/1641-mahleoriginal/" },
+    { name: "Mann Filter", link: "/brands/1651-mannfilter/" },
+    { name: "Wix", link: "/brands/2746-wixfilters/" },
   ];
 
   const isActive = (path) => location.pathname === path;
 
-  return (
-    <div className="hidden lg:block w-full lg:w-64 flex-shrink-0 mb-4 sm:mb-6 lg:mb-0">
-      <div className="bg-white dark:bg-gray-900 p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl shadow-sm border border-gray-100 sticky top-16 sm:top-20">
+  const sidebarContent = (
+    <div className="bg-white dark:bg-gray-900 p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl shadow-sm border border-gray-100 lg:sticky lg:top-16 sm:top-20 h-full overflow-y-auto">
 
         {/* Header */}
         <div className="flex items-center justify-between mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-gray-200">
@@ -319,7 +319,50 @@ const CatalogueSidebar = () => {
           </div>
         </div>
       </div>
-    </div>
+  );
+
+  return (
+    <>
+      {/* Mobile Filter Button */}
+      <button
+        onClick={() => setIsMobileOpen(true)}
+        className="lg:hidden fixed bottom-4 right-4 z-40 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-200 flex items-center gap-2"
+        aria-label="Open filters"
+      >
+        <FaFilter className="text-lg" />
+        <span className="text-sm font-semibold">Filters</span>
+      </button>
+
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
+
+      {/* Sidebar - Mobile Drawer & Desktop Sidebar */}
+      <div
+        className={`${
+          isMobileOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0 fixed lg:static inset-y-0 left-0 z-50 lg:z-auto w-80 lg:w-64 flex-shrink-0 mb-4 sm:mb-6 lg:mb-0 transition-transform duration-300 ease-in-out`}
+      >
+        <div className="h-full bg-white dark:bg-gray-900 shadow-xl lg:shadow-sm">
+          {/* Mobile Close Button */}
+          <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-200">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Filters</h3>
+            <button
+              onClick={() => setIsMobileOpen(false)}
+              className="text-gray-500 hover:text-gray-700 p-2"
+              aria-label="Close filters"
+            >
+              <FaTimes className="text-xl" />
+            </button>
+          </div>
+          {sidebarContent}
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -112,17 +112,17 @@ export default function BrandTrustAndCarMakers() {
   const handleCarMakerViewAll = () => navigate("/vehicles");
 
   return (
-    <div className="py-16 bg-gray-50 text-gray-800">
+    <div className="py-6 sm:py-8 md:py-10 bg-gray-50 text-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ===================== BRANDS SECTION ===================== */}
-        <section className="mb-20">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
+        <section className="mb-8 sm:mb-10 md:mb-12">
+          <div className="flex flex-row justify-between items-center mb-4 sm:mb-5 md:mb-6 gap-3">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-left flex-1">
               Brands we <span className="text-red-500">Trust</span>
             </h2>
             <button
               onClick={handleBrandViewAll}
-              className="mt-4 md:mt-0 text-sm text-blue-600 hover:underline font-semibold transition-colors"
+              className="text-xs sm:text-sm text-blue-600 hover:underline font-semibold transition-colors whitespace-nowrap flex-shrink-0"
             >
               VIEW ALL
             </button>
@@ -138,8 +138,8 @@ export default function BrandTrustAndCarMakers() {
           speed={4000}
           className="w-full"
           breakpoints={{
-            320: { slidesPerView: 2, spaceBetween: 8 },
-            640: { slidesPerView: 3, spaceBetween: 10 },
+            320: { slidesPerView: 3, spaceBetween: 8 },
+            640: { slidesPerView: 4, spaceBetween: 10 },
             1024: { slidesPerView: 6, spaceBetween: 16 },
           }}
         >
@@ -163,13 +163,13 @@ export default function BrandTrustAndCarMakers() {
 
         {/* ===================== CAR MAKERS SECTION ===================== */}
         <section>
-          <div className="flex flex-col md:flex-row justify-between items-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
+          <div className="flex flex-row justify-between items-center mb-4 sm:mb-5 md:mb-6 gap-3">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-left flex-1">
               Popular <span className="text-red-500">Car Makers</span>
             </h2>
             <button
               onClick={handleCarMakerViewAll}
-              className="mt-4 md:mt-0 text-sm text-blue-600 hover:underline font-semibold transition-colors"
+              className="text-xs sm:text-sm text-blue-600 hover:underline font-semibold transition-colors whitespace-nowrap flex-shrink-0"
             >
               VIEW ALL
             </button>
@@ -185,8 +185,8 @@ export default function BrandTrustAndCarMakers() {
             speed={4000}
             className="w-full"
             breakpoints={{
-              320: { slidesPerView: 2, spaceBetween: 8 },
-              640: { slidesPerView: 3, spaceBetween: 10 },
+              320: { slidesPerView: 3, spaceBetween: 8 },
+              640: { slidesPerView: 4, spaceBetween: 10 },
               1024: { slidesPerView: 6, spaceBetween: 16 },
             }}
           >

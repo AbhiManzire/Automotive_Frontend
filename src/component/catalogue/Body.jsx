@@ -67,11 +67,12 @@ const bodyPartsCategories = [
 
 
 
-   const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(bodyPartsCategories);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     const filtered = bodyPartsCategories.filter((item) =>
@@ -114,9 +115,10 @@ const bodyPartsCategories = [
         />
 
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
-          <div className="order-2 lg:order-1">
-            <CatalogueSidebar />
-          </div>
+          <CatalogueSidebar 
+            isMobileOpen={isMobileSidebarOpen} 
+            setIsMobileOpen={setIsMobileSidebarOpen} 
+          />
 
           <div className="flex-1 order-1 lg:order-2">
             {/* ✅ Grid */}

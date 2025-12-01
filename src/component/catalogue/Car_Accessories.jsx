@@ -52,19 +52,20 @@ const Car_Accessories = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
-  const [showMore, setShowMore] = useState(false); // ✅ Added this
+  const [showMore, setShowMore] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white py-8">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-white py-4 sm:py-6 md:py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
         <Breadcrumbs />
 
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-2">
             Car Accessories
           </h1>
-          <p className="text-gray-600">
+          <p className="text-xs sm:text-sm md:text-base text-gray-600">
             Explore essential car accessories to enhance comfort, safety, and
             style.
           </p>
@@ -81,26 +82,31 @@ const Car_Accessories = () => {
           categoryName="Car Accessories"
         />
 
-        <div className="flex gap-6">
-          {/* Sidebar */}
-          <CatalogueSidebar />
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
+          <CatalogueSidebar 
+            isMobileOpen={isMobileSidebarOpen} 
+            setIsMobileOpen={setIsMobileSidebarOpen} 
+          />
 
           {/* Accessories Grid */}
           <div className="flex-1">
-            <div className="bg-white py-8 px-4 rounded-lg shadow-md mb-10">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            <div className="bg-white py-4 sm:py-6 md:py-8 px-3 sm:px-4 rounded-lg shadow-md mb-6 sm:mb-8 md:mb-10">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5">
                 {accessoriesCategories.map((item) => (
                   <Link
                     key={item.name}
                     to={item.link}
-                    className="flex flex-col items-center bg-gray-50 hover:bg-blue-50 p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 transform hover:-translate-y-1"
+                    className="flex flex-col items-center bg-gray-50 hover:bg-blue-50 p-2 sm:p-3 md:p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 transform hover:-translate-y-1"
                   >
                     <img
                       src={item.img}
                       alt={item.name}
-                      className="w-14 h-14 object-cover rounded-md mb-2" // reduced image height
+                      className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 object-cover rounded-md mb-2"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/100x100?text=' + item.name;
+                      }}
                     />
-                    <span className="text-xs font-medium text-gray-700 hover:text-red-600 text-center">
+                    <span className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-medium text-gray-700 hover:text-red-600 text-center line-clamp-2 px-1">
                       {item.name}
                     </span>
                   </Link>

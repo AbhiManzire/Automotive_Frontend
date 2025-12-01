@@ -243,6 +243,7 @@ export const Electric_Components = () => {
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(catalogCategories);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // Search filter
   useEffect(() => {
@@ -263,16 +264,16 @@ export const Electric_Components = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white py-8">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-white py-4 sm:py-6 md:py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
         <Breadcrumbs />
 
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-2">
             Electric Components
           </h1>
-          <p className="text-gray-600">
+          <p className="text-xs sm:text-sm md:text-base text-gray-600">
             Explore a wide range of electric components including alternators,
             batteries, starter motors, ignition coils, bulbs, and more for your vehicle.
           </p>
@@ -289,18 +290,20 @@ export const Electric_Components = () => {
           categoryName="Electric Components"
         />
 
-        <div className="flex gap-6">
-          {/* Sidebar */}
-          <CatalogueSidebar />
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
+          <CatalogueSidebar 
+            isMobileOpen={isMobileSidebarOpen} 
+            setIsMobileOpen={setIsMobileSidebarOpen} 
+          />
 
           {/* Categories Grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 my-8">
-              {filteredProducts.map((product) => (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5 my-4 sm:my-6 md:my-8">
+              {filteredProducts.map((product, index) => (
                 <Link
-                  key={product.id}
+                  key={product.id || index}
                   to={product.link}
-                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}

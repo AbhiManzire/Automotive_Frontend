@@ -5,6 +5,7 @@ import CatalogueSidebar from "./CatalogueSidebar";
 
 const Belt = () => {
   const [expanded, setExpanded] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // Belt subcategories
   const beltSubcategories = [
@@ -40,27 +41,27 @@ const Belt = () => {
 
         {/* Main Content */}
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
-          {/* Left Sidebar */}
-          <div className="order-2 lg:order-1">
-            <CatalogueSidebar />
-          </div>
+          <CatalogueSidebar 
+            isMobileOpen={isMobileSidebarOpen} 
+            setIsMobileOpen={setIsMobileSidebarOpen} 
+          />
 
           {/* Right Content */}
-          <div className="flex-1 order-1 lg:order-2">
+          <div className="flex-1">
             {/* Drive Belt Description */}
             <div className="mb-4 sm:mb-6 text-gray-800">
-              <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
+              <p className="text-xs sm:text-sm md:text-base leading-relaxed mb-3 sm:mb-4">
                 Drive belt is a rubber belt connecting the crankshaft and camshaft in an internal combustion engine. 
                 It is easily found under the hood. The belt has teeth that connect to various components.
               </p>
-              <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
+              <p className="text-xs sm:text-sm md:text-base leading-relaxed mb-3 sm:mb-4">
                 Drive belt is a rubber belt connecting the crankshaft and camshaft in an internal combustion engine. 
                 It is easily found under the hood. The belt has teeth that connect to various components.
               </p>
             </div>
 
             {/* Belt Type Images */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
               {beltSubcategories.map((belt, index) => (
                 <Link
                   key={index}

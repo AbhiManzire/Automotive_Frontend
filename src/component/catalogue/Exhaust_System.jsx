@@ -117,6 +117,7 @@ const Exhaust_System = () => {
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(exhaustCategories);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     const filtered = exhaustCategories.filter((item) =>
@@ -135,15 +136,15 @@ const Exhaust_System = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white py-8">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-white py-4 sm:py-6 md:py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
         <Breadcrumbs />
 
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-2">
           Exhaust System Parts
           </h1>
-          <p className="text-gray-600">
+          <p className="text-xs sm:text-sm md:text-base text-gray-600">
             Explore our wide range of exhaust system parts designed to enhance your vehicle's performance and efficiency.
           </p>
         </div>
@@ -155,27 +156,32 @@ const Exhaust_System = () => {
           handleSort={handleSort}
           showFilters={showFilters}
           setShowFilters={setShowFilters}
-          categoryName="Example"
+          categoryName="Exhaust System"
         />
 
-        <div className="flex gap-6">
-          <CatalogueSidebar />
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
+          <CatalogueSidebar 
+            isMobileOpen={isMobileSidebarOpen} 
+            setIsMobileOpen={setIsMobileSidebarOpen} 
+          />
 
           <div className="flex-1">
-            {/* ✅ Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 my-8">
-              {filteredProducts.map((product) => (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5 my-4 sm:my-6 md:my-8">
+              {filteredProducts.map((product, index) => (
                 <Link
                   key={product.id}
                   to={product.link}
-                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
+                  className="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow hover:shadow-lg transition-all duration-200 flex flex-col items-center text-center"
                 >
                   <img
                     src={product.img}
                     alt={product.name}
-                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
+                    className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 object-cover rounded-md mb-2 mx-auto"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/100x100?text=' + (product.name || 'Part');
+                    }}
                   />
-                  <span className="text-gray-800 font-medium text-xs">
+                  <span className="text-gray-800 font-medium text-[9px] sm:text-[10px] md:text-xs lg:text-sm line-clamp-2 px-1">
                     {product.name}
                   </span>
                 </Link>

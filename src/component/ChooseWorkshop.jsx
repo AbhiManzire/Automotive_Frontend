@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { motion } from "framer-motion";
@@ -56,6 +56,22 @@ const workshops = [
     location: "Hyderabad",
     lat: 17.3850,
     lng: 78.4867
+  },
+  {
+    id: 7,
+    name: "Pro Auto Works",
+    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80",
+    location: "Pune",
+    lat: 18.5204,
+    lng: 73.8567
+  },
+  {
+    id: 8,
+    name: "City Auto Service",
+    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80",
+    location: "Ahmedabad",
+    lat: 23.0225,
+    lng: 72.5714
   }
 ];
 
@@ -89,6 +105,15 @@ export default function ChooseWorkshop() {
 
   // Google Maps API Key - Replace with your actual API key or use environment variable
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "";
+
+  // Group workshops into chunks of 4 (2 rows x 2 columns) for mobile
+  const mobileWorkshopsChunks = useMemo(() => {
+    const chunks = [];
+    for (let i = 0; i < workshops.length; i += 4) {
+      chunks.push(workshops.slice(i, i + 4));
+    }
+    return chunks;
+  }, []);
 
   const handleMarkerClick = (workshop) => {
     setSelectedWorkshop(workshop);
@@ -158,75 +183,124 @@ export default function ChooseWorkshop() {
             </motion.button>
 
             <div className="relative">
-              <Swiper
-                modules={[Autoplay, Navigation]}
-                spaceBetween={12}
-                slidesPerView={1}
-                loop={true}
-                speed={800}
-                autoplay={{
-                  delay: 4000,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: true
-                }}
-                navigation={{
-                  prevEl: '.workshop-prev',
-                  nextEl: '.workshop-next',
-                }}
-                onSwiper={(swiper) => {
-                  swiperRef.current = swiper;
-                  if (swiper.autoplay) {
-                    swiper.autoplay.start();
-                  }
-                }}
-                breakpoints={{
-                  0: {
-                    slidesPerView: 2,
-                    spaceBetween: 8
-                  },
-                  640: {
-                    slidesPerView: 2,
-                    spaceBetween: 12
-                  },
-                  1024: {
-                    slidesPerView: 2,
-                    spaceBetween: 14
-                  },
-                  1280: {
-                    slidesPerView: 2,
-                    spaceBetween: 16
-                  }
-                }}
-                className="workshop-swiper"
-              >
-                {workshops.map((workshop) => (
-                  <SwiperSlide key={workshop.id}>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="relative h-[200px] sm:h-[220px] md:h-[250px] lg:h-[280px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
-                    >
-                      <img
-                        src={workshop.image}
-                        alt={workshop.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          e.target.src = 'https://via.placeholder.com/800x450?text=' + workshop.name;
-                        }}
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-2 md:p-3">
-                        <h3 className="text-white text-sm md:text-base font-bold mb-0.5">
-                          {workshop.name}
-                        </h3>
-                        <p className="text-white/90 text-xs md:text-sm">
-                          {workshop.location}
-                        </p>
+              {/* Mobile View: 2 rows x 2 columns (4 items) Auto-scrolling Carousel */}
+              <div className="block md:hidden">
+                <Swiper
+                  modules={[Autoplay]}
+                  spaceBetween={8}
+                  slidesPerView={1}
+                  loop={mobileWorkshopsChunks.length > 1}
+                  speed={400}
+                  autoplay={{
+                    delay: 7000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
+                  }}
+                  className="workshop-swiper-mobile"
+                >
+                  {mobileWorkshopsChunks.map((chunk, chunkIndex) => (
+                    <SwiperSlide key={chunkIndex}>
+                      <div className="grid grid-cols-2 grid-rows-2 gap-3 px-2">
+                        {chunk.map((workshop) => (
+                          <motion.div
+                            key={workshop.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="relative h-[120px] sm:h-[140px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+                          >
+                            <img
+                              src={workshop.image}
+                              alt={workshop.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                e.target.src = 'https://via.placeholder.com/800x450?text=' + workshop.name;
+                              }}
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-2">
+                              <h3 className="text-white text-xs font-bold mb-0.5 truncate">
+                                {workshop.name}
+                              </h3>
+                              <p className="text-white/90 text-[10px] truncate">
+                                {workshop.location}
+                              </p>
+                            </div>
+                          </motion.div>
+                        ))}
                       </div>
-                    </motion.div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+
+              {/* Desktop View: Swiper Container */}
+              <div className="hidden md:block">
+                <Swiper
+                  modules={[Autoplay, Navigation]}
+                  spaceBetween={12}
+                  slidesPerView={1}
+                  loop={true}
+                  speed={800}
+                  autoplay={{
+                    delay: 4000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
+                  }}
+                  navigation={{
+                    prevEl: '.workshop-prev',
+                    nextEl: '.workshop-next',
+                  }}
+                  onSwiper={(swiper) => {
+                    swiperRef.current = swiper;
+                    if (swiper.autoplay) {
+                      swiper.autoplay.start();
+                    }
+                  }}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
+                      spaceBetween: 12
+                    },
+                    1024: {
+                      slidesPerView: 2,
+                      spaceBetween: 14
+                    },
+                    1280: {
+                      slidesPerView: 2,
+                      spaceBetween: 16
+                    }
+                  }}
+                  className="workshop-swiper"
+                >
+                  {workshops.map((workshop) => (
+                    <SwiperSlide key={workshop.id}>
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="relative h-[200px] sm:h-[220px] md:h-[250px] lg:h-[280px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+                      >
+                        <img
+                          src={workshop.image}
+                          alt={workshop.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.src = 'https://via.placeholder.com/800x450?text=' + workshop.name;
+                          }}
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-2 md:p-3">
+                          <h3 className="text-white text-sm md:text-base font-bold mb-0.5">
+                            {workshop.name}
+                          </h3>
+                          <p className="text-white/90 text-xs md:text-sm">
+                            {workshop.location}
+                          </p>
+                        </div>
+                      </motion.div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
 
               {/* Navigation Arrows */}
               <button
@@ -503,6 +577,9 @@ export default function ChooseWorkshop() {
       {/* Custom Styles for Swiper */}
       <style>{`
         .workshop-swiper .swiper-slide {
+          height: auto;
+        }
+        .workshop-swiper-mobile .swiper-slide {
           height: auto;
         }
         .workshop-prev,

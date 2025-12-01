@@ -83,28 +83,24 @@ export default function SearchByCategory() {
     setShowAll(true);
   }, []);
 
-  // Group categories into chunks of 16 (4 columns x 4 rows) for mobile
+  // Group categories into chunks of 9 (3 rows x 3 columns) for mobile
   const mobileCategoriesChunks = useMemo(() => {
     const chunks = [];
-    for (let i = 0; i < categories.length; i += 16) {
-      chunks.push(categories.slice(i, i + 16));
+    for (let i = 0; i < categories.length; i += 9) {
+      chunks.push(categories.slice(i, i + 9));
     }
     return chunks;
   }, []);
 
-  // Mobile Swiper Config (4 columns x 4 rows = 16 items per slide)
+  // Mobile Swiper Config (3 rows x 3 columns = 9 items per slide, no autoplay)
   const mobileSwiperConfig = useMemo(() => ({
-    modules: [Autoplay],
+    modules: [],
     spaceBetween: 0,
     slidesPerView: 1,
-    loop: mobileCategoriesChunks.length > 1,
+    loop: false,
     speed: 400,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true
-    }
-  }), [mobileCategoriesChunks.length]);
+    allowTouchMove: true
+  }), []);
 
   // Desktop Swiper Config
   const swiperConfig = useMemo(() => ({
@@ -190,17 +186,17 @@ export default function SearchByCategory() {
           </div>
         ) : (
           <>
-            {/* Mobile View: 4 columns x 4 rows Auto-scrolling Carousel */}
+            {/* Mobile View: 3 rows x 3 columns Swiper (No Auto-scrolling, Swipeable) */}
             <div className="block md:hidden">
               <Swiper {...mobileSwiperConfig} className="category-swiper-mobile">
                 {mobileCategoriesChunks.map((chunk, chunkIndex) => (
                   <SwiperSlide key={chunkIndex}>
-                    <div className="grid grid-cols-4 gap-3 px-2">
+                    <div className="grid grid-cols-3 gap-3 px-2">
                       {chunk.map((cat, index) => (
                         <CategoryCard 
                           key={cat.title} 
                           category={cat} 
-                          index={chunkIndex * 16 + index} 
+                          index={chunkIndex * 9 + index} 
                           isGrid={true}
                         />
                       ))}
@@ -251,9 +247,6 @@ export default function SearchByCategory() {
       {/* Custom Styles */}
       <style>{`
         .category-swiper .swiper-slide {
-          height: auto;
-        }
-        .category-swiper-mobile .swiper-slide {
           height: auto;
         }
         .category-prev,

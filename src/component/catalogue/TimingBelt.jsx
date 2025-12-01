@@ -150,6 +150,7 @@ const TimingBelt = () => {
 
   const [filteredProducts, setFilteredProducts] = useState(products);
   const totalParts = 4673; // Total parts count as shown in image
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // Filter products based on selected filters
   useEffect(() => {
@@ -284,7 +285,10 @@ const TimingBelt = () => {
           {/* Left Sidebar - CatalogueSidebar + Additional Filters */}
           <div className="w-full lg:w-64 flex-shrink-0 space-y-4 order-2 lg:order-1">
             {/* Catalogue Sidebar */}
-            <CatalogueSidebar />
+            <CatalogueSidebar 
+              isMobileOpen={isMobileSidebarOpen} 
+              setIsMobileOpen={setIsMobileSidebarOpen} 
+            />
             
             {/* Additional Filters */}
             <div className="bg-white p-4 sm:p-5 rounded-lg shadow-sm border border-gray-100 sticky top-20">

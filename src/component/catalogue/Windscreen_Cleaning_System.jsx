@@ -115,6 +115,7 @@ const Windscreen_Cleaning_System = () => {
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(windscreenComponents);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // Search
   useEffect(() => {
@@ -147,13 +148,13 @@ const Windscreen_Cleaning_System = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white py-8">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-white py-4 sm:py-6 md:py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
         <Breadcrumbs />
 
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Windscreen Cleaning System</h1>
-          <p className="text-gray-600">
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-2">Windscreen Cleaning System</h1>
+          <p className="text-xs sm:text-sm md:text-base text-gray-600">
             Explore our collection of windscreens, wiper blades, washer fluids, and all components for an optimal cleaning system.
           </p>
         </div>
@@ -169,25 +170,29 @@ const Windscreen_Cleaning_System = () => {
           categoryName="Windscreen Cleaning System"
         />
 
-        <div className="flex gap-6">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
           {/* Sidebar */}
-          <CatalogueSidebar />
+          <CatalogueSidebar 
+            isMobileOpen={isMobileSidebarOpen} 
+            setIsMobileOpen={setIsMobileSidebarOpen} 
+          />
 
           {/* Products Grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 my-8">
-              {filteredProducts.map((product) => (
-                <div key={product.id} className="bg-white p-2 rounded-lg shadow-sm text-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5 my-4 sm:my-6 md:my-8">
+              {filteredProducts.map((product, index) => (
+                <div key={product.id || index} className="bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-sm text-center">
                   <a href={product.link} target="_blank" rel="noopener noreferrer">
                      <img
                     src={product.img}
                     alt={product.name}
-                    className="w-14 h-14 object-cover rounded-md mb-2 mx-auto"
+                    className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 object-cover rounded-md mb-2 mx-auto"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/100x100?text=' + (product.name || 'Part');
+                    }}
                   />
-                    <h3 className="text-gray-800 font-semibold text-sm mb-1">{product.name}</h3>
+                    <h3 className="text-gray-800 font-semibold text-[9px] sm:text-[10px] md:text-xs lg:text-sm mb-1 line-clamp-2 px-1">{product.name}</h3>
                   </a>
-                  {/* <p className="text-gray-500 text-xs mb-1">Brand: {product.brand}</p>
-                  <p className="text-gray-800 font-bold text-sm">₹{product.price}</p> */}
                 </div>
               ))}
             </div>

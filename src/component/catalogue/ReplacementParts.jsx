@@ -2,38 +2,35 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const replacementPartsData = [
-  { name: "Maintenance Service Parts", img: "https://boodmo.com/media/images/categories/ebba234.svg", link: "/catalog/maintenance_service_parts/" },
-  { name: "Filters", img: "https://boodmo.com/media/images/categories/fab8332.svg", link: "/catalog/filters/" },
-  { name: "Windscreen Cleaning System", img: "https://boodmo.com/media/images/categories/d36974e.svg", link: "/catalog/windscreen_cleaning_system/" },
-  { name: "Car Accessories", img: "https://boodmo.com/media/images/categories/4372565.svg", link: "/catalog/car_accessories/" },
-  { name: "Lighting", img: "https://boodmo.com/media/images/categories/c009512.svg", link: "/catalog/lighting/" },
-  { name: "Control Cables", img: "https://boodmo.com/media/images/categories/64b9f40.svg", link: "/catalog/control_cables/" },
-  { name: "Brake System", img: "https://boodmo.com/media/images/categories/5c30d1d.svg", link: "/catalog/brakes/" },
-  { name: "Bearings", img: "https://boodmo.com/media/images/categories/d5dd6ce.svg", link: "/catalog/bearings/" },
-  { name: "Clutch System", img: "https://boodmo.com/media/images/categories/bc1a73f.svg", link: "/catalog/clutch/" },
-  { name: "Electric Components", img: "https://boodmo.com/media/images/categories/e1aba2b.svg", link: "/catalog/electric_components/" },
-  { name: "Engine", img: "https://boodmo.com/media/images/categories/f6afc8e.svg", link: "/catalog/engine/" },
-  { name: "Engine Cooling System", img: "https://boodmo.com/media/images/categories/e39dc1a.svg", link: "/catalog/cooling_system/" },
-  { name: "Exhaust System", img: "https://boodmo.com/media/images/categories/83cd783.svg", link: "/catalog/exhaust/" },
-  { name: "Air Conditioning", img: "https://boodmo.com/media/images/categories/10f1952.svg", link: "/catalog/air_conditioning/" },
-  { name: "Fuel Supply System", img: "https://boodmo.com/media/images/categories/457f4a4.svg", link: "/catalog/fuelsystem/" },
-  { name: "Gaskets and Sealing Rings", img: "https://boodmo.com/media/images/categories/38d5de9.svg", link: "/catalog/Gasket_SealingRings/" },
-  { name: "Ignition and Glowplug System", img: "https://boodmo.com/media/images/categories/bfcf2c1.svg", link: "/catalog/ignition_glowplug/" },
-  { name: "Interior and Comfort", img: "https://boodmo.com/media/images/categories/7e1a432.svg", link: "/catalog/interior_comfort/" },
-  { name: "Body", img: "https://boodmo.com/media/images/categories/50008e4.svg", link: "/catalog/body/" },
-  { name: "Oils and Fluids", img: "https://boodmo.com/media/images/categories/de978f4.svg", link: "/catalog/oilsfluids/" },
-  { name: "Pipes and Hoses", img: "https://boodmo.com/media/images/categories/eeab7a3.svg", link: "/catalog/pipes_hoses/" },
-  { name: "Repair Kits", img: "https://boodmo.com/media/images/categories/38427d6.svg", link: "/catalog/repair_kits/" },
-  { name: "Sensors Relays and Control Units", img: "https://boodmo.com/media/images/categories/878a84e.svg", link: "/catalog/sensors_control_units/" },
-  { name: "Steering", img: "https://boodmo.com/media/images/categories/15cfbae.svg", link: "/catalog/steering/" },
-  { name: "Suspension and Arms", img: "https://boodmo.com/media/images/categories/9bcc0da.svg", link: "/catalog/suspension/" },
-  { name: "Towbar Parts", img: "https://boodmo.com/media/images/categories/95660dc.svg", link: "/catalog/towbar/" },
-  { name: "Transmission", img: "https://boodmo.com/media/images/categories/5924137.svg", link: "/catalog/transmission/" },
-  { name: "Trims", img: "https://boodmo.com/media/images/categories/ecd08bd.svg", link: "/catalog/trims/" },
-  { name: "Tyres and Alloys", img: "https://boodmo.com/media/images/categories/b1b2c08.svg", link: "/catalog/tyres_and_alloys/" },
-  { name: "Universal", img: "https://boodmo.com/media/images/categories/8c5ddeb.svg", link: "/catalog/universal/" },
-  { name: "Wheels", img: "https://boodmo.com/media/images/categories/1bb7d48.svg", link: "/catalog/wheels/" },
-  { name: "Belts Chains and Rollers", img: "https://boodmo.com/media/images/categories/51eb913.svg", link: "/catalog/drive_belts/" },
+  { title: "Air Conditioning", href: "/catalog/air_conditioning/", img:"https://boodmo.com/media/cache/catalog_image/images/categories/db9dad4.jpg"}, // Receiver Drier
+  { title: "Bearings", href: "/catalog/bearings/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/40e95ca.jpg" }, // Big End Bearing
+  { title: "Belts Chains And Rollers", href: "/catalog/drive_belts/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/ddbeb81.jpg" }, // Belt
+  { title: "Body", href: "/catalog/body/", img:  "https://boodmo.com/media/cache/catalog_image/images/categories/40e6a4c.jpg" }, // Bumper
+  { title: "Brake System", href: "/catalog/brakes/", img:"https://boodmo.com/media/cache/catalog_image/images/categories/5301830.jpg" }, // Brake Pads
+  { title: "Car Accessories", href: "/catalog/car_accessories/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/ab143a7.webp" }, // Body Accessories
+  { title: "Clutch System", href: "/catalog/clutch/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/e8cb288.jpg" }, // Clutch
+  { title: "Control Cables", href: "/catalog/control_cables/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/7455b44.jpg" }, // Cable Strap
+  { title: "Electrical Components", href: "/catalog/electric_components/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/d5b3ac7.jpg" }, // Horn
+  { title: "Engine", href: "/catalog/engine/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/8fea232.jpg" }, // Air Supply/Engine Parts
+  { title: "Engine Cooling System", href: "/catalog/cooling_system/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/e215fcc.jpg" }, // Radiator Mounting
+  { title: "Exhaust System", href: "/catalog/exhaust/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/d1e33d6.jpg" }, // Cooler EGR
+  { title: "Filters", href: "/catalog/filters/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/a16bbf6.jpg" }, // Air Filter
+  { title: "Fuel Supply System", href: "/catalog/fuelsystem/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/49ed220.jpg" }, // Fuel Tank
+  { title: "Gaskets & Seals", href: "/catalog/Gasket_SealingRings/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/14b8753.jpg" }, // O-Ring
+  { title: "Interior and Comfort", href: "/catalog/interior_comfort/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/05a2b84.jpg" }, // Interior Mirror
+  { title: "Lighting", href: "/catalog/lighting/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/53380d3.webp" }, // Light
+  { title: "Maintenance Service Parts", href: "/catalog/maintenance_service_parts/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/e8cb288.jpg" }, // Engine Oil
+  { title: "Oils and Fluids", href: "/catalog/oilsfluids/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/4614ecf.webp" }, // Engine Oil
+  { title: "Pipes & Hoses", href: "/catalog/pipes_hoses/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/e0b2a63.jpg" }, // Sunroof Drain Hose
+  { title: "Sensors Relays and Control Units", href: "/catalog/sensors_control_units/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/2676bd2.jpg" }, // Control Unit
+  { title: "Steering", href: "/catalog/steering/", img:  "https://boodmo.com/media/cache/catalog_image/images/categories/72fb97b.jpg" }, // Steering Component
+  { title: "Suspension and Arms", href: "/catalog/suspension/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/f26073e.jpg" }, // Shock Absorber
+  { title: "Towbar Parts", href: "/catalog/towbar/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/98b48d2.jpg" }, // Towhook Cover
+  { title: "Transmission", href: "/catalog/transmission/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/21ce121.jpg" }, // Automatic Transmission Filter
+  { title: "Trims", href: "/catalog/trims/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/beccd06.jpg" }, // Bumper Trim
+  { title: "Universal", href: "/catalog/universal/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/af8d099.jpg" }, // Bolt
+  { title: "Wheels", href: "/catalog/wheels/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/430177a.jpg" }, // Spare Wheel Carrier
+  { title: "Windscreen Cleaning System", href: "/catalog/windscreen_cleaning_system/", img: "https://boodmo.com/media/cache/catalog_image/images/categories/1053d82.jpg" }, // Wiper Blade
 ];
 
 const ReplacementParts = () => {
@@ -41,7 +38,7 @@ const ReplacementParts = () => {
   const navigate = useNavigate();
 
   const filteredParts = replacementPartsData.filter((part) =>
-    part.name.toLowerCase().includes(search.toLowerCase())
+    part.title?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -66,19 +63,19 @@ const ReplacementParts = () => {
         {filteredParts.map((part, index) => (
           <a
             key={index}
-            href={part.link}
+            href={part.href}
             className="flex flex-col items-center bg-white shadow hover:shadow-lg rounded-lg sm:rounded-xl p-2 sm:p-3 transition-transform transform hover:scale-105"
           >
             <img
               src={part.img}
-              alt={part.name}
+              alt={part.title}
               className="w-12 h-12 sm:w-14 sm:h-14 object-contain mb-2"
               onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/100x100?text=' + part.name;
+                e.target.src = 'https://via.placeholder.com/100x100?text=' + (part.title || 'Part');
               }}
             />
             <span className="text-[10px] sm:text-xs text-gray-700 text-center font-medium line-clamp-2">
-              {part.name}
+              {part.title}
             </span>
           </a>
         ))}
