@@ -96,6 +96,15 @@ import Wheels from "./component/catalogue/Wheels";
 import Belts_Chains_Rollers from "./component/catalogue/Belts_Chains_Rollers";
 import Belt from "./component/catalogue/Belt";
 import TimingBelt from "./component/catalogue/TimingBelt";
+import TimingBeltKit from "./component/catalogue/TimingBeltKit";
+import VBelt from "./component/catalogue/VBelt";
+import BrakeParts from "./component/catalogue/BrakeParts";
+import ClutchParts from "./component/catalogue/ClutchParts";
+import EngineOilParts from "./component/catalogue/EngineOilParts";
+import FilterParts from "./component/catalogue/FilterParts";
+import GlowPlugParts from "./component/catalogue/GlowPlugParts";
+import HornParts from "./component/catalogue/HornParts";
+import LightParts from "./component/catalogue/LightParts";
 import { Brands } from "./component/brand/Brands";
 import BrandDetail from "./component/brand/BrandDetail";
 import VehiclePage from "./component/Vehicles/VehiclePage";
@@ -203,6 +212,7 @@ function App() {
                         <>
 
                           <BoodmoUi />
+                          <SearchSection />
                           <SearchByCategory />
                           <ChooseWorkshop />
                           <ChooseMechanics />
@@ -318,6 +328,15 @@ function App() {
                     <Route path="/catalog/4032-belts/" element={<Belt />} />
                     <Route path="/catalog/4390-timing_belt/" element={<TimingBelt />} />
                     <Route path="/catalog/4033-time_belt/" element={<TimingBelt />} />
+                    <Route path="/catalog/4393-timing_belt_kit/" element={<TimingBeltKit />} />
+                    <Route path="/catalog/3720-v_belt/" element={<VBelt />} />
+                    <Route path="/catalog/3713-brakes/" element={<BrakeParts />} />
+                    <Route path="/catalog/4027-clutch/" element={<ClutchParts />} />
+                    <Route path="/catalog/5193-engine_oil/" element={<EngineOilParts />} />
+                    <Route path="/catalog/3625-filters/" element={<FilterParts />} />
+                    <Route path="/catalog/4385-glow_plug/" element={<GlowPlugParts />} />
+                    <Route path="/catalog/4064-horns/" element={<HornParts />} />
+                    <Route path="/catalog/4028-light/" element={<LightParts />} />
                     <Route path="/catalog/filters/" element={<Filters />} />
                     <Route path="/catalog/windscreen_cleaning_system/" element={<Windscreen_Cleaning_System />} />
                     <Route path="/catalog/car_accessories/" element={<Car_Accessories />} />

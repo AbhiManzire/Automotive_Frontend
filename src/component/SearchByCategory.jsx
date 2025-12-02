@@ -1,8 +1,9 @@
-import React, { useRef, useState, useCallback, useMemo } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState, useCallback, useMemo, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaTimes } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
  
@@ -77,22 +78,32 @@ CategoryCard.displayName = 'CategoryCard';
 
 export default function SearchByCategory() {
   const swiperRef = useRef(null);
-  const [showAll, setShowAll] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isCategoryPage = location.pathname === '/category';
+  
+  // Show all categories by default on /category route
+  const [showAll, setShowAll] = useState(isCategoryPage);
+
+  useEffect(() => {
+    // Update showAll state when route changes
+    setShowAll(isCategoryPage);
+  }, [isCategoryPage]);
 
   const handleShowAll = useCallback(() => {
     setShowAll(true);
   }, []);
 
-  // Group categories into chunks of 9 (3 rows x 3 columns) for mobile
+  // Group categories into chunks of 16 (4 rows x 4 columns) for mobile
   const mobileCategoriesChunks = useMemo(() => {
     const chunks = [];
-    for (let i = 0; i < categories.length; i += 9) {
-      chunks.push(categories.slice(i, i + 9));
+    for (let i = 0; i < categories.length; i += 16) {
+      chunks.push(categories.slice(i, i + 16));
     }
     return chunks;
   }, []);
 
-  // Mobile Swiper Config (3 rows x 3 columns = 9 items per slide, no autoplay)
+  // Mobile Swiper Config (4 rows x 4 columns = 16 items per slide, no autoplay)
   const mobileSwiperConfig = useMemo(() => ({
     modules: [],
     spaceBetween: 0,
@@ -145,8 +156,8 @@ export default function SearchByCategory() {
   }), []);
 
   return (
-    <section className="relative bg-white py-4 sm:py-6 md:py-8 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-5 md:px-6 lg:px-8">
+    <section className={`relative bg-white ${isCategoryPage ? 'pt-20 md:pt-24 pb-8 md:pb-12' : 'py-4 sm:py-6 md:py-8'} overflow-hidden`}>
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         {/* Red Accent Line */}
         <div className="w-16 h-0.5 bg-red-600 mb-4 md:mb-5"></div>
 
@@ -154,27 +165,30 @@ export default function SearchByCategory() {
         <div className="mb-5 md:mb-6 flex flex-row items-center justify-between gap-3">
           <div className="flex-1">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 md:mb-3">
-              Search by <span className="">Spares Catalogue</span>
+              {isCategoryPage ? 'All Categories' : 'Search by'} <span className={isCategoryPage ? 'text-red-600' : ''}>{isCategoryPage ? '' : 'Spares Catalogue'}</span>
             </h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-700 font-medium">
-              Discover high-quality car parts and accessories organized into convenient categories
+            <p className="text-xs sm:text-sm md:text-base text-gray-600">
+              {isCategoryPage 
+                ? 'Browse through all available product categories' 
+                : 'Discover high-quality car parts and accessories organized into convenient categories'
+              }
             </p>
           </div>
-          {!showAll && (
-            <button
-              onClick={handleShowAll}
+          {!showAll && !isCategoryPage && (
+            <Link
+              to="/category"
               className="px-4 py-2 sm:px-6 sm:py-2.5 text-blue-500 font-semibold rounded-lg duration-300 text-sm sm:text-base hover:text-blue-600 transition-colors whitespace-nowrap flex-shrink-0"
-              aria-label="View All"
+              aria-label="View All Categories"
             >
               View All
-            </button>
+            </Link>
           )}
         </div>
 
         {/* Categories Display - Grid for Mobile, Swiper for Desktop */}
-        {showAll ? (
-          /* All Categories Grid */
-          <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
+        {showAll || isCategoryPage ? (
+          /* All Categories Grid - Responsive Layout */
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
             {categories.map((cat, index) => (
               <CategoryCard 
                 key={cat.title} 
@@ -186,17 +200,17 @@ export default function SearchByCategory() {
           </div>
         ) : (
           <>
-            {/* Mobile View: 3 rows x 3 columns Swiper (No Auto-scrolling, Swipeable) */}
+            {/* Mobile View: 4 rows x 4 columns Swiper (No Auto-scrolling, Swipeable) */}
             <div className="block md:hidden">
               <Swiper {...mobileSwiperConfig} className="category-swiper-mobile">
                 {mobileCategoriesChunks.map((chunk, chunkIndex) => (
                   <SwiperSlide key={chunkIndex}>
-                    <div className="grid grid-cols-3 gap-3 px-2">
+                    <div className="grid grid-cols-4 gap-2 px-2">
                       {chunk.map((cat, index) => (
                         <CategoryCard 
                           key={cat.title} 
                           category={cat} 
-                          index={chunkIndex * 9 + index} 
+                          index={chunkIndex * 16 + index} 
                           isGrid={true}
                         />
                       ))}
@@ -265,6 +279,7 @@ export default function SearchByCategory() {
           filter: none;
         }
       `}</style>
+
     </section>
   );
 }

@@ -34,8 +34,10 @@ export const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [selectedLocation, setSelectedLocation] = useState({
-    type: "Home",
-    address: "A Block Bol, Swastik Residacy"
+    area: "Gachibowli",
+    city: "Hyderabad",
+    state: "Telangana",
+    country: "India"
   });
   const [showLocationModal, setShowLocationModal] = useState(false);
   const [membershipType, setMembershipType] = useState("Gold"); // "Gold" or "Silver"
@@ -132,58 +134,126 @@ export const Header = () => {
   };
 
   return (
-    <motion.header
-      className={`w-full bg-white shadow-sm fixed top-0 left-0 right-0 z-50
-         ${isScrolled ? "shadow-xl bg-white/95 backdrop-blur-sm" : "shadow-sm"
+    <>
+      {/* Mobile Header - Dark Theme */}
+      <motion.header
+        className={`md:hidden w-full bg-gray-900/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50
+          ${isScrolled ? "shadow-xl bg-gray-900/90 backdrop-blur-md" : "shadow-sm bg-gray-900/80 backdrop-blur-md"
         }`}
-      initial={{ y: 0 }}
-      animate={{ 
-        y: isHeaderVisible ? 0 : -100,
-        opacity: isHeaderVisible ? 1 : 0
-      }}
-      transition={{ 
-        duration: 0.3,
-        ease: "easeInOut"
-      }}
-    >
-      {/* ===== MAIN HEADER ===== */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3">
-        {/* Top Row: Logo + Location on Left, Icons on Right */}
-        <div className="flex items-center justify-between gap-2 sm:gap-4 mb-2 sm:mb-3">
-          {/* Left Side: Logo and Location */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-            {/* Logo */}
-            <motion.div 
-              onClick={goToHomePage}
-              className="flex items-center cursor-pointer"
-              whileHover={{ scale: 1.05 }} 
-              whileTap={{ scale: 0.95 }}
+        initial={{ y: 0 }}
+        animate={{ 
+          y: isHeaderVisible ? 0 : -100,
+          opacity: isHeaderVisible ? 1 : 0
+        }}
+        transition={{ 
+          duration: 0.3,
+          ease: "easeInOut"
+        }}
+      >
+        <div className="px-4 py-3">
+          {/* Top Row: Location on Left, Cart on Right */}
+          <div className="flex items-center justify-between mb-3">
+            {/* Location */}
+            <button
+              onClick={() => setShowLocationModal(true)}
+              className="flex items-start gap-2 text-white"
             >
-              <img
-                src={logo3}
-                alt="Sparelo Logo"
-                className="h-8 sm:h-10 md:h-12 w-auto"
-              />
-            </motion.div>
+              <FaMapMarkerAlt className="text-base text-white flex-shrink-0 mt-0.5" />
+              <div className="text-left">
+                <p className="text-sm font-bold text-white">
+                  {selectedLocation.area}
+                </p>
+                <p className="text-xs text-gray-400 flex items-center gap-1">
+                  {selectedLocation.city}- {selectedLocation.state}- {selectedLocation.country}
+                  <FaChevronDown className="text-[10px] text-gray-400" />
+                </p>
+              </div>
+            </button>
 
-            {/* Location Display - Beside Logo */}
-            <div className="flex items-start gap-1 sm:gap-1.5 flex-shrink-0">
-              <button
-                onClick={() => setShowLocationModal(true)}
-                className="flex items-start gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-1 hover:bg-gray-50 transition-colors rounded-md text-left"
-              >
-                <FaMapMarkerAlt className="text-[9px] sm:text-[10px] text-red-600 flex-shrink-0 mt-0.5" />
-                <div className="text-left min-w-0">
-                  <p className="text-[7px] sm:text-[8px] md:text-[9px] font-medium text-gray-700 whitespace-nowrap">
-                    location {selectedLocation.type}
-                  </p>
-                  <p className="text-[6px] sm:text-[7px] md:text-[8px] text-gray-600 whitespace-nowrap">
-                    {selectedLocation.address}
-                  </p>
-                </div>
-              </button>
-            </div>
+            {/* Cart Icon */}
+            <motion.button
+              onClick={goToCart}
+              className="relative p-2 bg-white rounded-full border-2 border-white"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FaShoppingCart className="text-xl text-gray-900" />
+              {getTotalItems() > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">
+                  {getTotalItems() > 9 ? '9+' : getTotalItems()}
+                </span>
+              )}
+            </motion.button>
           </div>
+
+          {/* Search Bar */}
+          <div className="flex items-center bg-white rounded-lg px-3 py-2.5">
+            <FaSearch className="text-gray-600 text-base mr-2 flex-shrink-0" />
+            <input
+              type="text"
+              placeholder="Search for 'AC service'"
+              className="flex-1 bg-transparent text-gray-900 text-sm placeholder-gray-500 focus:outline-none"
+              value={headerPN}
+              onChange={(e) => setHeaderPN(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            />
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Desktop Header - Original Design */}
+      <motion.header
+        className={`hidden md:block w-full bg-white shadow-sm fixed top-0 left-0 right-0 z-50
+          ${isScrolled ? "shadow-xl bg-white/95 backdrop-blur-sm" : "shadow-sm"
+        }`}
+        initial={{ y: 0 }}
+        animate={{ 
+          y: isHeaderVisible ? 0 : -100,
+          opacity: isHeaderVisible ? 1 : 0
+        }}
+        transition={{ 
+          duration: 0.3,
+          ease: "easeInOut"
+        }}
+      >
+        {/* ===== MAIN HEADER ===== */}
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3">
+          {/* Top Row: Logo + Location on Left, Icons on Right */}
+          <div className="flex items-center justify-between gap-2 sm:gap-4 mb-2 sm:mb-3">
+            {/* Left Side: Logo and Location */}
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+              {/* Logo */}
+              <motion.div 
+                onClick={goToHomePage}
+                className="flex items-center cursor-pointer"
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+              >
+                <img
+                  src={logo3}
+                  alt="Sparelo Logo"
+                  className="h-8 sm:h-10 md:h-12 w-auto"
+                />
+              </motion.div>
+
+              {/* Location Display - Beside Logo */}
+              <div className="flex items-start gap-1 sm:gap-1.5 flex-shrink-0">
+                <button
+                  onClick={() => setShowLocationModal(true)}
+                  className="flex items-start gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-1 hover:bg-gray-50 transition-colors rounded-md text-left"
+                >
+                  <FaMapMarkerAlt className="text-[9px] sm:text-[10px] text-red-600 flex-shrink-0 mt-0.5" />
+                  <div className="text-left min-w-0">
+                    <p className="text-[7px] sm:text-[8px] md:text-[9px] font-medium text-gray-700 whitespace-nowrap">
+                      {selectedLocation.area}
+                    </p>
+                    <p className="text-[6px] sm:text-[7px] md:text-[8px] text-gray-600 whitespace-nowrap">
+                      {selectedLocation.city}- {selectedLocation.state}- {selectedLocation.country}
+                    </p>
+                  </div>
+                </button>
+              </div>
+            </div>
 
           {/* Right Side Icons: Notifications, Membership, Wallet, Cart, Menu */}
           <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-shrink-0">
@@ -308,7 +378,8 @@ export const Header = () => {
             )}
           </motion.button>
         </div>
-      </div>
+        </div>
+      </motion.header>
 
       {/* Location Selection Modal */}
       <AnimatePresence>
@@ -339,9 +410,9 @@ export const Header = () => {
                 </div>
                 <div className="space-y-2">
                   {[
-                    { type: "Home", address: "A Block Bol, Swastik Residacy" },
-                    { type: "Office", address: "123 Business Park, Sector 5" },
-                    { type: "Garage", address: "Auto Service Center, Main Road" }
+                    { area: "Gachibowli", city: "Hyderabad", state: "Telangana", country: "India" },
+                    { area: "Hitech City", city: "Hyderabad", state: "Telangana", country: "India" },
+                    { area: "Banjara Hills", city: "Hyderabad", state: "Telangana", country: "India" }
                   ].map((location, idx) => (
                     <button
                       key={idx}
@@ -350,13 +421,13 @@ export const Header = () => {
                         setShowLocationModal(false);
                       }}
                       className={`w-full text-left p-3 rounded-lg border-2 transition-colors ${
-                        selectedLocation.type === location.type
+                        selectedLocation.area === location.area
                           ? "border-red-500 bg-red-50"
                           : "border-gray-200 hover:border-gray-300"
                       }`}
                     >
-                      <p className="font-semibold text-gray-900">{location.type}</p>
-                      <p className="text-sm text-gray-600">{location.address}</p>
+                      <p className="font-semibold text-gray-900">{location.area}</p>
+                      <p className="text-sm text-gray-600">{location.city}- {location.state}- {location.country}</p>
                     </button>
                   ))}
                 </div>
@@ -365,10 +436,6 @@ export const Header = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-
-      {/* Sidebar */}
-      <Sider isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
       {/* 360 Degree Upload Modal */}
       <AnimatePresence>
@@ -519,7 +586,10 @@ export const Header = () => {
           </>
         )}
       </AnimatePresence>
-    </motion.header>
+
+      {/* Sidebar */}
+      <Sider isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+    </>
   );
 };
 

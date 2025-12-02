@@ -4,7 +4,7 @@ import { useVehicle } from '../contexts/VehicleContext'
 import { FaEdit, FaTrash, FaPlus, FaTimes } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { getVehicleImageUrl } from '../data/vehicleData'
-import { SearchSection } from './BoodmoUi'
+import { SearchSection } from './SearchSection'
 
 export const Garage = () => {
   const { vehicles, removeVehicle } = useVehicle();
