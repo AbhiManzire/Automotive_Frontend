@@ -54,10 +54,10 @@ const CategoryCard = React.memo(({ category, index, isGrid = false }) => {
   return (
     <motion.div
       {...animationProps}
-      className="group flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300"
+      className="group flex flex-col items-center p-3 sm:p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300"
     >
       <Link to={category.href} className="flex flex-col items-center w-full">
-        <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 mb-3 flex items-center justify-center bg-transparent">
+        <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-44 lg:h-44 mb-2 sm:mb-3 flex items-center justify-center bg-transparent">
           <img 
             src={category.img} 
             alt={category.title} 
@@ -66,7 +66,7 @@ const CategoryCard = React.memo(({ category, index, isGrid = false }) => {
             loading="lazy"
           />
         </div>
-        <span className="text-center font-semibold text-gray-700 text-xs sm:text-sm group-hover:text-red-600 transition-colors duration-300">
+        <span className="text-center font-semibold text-gray-700 text-xs sm:text-sm md:text-base group-hover:text-red-600 transition-colors duration-300">
           {category.title}
         </span>
       </Link>
@@ -94,16 +94,16 @@ export default function SearchByCategory() {
     setShowAll(true);
   }, []);
 
-  // Group categories into chunks of 16 (4 rows x 4 columns) for mobile
+  // Group categories into chunks of 12 (3 rows x 4 columns) for mobile
   const mobileCategoriesChunks = useMemo(() => {
     const chunks = [];
-    for (let i = 0; i < categories.length; i += 16) {
-      chunks.push(categories.slice(i, i + 16));
+    for (let i = 0; i < categories.length; i += 12) {
+      chunks.push(categories.slice(i, i + 12));
     }
     return chunks;
   }, []);
 
-  // Mobile Swiper Config (4 rows x 4 columns = 16 items per slide, no autoplay)
+  // Mobile Swiper Config (3 rows x 4 columns = 12 items per slide, no autoplay)
   const mobileSwiperConfig = useMemo(() => ({
     modules: [],
     spaceBetween: 0,
@@ -187,8 +187,8 @@ export default function SearchByCategory() {
 
         {/* Categories Display - Grid for Mobile, Swiper for Desktop */}
         {showAll || isCategoryPage ? (
-          /* All Categories Grid - Responsive Layout */
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+          /* All Categories Grid - 4 columns mobile, 6 columns desktop */
+          <div className="grid grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5">
             {categories.map((cat, index) => (
               <CategoryCard 
                 key={cat.title} 
@@ -200,7 +200,7 @@ export default function SearchByCategory() {
           </div>
         ) : (
           <>
-            {/* Mobile View: 4 rows x 4 columns Swiper (No Auto-scrolling, Swipeable) */}
+            {/* Mobile View: 4 columns x 3 rows Swiper (No Auto-scrolling, Swipeable) */}
             <div className="block md:hidden">
               <Swiper {...mobileSwiperConfig} className="category-swiper-mobile">
                 {mobileCategoriesChunks.map((chunk, chunkIndex) => (
@@ -210,7 +210,7 @@ export default function SearchByCategory() {
                         <CategoryCard 
                           key={cat.title} 
                           category={cat} 
-                          index={chunkIndex * 16 + index} 
+                          index={chunkIndex * 12 + index} 
                           isGrid={true}
                         />
                       ))}

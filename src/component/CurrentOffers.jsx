@@ -75,22 +75,20 @@ const CurrentOffers = () => {
   return (
     <section className="relative bg-white py-4 sm:py-6 md:py-8 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-5 md:px-6 lg:px-8">
-        {/* Red Accent Line */}
-        <div className="w-16 h-0.5 bg-red-600 mb-4 md:mb-5"></div>
-
+        
         {/* Header Section */}
-        <div className="mb-5 md:mb-6">
+        {/* <div className="mb-5 md:mb-6">
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 md:mb-3">
-        Current <span className="text-red-600">Hot Deals</span>
+        Current <span className="text-gray-900">Hot Deals</span>
           </h2>
-        </div>
+        </div> */}
 
         {/* Swiper Container */}
         <div className="relative">
           <Swiper
             modules={[Autoplay, Navigation]}
-            spaceBetween={12}
-            slidesPerView={1}
+            spaceBetween={8}
+            slidesPerView={2}
             loop={true}
             speed={800}
             autoplay={{
@@ -130,7 +128,7 @@ const CurrentOffers = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="relative h-[200px] sm:h-[220px] md:h-[250px] lg:h-[280px] rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+                  className="relative h-[140px] sm:h-[180px] md:h-[200px] lg:h-[220px] rounded-sm overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
                 >
                   <img
                     src={offer.image}

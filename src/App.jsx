@@ -218,9 +218,10 @@ function App() {
                           <ChooseMechanics />
                           {/* <SearchSection /> */}
 
-                          <CurrentOffers />
+                         
                           {/* <WhyChooseAftermarket /> */}
                           <BrandTrustAndCarMakers />
+                          <CurrentOffers />
                           <Article_review
                             items={[{ label: "Articles and Reviews", href: "/pages/article/" }]}
                           />

@@ -274,7 +274,7 @@ export const SearchSection = ({ onClose, initialVehicle = null }) => {
 
   return (
     <>
-      <section className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 pt-20 md:pt-24 pb-8 md:pb-12">
+      <section className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 pt-12 pb-3 sm:pt-16 md:pt-16 sm:pb-6 md:pb-8">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           {/* Title Section - Aligned with Header */}
          
@@ -295,12 +295,13 @@ export const SearchSection = ({ onClose, initialVehicle = null }) => {
               </button>
             </div>
           ) : (
-            <div className="flex flex-wrap justify-center items-start gap-3 sm:gap-4 md:gap-5 mb-6 sm:mb-8 md:mb-10">
+            <div className="flex flex-wrap justify-center items-start gap-2 sm:gap-3 md:gap-4 lg:gap-5 mb-3 sm:mb-4 md:mb-6 lg:mb-8">
               {/* Vehicle Cards */}
               {sortedVehicles.map((vehicle) => (
                 <motion.div 
                   key={vehicle.id} 
-                  className="w-[280px] sm:w-[280px] md:w-[240px] lg:w-[220px] xl:w-[200px] bg-white rounded-lg sm:rounded-xl shadow-md hover:shadow-xl overflow-hidden border border-gray-200 hover:border-blue-400 transition-all duration-300 group"
+                  className="w-[calc((100%-2*0.5rem)/3)] sm:w-[calc((100%-1*0.75rem)/2)] md:w-[240px] lg:w-[220px] xl:w-[200px] bg-white rounded-lg sm:rounded-xl shadow-md hover:shadow-xl overflow-hidden border border-gray-200 hover:border-blue-400 transition-all duration-300 group flex flex-col"
+                  style={{ height: 'calc(24*0.25rem + 80px)' }}
                   whileHover={{ y: -3 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -309,7 +310,7 @@ export const SearchSection = ({ onClose, initialVehicle = null }) => {
                   {/* Vehicle Image - Clickable */}
                   <div 
                     onClick={() => setShowCategoriesModal(true)}
-                    className="relative h-28 sm:h-32 md:h-36 lg:h-40 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-1.5 sm:p-2 md:p-3 overflow-hidden cursor-pointer"
+                    className="relative h-24 sm:h-28 md:h-32 lg:h-36 xl:h-40 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-1 sm:p-1.5 md:p-2 lg:p-3 overflow-hidden cursor-pointer"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <img
@@ -360,11 +361,11 @@ export const SearchSection = ({ onClose, initialVehicle = null }) => {
                   </div>
 
                   {/* Vehicle Details */}
-                  <div className="p-2 sm:p-2.5 md:p-3 bg-white">
-                    <h3 className="text-[10px] sm:text-xs md:text-sm font-bold text-blue-900 mb-1.5 sm:mb-2 uppercase line-clamp-1">
+                  <div className="p-2 sm:p-2.5 md:p-3 bg-white flex flex-col justify-between min-h-[80px] sm:min-h-[85px] md:min-h-[90px]">
+                    <h3 className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-bold text-blue-900 mb-1 sm:mb-1.5 uppercase line-clamp-1">
                       {vehicle.make} {vehicle.model}
                     </h3>
-                    <div className="space-y-0.5 sm:space-y-1 text-[9px] sm:text-[10px] md:text-xs text-gray-600">
+                    <div className="space-y-0.5 sm:space-y-0.5 md:space-y-1 text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-gray-600">
                       <p className="font-medium text-gray-700 truncate">
                         <span className="text-blue-600 font-semibold">{getEngineInfo(vehicle.variant)}</span> / {vehicle.variant || 'N/A'}
                       </p>
@@ -373,12 +374,12 @@ export const SearchSection = ({ onClose, initialVehicle = null }) => {
                         <span className="text-gray-800 font-bold">{vehicle.year}</span>
                       </p>
                       {vehicle.registrationNumber && (
-                        <p className="truncate text-gray-600">
+                        <p className="truncate text-gray-600 text-[8px] sm:text-[9px]">
                           <span className="font-medium">Reg:</span> {vehicle.registrationNumber}
                         </p>
                       )}
                       {vehicle.vin && (
-                        <p className="truncate text-gray-600 text-[8px] sm:text-[9px]">
+                        <p className="truncate text-gray-600 text-[7px] sm:text-[8px] md:text-[9px]">
                           <span className="font-medium">VIN:</span> {vehicle.vin}
                         </p>
                       )}
@@ -390,14 +391,16 @@ export const SearchSection = ({ onClose, initialVehicle = null }) => {
               {/* Add New Vehicle Card */}
               <div 
                 onClick={() => setShowVehicleTypeModal(true)}
-                className="w-[280px] sm:w-[280px] md:w-[240px] lg:w-[220px] xl:w-[200px] bg-gradient-to-br from-white via-blue-50 to-blue-100 rounded-lg sm:rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-all cursor-pointer flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] md:min-h-[240px] p-6"
+                className="w-[calc((100%-2*0.5rem)/3)] sm:w-[calc((100%-1*0.75rem)/2)] md:w-[240px] lg:w-[220px] xl:w-[200px] bg-gradient-to-br from-white via-blue-50 to-blue-100 rounded-lg sm:rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-all cursor-pointer flex flex-col items-center justify-center p-3 sm:p-4 md:p-6"
+                style={{ height: 'calc(24*0.25rem + 80px)' }}
               >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-md mb-3">
-                  <FaPlus className="text-white text-lg" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-md mb-2 sm:mb-3">
+                  <FaPlus className="text-white text-base sm:text-lg" />
                 </div>
                 <div className="text-center">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">Add New Vehicle</h3>
-                  <p className="text-sm text-gray-500">Add your car or bike to get personalized results</p>
+                  <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-900 mb-0.5 sm:mb-1">Add New</h3>
+                  <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-900 mb-1 sm:mb-1.5">Vehicle</h3>
+                  <p className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-sm text-gray-500 leading-tight">Add your car or bike to get personalized results</p>
                 </div>
               </div>
             </div>
